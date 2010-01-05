@@ -1,0 +1,21 @@
+<div class="comment_wrap">
+	<div class="inner">
+		
+		<% if comment.title %>
+			<span class="comment_title"><%=h comment.title %> </span>
+		<% end %>
+		
+		<% if comment.user %>
+			<span class="comment_user"> by <%= link_to comment.user.name, comment.user %> </span>
+		<% end %>
+		
+		<% if comment.created_at %>
+			<span class="comment_date"> on <%=h comment.created_at %> </span>
+		<% end %>
+		
+		<% if comment.comment %>
+			<div class="html_wrap comment_comment"><%=h comment.comment %></div>
+		<% end %>
+		
+	</div>
+</div> <!-- /.comment_wrap -->

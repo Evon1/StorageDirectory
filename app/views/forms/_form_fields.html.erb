@@ -1,0 +1,28 @@
+<% models.each do |form| %>
+	<% block_form = block_form_object(form, model) %>
+
+	<div class="row_checkable <%= cycle('odd', 'even') %>">
+	
+		<div class="left">
+			<%= hidden_field_tag 'block_forms[][id]', block_form.id unless block_form.new_record? %>
+			<%= hidden_field_tag 'block_forms[][block_id]', model.id %>
+			<%= hidden_field_tag 'block_forms[][form_id]', form.id %>
+			<%= check_box_tag 'block_forms[][enabled]', true, model.forms.include?(form), :class => 'disabler' %> 
+		</div>
+	
+		<div class="left">
+			<%= link_to form.name, edit_form_path(form, return_here_and('show_collapseable_FormsFields')) %><br />
+			<em><%= form.description %></em>
+		</div>
+		
+		<div class="left">
+			<span>
+				Controller: <%= form.controller %>; Action: <%= form.action %>; Scope: <%= form.scope %>; Target: <%= form.target_id %>
+			</span>
+			<br />
+			<span>Derived path: <%= url_for form.get_url_hash %></span>
+		</div>
+	
+	</div>
+	
+<% end %>

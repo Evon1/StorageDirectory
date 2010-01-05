@@ -1,0 +1,22 @@
+<div class="block region_left">
+	<div id="session_links">
+		<%= link_to_if current_user.nil?, 'Login', login_path do 
+			link_to current_user.name, user_path(current_user)
+		end unless current_page? login_path %>
+		
+		<%= link_to_if current_user.nil?, 'Sign Up', signup_path do
+      link_to 'Logout', logout_path
+    end unless current_page? signup_path %>
+	</div>
+</div>
+
+<% unless @controllers.nil? %>
+	<div class="block region_left">
+		<ul id="resource_list" class="grey1">
+			<% @controllers.each do |controller| %>
+				<% path = eval("#{controller}_path") %>
+				<li><%= link_to controller.titleize, path, :class => active_page(path) %></li>
+			<% end %>
+		</ul>
+	</div>
+<% end %>

@@ -1,0 +1,76 @@
+<% declare_content_for %>
+
+<% form_for @gallery, :html => { :class => 'ajax_form', :multipart => true } do |f| %>
+	<%= f.error_messages %>
+	
+	<fieldset>
+		<legend><%= action_name.capitalize %> Gallery</legend>
+		<div>
+			<%= f.label :title %>
+			<div class="shadow_wrap">
+				<%= f.text_field :title, :class => 'required' %>
+			</div>
+		</div>
+
+		<div>
+			<%= f.label :description %>
+			<div class="shadow_wrap">
+				<%= f.text_area :description, :class => 'small_textarea' %>
+			</div>
+		</div>
+	</fieldset>
+	
+	<p class="buttons">
+		<%= submit_tag (@gallery.new_record? ? 'Add gallery' : 'Save Changes') %>
+	</p>
+<% end %>
+
+<%= display_message flash %>
+
+<% unless @gallery.images.blank? %>
+	<div id="gallery_images">
+		<fieldset>
+			<legend>Images</legend>
+			<% @gallery.images.each do |image| %>
+				
+				<div class="image_wrap left">
+					<%= image_tag image.image.url(:thumb) %>
+					<%= link_to 'Destroy', image_path(image), :confirm => "Destroy #{image.title}?", :method => 'delete' %>
+				</div>
+				
+			<% end %>
+		</fieldset>
+	</div>
+<% end %>
+
+<% unless @gallery.new_record? %>
+	<% form_for @image, :html => { :multipart => true } do |f| %>
+		
+		<fieldset>
+			<legend>Add Images</legend>
+		
+				<div class="file">
+					<div>
+						<%= f.label :title %>
+						<div class="shadow_wrap">
+							<%= f.text_field :title, :class => 'required' %>
+						</div>
+					</div>
+					
+					<div>
+						<%= f.label :image %>
+						<div class="shadow_wrap">
+							<%= f.file_field :image %>
+						</div>
+						<%= hidden_field_tag 'gallery_id', @gallery.id %>
+						<%= hidden_field_tag :return, edit_gallery_path(@gallery) %>
+					</div>
+				</div>
+
+		</fieldset>
+		
+		<p class="buttons">
+			<%= submit_tag 'Add Image' %>
+		</p>
+	<% end %>
+<% end %>

@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  block_id: 1
+  form_id: 1
+  enabled: false
+  position: 1
+
+two:
+  block_id: 1
+  form_id: 1
+  enabled: false
+  position: 1

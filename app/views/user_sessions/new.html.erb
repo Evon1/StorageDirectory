@@ -1,0 +1,28 @@
+<% declare_content_for %>
+<%= display_message flash %>
+
+<% form_for @user_session do |f| %>
+  <%= f.error_messages %>
+	<fieldset>
+		<legend>Login</legend>
+		
+		<div>
+			<%= f.label :email %>
+			<div class="shadow_wrap">
+  			<%= f.text_field :email, :class => 'email' %>
+			</div>
+		</div>
+		
+		<div>
+  		<%= f.label :password %>
+			<div class="shadow_wrap">
+		  	<%= f.password_field :password, :class => 'password' %>
+			</div>
+		</div>
+		
+		<p><%= f.check_box :remember_me %><%= f.label :remember_me %></p>
+		
+		<div class="submit"><%= f.submit 'Login' %></div>
+		
+	</fieldset>
+<% end %>

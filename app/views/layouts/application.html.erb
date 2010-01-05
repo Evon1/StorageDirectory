@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		
+		<%= stylesheet_link_tag 'application' %>
+		<%= stylesheet_link_tag @typography_css %>		
+		<%= stylesheet_link_tag @layout_css %>
+		<%= stylesheet_link_tag @theme_css %>	
+		<%= stylesheet_link_tag 'print', :media => 'print' %>
+		
+		<meta charset="utf-8">
+		<title><%= yield :title %></title>
+
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+
+		<link rel="shortcut icon" type="image/x-ico" href="images/icons/favicon.ico" />
+		
+		<!--[if IE]>
+			<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+		
+		<!--[if lte IE 7]>
+			<link rel="stylesheet" type="text/css" href="stylesheets/ie.css" />
+			<script type="text/javascript" src="javascripts/IE8.js"></script>
+		<![endif]-->
+		
+		<%= javascript_include_tag 'jquery', @plugins, @widgets_js * ', ' %>
+		
+	</head>
+
+	<body id="<%= action_name %>" class="<%= controller_name %>">
+	<section>
+	
+			<nav>	
+				<div class="inside">
+				<!-- Nav -->
+					<%= yield :nav %>
+				</div>	
+			</nav>
+		
+			<header>	
+				<div class="inside">
+					<h1 id="title"><%= @logo %></h1>
+					
+					<div>
+						<%= yield :header %>
+					</div>
+					
+				</div>
+			</header>
+			  
+			<nav>	
+				<div class="inside">
+				<!-- SubNav -->
+					<%= yield :subnav %>					
+				</div>
+			</nav>
+		
+		
+			<section id="wrapper-1">
+				
+				<section id="level-1">
+			
+					<section id="column-1">
+						<div class="inside">
+						<!-- Content -->
+							
+							<div class="content">
+								<%= yield %>
+							</div>
+							
+							<div class="content content_bottom">
+								<%= yield :content_bottom %>
+							</div>
+						
+						</div>
+					</section><!-- end section #column-1 -->
+			
+					<section id="column-2" class="side">
+						<div class="inside">
+						<!-- Sidebar -->
+						
+							<%= yield :left %>
+							
+						</div>
+					</section><!-- end section #column-2 -->
+					
+					<section id="column-3" class="side">
+						<div class="inside">
+						<!-- Sidebar -->
+						
+							<%= yield :right %>
+							
+						</div>
+					</section><!-- end section #column-3 -->
+					
+					<section id="column-4">
+						<div class="inside">
+						<!-- Level-1 > Column-4 -->
+						</div>
+					</section><!-- end section #column-4 -->
+					
+				</section><!-- end section #level-1 -->
+				
+			</section><!-- end section #wrapper-1 -->
+
+			
+			<section id="wrapper-2">
+			
+				<section id="level-2">
+			
+					<section id="column-5">
+						<div class="inside">
+						<!-- Level-2 > Column-5 -->
+							
+							<%= yield :column_5 %>
+							
+						</div>
+					</section><!-- end section #column-5 -->
+			
+					<section id="column-6">
+						<div class="inside">
+						<!-- Level-2 > Column-6 -->
+							
+							<%= yield :column_6 %>
+						
+						</div>
+					</section><!-- end section #column-6 -->
+					
+					<section id="column-7">
+						<div class="inside">
+						<!-- Level-2 > Column-7 -->
+							
+							<%= yield :column_7 %>
+						
+						</div>
+					</section><!-- end section #column-7 -->
+					
+					<section id="column-8">
+						<div class="inside">
+						<!-- Level-2 > Column-8 -->
+							
+							<%= yield :column_8 %>
+						
+						</div>
+					</section><!-- end section #column-8 -->
+					
+				</section><!-- end section #level-2 -->
+			
+			</section><!-- end section #wrapper-2 -->
+			
+	
+			<footer>
+				<div class="inside">
+				<!-- add your content here -->
+					<%= yield :footer %>
+				</div>	
+			</footer><!-- end footer -->
+			
+
+	</section>
+	
+	<%= javascript_include_tag 'ckeditor/ckeditor.js', 'typeface', 'fonts/optimer/optimer_regular.typeface' %>
+	<%= javascript_include_tag 'application' %>
+	
+	</body>
+</html>

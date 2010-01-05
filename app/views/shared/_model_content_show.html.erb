@@ -1,0 +1,12 @@
+<% declare_content_for %>
+<%= display_message flash %>
+
+<div class="staticContent">
+	<%= render :partial => 'shared/model_options', :locals => { :model => model, :edit_path => edit_model_path(model), :hide_anchor => 'hide_collapseable_staticContent' } %>
+	
+	<h2><%= model.title %></h2>
+
+	<div class="collapseable">
+		<%= model.content %>
+	</div>
+</div>

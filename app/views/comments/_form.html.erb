@@ -1,0 +1,24 @@
+<fieldset id="NewCommentForm">
+	
+	<div>
+		<%= f.label :email %>
+		<div class="shadow_wrap">
+			<%= f.text_field :email, :class => 'email' %>
+		</div>
+	</div>
+	
+	<div>
+		<%= f.label :title %>
+		<div class="shadow_wrap">
+			<%= f.text_field :title, :class => 'required' %>
+		</div>
+	</div>
+
+	<div>
+		<%= f.label :comment, nil, :class => 'block_label' %>
+		<div class="shadow_wrap">
+			<%= f.text_area :comment, :class => 'small_textarea required' %>
+		</div>
+	</div>
+
+</fieldset>

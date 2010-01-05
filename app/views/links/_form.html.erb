@@ -1,0 +1,24 @@
+<div class="stack">
+	<%= f.label :title %>
+	<div class="shadow_wrap">
+		<%= f.text_field :title, :class => 'required' %>
+	</div>
+</div>
+
+<div class="stack">
+	<%= f.label :path %>
+	<div class="shadow_wrap">
+		<%= f.text_field :path, :class => 'required' %>
+	</div>
+</div>
+
+
+<div class="stack">
+	<div class="check_box_wrap left">
+		<%= f.check_box :relative %>
+		<%= f.label :relative, 'Relative path?' %>
+	</div>
+	
+	<%= f.label :link_group_id, 'Group' %>
+	<%= f.select :link_group_id, @link_groups.map { |lg| [lg.name, lg.id] }, { :include_blank => true }, :title => 'You may put this link in a group for easy display' %>
+</div>

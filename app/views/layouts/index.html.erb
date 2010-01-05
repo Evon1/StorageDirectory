@@ -1,0 +1,17 @@
+<% declare_content_for %>
+
+<h2>Layouts</h2>
+
+<%= display_message(flash) %>
+
+<% form_tag '/layouts', :method => :put  do %>
+<fieldset>
+	<legend>Active Layout</legend>
+	<p><%= @layout_css %></p>
+	<%= submit_tag 'Revert' %>
+</fieldset>
+<% end %>
+
+<ul class="option_scroll">
+<%= render :partial => @layouts %>
+</ul>

@@ -1,0 +1,18 @@
+<div class="blog_roll_view">
+		
+		<div class="page uncollapse">
+			<h4><%= link_to page.name_or_title, page %></h4>
+			
+			<div class="page_info">
+				<% unless page.timestamp.nil? %>
+					<span> on: <%= page.timestamp.asctime %></span>
+				<% end %>
+			</div>
+			
+			<% if page.attributes.keys.include?('content') && page.content %>
+				<p><%= page.content_teaser %></p>
+			<% end %>
+				
+		</div>
+	
+</div>

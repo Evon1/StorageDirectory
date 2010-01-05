@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  view_id: 1
+  model_id: 1
+  model_type: MyString
+  order: MyString
+  position: 1
+  limit: 1
+
+two:
+  view_id: 1
+  model_id: 1
+  model_type: MyString
+  order: MyString
+  position: 1
+  limit: 1

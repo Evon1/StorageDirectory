@@ -1,0 +1,16 @@
+<fieldset>
+	
+	<div>
+		<%= f.label :title %>
+		<div class="shadow_wrap">
+			<%= f.text_field :title, :class => 'required' %>
+		</div>
+	</div>
+
+	<div>
+		<%= f.label :image %>
+		<div class="shadow_wrap">
+			<%= f.file_field :image %>
+		</div>
+	</div>
+</fieldset>
