@@ -42,6 +42,10 @@ class ApplicationController < ActionController::Base
   
   layout (session ? (session[:layout] || 'greyrobotRD') : 'greyrobotRD')
   
+  def local_request?
+    true
+  end
+  
   protected # ---------------------------------------------
   
   def model_errors(model)
