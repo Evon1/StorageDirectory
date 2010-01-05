@@ -199,11 +199,8 @@ module ApplicationHelper
   
   def edit_model_path(model, options = {})
     eval "edit_#{model_name(model)}_path(model, options)"
-<<<<<<< HEAD:app/helpers/application_helper.rb
-=======
   rescue # the role model doesn't have routes
     "##{model_name(model)}"
->>>>>>> a47dc7bc146770b844e8362fe494dfba33f49271:app/helpers/application_helper.rb
   end
   
   def new_model_path(name, options = {})
