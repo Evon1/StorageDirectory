@@ -43,7 +43,7 @@ class ApplicationController < ActionController::Base
   layout (session ? (session[:layout] || 'greyrobotRD') : 'greyrobotRD')
   
   def local_request?
-    true
+    true if current_user
   end
   
   protected # ---------------------------------------------
