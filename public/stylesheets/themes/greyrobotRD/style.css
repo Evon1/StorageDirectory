@@ -96,15 +96,6 @@ a img, #body img { border:2px solid #dadada; }
 #subnav li a, #sidebar .block_models_view > ul li a { width:155px; padding:18px 0 22px 40px; display:block; }
 #sidebar .block_models_view > ul li a { background:url(/images/ui/button.png) no-repeat; font-size:18px; text-shadow:1px 1px 4px #fff; }
 
-<<<<<<< HEAD:public/stylesheets/themes/greyrobotRD/style.css
-#custom 	 { background:url(/images/ui/custom_button.png) no-repeat; }
-#templates { background:url(/images/ui/templates_button.png) no-repeat; }
-#marketing { background:url(/images/ui/marketing_button.png) no-repeat; }
-#support 	 { background:url(/images/ui/support_button.png) no-repeat; }
-#go 			 { background:url(/images/ui/GO_button.png) no-repeat; }
-
-=======
->>>>>>> a47dc7bc146770b844e8362fe494dfba33f49271:public/stylesheets/themes/greyrobotRD/style.css
 #body { padding:10px 25px 0 35px; margin-bottom:18px; width:76.5%; font-size:80%; }
 
 #body fieldset > div { margin-bottom:10px; }
@@ -367,6 +358,8 @@ input.tiny_text_field { width:30px; }
 .field_form > div { padding:4px 0; }
 .option_group { padding:2px 4px; background-color:#ebebeb; }
 
+
+
 /* icons */
 .icon16 { padding-left:22px; background-position:left; background-repeat:no-repeat; }
 .iconOnly16, a.iconOnly16, 
@@ -394,7 +387,6 @@ a.toggle_down { background-image:url(/images/ui/toggle_icon-down.png); }
 .block .buttons .toggle_right:hover,
 #page_buttons .toggle_right,
 #page_buttons .toggle_right:hover { background:url(/images/ui/hide_icon.png) no-repeat 0; }
-
 .block .buttons .toggle_down, .block .buttons .toggle_down:hover,
 #page_buttons .toggle_down, #page_buttons .toggle_down:hover { background:url(/images/ui/show_icon.png) no-repeat 0; }
 
