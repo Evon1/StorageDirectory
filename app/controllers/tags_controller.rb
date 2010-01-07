@@ -13,15 +13,15 @@ class TagsController < ApplicationController
   end
 
   def create
-    @tag = Tag.new(params[:tag])
+    @tag = Tag.new(params[:tag], params, current_user)
     
     if @tag.save
       flash[:notice] = @tag.name + ' has been created.'
-      redirect_to tags_path
     else
-      get_associations
-      render :action => 'edit'
+      flash[:error] = model_errors(@tag)
     end
+    
+    redirect_back_or_default tags_path
   end
 
   def edit
@@ -30,11 +30,11 @@ class TagsController < ApplicationController
   def update
     if @tag.update_attributes(params[:tag])
       flash[:notice] = @tag.name + ' has been updated.'
-      redirect_to tags_path
     else
-      get_associations
-      render :action => 'edit'
+      flash[:error] = model_errors(@tag)
     end
+    
+    redirect_back_or_default tags_path
   end
 
   def destroy

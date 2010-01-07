@@ -88,19 +88,21 @@ module ApplicationHelper
   # will render all posts by that user if they exist, otherwise it will render all posts.
   def render_views_in_this(block)
     html = ''
-    @count = 0
     block.views.each do |view|
-      next unless view.model.respond_to?('all')
-      
       models_view = view.models_view(block)
-      data        = view.model.all(view_find_options(view, models_view))
+      
+      if view.model_name == 'tag'
+        active_model = eval("@#{view.scope}")
+        data = active_model.tags
+      else
+        data = view.model.all(view_find_options(view, models_view))
+      end
       
       html << render(:partial => "views/#{models_view.view_type}", :locals => { :data => data })
-      @count += 1
     end
     html
   rescue => e
-    raise e.pretty_inspect
+    #raise [@view, @option_hash,e].pretty_inspect
   end
   
   def render_forms_in_this(block)
@@ -124,8 +126,8 @@ module ApplicationHelper
     option_hash = {}
     
     unless view.owner_id.blank? # specific model
-      model_class = view.scope.camelcase.constantize
-      active_model = model_class.find(view.owner_id) if model_class.exists?(view.owner_id)
+      modelClass = model_class(view.scope)
+      active_model = modelClass.find(view.owner_id) if modelClass.exists?(view.owner_id)
     else # active model
       active_model = eval("@#{view.scope}")
     end

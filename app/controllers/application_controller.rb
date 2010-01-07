@@ -1,6 +1,6 @@
 # Filters added to this controller apply to all controllers in the application.
 # Likewise, all the methods added will be available for all controllers.
-require 'PP' if RAILS_ENV == 'development'
+#require 'PP' if RAILS_ENV == 'development'
 class ApplicationController < ActionController::Base
   helper :all # include all helpers, all the time
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
@@ -28,11 +28,11 @@ class ApplicationController < ActionController::Base
   include UtilityMethods
   
   # for the SharedModelMethod module
-  $regions = [:header, :banner, :sidebar, :left, :right, :content_bottom, :column_5, :column_6, :column_7, :column_8, :footer]
+  $regions    = [:header, :banner, :sidebar, :left, :right, :content_bottom, :column_5, :column_6, :column_7, :column_8, :footer]
   $view_types = [:list, :blog_roll, :box, :table]
   
   # for the virtual forms, build forms
-  $_actions = [:index, :show, :create, :update]
+  $_actions     = [:index, :show, :create, :update]
   $_field_types = [:text_field, :text_area, :select, :check_box, :radio, :hidden]
   
   # authorization system

@@ -77,8 +77,8 @@ a img, #body img { border:2px solid #dadada; }
 #content .inner  > .content { padding:20px 0; }
 
 #banner { overflow:hidden; padding:0; margin-bottom:65px; }
-#banner .left { width:45%; }
-#slogan { text-align:center; margin-right:10px; }
+#banner .left { width:40%; }
+#slogan { margin:15px 50px 0 25px; }
 #slogan h2 { line-height:1.4; }
 #slogan h3 { line-height:1.5; }
 

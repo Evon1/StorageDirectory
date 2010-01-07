@@ -8,11 +8,19 @@ class Tag < ActiveRecord::Base
   has_many :taggings, :dependent => :destroy
   
   validates_presence_of :name
-  validates_uniqueness_of :name
   
   named_scope :named, lambda { |name| { :conditions => ["name = ?", name] } }
   named_scope :named_like, lambda { |name| { :conditions => ["name LIKE ?", "%#{name}%"] } }
   named_scope :named_like_any, lambda { |list| { :conditions => list.map { |tag| sanitize_sql(["name LIKE ?", tag.to_s]) }.join(" OR ") } }
+  
+  def initialize(attributes = {}, params = {}, user = nil)
+    target = params[:target_type].camelcase.constantize.find(params[:target_id])
+    eval("target.#{params[:context] || 'tag'}_list = attributes[:name]")
+    target.save
+    super attributes
+  rescue
+   super attributes
+  end
   
   # LIKE is used for cross-database case-insensitivity
   def self.find_or_create_with_like_by_name(name)
@@ -30,4 +38,5 @@ class Tag < ActiveRecord::Base
   def count
     read_attribute(:count).to_i
   end
+  
 end
