@@ -14,6 +14,8 @@ class GalleriesController < ApplicationController
   end
 
   def create
+    @gallery = Gallery.new(params[:gallery])
+    
     if @gallery.save
       flash[:notice] = @gallery.title + ' has been created.'
       redirect_to galleries_path

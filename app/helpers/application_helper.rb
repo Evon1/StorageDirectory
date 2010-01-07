@@ -99,6 +99,8 @@ module ApplicationHelper
       @count += 1
     end
     html
+  rescue => e
+    raise e.pretty_inspect
   end
   
   def render_forms_in_this(block)
