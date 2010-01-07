@@ -88,6 +88,7 @@ module ApplicationHelper
   # will render all posts by that user if they exist, otherwise it will render all posts.
   def render_views_in_this(block)
     html = ''
+    @count = 0
     block.views.each do |view|
       next unless view.model.respond_to?('all')
       
@@ -95,6 +96,7 @@ module ApplicationHelper
       data        = view.model.all(view_find_options(view, models_view))
       
       html << render(:partial => "views/#{models_view.view_type}", :locals => { :data => data })
+      @count += 1
     end
     html
   end
@@ -126,15 +128,11 @@ module ApplicationHelper
       active_model = eval("@#{view.scope}")
     end
     
-    begin
-      if assoc = view.model.column_names.detect { |k| k =~ /.*_type$/i } # polymorphic models
-        assoc.gsub!('_type', '')
-        option_hash = { "#{assoc}_id" => active_model.id, "#{assoc}_type" => view.scope.camelcase }
-      else
-        option_hash = { "#{view.scope}_id" => active_model.id }
-      end
-    rescue 
-      raise ["#{__FILE__}:#{__LINE__}: in scope_conditions_hash(view)", params, view, active_model, assoc, option_hash].pretty_inspect
+    if assoc = view.model.column_names.detect { |k| k =~ /.*_type$/i } # polymorphic models
+      assoc.gsub!('_type', '')
+      option_hash = { "#{assoc}_id" => active_model.id, "#{assoc}_type" => view.scope.camelcase }
+    else
+      option_hash = { "#{view.scope}_id" => active_model.id }
     end
   end
   
