@@ -91,9 +91,9 @@ module ApplicationHelper
     block.views.each do |view|
       models_view = view.models_view(block)
       
-      if view.model_name == 'tag'
-        active_model = eval("@#{view.scope}")
-        data = active_model.tags
+      if view.model_name =~ /(tag)|(image)/ && !view.scope.blank?
+        scope_model = view.owner_id.blank? ? eval("@#{view.scope}") : model_class(view.scope).find(view.owner_id)
+        data = eval("scope_model.#{view.model_name.pluralize}")
       else
         data = view.model.all(view_find_options(view, models_view))
       end

@@ -14,10 +14,8 @@ class Tag < ActiveRecord::Base
   named_scope :named_like_any, lambda { |list| { :conditions => list.map { |tag| sanitize_sql(["name LIKE ?", tag.to_s]) }.join(" OR ") } }
   
   def initialize(attributes = {}, params = {}, user = nil)
-    target = params[:target_type].camelcase.constantize.find(params[:target_id])
-    eval("target.#{params[:context] || 'tag'}_list = attributes[:name]")
-    target.save
     super attributes
+    
   rescue
    super attributes
   end

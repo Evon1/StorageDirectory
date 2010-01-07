@@ -22,7 +22,7 @@ class ImagesController < ApplicationController
       flash[:error] = model_errors(@image)
     end
     
-    return_or_back(params)
+    redirect_back_or_default images_path
   end
 
   def edit
@@ -35,7 +35,7 @@ class ImagesController < ApplicationController
       flash[:error] = model_errors(@image)
     end
     
-    redirect_to params[:return]
+    redirect_back_or_default images_path
   end
 
   def destroy
@@ -46,7 +46,7 @@ class ImagesController < ApplicationController
       flash[:error] = 'Error destroying ' + @image.title
     end
     
-    return_or_back(params)
+    redirect_back_or_default images_path
   end
 
   private
