@@ -16,9 +16,13 @@
 						<span> on: <%= model.timestamp.asctime %></span>
 					<% end %>
 				</div>
-			
+				
+				<% if model.respond_to?('image') %>
+					<div><%= link_to image_tag(model.image.url(:thumb)), model %></div>
+				<% end %>
+				
 				<% if model.attributes.keys.include?('content') %>
-					<p><%= model.content_teaser %></p>
+					<div><%= model.content_teaser %></div>
 				<% end %>
 				
 				<%= render :partial => 'posts/meta', :locals => { :post => model } if model.respond_to?('comments') %>

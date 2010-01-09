@@ -5,9 +5,8 @@
 
 <%= render_model_helptext(controller_name) %>
 
-<% unless data.blank? %>
 <div class="uncollapse">
-	
+
 	<div class="left">
 		<% if current_user %>
 			<div class="buttons grey_buttons">
@@ -23,10 +22,9 @@
 			</div>
 		<% end %>
 	</div>
-	
-	<%= render :partial => 'menus/view_type_links' %>
-	
+
+	<%= render :partial => 'menus/view_type_links' unless data.blank? %>
+
 </div>
-<% end %>
 
 <%= render :partial => "views/#{@default_view_type}", :locals => { :data => data } %>

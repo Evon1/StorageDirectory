@@ -1,12 +1,32 @@
 <fieldset>
 	
+	<div class="uncollapse">
+		<div class="left">
+			<div>
+				<%= f.label :title %>
+				<div class="shadow_wrap">
+					<%= f.text_field :title, :class => 'required' %>
+				</div>
+			</div>
+			
+			<div>
+				<%= f.label :description %>
+				<div class="shadow_wrap">
+					<%= f.text_area :description, :class => 'required small_textarea' %>
+				</div>
+			</div>
+		</div>
+
+		<%= image_tag @image.image.url(:thumb), :class => 'right' if @image.image.exists? %>
+	</div>
+	
 	<div>
-		<%= f.label :title %>
+		<%= f.label :content %>
 		<div class="shadow_wrap">
-			<%= f.text_field :title, :class => 'required' %>
+			<%= f.text_area :content, :class => 'required wysiwyg' %>
 		</div>
 	</div>
-
+	
 	<div>
 		<%= f.label :image %>
 		<div class="shadow_wrap">

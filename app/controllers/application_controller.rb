@@ -15,10 +15,11 @@ class ApplicationController < ActionController::Base
                 :models,     # for model_view_form
                 :blocks_models,           # for the add_blocks_for helper
                 :model_blocks_for_region, # for the add_blocks_for helper
-                :rest_methods, # for the virtual forms builder
-                :_actions,     # for the virtual forms builder
-                :_controllers, # for the virtual forms builder
-                :_field_types, # for the virtual forms builder
+                :rest_methods,  # for the virtual forms builder
+                :_actions,      # for the virtual forms builder
+                :_controllers,  # for the virtual forms builder
+                :_field_types,  # for the virtual forms builder
+                :_page_actions, # suggestions form
                 :_models_having_assoc,
                 :in_edit_mode?,
                 :reject_blocks_enabled_on_this, # for the blocks_fields
@@ -34,6 +35,9 @@ class ApplicationController < ActionController::Base
   # for the virtual forms, build forms
   $_actions     = [:index, :show, :create, :update]
   $_field_types = [:text_field, :text_area, :select, :check_box, :radio, :hidden]
+  
+  # suggestions form
+  $_page_actions = [:index, :show, :new, :edit]
   
   # authorization system
   $_crud = [:create, :read, :update, :delete]
@@ -153,6 +157,10 @@ class ApplicationController < ActionController::Base
   
   def _actions(for_select = true)
     fetch_array_for $_actions, for_select
+  end
+  
+  def _page_actions(for_select = true)
+    fetch_array_for $_page_actions, for_select
   end
   
   def _field_types(for_select = true)

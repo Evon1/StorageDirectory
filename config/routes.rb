@@ -31,6 +31,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :link_groups
   map.resources :helptexts
   map.resources :forms
+  map.resources :suggestions
   
   # Sample resource route with options:
   #   map.resources :products, :member => { :short => :get, :toggle => :post }, :collection => { :sold => :get }
@@ -55,6 +56,7 @@ ActionController::Routing::Routes.draw do |map|
     page.resources :views
     page.resources :blocks
     page.resources :tags
+    page.resources :suggestions
   end
   
   map.resources :posts do |post|

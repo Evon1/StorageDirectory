@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100103215134) do
+ActiveRecord::Schema.define(:version => 20100107073354) do
 
   create_table "block_forms", :force => true do |t|
     t.integer  "block_id"
@@ -113,6 +113,8 @@ ActiveRecord::Schema.define(:version => 20100103215134) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
+    t.text     "description"
+    t.text     "content"
   end
 
   create_table "link_groups", :force => true do |t|
@@ -178,6 +180,15 @@ ActiveRecord::Schema.define(:version => 20100103215134) do
 
   create_table "roles", :force => true do |t|
     t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "suggestions", :force => true do |t|
+    t.string   "title"
+    t.text     "description"
+    t.string   "controller"
+    t.string   "action"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

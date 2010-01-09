@@ -59,7 +59,7 @@ module SharedModelMethods #:nodoc:
     end
 
     def content_teaser(limit = 400)
-      self.content.stripped_teaser(limit)
+      self.content.stripped_teaser(limit) unless self.content.blank?
     end
     
     def update_assoc(assoc, params)
@@ -87,7 +87,7 @@ module SharedModelMethods #:nodoc:
     # models_views and blocks_model require the assoc symbol, models_views object is the actual associated object,
     # blocks_model needs the join model object, attribute is either object's attribute being matched against options_array
     # the nil case is for checking options_array against self's attribute
-    def option_tags_for(options_array = [], assoc = nil, object = nil, attribute = nil, prompt = nil)
+    def option_tags_for(options_array = [], assoc = nil, object = nil, attribute = nil, prompt = nil, selected = nil)
       option_tags = prompt ? ["<option value=''>#{prompt}</option>"] : []
 
       case assoc
@@ -105,7 +105,7 @@ module SharedModelMethods #:nodoc:
 
         else # => no assoc object, or the blocks_model_object
           options_array.each do |option|
-            option_tags << _option_tag(attribute, option, _should_be_selected?(object, attribute, option))
+            option_tags << _option_tag(attribute, option, _should_be_selected?(object, attribute, option, selected))
           end
       end
 
@@ -131,11 +131,10 @@ module SharedModelMethods #:nodoc:
     
     private
     
-    def _should_be_selected?(object, attribute, option) 
+    def _should_be_selected?(object, attribute, option, selected) 
       # => role_id : 1-Admin, extract id from start of string if attribute has _id
       opt = attribute.to_s['_id'] ? option.to_s.to_i : option.to_s
-      
-      (_self_or_object_attribute(self, object, attribute) == opt)
+      opt == selected.to_s || _self_or_object_attribute(self, object, attribute) == opt
     end
     
     def _option_tag(attribute, value, selected)
