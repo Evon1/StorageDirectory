@@ -27,4 +27,4 @@
 
 </div>
 
-<%= render :partial => "views/#{@default_view_type}", :locals => { :data => data } %>
+<%= render :partial => "views/#{@default_view_type}", :locals => { :data => data } unless data.blank? %>

@@ -10,11 +10,6 @@ module ApplicationHelper
         
           render_region_top(region)
           render_global_blocks_for(region)
-          
-          if region.to_s =~ /sidebar/ # add administrative menus above blocks
-            @html << render(:partial => 'menus/menu')
-          end
-          
           render_local_blocks_for(region.to_s)
 
         @html << '</div>'

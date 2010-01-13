@@ -7,7 +7,8 @@
 		<%#= stylesheet_link_tag @layout_css %>
 		<%#= stylesheet_link_tag @theme_css %>	
 		<%#= stylesheet_link_tag 'print', :media => 'print' %>
-		<%= stylesheet_link_tag @theme_css %>	
+		<%= stylesheet_link_tag 'common' %>
+		<%= stylesheet_link_tag @theme_css %>
 		
 		<meta charset="utf-8">
 		<title><%= yield :title %></title>
@@ -29,6 +30,10 @@
 	</head>
 
 	<body id="<%= controller_name %>_controller" class="<%= action_name %>_action">
+		
+		<div id="admin_menu">
+		  <%= render :partial => 'menus/menu' %>
+		</div>
 		
 		<div id="header">
 			<div class="wrap">

@@ -187,6 +187,26 @@ $.toggleHelptext = function(clickedLink) {
 	  });
 	});
 	
+	// admin menu hover behoviors
+	var GR_content_menu_hover_interval,
+			GR_resource_list = $('#resource_list');
+	$('#content_menu_link').mouseover(function() {
+		GR_resource_list.slideDown();
+		return false;
+	});
+	$('#resource_list, #content_menu_link').mouseout(function(){
+		GR_content_menu_hover_interval = setTimeout('GR_resource_list.slideUp()', 1000);
+	});
+	$('#resource_list, #content_menu_link').mouseover(function(){
+		clearInterval(GR_content_menu_hover_interval);
+	});
+	
+	$('.unique_checkbox').click(function() {
+		var $this = $(this);
+		$('input[type=checkbox]', $this.parent().parent().parent()).attr('checked', false);
+		$this.attr('checked', !$this.is(':checked'))
+	});
+	
 	$('.unique_checkbox').click(function() {
 		var $this = $(this);
 		$('input[type=checkbox]', $this.parent().parent().parent()).attr('checked', false);
