@@ -1,0 +1,47 @@
+/* RESET */
+html, body, div, span, applet, object, iframe,h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,b, u, i, center,dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,table, caption, tbody, tfoot, thead, tr, th, td {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+	background: transparent;
+}
+body { line-height: 1; }
+ul { list-style: none; }
+/* remember to define focus styles! */
+:focus { outline: 0; }
+/* tables still need 'cellspacing="0"' in the markup */
+table { border-collapse: collapse; border-spacing: 0; }
+
+/* overrides */
+body { background:#000; text-align:center; font-family:Verdana, Arial, sans-serif; }
+h2 { font-size:200%; margin-bottom:20px; }
+
+/* LAYOUT */
+#outer_wrapper { width:1153px; height:849px; text-align:left; margin:0 auto; padding-top:105px; background:url(images/lodge-bg.jpg) no-repeat top center; }
+#inner_wrapper { width:740px; height:541px; margin:0 auto; position:relative; background:url(images/wrapper-bg.jpg) no-repeat top center; }
+
+#logo { width:316px; height:168px; position:absolute; top:-55px; left:-57px; background:url(images/lodge-logo.png) no-repeat top center; }
+#address { padding:20px 7px 0 0; }
+
+#content_wrapper { padding:100px 30px 0 30px; overflow:hidden; clear:both; }
+#nav_wrap { float:left; width:178px; padding-top:10px; }
+#nav_wrap ul li a { color:#000; display:block; padding:3px 0; font-family:Impact, Arial, sans-serif; font-size:195%; text-decoration:none; }
+#nav_wrap ul li a.active, #nav_wrap ul li a:hover, #nav_wrap ul li a:active { text-shadow:0 0 13px #e1d7a7; }
+#content { float:left; width:357px; height:310px; padding:30px 60px 0 60px; text-align:center; background:url(images/content-bg.jpg) no-repeat top center; }
+
+#footer { position:relative; }
+#twitter, #specials, #facebook { position:absolute; }
+#twitter { top:-11px; left:3px; }
+#specials { width:112px; height:136px; top:14px; left:340px; text-align:center; padding:30px 7px 0 7px; color:#687d39; background:url(images/postit-bg.png) no-repeat top center; }
+#facebook { top:15px; right:8px; }
+
+/* CONTENT CLASSES */
+.accessible_img_link { text-indent:-99999px; }
+.right { float:right; }
+.white { color:#fff; }
