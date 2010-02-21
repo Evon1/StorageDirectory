@@ -1,0 +1,31 @@
+<fieldset id="HelptextsFormFields">
+	
+	<div class="stack uncollapse">
+		<div class="left right_space">
+			<%= f.label :model, 'For ' %>
+			<%= f.select :model, models, 
+					{ :selected => (action_name == 'new' && params[:model] ? params[:model] : nil), :prompt => 'Choose...' }, 
+					{ :class => 'required', :title => 'Explain the how to use one of these features' } %>
+		</div>
+	
+		<div class="left check_box_wrap">
+			<%= f.check_box :show %>
+			<%= f.label :show, nil, :title => 'Load a page with the help box expanded by default' %>
+		</div>
+	</div>
+	
+	<div class="stack">
+		<%= f.label :text, nil, :class => 'block_label' %>
+		<div class="shadow_wrap">
+			<%= f.text_area :text, :class => 'wysiwyg medium_textarea required' %>
+		</div>
+	</div>
+	
+	<div class="stack">
+		<%= f.label :examples, nil, :class => 'block_label' %>
+		<div class="shadow_wrap">
+			<%= f.text_area :examples, :class => 'wysiwyg medium_textarea' %>
+		</div>
+	</div>
+	
+</fieldset>

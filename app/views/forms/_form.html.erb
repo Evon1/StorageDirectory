@@ -1,0 +1,54 @@
+<fieldset id="FormsForm">
+
+	<div class="stack">
+		<%= f.label :name %>
+		<div class="shadow_wrap">
+			<%= f.text_field :name, :class => 'required' %>
+		</div>
+	</div>
+
+	<div class="stack">
+		<%= f.label :description, nil, :class => 'block_label' %>
+		<div class="shadow_wrap">
+			<%= f.text_area :description, :class => 'small_textarea' %>
+		</div>
+	</div>
+	
+	<div class="stack uncollapse control_bar">
+		<div class="check_box_wrap left">
+			<%= f.check_box :enabled %>
+			<%= f.label :enabled %>
+		</div>
+		
+		<div class="left">
+			<%= f.label :action, 'Do ' %>
+			<%= select_tag 'form[action]', @form.option_tags_for(_actions(false), nil, @form, :action, ''), :class => 'required', :title => 'Specify what to do with the form data' %>
+		</div>
+		
+		<div class="left">
+			<%= f.label :controller, '&nbsp;' %>
+			<%= f.select :controller, _controllers, { :include_blank => true }, :class => 'required', :title => 'Choose the controller to send the form data to' %>
+		</div>
+		
+		<div id="scope_fields" class="left">
+			<%= f.label :scope, ' for ' %>
+			<%= select_tag 'form[scope]', @form.option_tags_for(_models_having_assoc, nil, @form, :scope, ''), :class => 'scope_dropdown', :title => 'Specify what to do with the form data' %>
+		</div>
+		
+		<div id="scope_target_fields" class="left">
+			<%= hidden_field_tag 'target_id', @form.target_id, :class => 'scope_down_hidden' unless @form.target_id.blank? %>
+			
+			<%= f.label :target_id, ' in/called ' %>
+			<%= f.select :target_id, @form.get_scope_models, { :prompt => 'Active Context'} , :class => 'scoping_dropdown', :title => 'Choose the controller to send the form data to' %>
+		</div>
+		
+	</div>
+	
+	<div id="form_builder" class="partial_addable">
+		
+		<%= render :partial => 'shared/model_addable_fields', 
+				:locals => { :f => f, :_for => 'fields', :context => 'form_builder', :collection => @form.fields, :new_model => Field.new(:form_id => @form.id) } %>
+		
+	</div>
+	
+</fieldset>

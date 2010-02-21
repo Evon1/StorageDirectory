@@ -1,0 +1,29 @@
+<% declare_content_for %>
+
+<% form_for @virtual_model do |f| %>
+	<%= f.error_messages %>
+	
+	<fieldset>
+		<legend><%= action_name.capitalize %> Virtual Model</legend>
+		
+		<div>
+			<%= f.label :model %>
+			<div class="shadow_wrap">
+				<%= f.text_field :model %>
+			</div>
+		</div>
+		
+		<div>
+			<%= f.label :schema %>
+			<div class="shadow_wrap">
+				<%= f.text_field :schema %>
+			</div>
+		</div>
+		
+	</fieldset>
+	
+	<p class="buttons">
+		<%= submit_tag (@virtual_model.new_record? ? 'Add Virtual Model' : 'Save Changes') %>
+	</p>
+	
+<% end %>

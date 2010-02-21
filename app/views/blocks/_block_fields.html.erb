@@ -1,0 +1,33 @@
+<% models.each_with_index do |block, count| %>
+	<% blocks_model = blocks_model_object(block, model); %>
+	<% count += precount if defined?(precount) %>
+
+	<div class="row_checkable round <%= cycle('odd', 'even') %>">
+		<%= anchor "#{block.title}Fields" %>
+		
+		<% model_field.fields_for :blocks_model, blocks_model do |bm_field| %>
+		
+			<div class="left">
+				<%= bm_field.check_box :enabled, :class => 'disabler' %>
+			</div>
+
+			<div class="left">
+				<p class="title"><%= link_to h(block.title), edit_model_path(block, return_here_and('show_collapseable_BlocksFields')), :title => 'Edit This Block' %></p>
+				<p class="description"><%=h block.description %></p>
+				<%= bm_field.hidden_field :model_id, :value => model.id %>
+				<%= bm_field.hidden_field :model_type, :value => model.class.name %>
+				<%= bm_field.hidden_field :block_id, :value => block.id %>
+			</div>
+
+			<div class="text-right buttons">
+				<div class="check_box_wrap">
+					<%= bm_field.check_box :show_title %>&nbsp;<%= bm_field.label :show_title %>
+				</div>
+				
+				<%= select_tag "#{model_name(model)}[blocks_model_attributes][#{count}][place]", model.option_tags_for(regions(false), :blocks_model, blocks_model, :place, 'Place me...') %>
+			</div>
+		
+		<% end %>
+
+	</div>
+<% end %>

@@ -1,0 +1,29 @@
+<div class="framed round box stack uncollapse <%= cycle('odd', 'even') %>">
+	
+	<div class="right">
+		<%= render :partial => 'shared/addable_cancel_delete_links', :locals => { :model => model, :disabled => disabled } %>
+		<%= hidden_field_tag 'permissions[][id]', model.id unless model.new_record? %>
+	</div>
+	
+	<div class="left right_space">
+		<div class="html_wrap left right_space">
+			<%= label_tag (disabled ? 'New' : "Permission ##{model.id}") %>
+		</div>
+		
+		<%= label_tag 'permissions[][role_id]', 'Role' %>
+		<%= select_tag 'permissions[][role_id]', 
+				model.option_tags_for(@roles.map { |r| "#{r.id}-#{r.title}"}, nil, nil, :role_id, ''), :class => 'required', :title => 'Assign permission to a role', :disabled => disabled %>
+	</div>
+	
+	<div class="left right_space">
+		<%= label_tag 'permissions[][action]', ' can ' %>
+		<%= select_tag 'permissions[][action]', 
+				model.option_tags_for(_crud(false), nil, nil, :action, ''), :class => 'required', :title => 'Choose an action to perform on the resource', :disabled => disabled %>
+	</div>
+
+	<div class="left">
+		<%= label_tag 'permissions[][resource]', '&nbsp;' %>
+		<%= select_tag 'permissions[][resource]', model.option_tags_for(_controllers(false), nil, nil, :resource, ''), :class => 'required', :title => 'Choose a resource to define the permission on', :disabled => disabled %>
+	</div>
+
+</div>

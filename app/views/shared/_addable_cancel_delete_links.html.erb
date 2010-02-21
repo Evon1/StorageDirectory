@@ -1,0 +1,5 @@
+<% if disabled || model.new_record? %>
+	<%= link_to 'Remove', '#', :class => 'iconOnly16 cancel_link right note', :title => "Cancel adding new #{model_name(model)}" %>
+<% else %>
+	<%= link_to 'Delete', ajax_action_path(:destroy, :model => model_name(model), :id => model.id), :rel => "#{model_name(model)}_#{model.id}", :class => 'ajax_action before_confirm iconOnly16 delete_link right note', :title => "Delete #{model.name_or_title} field" %>
+<% end %>

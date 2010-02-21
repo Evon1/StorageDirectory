@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<%= stylesheet_link_tag 'common' %>
+		<%= stylesheet_link_tag @theme_css %>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+		<title><%= yield :title %></title>
+	</head>
+	<body id="<%= controller_name %>_controller" class="<%= action_name %>_action">
+    
+	  <%= render :partial => 'menus/admin_menu' %>
+    
+		<div id="outer_wrapper">
+			
+			<div id="inner_wrapper">
+			  
+			  <div id="header">
+				  <%= yield :header %>
+				</div>
+				
+				<div id="content_wrapper">
+					
+					<div id="nav" class="region">
+						<ul>
+							<%= render :partial => 'menus/nav', :collection => @nav_pages %>
+						</ul>
+					</div> <!-- /#nav_wrap -->
+					
+					<div id="content">
+					  
+						<%= yield %>
+					
+						<div id="content_bottom" class="region">
+							<%= yield :content_bottom %>
+						</div>
+					</div> <!-- /#content -->
+					
+					<br class="clear" />
+					
+				</div> <!-- /#content_wrapper -->
+				
+				<div id="footer" class="region">
+  				<%= yield :footer %>
+    		</div>
+				
+			</div> <!-- /#inner_wrapper -->
+			
+		</div> <!-- /#outer_wrapper -->
+    
+    <%= javascript_include_tag 'ckeditor/ckeditor.js', 'jquery.all', @plugins %>
+  	<%= @widgets_js.map { |js| javascript_include_tag js } %>
+  	<%= javascript_include_tag 'application' %>
+    
+	</body>
+</html>

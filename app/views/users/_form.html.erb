@@ -1,0 +1,63 @@
+<fieldset>
+	
+	<div class="uncollapse stack">
+		
+		<% unless @user.profile_image.blank? %>
+			<div class="left right_space">
+				<%= link_to image_tag(@user.profile_image.image.url(:thumb), :alt => @user.name), @user.profile_image %>
+			</div>
+		<% end %>
+		
+		<div class="left stack">
+			<%= f.label :name %>
+			<div class="shadow_wrap">
+				<%= f.text_field :name, :class => 'required' %>
+			</div>
+		</div>
+
+		<div class="left">
+			<%= f.label :email %>
+			<div class="shadow_wrap">
+				<%= f.text_field :email, :class => 'email' %>
+			</div>
+		</div>
+	
+	</div>
+	
+	<div class="half_fields uncollapse">
+		<div class="left right_space stack">
+			<%= f.label :password %>
+			<div class="shadow_wrap">
+				<%= f.password_field :password, :class => 'password' %>
+			</div>
+		</div>
+
+		<div class="left">
+			<%= f.label :password_confirmation %>
+			<div class="shadow_wrap">
+				<%= f.password_field :password_confirmation, :class => 'confirm' %>
+			</div>
+		</div>
+	</div>
+	
+	<% f.fields_for :profile_image, (@user.profile_image ? @user.profile_image : @user.build_profile_image) do |image_field| %>
+		<div id="user_image_fields" class="framed round box stack">
+			<%= image_field.label :image %>
+			
+			<div class="stack">
+				<div class="shadow_wrap">
+					<%= image_field.text_field :title, :class => 'hintable', :title => 'Image Title' %>
+				</div>
+			</div>
+			
+			<div>
+				<div class="shadow_wrap">
+					<%= image_field.file_field :image %>
+					<%= image_field.hidden_field :user_id, :value => current_user.id %>
+				</div>
+			</div>
+		
+		</div>
+	<% end %>
+	
+</fieldset>
