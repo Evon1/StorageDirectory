@@ -1,6 +1,6 @@
 # Filters added to this controller apply to all controllers in the application.
 # Likewise, all the methods added will be available for all controllers.
-require 'PP' if RAILS_ENV == 'development'
+#require 'PP' if RAILS_ENV == 'development'
 class ApplicationController < ActionController::Base
   helper :all # include all helpers, all the time
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
@@ -30,7 +30,7 @@ class ApplicationController < ActionController::Base
   include UtilityMethods
   
   # for the SharedModelMethod module
-  $regions    = [:header, :banner, :sidebar, :left, :right, :content_bottom, :column_5, :column_6, :column_7, :column_8, :footer]
+  $regions    = [:header, :content_bottom, :footer]
   $view_types = [:list, :blog_roll, :box, :table]
   
   # for the virtual forms, build forms
@@ -47,7 +47,7 @@ class ApplicationController < ActionController::Base
   
   layout (session ? (session[:layout] || 'thelodge') : 'thelodge')
   
-  def local_request?
+  def local_request? # display full error message when logged in
     true if current_user
   end
   
@@ -64,6 +64,8 @@ class ApplicationController < ActionController::Base
   private # -----------------------------------------------
   
   def init
+    redirect_to("/#{Page.first.title.downcase}") and return if request.path == '/' || (!current_user && action_name =~ /index|edit|update|destroy/)
+    
     set_session_vars
     get_content_vars
     get_list_of_controllers_for_menu if current_user
@@ -117,7 +119,7 @@ class ApplicationController < ActionController::Base
   #--------------------- Fetch Arrays, for select lists, etc. ---------------------
   
   def get_list_of_controllers_for_menu
-    @controllers ||= get_list_of_file_names('controllers').reject! { |c| c =~ /^application|^user_sessions|^ajax/i }
+    @controllers ||= get_list_of_file_names('controllers').reject! { |c| c =~ /^application|^user_sessions|^ajax|^controllers/i }
     @controllers.map { |c| c.gsub!('_controller', '') }
   end
   

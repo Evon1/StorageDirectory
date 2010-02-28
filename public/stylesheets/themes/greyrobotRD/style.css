@@ -177,30 +177,6 @@ input[type='reset'], a.cancel:link { color:#a63217; }
 
 #session_links { margin-bottom:10px; }
 
-/* round borders */
-.round, .shadow_wrap { 
-	-moz-border-radius:10px;
-	-webkit-border-radius:10px;
-	border-radius:10px;
-}
-.medium_round, .html_wrap {
-	-moz-border-radius:7px;
-	-webkit-border-radius:7px;
-	border-radius:7px;
-}
-.small_round, .region_label {
-	-moz-border-radius:3px;
-	-webkit-border-radius:3px;
-	border-radius:3px;
-}
-
-/* shadows */
-.box { 
-	-moz-box-shadow:1px 1px 5px rgba(100,100,100,0.8);
-	-webkit-box-shadow:1px 1px 5px rgba(100,100,100,0.8);
-	box-shadow:1px 1px 5px rgba(100,100,100,0.8);
-}
-
 .address {
 	line-height:1.4;
 	margin-top:10px;

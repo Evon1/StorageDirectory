@@ -1,0 +1,10 @@
+<div class="blog_roll_view">
+	<div>		
+		<% view.attributes.each do |attribute, value| %>
+			<p>
+				<%= label_tag attribute, nil, :class => 'block w80' %>
+				<span class="block html_wrap"><%= value %></span>
+			</p>
+		<% end %>
+	</div>
+</div>

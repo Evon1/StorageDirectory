@@ -2,7 +2,8 @@
 module ApplicationHelper
   
   def declare_content_for # renders blocks in regions based on current page
-    content_for :title, @page ? @page.title : @controller_name
+    title = (@page ? @page.title  : @controller_name.titleize).to_s
+    content_for :title, "#{title.blank? ? 'Manage - ' : title + ' - '}The Lodge Beer &amp; Grill in Boca Raton, FL"
     
     regions(false).each do |region|
       content_for region do
@@ -240,7 +241,7 @@ module ApplicationHelper
     if resource_or_path.is_a? String # string path
       current_controller?(resource_or_path)  ? 'active' : ''
     else # model instance, also check if the model title is the same as the path without the preceding / (forward slash)
-      current_page?(url_for(resource_or_path)) || (resource_or_path.name_or_title.downcase == request.path[1, 100]) ? 'active' : ''
+      current_page?(url_for(resource_or_path)) || (resource_or_path.name_or_title.parameterize.downcase == request.path[1, 100].parameterize.to_s) ? 'active' : ''
     end
   end
   
