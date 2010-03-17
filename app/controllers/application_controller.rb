@@ -175,7 +175,7 @@ class ApplicationController < ActionController::Base
       model_class = entry.camelcase.constantize
       
       model_class.respond_to?('column_names') &&
-      (model_columns.any? { |c| c != 'parent_id' && c =~ /^(.*_id)$/i } || entry =~ /(user)|(page)|(tag)/)
+      (model_class.column_names.any? { |c| c != 'parent_id' && c =~ /^(.*_id)$/i } || entry =~ /(user)|(page)|(tag)/)
     end
     
     fetch_array_for models_array, for_select

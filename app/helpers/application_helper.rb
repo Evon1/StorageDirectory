@@ -137,7 +137,9 @@ module ApplicationHelper
   end
   
   def render_form_hidden_fields(form)
-    html = hidden_field_tag(:update_element, form.field_set_id)
+    html =  hidden_field_tag(:update_element, form.field_set_id)
+    html << content_tag(:div, text_field_tag(:hack_me, ''), :class => 'hide') if form.use_reverse_captcha
+    html << hidden_field_tag(:notify, form.recipient) if form.send_email && !form.recipient.blank?
     
     begin
       unless form.scope.blank?
@@ -152,6 +154,8 @@ module ApplicationHelper
     rescue
       raise ["#{__FILE__}:#{__LINE__}: in render_form_hidden_field(form)", params, form, scope_class, scope_instance].pretty_inspect
     end
+    
+    html
   end
   
   def render_model_helptext(controller_name)

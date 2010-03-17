@@ -71,7 +71,7 @@ $.switch_actions = function(action) {
 	
 	var i = action_sets.length; 
 	while (i--) { // return the opposite of the action in question
-		if (action_sets[i].indexOf(action) >= 0) return action_sets[i][ (action_sets[i].indexOf(action) ^ 1) ];
+		if (action_sets[i].indexOf(action) >= 0) return action_sets[i][(action_sets[i].indexOf(action) ^ 1)];
 	}
 }
 
@@ -185,6 +185,20 @@ $.fn.paneSwitcher = function() {
 	});
 }
 
+// use a checkbox to show/hide its parents next sibling div, focus on any child inputs there may be
+$.fn.toggleDiv = function() {
+	return this.each(function() {
+		var $this = $(this);
+		var sibling = $this.parent().next('.toggle_this');
+		
+		this.checked ? sibling.show() : sibling.hide();
+		$this.change(function(){
+			sibling.toggle(); 
+			sibling.find('input, textarea, select').focus();
+		});
+	});
+}
+
 /******************************************* SUCCESS CALLBACKS *******************************************/
 
 $.toggleHelptext = function(clickedLink) {
@@ -207,11 +221,11 @@ $.toggleHelptext = function(clickedLink) {
 	
 	$('.hintable').hinty();  // all matched inputs will display their title attribute
 	$('form').formBouncer(); // form validation, fields with supported validation classes will be processed
-	
 	$('.disabler', '.disabled').disabler(); // checkbox that disables all inputs in its form
 	$('.anchorListener').anchorDispatch();  // a toggle an element when its id is present in the url hash
 	$('.row_checkable').rowCheckable();			// clicking a whole form also enables its first checkbox
 	$('.pane_switch').paneSwitcher();				// use a checkbox to switch between two containers. classes: .pane_0, .pane_1
+	$('.toggle_div').toggleDiv();						// use a checkbox to show/hide its parents next sibling div
 	
 	$('input', '.ajax_form').live('change', function(){
 	  $(this).parent().parent().ajaxSubmit({
@@ -374,7 +388,6 @@ $.toggleHelptext = function(clickedLink) {
 		$('.delete_link', '#form_builder').live('click', function(){
 			var $this = $(this),
 					field_id = $(this).attr('rel').replace('field_', '');
-			
 			
 			$this.parent().parent().html()
 			

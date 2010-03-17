@@ -1,0 +1,141 @@
+/* =====================================================================
+[Debug Stylesheet]
+
+THEME NAME: My Simple Framework
+THEME URI: http://www.woobzine.com
+DESCRIPTION: A user-friendly, search-engine optimized, simple yet powerful framework focusing on adaptability
+VERSION: 1.3
+AUTHOR: Samuel Petit
+AUTHOR URI: http://www.woobzine.com
+AUTHOR EMAIL: s.petit@woobzine.com
+LAST CHANGE: 01/08/09
+
+------------------------------------------------------------------------
+[Copyright]
+
+My Simple Framework is a copyright of Samuel Petit (www.woobzine.com)
+It is free to be used, modified and shared provided this text remains intact.
+
+That being said, I'll be really grateful if you drop me an email
+(s.petit@woobzine.com) with your feedback when your website is done :)
+
+------------------------------------------------------------------------
+[Introduction]
+
+To debug your site, uncomment debug.css in the master.css.
+Then uncomment one of the following methods to chose the one you need.
+
+The first method is taken from Eric Meyer's Diagnostic CSS tool. 
+A HUGE thanks to Eric who shares such useful tools with everyone!
+
+To debug your site, uncomment debug.css in the master.css.
+
+===================================================================== */
+
+
+/* =====================================================================
+/* First method: good for tables, images, and links
+===================================================================== */
+/* 
+div:empty, span:empty, p:empty {
+    padding: 0.3em; background: #ffff00;
+}
+
+td:empty, th:empty, li:empty, dd:empty, dt:empty {
+    padding: 0.3em; background: #ffc862;
+}
+
+*[style], img, a[href], font, center {
+    border: 5px solid red;
+}
+
+*[class=""], *[id=""] {
+    border: 5px dotted red;
+}
+
+table, th {
+    border: 5px solid red;
+}
+
+img {
+    border: 5px solid red;
+}
+
+img[alt][title] {
+    border-width: 0;
+}
+
+img[alt] {
+   border-color: fuchsia;
+}
+
+img[alt], img[title] {
+    border-style: double;
+}
+
+img[alt=""][title], img[alt][title=""] {
+    border-width: 3px;
+}
+
+img[alt=""][title=""] {
+    border-style: dotted;
+}
+
+table[summary], th[scope="col"], th[scope="row"] {
+    border: 1px solid #AAA;
+}
+
+a[title] {
+    border-width: 0;
+}
+
+a[title=""] {
+    border-width: 3px;
+}
+
+a[href="#"] {
+    background: lime;
+}
+
+a[href=""] {
+    background: fuchsia;
+}
+
+acronym span:empty, abbr span:empty, acronym *[style], abbr *[style] {
+    border-width: 0;
+    background:transparent;
+}
+ */
+
+
+/* =====================================================================
+/* Second method: useful to display hierarchy
+===================================================================== */
+/* 
+* { outline: 2px dotted red }
+* * { outline: 2px dotted green }
+* * * { outline: 2px dotted orange }
+* * * * { outline: 2px dotted blue }
+* * * * * { outline: 1px solid red }
+* * * * * * { outline: 1px solid green }
+* * * * * * * { outline: 1px solid orange }
+* * * * * * * * { outline: 1px solid blue }
+*/
+
+
+/* =====================================================================
+/* Third method : highlight deprecated and non-semantic elements
+===================================================================== */
+/* 
+b, i, u, s, strike, font, center, hr, xmp {
+	margin: 0;
+	padding: 0;
+	outline: double #ff0000;
+	font-size: 200%;
+	font-weight: normal;
+	font-style: normal;
+	border: 1px solid #ff0000;
+	text-decoration: none;
+	text-align: left;
+}
+

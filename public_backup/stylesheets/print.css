@@ -1,0 +1,396 @@
+/* =====================================================================
+[Print Stylesheet]
+
+THEME NAME: My Simple Framework
+THEME URI: http://www.woobzine.com
+DESCRIPTION: A user-friendly, search-engine optimized, simple yet powerful framework focusing on adaptability
+VERSION: 1.3
+AUTHOR: Samuel Petit
+AUTHOR URI: http://www.woobzine.com
+AUTHOR EMAIL: s.petit@woobzine.com
+LAST CHANGE: 01/08/09
+
+------------------------------------------------------------------------
+[Copyright]
+
+My Simple Framework is a copyright of Samuel Petit (www.woobzine.com)
+It is free to be used, modified and shared provided this text remains intact.
+
+That being said, I'll be really grateful if you drop me an email
+(s.petit@woobzine.com) with your feedback when your website is done :)
+
+------------------------------------------------------------------------
+[Table of contents]
+
+    1. Global Settings
+    2. Layout
+    3. Headings
+    4. Common Text Formatting
+    5. Links
+    6. Global Classes
+    7. Navigation & Lists
+    8. Forms
+    9. Tables
+    10. Images & Objects
+    11. Misc, Tips & Useful Snippets
+
+===================================================================== */
+
+
+/* =====================================================================
+=GLOBAL SETTINGS
+===================================================================== */
+
+html { 
+    height: auto; 
+    margin-bottom: 0;
+	vertical-align: baseline;
+}
+
+body {
+    width:100% !important;
+    margin:0 !important;
+    padding:0 !important;
+    line-height: 1.5;
+    font-family: "Times New Roman", Garamond, Georgia, Times, serif;
+    color:#000;
+    background: none;
+    font-size: 12pt; /* Best from 10pt to 12pt */
+    word-spacing:1.1pt;
+    letter-spacing:0.2pt;
+}
+
+
+/* =====================================================================
+=LAYOUT
+===================================================================== */
+
+nav, header, section, article  {
+	background: none;
+	color: #000;
+}
+
+/* Choose the containers and sections you want to hide from print */
+/* Example: section[id*=column-2] */ 
+body>section>nav, body>section>header, body>section>footer { 
+    display: none; 
+}
+
+
+/* =====================================================================
+=HEADINGS
+===================================================================== */
+
+h1,h2,h3,h4,h5,h6 { 
+    font-family: Helvetica, Arial, Verdana, sans-serif;
+    page-break-after:avoid;
+	padding-top: 20px;
+}
+
+h1, h2, h3 {
+	page-break-after:avoid;
+}
+
+h1 {
+    font-size: 21pt;
+	padding-top: 0px;
+}
+
+h2 {
+    font-size:19pt;
+}
+
+h3 {
+    font-size: 16pt;
+}
+
+h4 {
+    font-size: 14pt;
+}
+
+h5 {
+    font-size: 12pt;
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
+
+h6 {
+    font-size: 12pt;
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
+
+
+/* =====================================================================
+=COMMON TEXT FORMATTING
+===================================================================== */
+
+code { 
+	font: 10pt Courier, monospace; 
+}
+
+blockquote { 
+	font-size: 10pt;
+	margin: 1.3em; 
+	padding: 1em;   
+	}
+
+abbr[title]:after,
+acronym[title]:after {
+	content: " (" attr(title) ")";
+	font-size: 90%;
+}
+
+/* =====================================================================
+=LINKS
+===================================================================== */
+
+/* Disable background graphics of links and bold  */
+
+body a[href^="http:"],
+body a[href^="https:"] {
+    text-decoration: none;
+    background: transparent;
+    font-weight: 700;
+    color: #333;
+}
+
+a:link[href^="http://"]:after, a[href^="http://"]:visited:after { 
+	color: #000;
+    content: " (" attr(href) ") "; 
+	font-size: 90%;
+}
+
+a:link:after, a:visited:after {
+  color: #000;
+  content: " (" attr(href) ") ";
+  font-size: 90%;
+}
+
+/* Display your site URL for relative links  */
+a[href^="/"]:after {
+	content: " (http://www.yoursite.com" attr(href) ")"; /* Put your site URL here  */
+	font-size: 90%;
+}
+
+
+/* =====================================================================
+=NAVIGATION & LISTS
+===================================================================== */
+
+
+
+/* =====================================================================
+=GLOBAL CLASSES
+===================================================================== */
+
+
+
+
+/* =====================================================================
+=FORMS
+===================================================================== */
+/*  
+    Forms layout
+*/
+
+
+form {
+    display:inline;
+    margin:0;
+    padding:0
+}
+
+form div { 
+    margin-bottom: .75em; 
+}
+
+fieldset {
+    margin: 1.5em 0;
+    padding: 1.5em 1em 1em 1.5em;
+}
+
+legend { 
+    font-weight: bold; 
+    font-size:1.2em;
+    padding:0 0.375em;
+}
+
+label {
+    font-weight: 700;
+    width:12em; 
+    display:block; 
+    float:left; 
+	text-align:left; 
+    clear:left; 
+    margin-right:1em;
+}
+
+label + br + * {
+    margin-top:0.3em;
+}
+
+input, select, textarea {
+    font:1em Arial, Helvetica, sans-serif;
+    line-height:1.25;
+    margin-bottom: 1em;
+    padding: 0.375em 0.375em 0.15em 0.375em ;
+}
+
+input[type="checkbox"] ,input[type="radio"] { 
+    margin-bottom:0; 
+}	
+
+select {
+    padding: 0.2em 0.2em 0 0.2em;
+    width: 10em;
+}
+
+option {
+    padding: 0 0.5em;
+}
+
+button, optgroup {
+    margin-top:0.5em;
+}
+
+
+/*
+	Forms colors
+*/
+
+fieldset {
+    border:1px solid #818181;
+    background:none; /* Impossible to have the same display with Firefox and IE */
+}
+
+fieldset:hover {
+    border:1px solid #818181;
+    background:none; /* Impossible to have the same display with Firefox and IE */
+}
+
+legend
+	{ 
+    background-color: #818181; 
+    color: #fff; 
+}
+
+label
+	{ 
+    color:#333; 
+}
+	
+textarea
+	{ 
+    border: 1px solid #666; 
+}
+
+textarea, input[type='text'], input[type='password'], select { 
+    border: 1px solid #ccc; background: #fff; 
+}
+
+textarea:hover, input[type='text']:hover, input[type='password']:hover, select:hover { 
+    border: 1px solid #ccc; background: #ebebeb; 
+}
+
+textarea:focus, input[type='text']:focus, input[type='password']:focus, select:focus { 
+    outline:1px solid #666;  background: #fff;
+}
+
+select {  
+    background-color: #fff; color: #000; 
+}
+
+input[type="submit"] {  
+    background-color: #ccc; color: #333; 
+}
+
+input[type="checkbox"] { 
+    color: #000;
+}
+
+input[type="radio"] {  
+    color: #000; 
+}
+
+option { 
+    background-color:#fff; 
+    color:#000;
+}
+
+optgroup { 
+    background-color:#ccc; 
+    color:#000; 
+}
+
+button { 
+    background-color: #ccc; 
+    color: #333; 
+}
+
+
+
+
+/* =====================================================================
+=TABLES
+===================================================================== */
+ 
+table { 
+	margin: 1px; 
+}
+
+th { 
+	border-bottom: 1px solid #333;  
+	font-weight: bold; 
+}
+
+td { 
+	border-bottom: 1px solid #333; 
+}
+
+th,td { 
+	padding: 5px 10px 5px 0; 
+}
+
+tfoot { 
+	font-style: italic; 
+}
+
+caption { 
+	background: #fff; margin-bottom:20px; text-align:left; 
+}
+
+thead {
+	display: table-header-group;
+}
+
+tr {
+	page-break-inside: avoid
+} 
+
+
+/* =====================================================================
+=IMAGES & OBJECTS
+===================================================================== */
+
+img, a.img {
+	border: 0;
+	outline: none;
+}
+
+
+/* =====================================================================
+=MISC, TIPS & USEFUL SNIPPETS
+===================================================================== */
+
+/* If you're having trouble printing relative links, uncomment and customize this */
+/* a[href^="/"]:after { content: " (http://www.yourdomain.com" attr(href) ") "; } */
+
+/* Prevent the element from being printed */
+.noprint { 
+    display:none !important; 
+}
+
+/* Split comments onto a separate page (useful for blogs)
+#your-comments-id {
+	page-break-before: always;
+}
+ */

@@ -25,7 +25,6 @@ class GalleriesController < ApplicationController
   end
 
   def edit
-    @image = Image.new
   end
 
   def update
@@ -51,6 +50,7 @@ class GalleriesController < ApplicationController
   
   def get_gallery
     @gallery = Gallery.find(params[:id])
+    @image = Image.new if action_name =~ /^e.+(r|y)$/
   end
   
   def get_associations

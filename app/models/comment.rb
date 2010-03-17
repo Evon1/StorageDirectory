@@ -37,10 +37,13 @@ class Comment < ActiveRecord::Base
   end
   
   # Instance Methods
+  
   def before_save
-    if self.title.blank?
-      self.title = "Comment "
-    end
+    self.title = 'Comment ' if self.title.blank?
+  end
+  
+  def after_save
+    Notifier.deliver_comment_notification self
   end
   
 end

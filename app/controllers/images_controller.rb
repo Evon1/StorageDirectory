@@ -15,8 +15,7 @@ class ImagesController < ApplicationController
   def create
     @image = Image.new(params[:image])
     
-    if @image.save
-      _save_to_gallery(params) unless params[:gallery_id].nil?
+    if @image.save(params)
       flash[:notice] = @image.title + ' has been created.'
     else
       flash[:error] = model_errors(@image)
@@ -53,10 +52,6 @@ class ImagesController < ApplicationController
   
   def get_image
     @image = Image.find(params[:id])
-  end
-  
-  def _save_to_gallery(params)
-    @image.gallery_images.create(:gallery_id => params[:gallery_id])
   end
   
 end
