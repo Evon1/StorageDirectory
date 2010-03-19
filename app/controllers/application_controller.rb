@@ -44,7 +44,7 @@ class ApplicationController < ActionController::Base
   $_crud = [:create, :read, :update, :delete]
   
   before_filter :init
-  layout (session ? (session[:layout] || 'usselfstoragelocator') : 'usselfstoragelocator')
+  layout 'storagedirectory'
   
   def local_request?
     true if current_user
@@ -83,10 +83,10 @@ class ApplicationController < ActionController::Base
     
     @default_view_type = session[:view_type]
     
-    @theme_css = theme_css(session[:theme] || 'usselfstoragelocator')
+    @theme_css = theme_css(session[:theme] || 'storagedirectory')
     
     @plugins = ['plugins/jquery.formbouncer', 'plugins/jquery.hinty']
-    @widgets_js = []
+    @widgets_js = ['widgets/map_anim']
     
     @nav_pages = Page.find_all_by_show_in_nav(true)
     @global_blocks = Block.all(:conditions => ['show_in_all in (?)', regions(false).map(&:to_s)])
