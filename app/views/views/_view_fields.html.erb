@@ -1,0 +1,42 @@
+<% models.each do |view| %>
+	<% models_view = models_view_object(view, model) %>
+
+	<div class="row_checkable round <%= cycle('odd', 'even') %>">
+	
+		<div class="left">
+			<%= hidden_field_tag 'models_views[][id]', models_view.id %>
+			<%= hidden_field_tag 'models_views[][view_id]', view.id %>
+		
+			<%#= hidden_field_tag 'models_views[][enable]', false %>
+			<%= check_box_tag 'models_views[][enabled]', true, model.views.include?(view), :class => 'disabler' %> 
+		</div>
+	
+		<div class="left">
+			<p>
+				<%= link_to view.name, edit_view_path(view, return_here_and('show_collapseable_ViewsFields')) %><br />
+				<em><%= view.description %></em>
+			</p>
+			Listing: <%= view.model_name.titleize.pluralize %>
+		</div>
+
+		<div class="left">
+			<%= label_tag :view_type %><br />
+			<%= select_tag 'models_views[][view_type]', model.option_tags_for(view_types(false), :models_views, view, :view_type, 'Choose...') %>
+		</div>
+	
+		<div class="left">
+			<%= label_tag :fields %><br />
+			<%= select_tag 'models_views[][fields]', model.option_tags_for(view.fields, nil, models_view, :fields), :multiple => true, :title => 'Select multiple fields to display in view' %>
+		</div>
+	
+		<div class="left stacked_controls">
+			<%= label_tag :order %>
+			<%= text_field_tag 'models_views[][order]', models_view.order, :class => 'small_text_field' %>
+		
+			<%= label_tag :limit %>
+			<%= text_field_tag 'models_views[][limit]', models_view.limit, :maxlength => 4, :class => 'tiny_text_field' %>
+		</div>
+	
+	</div>
+	
+<% end %>

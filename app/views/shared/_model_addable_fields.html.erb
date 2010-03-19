@@ -1,0 +1,13 @@
+<div class="stack">
+	<%= link_to _for.singular.titleize, '#', :class => 'icon16 add_link', :rel => context %>
+</div>
+
+<div class="partial_forms_wrap">
+	<% collection.each do |model| %>
+		<%= render :partial => "#{_for}/#{_for.singular}_fields", :locals => { :f => f, :disabled => false, :model => model } %>
+	<% end %>
+</div>
+
+<div class="hide partial_form_html">
+	<%= render :partial => "#{_for}/#{_for.singular}_fields", :locals => { :f => f, :disabled => true, :model => new_model } %>
+</div>

@@ -1,0 +1,12 @@
+<div id="view_type_link_wrap" class="right">
+	<span class="left">View as: </span>
+	<ul class="horizontal plain right uncollapse">
+		<% view_types(false).each do |type| %>
+			<li class="left">
+				<%= link_to_unless (session[:view_type] == type.to_s), "#{type}".titleize, { :view_type => type }, :class => "iconOnly16 #{type}_icon small_round", :title => "#{type.to_s.camelcase} View" do |name|
+					"<span class='iconOnly16 #{type}_icon active small_round' title='#{type.to_s.camelcase} View'>#{name}</span>"
+				end %>
+			</li>
+		<% end %>
+	</ul>
+</div>

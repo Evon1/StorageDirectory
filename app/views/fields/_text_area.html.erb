@@ -1,0 +1,6 @@
+<div class="<%= field.field_type %>">
+	<%= f.label field.name unless field.has_plugin?(:hintable) %>
+	<div class="shadow_wrap">
+		<%= f.text_area field.name, field.field_attributes_hash_for_form_helper %>
+	</div>
+</div>

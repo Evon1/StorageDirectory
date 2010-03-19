@@ -1,0 +1,27 @@
+<fieldset id="SuggestionForm">
+	
+	<div>
+		<%= f.label :title %>
+		<div class="shadow_wrap">
+			<%= f.text_field :title, :class => 'required' %>
+		</div>
+	</div>
+	
+	<div>
+		<%= f.label :description %>
+		<div class="shadow_wrap">
+			<%= f.text_area :description, :class => 'required' %>
+		</div>
+	</div>
+
+	<div class="left right_space">
+		<%= f.label :controller, 'Page' %>
+		<%= f.select :controller, _controllers, { :selected => controller_name, :include_blank => true }, :class => 'required', :title => 'Choose the controller to send the form data to' %>
+	</div>
+	
+	<div class="left">
+		<%= f.label :action %>
+		<%= select_tag 'suggestion[action]', @suggestion.option_tags_for(_page_actions(false), nil, @form, :action, '', action_name), :class => 'required', :title => 'Specify what to do with the form data' %>
+	</div>
+	
+</fieldset>

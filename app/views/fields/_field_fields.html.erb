@@ -1,0 +1,61 @@
+<div class="field_form stack uncollapse round box framed">
+	
+		<div class="uncollapse stack">
+			
+			<div class="left right_space">
+				<%= label_tag 'field_type', 'Type' %>
+				<%= select_tag 'form[fields_attributes][][field_type]', @form.option_tags_for(_field_types(false), nil, model, :field_type), :class => 'required', :title => 'Type of input', :disabled => disabled %>
+				<%= hidden_field_tag 'form[fields_attributes][][id]', model.id unless model.new_record? %>
+			</div>
+			
+			<div class="left uncollapse option_group round box right_space">
+				<%= label_tag 'Validation: ', nil, :class => 'left note' %>
+				<div class="left check_box_wrap">
+					<%= check_box_tag 'form[fields_attributes][][required]', 1, model.validates?(:required), :disabled => disabled %>
+					<%= label_tag 'field_required', 'Required', :title => 'Make this a required field' %>
+				</div>
+			
+				<div class="left check_box_wrap">
+					<%= check_box_tag 'form[fields_attributes][][email]', 1, model.validates?(:email), :disabled => disabled %>
+					<%= label_tag 'field_email', 'Email', :title => 'Use for email fields to validate the input' %>
+				</div>
+			</div>
+			
+			<div class="left uncollapse option_group round box">
+				<%= label_tag 'Plugins: ', nil, :class => 'left note' %>
+				<div class="left check_box_wrap">
+					<%= check_box_tag 'form[fields_attributes][][hintable]', 1, model.has_plugin?(:hintable), :disabled => disabled %>
+					<%= label_tag 'field_hintable', 'Hintable', :title => 'A text hint will appear within the field using the title attribute' %>
+				</div>
+			</div>
+			
+			<%= render :partial => 'shared/addable_cancel_delete_links', :locals => { :model => model, :disabled => disabled } %>
+			
+		</div>
+		
+		<div class="half_fields uncollapse stack">
+			
+			<div class="left right_space">
+				<%= label_tag 'field_attr_name', 'Name' %>
+				<div class="shadow_wrap">
+					<%= text_field_tag 'form[fields_attributes][][name]', model.name, :class => 'required', :disabled => disabled %>
+				</div>
+			</div>
+		
+			<div class="left">
+				<%= label_tag 'field_attr_title', 'Title' %>
+				<div class="shadow_wrap">
+					<%= text_field_tag 'form[fields_attributes][][title]', model.field_title, :disabled => disabled %>
+				</div>
+			</div>
+			
+		</div>
+		
+		<div>
+			<%= label_tag 'field_attr_classe', 'Classes' %>
+			<div class="shadow_wrap">
+				<%= text_field_tag 'form[fields_attributes][][class]', model.field_classes, :disabled => disabled %>
+			</div>
+		</div>
+		
+</div>

@@ -1,0 +1,36 @@
+<fieldset>
+	
+	<div>
+		<%= f.label :name %>
+		<div class="shadow_wrap">
+			<%= f.text_field :name, :class => 'required' %>
+		</div>
+	</div>
+
+	<div>
+		<%= f.label :description %>
+		<div class="shadow_wrap">
+			<%= f.text_area :description, :class => 'small_textarea' %>
+		</div>
+	</div>
+	
+	<div class="uncollapse">
+		<div id="model_name_fields" class="view_options left">
+			<%= f.label :model_name, 'List all ' %>
+			<%= f.select :model_name, models, { :include_blank => true }, :class => 'required', :title => 'List records of this class' %>
+		</div>
+		
+		<div id="scope_fields" class="view_options left">
+			<%= f.label :scope, ' by a ' %>
+			<%= f.select :scope, models(true, false), { :include_blank => true }, :title => 'Show listing of these records owned by the model loaded on the page where this view will reside', :class => 'scope_dropdown' %>
+		</div>
+		
+		<div id="scope_owner_fields" class="view_options left">
+			<%= hidden_field_tag 'owner_id', @view.owner_id, :class => 'scope_down_hidden' unless @view.owner_id.blank? %>
+			
+			<%= f.label :owner_id, 'Owner', :title => 'Choose a specific model to scope by, rather than just the one loaded on the page where this view will reside' %>
+			<%= f.select :owner_id, @view.get_scope_models, { :prompt => 'Active Context' }, :class => 'scoping_dropdown' %>
+		</div>
+	</div>
+	
+</fieldset>

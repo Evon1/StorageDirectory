@@ -1,0 +1,13 @@
+<% if current_user %>
+	<ul class="options">
+		<% options.each do |option| %>
+	
+			<% if option[:method].nil? %>
+				<li><%= link_to option[:title], option[:path] %></li>
+			<% else # method provided, must be delete %>
+				<li><%= link_to option[:title], option[:path], :confirm => option[:confirm], :method => option[:method] %></li>
+			<% end %>
+		
+		<% end %>
+	</ul>
+<% end %>

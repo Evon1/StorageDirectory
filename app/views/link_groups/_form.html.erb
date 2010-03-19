@@ -1,0 +1,17 @@
+<fieldset>
+	
+	<div>
+		<%= f.label :name %>
+		<div class="shadow_wrap">
+			<%= f.text_field :name, :class => 'required' %>
+		</div>
+	</div>
+
+	<div>
+		<%= f.label :description, nil, :class => 'block_label' %>
+		<div class="shadow_wrap">
+			<%= f.text_area :description, :class => 'small_textarea' %>
+		</div>
+	</div>
+	
+</fieldset>

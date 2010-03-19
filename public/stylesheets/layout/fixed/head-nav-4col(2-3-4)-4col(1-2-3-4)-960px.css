@@ -1,0 +1,373 @@
+/* =====================================================================
+[Layout Stylesheet]
+
+THEME NAME: My Simple Framework
+THEME URI: http://www.woobzine.com
+DESCRIPTION: A user-friendly, search-engine optimized, simple yet powerful framework focusing on adaptability
+VERSION: 1.3
+AUTHOR: Samuel Petit
+AUTHOR URI: http://www.woobzine.com
+AUTHOR EMAIL: s.petit@woobzine.com
+LAST CHANGE: 01/08/09
+
+------------------------------------------------------------------------
+[Copyright]
+
+My Simple Framework is a copyright of Samuel Petit (www.woobzine.com)
+It is free to be used, modified and shared provided this text remains intact.
+
+That being said, I'll be really grateful if you drop me an email
+(s.petit@woobzine.com) with your feedback when your website is done :)
+
+------------------------------------------------------------------------
+[Table of contents]
+
+    0. Glossary
+    1. Body
+    2. Header
+    3. Navigation
+    4. Header
+    5. Level-1
+    6. Level-2
+    7. Footer
+    8. Clear Floats
+    9. Misc, Tips & Useful Snippets
+
+/*------------------------------------------------------------------
+[Hierarchy]
+
+   | <body>
+   | ...,<section>
+   | ...,...,<nav>
+   | ...,...,<header>
+   | ...,...,<nav>
+   | ...,...,<section #wrapper>
+   | ...,...,...,<section #level-1>
+   | ...,...,...,...,<section #column-1>
+   | ...,...,...,...,<section #column-2>   
+   | ...,...,...,...,<section #column-3>
+   | ...,...,...,...,<section #column-4>
+   | ...,...,...,<section #level-2>
+   | ...,...,...,...,<section #column-5>
+   | ...,...,...,...,<section #column-6>
+   | ...,...,...,...,<section #column-7>
+   | ...,...,...,...,<section #column-8>
+   | ...,...,<footer>
+   
+===================================================================== */
+
+
+/* =====================================================================
+=GLOSSARY
+===================================================================== */
+
+/*  List the important colors of your website here.
+
+    Black:#000000;
+    White:#FFFFFF;
+    Red:#FF0000;
+
+*/
+
+/*  Use this for another quick reminder.
+
+*/
+
+
+/* =====================================================================
+=BODY
+===================================================================== */
+
+body {
+    background: #d5e8f3 url(../images/layout/body-bg.png) repeat-x top;
+    min-width: 960px;  /* Prevent the liquid layouts from breaking */
+}
+
+/* Section for additionnal styling purpose */
+body>section {
+    text-align: left;
+}
+
+/* Inside class for many elements */
+.inside {
+	background: #f1f1f1;
+    margin: 10px;
+	padding: 10px;
+}
+
+/* =====================================================================
+=HEADER
+===================================================================== */
+
+body>section>header {
+    background: #fff;
+    margin: 0 auto;
+    position: relative;
+    text-align: center;
+    width: 960px;
+}
+
+	body>section>header>.inside {}
+
+
+/* =====================================================================
+=NAVIGATION
+===================================================================== */
+
+body>section>header~nav {
+    background: #fff;
+    margin: 0 auto;
+    position: relative;
+    text-align: center;
+    width: 960px;
+}
+
+	body>section>header~nav>.inside {}
+
+body>section>nav:first-child, body>section>nav:first-child>.inside {
+	display: none; /* Totally hide one of the navigation menus */
+}
+
+
+/* =====================================================================
+=LEVEL-1
+===================================================================== */
+
+section[id*=wrapper-1]{
+    margin: 0 auto;
+    padding: 0 0 0 200px;
+    width: 760px;
+}
+
+section[id*=level-1] {
+    background: #fff;
+    float: left;
+    height: auto;
+	float: left;
+    overflow: hidden;
+	margin-left: -200px;
+    padding-left: 200px;
+    position: relative;
+    text-align: left;
+    width: 100%;
+}
+
+/*
+	LEVEL-1>COLUMN-1
+*/
+
+section[id*=column-1] {
+    float: left;
+    position: relative;
+    text-align: left;
+    width: 33.3%;
+}
+
+	section[id*=column-1]>.inside {}
+
+/*
+	LEVEL-1>COLUMN-2
+*/
+
+section[id*=column-2] {
+    float: left;
+    position: relative;
+    text-align: left;
+    width: 33.3%;
+}
+
+	section[id*=column-2]>.inside {}
+
+/*
+	LEVEL-1>COLUMN-3
+*/
+
+section[id*=column-3] {
+    float: left;
+    position: relative;
+    text-align: left;
+    width: 33.3%;
+}
+
+	section[id*=column-3]>.inside {}
+
+/*
+	LEVEL-1>COLUMN-4
+*/
+
+section[id*=column-4] {
+	float: left;
+	width: 200px;
+	position: relative;
+	margin-left: -100%;
+	left: 200px;
+}
+
+/* Protect the layout from IE strange behaviour */
+section[id*=level-1]>section[id*=column-4]  {
+	left: -200px;
+}
+
+	section[id*=column-4]>.inside {}
+
+
+/* =====================================================================
+=LEVEL-2
+===================================================================== */
+
+section[id*=wrapper-2]{
+    margin: 0 auto;
+    width: 960px;
+}
+
+section[id*=level-2] {
+    background: #fff;
+    float: left;
+    height: auto;
+	float: left;
+    overflow: hidden;
+	margin-left: -200px;
+    padding-left: 200px;
+    position: relative;
+    text-align: left;
+    width: 100%;
+}
+
+/*
+	LEVEL-2>COLUMN-5
+*/
+
+section[id*=column-5] {
+    float: left;
+    position: relative;
+    text-align: left;
+    width: 25%;
+}
+
+	section[id*=column-5]>.inside {}
+
+/*
+	LEVEL-2>COLUMN-6
+*/
+
+section[id*=column-6] {
+    float: left;
+    position: relative;
+    text-align: left;
+    width: 25%;
+}
+
+	section[id*=column-6]>.inside {}
+
+/*
+	LEVEL-2>COLUMN-7
+*/
+
+section[id*=column-7] {
+    float: left;
+    position: relative;
+    text-align: left;
+    width: 25%;
+}
+
+	section[id*=column-7]>.inside {}
+
+/*
+	LEVEL-2>COLUMN-8
+*/
+
+section[id*=column-8] {
+    float: left;
+    position: relative;
+    text-align: left;
+    width: 24.9%;
+}
+
+	section[id*=column-8]>.inside {}
+
+	
+/* =====================================================================
+=FOOTER
+===================================================================== */
+
+footer {
+    background: #fff;
+    margin: 0 auto;
+    position: relative;
+    text-align: center;
+    width: 960px;
+}
+
+footer>.inside {}
+
+
+/* =====================================================================
+=CLEAR FLOATS
+===================================================================== */
+
+section, nav, header, footer, div.inside {
+    overflow: hidden;
+}
+
+section:after, nav:after, header:after, footer:after, div.inside:after {
+    clear: both;
+    content: " ";
+    display: block;
+    font-size: 0;
+    height: 0;
+    line-height: 0;
+    overflow: hidden;
+    visibility: hidden;
+    width: 0;
+}
+
+.clear {
+    clear: both;
+    display: block;
+    height: 0;
+    overflow: hidden;
+    visibility: hidden;
+    width: 0;
+}
+
+/* Clearfix trick for clearing floats */
+.clearfix:after {
+    clear: both;
+    content: " ";
+    display: block;
+    font-size: 0;
+    height: 0;
+    line-height: 0;
+    overflow: hidden;
+    visibility: hidden;
+    width: 0;
+}
+
+* html .clearfix {
+    height: 1%;
+}
+
+.clearfix {
+    display: block;
+}
+
+
+/* =====================================================================
+=MISC, TIPS & USEFUL SNIPPETS
+===================================================================== */
+
+/* Security for correct positioning */
+header, nav, body>section>section, footer {
+    clear: both;
+}
+
+/* Overflow trick for equal-height columns
+
+	padding: 10px 10px 10020px 10px;
+    margin: 10px 10px -10000px 10px;
+	
+	or
+	
+    padding-bottom: 10020px;
+    margin-bottom: -10000px;
+*/

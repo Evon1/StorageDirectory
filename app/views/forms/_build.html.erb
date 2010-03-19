@@ -1,0 +1,17 @@
+<% form_for virtual_form_path(form), :url => form.get_url_hash do |f| %>
+	<fieldset id="<%= form.field_set_id %>" class="virtual_form">
+		<legend><%= form.name %></legend>
+		
+		<% form.fields.each do |field| %>
+			<%= render :partial => "fields/#{field.field_type}", :locals => { :f => f, :field => field } %>
+		<% end %>
+		
+		<div class="uncollapse">
+			<div class="buttons left">
+				<%= render_form_hidden_fields(form) %>
+				<%= f.submit 'Submit' %>
+			</div>
+		</div>
+		
+	</fieldset>
+<% end %>

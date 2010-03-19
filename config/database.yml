@@ -1,0 +1,14 @@
+development:
+  adapter: mysql
+  encoding: utf8
+  database: usselfstoragelocator
+  username: root
+  password: 
+
+production:
+  adapter: mysql
+  encoding: utf8
+  database: usselfstoragelocator_production
+  username: greyrob_admin
+  password: -pX8.PK2{4AW
+

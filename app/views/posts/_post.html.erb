@@ -1,0 +1,24 @@
+<div class="post_view">
+		
+		<div class="post uncollapse">
+			<h4 class="left"><%= link_to post.name_or_title, post %></h4>
+			
+			<div class="post_info">
+				<% if post.respond_to?('user') && post.user %>
+					<span> by <%= link_to post.user.name, post.user %></span>
+				<% end %>
+				
+				<% unless post.timestamp.nil? %>
+					<span> on <%= post.timestamp.asctime %></span>
+				<% end %>
+			</div>
+			
+			<% if post.attributes.keys.include?('content') %>
+				<div class="post_content stack"><%= post.content_teaser %></div>
+			<% end %>
+				
+			<%= render :partial => 'meta', :locals => { :post => post } %>
+				
+		</div>
+	
+</div>

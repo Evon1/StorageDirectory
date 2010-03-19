@@ -1,0 +1,3 @@
+<% nav.each do |page| %>
+	<%= link_to page.title, nice_page_path(page), :class => active_page(page) %>
+<% end %>

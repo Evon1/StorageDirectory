@@ -1,0 +1,32 @@
+<% unless class_helptext.nil? %>
+	<div class="helptext round stack uncollapse">
+	
+		<div class="helptext_options<%= class_helptext.show ? ' bg_green' : '' %>">
+			<strong class="icon16 question_mark">Help</strong>
+
+				<%= link_to 'Hide', ajax_update_path('helptext', class_helptext.id, :attribute => 'show', :value => 0),
+						:rel => 'helptext', :class => "ajax_action right small_round #{class_helptext.show ? '' : 'hide'}" %>
+
+				<%= link_to 'Show', ajax_update_path('helptext', class_helptext.id, :attribute => 'show', :value => 1),
+						:rel => 'helptext', :class => "ajax_action right small_round #{class_helptext.show ? 'hide' : ''}" %>
+		</div>
+	
+		<div id="<%= controller_name %>_helptext" class="inner<%= class_helptext.show ? '' : ' hide' %>">
+		
+			<div class="helptext_text<%= class_helptext.examples.blank? ? '' : '' %>">
+				<%= class_helptext.text %>
+			</div>
+
+			<% unless class_helptext.examples.blank? %>
+				<%= link_to 'Examples', { :anchor => 'show_examples_helptext' }, :class => 'toggle_action toggle_right', :title => 'Show the examples' %>
+				<div class="examples round hide_if_js">
+					<%= class_helptext.examples %>
+				</div>
+			<% end %>
+		
+		</div>
+
+	</div>
+<% else %>
+	<%= link_to 'Helptext', new_helptext_path(:model => controller_name.underscore.singular), :id => 'add_helptext_link', :class => 'note add_link icon16', :title => "Add Helptext for #{controller_name.titleize}." %>
+<% end %>

@@ -1,0 +1,26 @@
+<fieldset>
+	
+	<div>
+		<%= f.label :title %>
+		<div class="shadow_wrap">
+			<%= f.text_field :title, :class => 'required' %>
+		</div>
+	</div>
+
+	<div>
+		<%= f.label :content, nil, :class => 'block_label' %>
+		<div class="shadow_wrap">
+			<%= f.text_area :content, :class => 'wysiwyg required' %>
+		</div>
+	</div>
+	
+	<div class="check_box_wrap">
+		<%= f.check_box :published %>
+		<%= f.label :published, nil, :class => 'small_label' %>
+	</div>
+	
+</fieldset>
+
+<%= render :partial => 'shared/assoc_form',
+	:locals => { :model_field => f, :model => @post, :fields_title => 'Blocks', :enabled_models => @post.enabled_blocks,
+	:disabled_models => reject_blocks_enabled_on_this(@post, @blocks) } %>
