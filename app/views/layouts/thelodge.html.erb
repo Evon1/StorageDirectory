@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 	<head>
-		<%= stylesheet_link_tag 'common' %>
-		<%= stylesheet_link_tag @theme_css %>
+		<%= stylesheet_link_tag 'common', @theme_css %>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 		<meta name="google-site-verification" content="mwkC_bd3HmEdRzW8gE8YFHZfSX-xqL1eSPfQ-zHF-yU" />
 		<meta name="description" content="The Lodge is a Boca Raton sports pub where the emphasis is on craft beer and fresh food. We offer an extensive selection of 24 draft beers, which are constantly rotated, and wines by the glass and bottle. We are constantly rotating our beer selection to reflect customer preferences and seasonal availability. Sit back at the bar and watch sports, drink your favorite craft brew, and sample our menu. We hope to see you soon." />
 		<meta name="keywords" content="the lodge boca raton, the lodge boca, beer lodge, lodge boca, the lodge beer and grill, sports bar boca raton, sports pub boca raton, beer bar, bar and grill boca raton" />
 		<title><%= yield :title %></title>
+		<%= javascript_include_tag 'jquery.all' %>
 	</head>
 	<body id="<%= controller_name %>_controller" class="<%= action_name %>_action">
     
@@ -15,7 +15,6 @@
     
 		<div id="outer_wrapper">
 			<div id="inner_wrapper">
-			  
 			  <div id="header">
 				  <%= yield :header %>
 				</div>
@@ -28,15 +27,19 @@
 						</ul>
 					</div> <!-- /#nav_wrap -->
 					
-					<div id="content">
-					  <div class="inner">
-						  <%= yield %>
-					  </div>
+					<div id="content_outer">
+					  <div id="content">
+  					  <div class="content_inner">
+  						  <%= yield %>
+  						  
+  						  <div id="content_bottom" class="region">
+    							<%= yield :content_bottom %>
+    						</div>
+  					  </div>
 					  
-						<div id="content_bottom" class="region">
-							<%= yield :content_bottom %>
-						</div>
-					</div> <!-- /#content -->
+  						<div id="btm_content_bg"></div>
+  					</div> <!-- /#content -->
+					</div> <!-- /#content_outer -->
 					
 					<br class="clear" />
 					
@@ -49,9 +52,7 @@
 			</div> <!-- /#inner_wrapper -->
 		</div> <!-- /#outer_wrapper -->
     
-    <div id="greyrobot" class="white uncollapse"><span class="right">Powered by <a href="http://greyrobot.com">Grey Robot</a></span><span class="left">&copy; 2010 The Lodge</span></div>
-    
-    <%= javascript_include_tag 'ckeditor/ckeditor.js', 'jquery.all', @plugins %>
+    <%= javascript_include_tag 'ckeditor/ckeditor.js', @plugins %>
   	<%= @widgets_js.map { |js| javascript_include_tag js } %>
   	<%= javascript_include_tag 'application' %>
     

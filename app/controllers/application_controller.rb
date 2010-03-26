@@ -21,6 +21,7 @@ class ApplicationController < ActionController::Base
                 :_field_types,  # for the virtual forms builder
                 :_page_actions, # suggestions form
                 :_models_having_assoc,
+                :_models_with_title,
                 :in_edit_mode?,
                 :reject_blocks_enabled_on_this, # for the blocks_fields
                 :reject_views_enabled_on_this,  # for the blocks_fields
@@ -29,6 +30,7 @@ class ApplicationController < ActionController::Base
   include UtilityMethods
   
   # for the SharedModelMethod module
+  
   $regions    = [:header, :banner, :sidebar, :left, :right, :content_bottom, :column_5, :column_6, :column_7, :column_8, :footer]
   $view_types = [:list, :blog_roll, :box, :table]
   
@@ -42,11 +44,12 @@ class ApplicationController < ActionController::Base
   # authorization system
   $_crud = [:create, :read, :update, :delete]
   
-  before_filter :init
-  
   layout (session ? (session[:layout] || 'greyrobotRD') : 'greyrobotRD')
   
-  def local_request?
+  before_filter :reverse_captcha_check, :only => :create
+  before_filter :init
+  
+  def local_request? # display full error message when logged in
     true if current_user
   end
   
@@ -63,9 +66,15 @@ class ApplicationController < ActionController::Base
   private # -----------------------------------------------
   
   def init
+    redirect_to("/#{Page.first.title.downcase}") and return if request.path == '/' || (!current_user && action_name =~ /index|edit|update|destroy/)
+    
     set_session_vars
     get_content_vars
     get_list_of_controllers_for_menu if current_user
+  end
+  
+  def reverse_captcha_check # hidden field hack_me must pass through empty, cheap reverse captcha trick
+    redirect_to("/#{Page.first.title.downcase}") and return if params.has_key?(:hack_me) && !params[:hack_me].empty?
   end
   
   def set_session_vars
@@ -178,6 +187,21 @@ class ApplicationController < ActionController::Base
     end
     
     fetch_array_for models_array, for_select
+  end
+  
+  def _models_with_title(for_select = false)
+    models_array = filter_dir_entries('models') do |entry|
+      model_class = entry.camelcase.constantize
+      model_class.respond_to?('title')
+    end
+    
+    fetch_array_for models_array, for_select
+  end
+  
+  def filter_dir_entries(dir, &filter)
+    get_list_of_file_names('models').each do |entry|
+      (entries ||= []) << entry if yield(entry)
+    end
   end
   
   def fetch_array_for(array, for_select = true, plural = false) # => [ ['Subnav', 'subnav'], ... ]

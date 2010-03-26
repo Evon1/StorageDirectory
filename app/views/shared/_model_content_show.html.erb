@@ -4,7 +4,7 @@
 <div class="staticContent">
 	<%= render :partial => 'shared/model_options', :locals => { :model => model, :edit_path => edit_model_path(model), :hide_anchor => 'hide_collapseable_staticContent' } %>
 	
-	<h2><%= model.title %></h2>
+	<%= show_title model %>
 
 	<div class="collapseable">
 		<%= model.content %>

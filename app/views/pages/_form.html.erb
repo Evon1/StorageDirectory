@@ -1,15 +1,22 @@
 <fieldset>
 	
 	<div>
-		<%= f.label :title %>
+		<%= f.label :title, 'Nav Title' %>
 		<div class="shadow_wrap">
 			<%= f.text_field :title, :class => 'required' %>
 		</div>
 	</div>
-
-	<div class="check_box_wrap">
-		<%= f.check_box :show_in_nav %>
-		<%= f.label :show_in_nav, nil, :class => 'small_label' %>
+  
+  <div class="uncollapse">
+  	<div class="check_box_wrap left right_space">
+  		<%= f.check_box :show_in_nav %>
+  		<%= f.label :show_in_nav, nil, :class => 'small_label' %>
+  	</div>
+	
+  	<div class="check_box_wrap left">
+  		<%= f.check_box :show_title %>
+  		<%= f.label :show_title, 'Show title in page', :class => 'small_label' %>
+  	</div>
 	</div>
 	
 	<div>

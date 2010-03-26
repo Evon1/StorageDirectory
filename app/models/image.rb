@@ -18,8 +18,20 @@ class Image < ActiveRecord::Base
   access_shared_methods
   
   # Class Methods
+  
   def self.all_for_index_view
     find(:all, :select => 'title, image_file_name, id')
+  end
+  
+  # Instance Methods
+  
+  def save(params)
+    self.add_to_gallery(params) unless params[:gallery_id].nil?
+    super
+  end
+  
+  def add_to_gallery(params)
+    self.gallery_images.build(:gallery_id => params[:gallery_id]) # join table
   end
   
 end

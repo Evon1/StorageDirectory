@@ -2,7 +2,8 @@
 module ApplicationHelper
   
   def declare_content_for # renders blocks in regions based on current page
-    content_for :title, @page ? @page.title : @controller_name
+    title = (@page ? @page.title  : @controller_name.titleize).to_s
+    content_for :title, "#{title.blank? ? 'Manage - ' : title + ' - '}GreyCMS"
     
     regions(false).each do |region|
       content_for region do
@@ -66,18 +67,29 @@ module ApplicationHelper
       :type => 'text/javascript') + '<div id="slideshow"></div>'
   end
   
+<<<<<<< HEAD
   # ---------------------------
+=======
+>>>>>>> 86c93d6b2f859876d66a471b9608802dfe3d0b59
   # Renders the models_views inside the block partial
   # Views define what model records to list, and by what scope. Scoping a view retrieves the records of view's
   # model that are owned by either the active instance (e.g. @page, or @block. in the show action of the model) 
   # or a specific instance as defined by the view's owner_id
+<<<<<<< HEAD
   #
+=======
+  
+>>>>>>> 86c93d6b2f859876d66a471b9608802dfe3d0b59
   # Example 1: ---------------------------
   #  a view whose model is 'comment' will display all comments. Using scope 'post' with no owner_id will 
   # retrieve the comments that are owned by the active post instance, given the view will be rendered in a block
   # or page where that instance variable is set (in this case: @post). For this comment example to work we would have to
   # assign the view to a block and place the block in any post. The view will then render that post's comments
+<<<<<<< HEAD
   #
+=======
+  
+>>>>>>> 86c93d6b2f859876d66a471b9608802dfe3d0b59
   # Example 1: ---------------------------
   #  a view whose model is 'post' will display all posts. Using scope 'user' with and choosing a user from the resulting
   # dropdown menu in th ui will retrieve all the posts of that specific user. We can then place this view anywhere and it
@@ -137,7 +149,13 @@ module ApplicationHelper
   end
   
   def render_form_hidden_fields(form)
+<<<<<<< HEAD
     html = hidden_field_tag(:update_element, form.field_set_id)
+=======
+    html =  hidden_field_tag(:update_element, form.field_set_id)
+    html << hidden_field_tag(:fid, form.id)
+    html << content_tag(:div, text_field_tag(:hack_me, ''), :class => 'hhh') if form.use_reverse_captcha
+>>>>>>> 86c93d6b2f859876d66a471b9608802dfe3d0b59
     
     begin
       unless form.scope.blank?
@@ -152,6 +170,11 @@ module ApplicationHelper
     rescue
       raise ["#{__FILE__}:#{__LINE__}: in render_form_hidden_field(form)", params, form, scope_class, scope_instance].pretty_inspect
     end
+<<<<<<< HEAD
+=======
+    
+    html
+>>>>>>> 86c93d6b2f859876d66a471b9608802dfe3d0b59
   end
   
   def render_model_helptext(controller_name)
@@ -178,6 +201,13 @@ module ApplicationHelper
     bm.find_by_block_id(block.id) || bm.new
   end
   
+<<<<<<< HEAD
+=======
+  def show_title(model)
+    "<h2>#{model.title}</h2>" if (model.respond_to?(:show_title) && model.show_title) || !model.respond_to?(:show_title)
+  end
+  
+>>>>>>> 86c93d6b2f859876d66a471b9608802dfe3d0b59
   def model_class(model_or_controller_name)
     model_or_controller_name.singular.camelcase.constantize
   end
@@ -236,8 +266,13 @@ module ApplicationHelper
   def active_page(resource_or_path) # sets the active class on links
     if resource_or_path.is_a? String # string path
       current_controller?(resource_or_path)  ? 'active' : ''
+<<<<<<< HEAD
     else # model instance
       current_page?(url_for(resource_or_path)) ? 'active' : ''
+=======
+    else # model instance, also check if the model title is the same as the path without the preceding / (forward slash)
+      current_page?(url_for(resource_or_path)) || (resource_or_path.name_or_title.parameterize.downcase == request.path[1, 100].parameterize.to_s) ? 'active' : ''
+>>>>>>> 86c93d6b2f859876d66a471b9608802dfe3d0b59
     end
   end
   
@@ -300,4 +335,8 @@ module ApplicationHelper
     !params[:title] || params[:title] != 'home'
   end
   
+<<<<<<< HEAD
 end
+=======
+end
+>>>>>>> 86c93d6b2f859876d66a471b9608802dfe3d0b59

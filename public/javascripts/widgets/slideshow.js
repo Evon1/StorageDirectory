@@ -88,7 +88,7 @@ jQuery.fn.GreyRobotSlideShow = function() {
 		
 		function apply_css() {
 			$(css_id(slideWrap)).css({ 'width':'100%', 'height':'350px', 'position':'relative', 'background':'black', 'overflow':'hidden', 'margin-bottom':'10px' });
-			$('img', '#slide').css({ 'height':'100%', 'position':'absolute', 'top':'0' });
+			$('img', '#slide').css({ 'height':'100%' });
 			$(css_id(slideWrap), '.side').css({ 'height':'120px', 'font-size':'12px', 'font-weight':'bold' });
 			$('#slide img', '.side').css({ 'height':'120px', 'width':'150px' });
 			$('#slide_index').css({ 'position':'absolute', 'bottom':'0px', 'left':'3px', 'height':'30px', 'width':'100%' });

@@ -18,8 +18,32 @@ $.log = function(msg) {
 	if (typeof console != 'undefined') console.log(msg); else alert(msg);
 }
 
-$.on_page = function(controller, action) {
-	return ($('body').attr('id') == controller + '_controller') && $('body').hasClass(action + '_action')
+// take an array of actions and controllers to see if any pair of those match the page we're on
+// either set can be a single action or controller as a string or a comma separated string of multiple actions or controllers
+$.on_page = function(route_sets) { // routes looks like: [ ['edit, new', 'views, forms, links'], ['index', 'pages'] ]
+	var actions,
+			controllers,
+			route = [
+				$('body').attr('class').split(' ')[0].replace('_action', ''),
+				$('body').attr('id').replace('_controller', '')
+			]
+	
+	var i = route_sets.length;
+	
+	while (i--) { // iterate through all the action/controller sets
+		actions 		= route_sets[i][0].split(/,\W?/);
+		controllers = route_sets[i][1].split(/,\W?/);
+		
+		var j = actions.length;
+		while (j--) { // check each action
+			if (route[0] != actions[j]) continue; // skip to the next one
+			
+			var k = controllers.length;
+			while (k--) { // action matched, now match with a controller
+				if (route[1] == controllers[k]) return true;
+			}
+		}
+	}
 }
 
 $.get_auth_token = function() {
@@ -61,6 +85,34 @@ $.disableToggle = function(disabler, disablees) {
 	disabler.data('enabled', !disabler.data('enabled'));
 	$.disable(disabler, disablees);
 }
+
+// call a jquery show/hide method on matching element from the selectors present in the href
+$.toggleAction = function(href, scroll_to_it) {
+	var url_hash = href.split('#');
+	
+	if (url_hash[1]) {
+		url_hash					= url_hash[1],
+		 		action				= url_hash.split('_')[0],
+				elementClass	= url_hash.split('_')[1],
+				contextClass	= url_hash.split('_')[2],
+				target			  = $('.' + elementClass, '.' + contextClass);
+		
+		// validate action name and do it.
+		if ($.validateAnimationAction(action)) {
+			var context = $('.' + contextClass);
+			var actionLink = $('.toggle_action', context);
+			
+			if (actionLink.length) $.switch_action_hash($('.toggle_action', context), action, elementClass, contextClass);
+			
+			if (scroll_to_it) $(document).scrollTo(context, 800);
+			
+			target[action]();
+		}
+	}
+	
+}
+
+/******************************************* JQUERY PLUGINS *******************************************/
 
 $.fn.disabler = function(d) { // master switch checkbox, disables all form inputs when unchecked
 	var disablees = d || 'input, textarea, select, checkbox, radio';
@@ -118,33 +170,33 @@ $.fn.rowCheckable = function() {
 				checkbox.trigger('change').attr('checked', !checkbox.is(':checked'));
 			}
 		});
-	})
+	});
 }
 
-// call a jquery show/hide method on matching element from the selectors present in the href
-$.toggleAction = function(href, scroll_to_it) {
-	var url_hash = href.split('#');
-	
-	if (url_hash[1]) {
-		url_hash					= url_hash[1],
-		 		action				= url_hash.split('_')[0],
-				elementClass	= url_hash.split('_')[1],
-				contextClass	= url_hash.split('_')[2],
-				target			  = $('.' + elementClass, '.' + contextClass);
+// use a checkbox to switch between two containers. classes: .pane_0, .pane_1
+$.fn.paneSwitcher = function() {
+	return this.each(function() {
+		var context = $(this).parent().parent().parent();
+		this.checked ? $('#pane_0', context).hide() : $('#pane_1', context).hide();
 		
-		// validate action name and do it.
-		if ($.validateAnimationAction(action)) {
-			var context = $('.' + contextClass);
-			var actionLink = $('.toggle_action', context);
-			
-			if (actionLink.length) $.switch_action_hash($('.toggle_action', context), action, elementClass, contextClass);
-			
-			if (scroll_to_it) $(document).scrollTo(context, 800);
-			
-			target[action]();
-		}
-	}
-	
+		$(this).change(function() { // trigger checkbox unless a link is clicked
+			$('.pane_switchable', context).slideToggle();
+		});
+	});
+}
+
+// use a checkbox to show/hide its parents next sibling div, focus on any child inputs there may be
+$.fn.toggleDiv = function() {
+	return this.each(function() {
+		var $this = $(this);
+		var sibling = $this.parent().next('.toggle_this');
+		
+		this.checked ? sibling.show() : sibling.hide();
+		$this.change(function(){
+			sibling.toggle(); 
+			sibling.find('input, textarea, select').focus();
+		});
+	});
 }
 
 /******************************************* SUCCESS CALLBACKS *******************************************/
@@ -158,7 +210,9 @@ $.toggleHelptext = function(clickedLink) {
 
 /******************************************* EVENT HANDLERS *******************************************/
 
+// removed jQuery ready call since the scripts are at the bottom of the layout
 //jQuery(function(){
+	
 	var $ = jQuery;
 	$('body').addClass('js');
 	$('.hide_if_js').hide();
@@ -167,10 +221,11 @@ $.toggleHelptext = function(clickedLink) {
 	
 	$('.hintable').hinty();  // all matched inputs will display their title attribute
 	$('form').formBouncer(); // form validation, fields with supported validation classes will be processed
-	
 	$('.disabler', '.disabled').disabler(); // checkbox that disables all inputs in its form
 	$('.anchorListener').anchorDispatch();  // a toggle an element when its id is present in the url hash
 	$('.row_checkable').rowCheckable();			// clicking a whole form also enables its first checkbox
+	$('.pane_switch').paneSwitcher();				// use a checkbox to switch between two containers. classes: .pane_0, .pane_1
+	$('.toggle_div').toggleDiv();						// use a checkbox to show/hide its parents next sibling div
 	
 	$('input', '.ajax_form').live('change', function(){
 	  $(this).parent().parent().ajaxSubmit({
@@ -187,7 +242,7 @@ $.toggleHelptext = function(clickedLink) {
 	  });
 	});
 	
-	// admin menu hover behoviors
+	// admin menu hover behaviors
 	var GR_content_menu_hover_interval,
 			GR_resource_list = $('#resource_list');
 	$('#content_menu_link').mouseover(function() {
@@ -286,13 +341,13 @@ $.toggleHelptext = function(clickedLink) {
 	
 /******************************************* PAGE SPECIFIC BEHAVIOR *******************************************/
 	
-	// Views/Forms Edit
-	if ($.on_page('views', 'edit') || $.on_page('views', 'new') || $.on_page('forms', 'edit') || $.on_page('forms', 'new')) {
-		var scope_down = ''
-		if ($.on_page('views', 'edit') || $.on_page('views', 'new')) scope_down = 'owner';
+	// Views/Forms/Links Edit
+	if ($.on_page([['edit, new', 'views, forms, links']])) {
+		var scope_down = ''; 
+		if ($.on_page([['edit, new', 'views']])) scope_down = 'owner';
 		else scope_down = 'target';
 		
-		// when the user chooses a scope, show the scope-dependent owner_id or target_id dropdown
+		// when the user chooses a scope (aka resource), show the scope-dependent owner_id or target_id dropdown
 		// which is populated by models of the selected scope class
 		var scoping_fields = $('#scope_' + scope_down + '_fields', '#body');
 		
@@ -310,18 +365,20 @@ $.toggleHelptext = function(clickedLink) {
 			
 			if ($this.val() != '') { // retrieve all models of this class
 				scoping_fields.show(100);
-				$('.scoping_dropdown', scoping_fields).html('<option>Loading ' + $this.val() + 's...</option>');
+				scoping_dropdown = $('.scoping_dropdown', scoping_fields);
+				scoping_dropdown.html('<option>Loading ' + $this.val() + '...</option>');
 				
 				$.getJSON(
 					'/ajax/get_all',
 					{ model: $this.val(), authenticity_token: $.get_auth_token() },
 					function(response) {
 						if (response.success) {
-							var option_tags = $.option_tags_from_model($this.val(), response.data, { attribute: 'name', select_prompt: 'Active Context' });
-							$('.scoping_dropdown', scoping_fields).html(option_tags);
+							var args = { attribute: 'name', select_prompt: (scoping_dropdown.hasClass('no_prompt') ? '' : 'Active Context') }
+							var option_tags = $.option_tags_from_model($this.val(), response.data, args);
+							scoping_dropdown.html(option_tags);
 							
 						} else {
-							$('.scoping_dropdown', scoping_fields).html('<option>Error Loading Records</option>')
+							scoping_dropdown.html('<option>Error Loading Records</option>')
 						}
 					}
 				);
@@ -331,7 +388,6 @@ $.toggleHelptext = function(clickedLink) {
 		$('.delete_link', '#form_builder').live('click', function(){
 			var $this = $(this),
 					field_id = $(this).attr('rel').replace('field_', '');
-			
 			
 			$this.parent().parent().html()
 			

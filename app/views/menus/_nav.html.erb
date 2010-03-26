@@ -1,3 +1,1 @@
-<% nav.each do |page| %>
-	<%= link_to page.title, nice_page_path(page), :class => active_page(page) %>
-<% end %>
+<li><%= link_to h(nav.title), nice_page_path(nav), :class => "page_updater #{active_page(nav)}" %></li>
