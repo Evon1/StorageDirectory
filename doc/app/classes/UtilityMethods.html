@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Module: UtilityMethods</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Module</strong></td>
+          <td class="class-name-in-header">UtilityMethods</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../files/lib/utility_methods_rb.html">
+                lib/utility_methods.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000235">parameterize</a>&nbsp;&nbsp;
+      <a href="#M000233">plural</a>&nbsp;&nbsp;
+      <a href="#M000234">plural?</a>&nbsp;&nbsp;
+      <a href="#M000236">possessive</a>&nbsp;&nbsp;
+      <a href="#M000232">singular</a>&nbsp;&nbsp;
+      <a href="#M000239">stripped_teaser</a>&nbsp;&nbsp;
+      <a href="#M000240">title_sort!</a>&nbsp;&nbsp;
+      <a href="#M000237">to_class</a>&nbsp;&nbsp;
+      <a href="#M000238">truncate</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+    <div id="constants-list">
+      <h3 class="section-bar">Constants</h3>
+
+      <div class="name-list">
+        <table summary="Constants">
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">PLURALS</td>
+          <td>=</td>
+          <td class="context-item-value">[['(quiz)$', '\1zes'],['(ox)$', '\1en'],['([m|l])ouse$', '\1ice'],['(matr|vert|ind)ix|ex$', '\1ices'],       ['(x|ch|ss|sh)$', '\1es'],['([^aeiouy]|qu)ies$', '\1y'],['([^aeiouy]|q)y$$', '\1ies'],['(hive)$', '\1s'],       ['(?:[^f]fe|([lr])f)$', '\1\2ves'],['(sis)$', 'ses'],['([ti])um$', '\1a'],['(buffal|tomat)o$', '\1oes'],['(bu)s$', '\1es'],       ['(alias|status)$', '\1es'],['(octop|vir)us$', '\1i'],['(ax|test)is$', '\1es'],['s$', 's'],['$', 's']]</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">SINGULARS</td>
+          <td>=</td>
+          <td class="context-item-value">[['(quiz)zes$', '\1'],['(matr)ices$', '\1ix'],['(vert|ind)ices$', '\1ex'],['^(ox)en$', '\1'],['(alias|status)es$', '\1'],       ['(octop|vir)i$', '\1us'],['(cris|ax|test)es$', '\1is'],['(shoe)s$', '\1'],['[o]es$', '\1'],['[bus]es$', '\1'],['([m|l])ice$', '\1ouse'],       ['(x|ch|ss|sh)es$', '\1'],['(m)ovies$', '\1ovie'],['[s]eries$', '\1eries'],['([^aeiouy]|qu)ies$', '\1y'],['[lr]ves$', '\1f'],       ['(tive)s$', '\1'],['(hive]s$', '\1'],['([^f]]ves$', '\1fe'],['(^analy)ses$', '\1sis'],       ['([a]naly|[b]a|[d]iagno|[p]arenthe|[p]rogno|[s]ynop|[t]he)ses$', '\1\2sis'],['([ti])a$', '\1um'],['(news)$', '\1ews'],['s{1}$', '']]</td>
+        </tr>
+        </table>
+      </div>
+    </div>
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000235" class="method-detail">
+        <a name="M000235"></a>
+
+        <div class="method-heading">
+          <a href="#M000235" class="method-signature">
+          <span class="method-name">parameterize</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+(monkey patch) get rid of apostrophes in string
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000235-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000235-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/utility_methods.rb, line 32</span>
+32:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">parameterize</span>
+33:       <span class="ruby-identifier">gsub</span>(<span class="ruby-value str">&quot;\'&quot;</span>, <span class="ruby-value str">''</span>)
+34:       <span class="ruby-keyword kw">super</span>
+35:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000233" class="method-detail">
+        <a name="M000233"></a>
+
+        <div class="method-heading">
+          <a href="#M000233" class="method-signature">
+          <span class="method-name">plural</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000233-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000233-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/utility_methods.rb, line 22</span>
+22:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">plural</span>()
+23:       <span class="ruby-constant">PLURALS</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">match_exp</span>, <span class="ruby-identifier">replacement_exp</span><span class="ruby-operator">|</span> <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">gsub</span>(<span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">compile</span>(<span class="ruby-identifier">match_exp</span>), <span class="ruby-identifier">replacement_exp</span>) <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">match</span>(<span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">compile</span>(<span class="ruby-identifier">match_exp</span>)).<span class="ruby-identifier">nil?</span> }
+24:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000234" class="method-detail">
+        <a name="M000234"></a>
+
+        <div class="method-heading">
+          <a href="#M000234" class="method-signature">
+          <span class="method-name">plural?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000234-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000234-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/utility_methods.rb, line 26</span>
+26:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">plural?</span>
+27:       <span class="ruby-constant">PLURALS</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">match_exp</span>, <span class="ruby-identifier">replacement_exp</span><span class="ruby-operator">|</span> <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">true</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">match</span>(<span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">compile</span>(<span class="ruby-identifier">match_exp</span>))}
+28:       <span class="ruby-keyword kw">false</span>
+29:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000236" class="method-detail">
+        <a name="M000236"></a>
+
+        <div class="method-heading">
+          <a href="#M000236" class="method-signature">
+          <span class="method-name">possessive</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+More custom methods
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000236-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000236-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/utility_methods.rb, line 38</span>
+38:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">possessive</span>
+39:       <span class="ruby-identifier">match</span>(<span class="ruby-regexp re">/s$/i</span>) <span class="ruby-operator">?</span> <span class="ruby-node">&quot;#{self}'&quot;</span> <span class="ruby-operator">:</span> <span class="ruby-node">&quot;#{self}'s&quot;</span>
+40:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000232" class="method-detail">
+        <a name="M000232"></a>
+
+        <div class="method-heading">
+          <a href="#M000232" class="method-signature">
+          <span class="method-name">singular</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000232-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000232-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/utility_methods.rb, line 16</span>
+16:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">singular</span>()
+17:       <span class="ruby-constant">SINGULARS</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">match_exp</span>, <span class="ruby-identifier">replacement_exp</span><span class="ruby-operator">|</span> <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">gsub</span>(<span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">compile</span>(<span class="ruby-identifier">match_exp</span>), <span class="ruby-identifier">replacement_exp</span>) <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">match</span>(<span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">compile</span>(<span class="ruby-identifier">match_exp</span>)).<span class="ruby-identifier">nil?</span>}
+18:     <span class="ruby-keyword kw">rescue</span>
+19:       <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp re">/s$/</span>, <span class="ruby-value str">''</span>).<span class="ruby-identifier">sub</span>(<span class="ruby-regexp re">/ie$/</span>, <span class="ruby-value str">'y'</span>)
+20:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000239" class="method-detail">
+        <a name="M000239"></a>
+
+        <div class="method-heading">
+          <a href="#M000239" class="method-signature">
+          <span class="method-name">stripped_teaser</span><span class="method-args">(count = 100)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000239-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000239-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/utility_methods.rb, line 51</span>
+51:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">stripped_teaser</span>(<span class="ruby-identifier">count</span> = <span class="ruby-value">100</span>)
+52:       <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">blank?</span>
+53:       
+54:       <span class="ruby-identifier">string</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/&lt;.*[^&gt;]*&gt;/i</span>, <span class="ruby-value str">''</span>); <span class="ruby-comment cmt">#replace html tags with nothing</span>
+55:           <span class="ruby-identifier">shortened</span> = <span class="ruby-identifier">string</span>[<span class="ruby-value">0</span>, <span class="ruby-identifier">count</span>]
+56:           <span class="ruby-identifier">splitted</span> = <span class="ruby-identifier">shortened</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp re">/\s/</span>)
+57:           <span class="ruby-identifier">words</span> = <span class="ruby-identifier">splitted</span>.<span class="ruby-identifier">length</span>
+58: 
+59:           <span class="ruby-comment cmt"># use only first paragraph if short enough</span>
+60:           <span class="ruby-identifier">paragraph</span> = <span class="ruby-identifier">shortened</span>[<span class="ruby-regexp re">/&lt;p\b[^&gt;]*&gt;(.*?)&lt;\/p&gt;/</span>]
+61:           <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">paragraph</span>.<span class="ruby-identifier">blank?</span>
+62:             <span class="ruby-identifier">string</span> = <span class="ruby-identifier">paragraph</span>[<span class="ruby-value">3</span>,(<span class="ruby-identifier">paragraph</span>.<span class="ruby-identifier">length</span><span class="ruby-operator">-</span><span class="ruby-value">7</span>)]  <span class="ruby-comment cmt"># remove &lt;p&gt; tags</span>
+63:           <span class="ruby-keyword kw">else</span>
+64:             <span class="ruby-identifier">string</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-identifier">count</span> <span class="ruby-value">? </span><span class="ruby-identifier">string</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">splitted</span>[<span class="ruby-value">0</span>, <span class="ruby-identifier">words</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>].<span class="ruby-identifier">join</span>(<span class="ruby-value str">&quot; &quot;</span>) <span class="ruby-operator">+</span> <span class="ruby-value str">' ...'</span>
+65:       <span class="ruby-keyword kw">end</span>
+66:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000240" class="method-detail">
+        <a name="M000240"></a>
+
+        <div class="method-heading">
+          <a href="#M000240" class="method-signature">
+          <span class="method-name">title_sort!</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000240-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000240-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/utility_methods.rb, line 71</span>
+71:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">title_sort!</span>
+72:       <span class="ruby-comment cmt">#raise [self.sort { |a,b| a[0][0] &lt;=&gt; 't' }].inspect</span>
+73:       <span class="ruby-keyword kw">self</span>
+74:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000237" class="method-detail">
+        <a name="M000237"></a>
+
+        <div class="method-heading">
+          <a href="#M000237" class="method-signature">
+          <span class="method-name">to_class</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000237-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000237-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/utility_methods.rb, line 42</span>
+42:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">to_class</span>
+43:       <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">camelcase</span>.<span class="ruby-identifier">constantize</span>
+44:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000238" class="method-detail">
+        <a name="M000238"></a>
+
+        <div class="method-heading">
+          <a href="#M000238" class="method-signature">
+          <span class="method-name">truncate</span><span class="method-args">(limit = 200, trailing_dots = true)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000238-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000238-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/utility_methods.rb, line 46</span>
+46:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">truncate</span>(<span class="ruby-identifier">limit</span> = <span class="ruby-value">200</span>, <span class="ruby-identifier">trailing_dots</span> = <span class="ruby-keyword kw">true</span>)
+47:       <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">self</span> <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-identifier">limit</span>
+48:       <span class="ruby-keyword kw">self</span>[<span class="ruby-value">0</span>, <span class="ruby-identifier">limit</span>] <span class="ruby-operator">+</span> (<span class="ruby-identifier">trailing_dots</span> <span class="ruby-value">? </span><span class="ruby-value str">'...'</span> <span class="ruby-operator">:</span> <span class="ruby-value str">''</span>)
+49:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

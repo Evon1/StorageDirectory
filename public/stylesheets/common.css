@@ -39,14 +39,36 @@ span.active { cursor:default; }
 #resource_list li a { padding:3px 5px; display:block; }
 
 /********************* added in from old greyCMS stylesheet **********************/
+/* round borders */
+.round, .shadow_wrap { 
+	-moz-border-radius:10px;
+	-webkit-border-radius:10px;
+	border-radius:10px;
+}
+.medium_round, .html_wrap {
+	-moz-border-radius:7px;
+	-webkit-border-radius:7px;
+	border-radius:7px;
+}
+.small_round, .region_label {
+	-moz-border-radius:3px;
+	-webkit-border-radius:3px;
+	border-radius:3px;
+}
+
+/* shadows */
+.box { 
+	-moz-box-shadow:1px 1px 5px rgba(100,100,100,0.8);
+	-webkit-box-shadow:1px 1px 5px rgba(100,100,100,0.8);
+	box-shadow:1px 1px 5px rgba(100,100,100,0.8);
+}
+
 /* model index */
 /*.index { margin-right:-2.2%;}*/
 .index > div { width:28.3%; min-height:130px; float:left; margin:0 22px 22px 0; padding:5px 7px 9px 7px; }
 .index > div:last-child { margin-right:0; }
 .index label { display:block; }
-.User .email { font-size:10px; }
-
-
+.User .email { font-size:10px; }\
 
 /* gallery */
 #gallery_images { padding-right:0; }
@@ -93,6 +115,30 @@ div.field_wrap, div.available { margin:0; }
 .helptext_text p:first-child { margin:0; }
 
 #add_helptext_link { position:absolute; top:4px; right:29px; z-index:9999; }
+
+/* views */
+#body .list_view { margin-top:10px; }
+.list_view li { padding:8px 8px 10px; margin:7px 0; overflow:hidden; }
+.list_view li.even { background-color:#fff; }
+.list_view li > a { display:block; float:left; min-width:180px; }
+.list_view li img { width:10%; }
+#left .list_view , #right .list_view { font-size:85%; }
+#left .list_view .timestamp , #right .list_view .timestamp { display:block; }
+.block_models_view .buttons a.edit_link:link,
+.block_models_view .buttons a.edit_link:hover,
+.block_models_view .buttons a.edit_link:visited,
+.block_models_view .buttons a.delete_link:link,
+.block_models_view .buttons a.delete_link:hover,
+.block_models_view .buttons a.delete_link:visited { border:0 none }
+
+#body .table_view { width:100%; }
+.table_view { margin:10px 5px; }
+.table_view thead th { text-align:center; padding:5px 0 7px 0; }
+.table_view td { padding:10px 15px; vertical-align:middle; max-width:130px; }
+.table_view td:first-child { max-width:150px; }
+.table_view td img { width:150px; }
+.table_view .admin_options { text-align:center; }
+.table_view { background-color:#fff; }
 
 /* icons */
 .icon16 { padding-left:22px; background-position:left; background-repeat:no-repeat; }
