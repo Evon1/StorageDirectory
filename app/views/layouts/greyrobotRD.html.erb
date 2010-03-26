@@ -7,8 +7,7 @@
 		<%#= stylesheet_link_tag @layout_css %>
 		<%#= stylesheet_link_tag @theme_css %>	
 		<%#= stylesheet_link_tag 'print', :media => 'print' %>
-		<%= stylesheet_link_tag 'common' %>
-		<%= stylesheet_link_tag @theme_css %>
+		<%= stylesheet_link_tag 'common', @theme_css %>
 		
 		<meta charset="utf-8">
 		<title><%= yield :title %></title>
@@ -45,7 +44,9 @@
 			<div class="wrap">
 
 				<div id="nav" class="region">
-					<%= render :partial => 'menus/nav', :object => @nav_pages %>
+					<ul class="plain horizontal">
+					  <%= render :partial => 'menus/nav', :collection => @nav_pages %>
+					</ul>
 				</div>
 			
 				<div id="content">

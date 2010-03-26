@@ -2,7 +2,11 @@ class ImagesController < ApplicationController
   before_filter :get_image, :only => [:show, :edit, :update, :destroy]
   
   def index
-    @images = Image.all_for_index_view
+    if params[:user_id].blank?
+      @images = Image.all_for_index_view
+    else
+      @images = User.find(params[:user_id]).images
+    end
   end
   
   def show
@@ -15,7 +19,8 @@ class ImagesController < ApplicationController
   def create
     @image = Image.new(params[:image])
 
-    if @image.save(params)
+    if @image.save
+      @image.add_to_gallery(params) unless params[:gallery_id].nil?
       flash[:notice] = @image.title + ' has been created.'
     else
       flash[:error] = model_errors(@image)

@@ -1,0 +1,19 @@
+<% fields_for :profile_image, (user.profile_image ? user.profile_image : user.build_profile_image) do |image_field| %>
+	<div id="user_image_fields" class="framed round box stack">
+		<%= image_field.label :image %>
+		
+		<div class="stack">
+			<div class="shadow_wrap">
+				<%= image_field.text_field :title, :class => 'hintable', :title => 'Image Title' %>
+			</div>
+		</div>
+		
+		<div>
+			<div class="shadow_wrap">
+				<%= image_field.file_field :image %>
+				<%= image_field.hidden_field :user_id, :value => current_user.id %>
+			</div>
+		</div>
+	
+	</div>
+<% end %>

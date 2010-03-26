@@ -9,11 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(:version => 20100107073354) do
-=======
 ActiveRecord::Schema.define(:version => 20100317043322) do
->>>>>>> 86c93d6b2f859876d66a471b9608802dfe3d0b59
 
   create_table "block_forms", :force => true do |t|
     t.integer  "block_id"
@@ -83,12 +79,9 @@ ActiveRecord::Schema.define(:version => 20100317043322) do
     t.datetime "updated_at"
     t.string   "scope"
     t.integer  "target_id"
-<<<<<<< HEAD
-=======
     t.boolean  "send_email"
     t.string   "recipient"
     t.boolean  "use_reverse_captcha"
->>>>>>> 86c93d6b2f859876d66a471b9608802dfe3d0b59
   end
 
   create_table "galleries", :force => true do |t|
@@ -141,11 +134,8 @@ ActiveRecord::Schema.define(:version => 20100317043322) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "link_group_id"
-<<<<<<< HEAD
-=======
     t.string   "resource"
     t.integer  "target_id"
->>>>>>> 86c93d6b2f859876d66a471b9608802dfe3d0b59
   end
 
   create_table "models_views", :force => true do |t|
@@ -171,10 +161,7 @@ ActiveRecord::Schema.define(:version => 20100317043322) do
     t.boolean  "show_in_nav"
     t.text     "content"
     t.text     "description"
-<<<<<<< HEAD
-=======
     t.boolean  "show_title"
->>>>>>> 86c93d6b2f859876d66a471b9608802dfe3d0b59
   end
 
   create_table "permissions", :force => true do |t|

@@ -25,11 +25,6 @@ class Image < ActiveRecord::Base
   
   # Instance Methods
   
-  def save(params)
-    self.add_to_gallery(params) unless params[:gallery_id].nil?
-    super
-  end
-  
   def add_to_gallery(params)
     self.gallery_images.build(:gallery_id => params[:gallery_id]) # join table
   end

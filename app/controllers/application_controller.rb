@@ -1,6 +1,6 @@
 # Filters added to this controller apply to all controllers in the application.
 # Likewise, all the methods added will be available for all controllers.
-#require 'PP' if RAILS_ENV == 'development'
+require 'PP' if RAILS_ENV == 'development'
 class ApplicationController < ActionController::Base
   helper :all # include all helpers, all the time
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
@@ -32,7 +32,7 @@ class ApplicationController < ActionController::Base
   # for the SharedModelMethod module
   
   $regions    = [:header, :banner, :sidebar, :left, :right, :content_bottom, :column_5, :column_6, :column_7, :column_8, :footer]
-  $view_types = [:list, :blog_roll, :box, :table]
+  $view_types = [:list, :blog_roll, :box, :table, :gallery]
   
   # for the virtual forms, build forms
   $_actions     = [:index, :show, :create, :update]
@@ -44,23 +44,15 @@ class ApplicationController < ActionController::Base
   # authorization system
   $_crud = [:create, :read, :update, :delete]
   
-  layout (session ? (session[:layout] || 'greyrobotRD') : 'greyrobotRD')
+  $_theme = 'greyrobotRD'
+  
+  layout (session ? (session[:layout] || $_theme) : $_theme)
   
   before_filter :reverse_captcha_check, :only => :create
   before_filter :init
   
   def local_request? # display full error message when logged in
     true if current_user
-  end
-  
-  protected # ---------------------------------------------
-  
-  def model_errors(model)
-    model.errors.full_messages.map { |e| "<p>#{e}</p>" }
-  end
-  
-  def return_or_back(params)
-    params[:return].nil? ? redirect_to(:back) : redirect_to(params[:return])
   end
   
   private # -----------------------------------------------
@@ -92,31 +84,32 @@ class ApplicationController < ActionController::Base
     
     @default_view_type = session[:view_type]
     
-    @theme_css = theme_css(session[:theme] || 'greyrobotRD')
+    @theme_css = theme_css(session[:theme] || $_theme)
     
-    @plugins = ['plugins/jquery.formbouncer', 'plugins/jquery.hinty']
+    @plugins = ['plugins/jquery.formbouncer', 'plugins/jquery.hinty', 'plugins/inflector']
     @widgets_js = []
     
     @nav_pages = Page.find_all_by_show_in_nav(true)
     @global_blocks = Block.all(:conditions => ['show_in_all in (?)', regions(false).map(&:to_s)])
 
     @roles = Role.all
+    @user = User.find(params[:user_id]) unless params[:user_id].blank?
   end
   
   # TODO move this feature into the database and save state through AJAX, using a key-val pair { :controller_name => :view_type }
   def set_default_view_type
     model_class = controller_name.singular.camelcase.constantize
-    
+      
     if !params[:view_type].blank?
       session[:view_type] = params[:view_type]
-    elsif controller_name == 'posts'
+    elsif controller_name == 'posts' || (controller_name == 'tags' && action_name == 'show')
       session[:view_type] = 'blog_roll'
-    elsif controller_name == 'permissions'
+    elsif controller_name == 'permissions' || (model_class.respond_to?('column_names') && model_class.column_names.include?('content'))
       session[:view_type] = 'table'
     elsif model_class.respond_to?('column_names') && model_class.column_names.include?('image_file_name')
       session[:view_type] = 'box'
-    elsif model_class.respond_to?('column_names') && model_class.column_names.include?('content')
-      session[:view_type] = 'table'
+    elsif controller_name == 'images'
+      session[:view_type] = 'gallery'
     else
       session[:view_type] = 'list'
     end
@@ -250,6 +243,14 @@ class ApplicationController < ActionController::Base
   end
   
   #--------------------- Authlogic ---------------------
+  
+  def model_errors(model)
+    model.errors.full_messages.map { |e| "<p>#{e}</p>" }
+  end
+  
+  def return_or_back(params)
+    params[:return].nil? ? redirect_to(:back) : redirect_to(params[:return])
+  end
   
   def current_user_session
     @current_user_session ||= UserSession.find

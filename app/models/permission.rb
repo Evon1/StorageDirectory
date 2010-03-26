@@ -5,6 +5,7 @@ class Permission < ActiveRecord::Base
   access_shared_methods
   
   # Class Methods
+  
   def self.create_or_update_many(params)
     results = { :permissions => [], :updated => 0, :created => 0 }
     
@@ -22,6 +23,7 @@ class Permission < ActiveRecord::Base
   end
   
   # Instance Methods
+  
   def title
     "#{self.role.title} #{self.action} #{self.resource}" unless self.new_record?
   end

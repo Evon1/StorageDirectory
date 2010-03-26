@@ -17,6 +17,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :users
   map.resources :user_sessions
   map.resources :permissions
+  map.resources :roles
   map.resources :pages
   map.resources :posts
   map.resources :blocks
@@ -85,6 +86,7 @@ ActionController::Routing::Routes.draw do |map|
   #   end
   
   map.ajax '/ajax/:action', :controller => 'ajax', :action => nil 
+  map.tagged_with '/:model/tagged-with/:tag', :controller => 'tags', :action => 'show'
   
   # You can have the root of your site routed with map.root -- just remember to delete public/index.html.
   map.root :controller => 'pages', :action => 'show', :title => 'home'

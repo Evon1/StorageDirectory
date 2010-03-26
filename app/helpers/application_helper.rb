@@ -67,29 +67,17 @@ module ApplicationHelper
       :type => 'text/javascript') + '<div id="slideshow"></div>'
   end
   
-<<<<<<< HEAD
-  # ---------------------------
-=======
->>>>>>> 86c93d6b2f859876d66a471b9608802dfe3d0b59
   # Renders the models_views inside the block partial
   # Views define what model records to list, and by what scope. Scoping a view retrieves the records of view's
   # model that are owned by either the active instance (e.g. @page, or @block. in the show action of the model) 
   # or a specific instance as defined by the view's owner_id
-<<<<<<< HEAD
-  #
-=======
   
->>>>>>> 86c93d6b2f859876d66a471b9608802dfe3d0b59
   # Example 1: ---------------------------
   #  a view whose model is 'comment' will display all comments. Using scope 'post' with no owner_id will 
   # retrieve the comments that are owned by the active post instance, given the view will be rendered in a block
   # or page where that instance variable is set (in this case: @post). For this comment example to work we would have to
   # assign the view to a block and place the block in any post. The view will then render that post's comments
-<<<<<<< HEAD
-  #
-=======
   
->>>>>>> 86c93d6b2f859876d66a471b9608802dfe3d0b59
   # Example 1: ---------------------------
   #  a view whose model is 'post' will display all posts. Using scope 'user' with and choosing a user from the resulting
   # dropdown menu in th ui will retrieve all the posts of that specific user. We can then place this view anywhere and it
@@ -149,13 +137,9 @@ module ApplicationHelper
   end
   
   def render_form_hidden_fields(form)
-<<<<<<< HEAD
-    html = hidden_field_tag(:update_element, form.field_set_id)
-=======
     html =  hidden_field_tag(:update_element, form.field_set_id)
     html << hidden_field_tag(:fid, form.id)
     html << content_tag(:div, text_field_tag(:hack_me, ''), :class => 'hhh') if form.use_reverse_captcha
->>>>>>> 86c93d6b2f859876d66a471b9608802dfe3d0b59
     
     begin
       unless form.scope.blank?
@@ -170,11 +154,8 @@ module ApplicationHelper
     rescue
       raise ["#{__FILE__}:#{__LINE__}: in render_form_hidden_field(form)", params, form, scope_class, scope_instance].pretty_inspect
     end
-<<<<<<< HEAD
-=======
     
     html
->>>>>>> 86c93d6b2f859876d66a471b9608802dfe3d0b59
   end
   
   def render_model_helptext(controller_name)
@@ -201,27 +182,40 @@ module ApplicationHelper
     bm.find_by_block_id(block.id) || bm.new
   end
   
-<<<<<<< HEAD
-=======
   def show_title(model)
     "<h2>#{model.title}</h2>" if (model.respond_to?(:show_title) && model.show_title) || !model.respond_to?(:show_title)
   end
   
->>>>>>> 86c93d6b2f859876d66a471b9608802dfe3d0b59
+  def contextual_index_view_title
+    str = ''
+    if !params[:model].blank?
+      str << "#{params[:model].titleize} Tagged With \"#{params[:tag]}\""
+    elsif !params[:user_id].blank?
+      str << @user.name.possessive + ' ' + controller_name.titleize
+    end
+    str
+  rescue
+    controller_name.titleize
+  end
+  
   def model_class(model_or_controller_name)
     model_or_controller_name.singular.camelcase.constantize
   end
   
   def model_form_heading
+    str = params[:user_id].blank? ? '' : ' for ' + @user.name
+    "#{action_name} #{controller_name.singular}".titleize + str
+  rescue
     "#{action_name} #{controller_name.singular}".titleize
   end
   
+  # monkey patched parameterize method. see: /lib/utility_methods.rb:31
   def nice_page_path(page)
-    # monkey patched parameterize method. see: /lib/utility_methods.rb:31
     "/#{page.title.parameterize}"
   end
   
-  def model_index_path(name, options = {}) # index action for a resource
+  # index action for a resource
+  def model_index_path(name, options = {}) 
     eval "#{name}_path(options)"
   end
   
@@ -235,16 +229,24 @@ module ApplicationHelper
     eval "new_#{name.downcase.singular}_path(options)"
   end
   
-  def model_path(model, options = {}) # a resource's named route
+  # a resource's named route
+  def model_path(model, options = {})
     eval "#{model_name(model)}_path(model, options)"
   end
   
-  def model_crud_title(crud, name) # link title for resource crud action
+  # link title for resource crud action
+  def model_crud_title(crud, name)
     "#{crud} #{name.singular}".titleize
   end
   
-  def model_name(models) # require a model or array of models
+  # require a model or array of models
+  def model_name(models)
     models.kind_of?(Array) ? models.first.class.name : models.class.name.underscore.singular
+  end
+  
+  # takes an AR object and returns the controller name for it
+  def model_controller(model)
+    model.class.name.downcase.pluralize
   end
   
   def model_name_or_title(model)
@@ -266,13 +268,8 @@ module ApplicationHelper
   def active_page(resource_or_path) # sets the active class on links
     if resource_or_path.is_a? String # string path
       current_controller?(resource_or_path)  ? 'active' : ''
-<<<<<<< HEAD
-    else # model instance
-      current_page?(url_for(resource_or_path)) ? 'active' : ''
-=======
     else # model instance, also check if the model title is the same as the path without the preceding / (forward slash)
       current_page?(url_for(resource_or_path)) || (resource_or_path.name_or_title.parameterize.downcase == request.path[1, 100].parameterize.to_s) ? 'active' : ''
->>>>>>> 86c93d6b2f859876d66a471b9608802dfe3d0b59
     end
   end
   
@@ -335,8 +332,4 @@ module ApplicationHelper
     !params[:title] || params[:title] != 'home'
   end
   
-<<<<<<< HEAD
 end
-=======
-end
->>>>>>> 86c93d6b2f859876d66a471b9608802dfe3d0b59

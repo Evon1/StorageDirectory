@@ -17,6 +17,13 @@ class AjaxController < ApplicationController
     render :json => { :success => false, :data => _prep_error(e) }
   end
   
+  def get_partial
+    @model = params[:model].constantize.find params[:id]
+    render :partial => params[:partial], :locals => { params[:model].downcase.to_sym => @model }
+  rescue => e
+    render :text => "<div class='error'>#{e.message}</div>"
+  end
+  
   def update
     @model = _get_model_class.find(params[:id])
     render :json => { :success => @model.update_attribute(params[:attribute].to_sym, params[:value]) }

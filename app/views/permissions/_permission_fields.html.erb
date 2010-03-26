@@ -12,7 +12,7 @@
 		
 		<%= label_tag 'permissions[][role_id]', 'Role' %>
 		<%= select_tag 'permissions[][role_id]', 
-				model.option_tags_for(@roles.map { |r| "#{r.id}-#{r.title}"}, nil, nil, :role_id, ''), :class => 'required', :title => 'Assign permission to a role', :disabled => disabled %>
+				model.option_tags_for(roles_select_list_options(@roles), nil, nil, :role_id, ''), :class => 'required', :title => 'Assign permission to a role', :disabled => disabled %>
 	</div>
 	
 	<div class="left right_space">

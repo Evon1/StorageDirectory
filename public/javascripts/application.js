@@ -245,17 +245,31 @@ $.toggleHelptext = function(clickedLink) {
 	// admin menu hover behaviors
 	var GR_content_menu_hover_interval,
 			GR_resource_list = $('#resource_list');
+	
 	$('#content_menu_link').mouseover(function() {
 		GR_resource_list.slideDown();
 		return false;
 	});
+	
 	$('#resource_list, #content_menu_link').mouseout(function(){
 		GR_content_menu_hover_interval = setTimeout('GR_resource_list.slideUp()', 1000);
 	});
+	
 	$('#resource_list, #content_menu_link').mouseover(function(){
 		clearInterval(GR_content_menu_hover_interval);
 	});
 	
+	$('li', '#resource_list').hover(function(){
+		var li = $(this).css('position', 'relative');
+		var link = $('a', li);
+		var new_option = $('<a class="admin_new_link" href="'+ link.attr('href') +'/new">New</a>');
+		new_option.addClass('admin_hover_option').appendTo(link).hide().show();
+		new_option.click(function(){ window.location = this.href; return false; });
+	}, function(){
+		$('.admin_new_link', '#resource_list').fadeOut().addClass('admin_hover_option');
+	});
+	
+	// helpers
 	$('.unique_checkbox').click(function() {
 		var $this = $(this);
 		$('input[type=checkbox]', $this.parent().parent().parent()).attr('checked', false);
@@ -297,8 +311,7 @@ $.toggleHelptext = function(clickedLink) {
 		$this.addClass('loading');
 		
 		if (!$this.hasClass('before_confirm') || ($this.hasClass('before_confirm') && confirm($this.attr('title') + '?'))) {
-			$.getJSON(
-				this.href + '&authenticity_token=' + $.get_auth_token(), {},
+			$.getJSON(this.href + '&authenticity_token=' + $.get_auth_token(), {},
 				function(response) {
 					$this.removeClass('loading');
 					
@@ -320,24 +333,33 @@ $.toggleHelptext = function(clickedLink) {
 	});
 	
 	// Partial addables, grab html from a div and add it to the form, used on forms and permissions create and edit
-	if ($('.partial_addable').length > 0) {
-		$('.add_link', '.partial_addable').click(function(){
-			var $this 			= $(this),
-					context 		= '#' + $this.attr('rel'),
-					partial_form = $($('.partial_form_html', context).html());
+	$('.add_link', '.partial_addable').click(function(){
+		var $this 			= $(this),
+				context 		= '#' + $this.attr('rel'),
+				partial_form = $($('.partial_form_html', context).html());
+	
+		$('input, select, checkbox', partial_form).each(function(){ $(this).attr('disabled', false); });
+	
+		partial_form.hide().prependTo('.partial_forms_wrap', context).slideDown(600);
+	
+		return false;
+	});
+	
+	$('.cancel_link', '.partial_addable').click(function(){
+		$(this).parent().parent().remove(); 
+		return false; 
+	});
+	
+	// retrieves a partial via ajax and inserts it into the target div
+	$('.insert_partial').click(function(){
+		var $this = $(this);
 		
-			$('input, select, checkbox', partial_form).each(function(){ $(this).attr('disabled', false); });
+		$.get(this.href, function(response){
+			$('#' + $this.attr('rel')).html(response);
+		})
 		
-			partial_form.hide().prependTo('.partial_forms_wrap', context).slideDown(600);
-		
-			return false;
-		});
-		
-		$('.cancel_link', '.partial_addable').click(function(){
-			$(this).parent().parent().remove(); 
-			return false; 
-		});
-	}
+		return false;
+	});
 	
 /******************************************* PAGE SPECIFIC BEHAVIOR *******************************************/
 	
@@ -396,5 +418,9 @@ $.toggleHelptext = function(clickedLink) {
 		
 	} // END Views/Forms Edit
 	
+	// Permissions New
+	if ($.on_page([['new', 'permissions']])) {
+		$('a[rel=PermissionFields]').click();
+	}
 	
 //});

@@ -1,7 +1,7 @@
 <% declare_content_for %>
 <%= display_message flash %>
 
-<h2><%= controller_name.titleize %></h2>
+<h2><%= contextual_index_view_title %></h2>
 
 <%= render_model_helptext(controller_name) %>
 
@@ -12,7 +12,7 @@
 			<div class="buttons grey_buttons">
 				<% case action_name when 'index', 'show' %>
 
-					<%= link_to model_crud_title('new', controller_name), new_model_path(controller_name) %>
+					<%= link_to model_crud_title('new', controller_name), new_model_path(controller_name, :user_id => params[:user_id]) %>
 
 				<% when 'new', 'edit'  %>
 
