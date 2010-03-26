@@ -1,7 +1,7 @@
-set :application, "GreyrobotApp"
+set :application, "thelodge"
 set :domain, "68.233.10.61"
 set :user, "greyrob"
-set :repository, "#{user}@#{domain}:/home/#{user}/git/GreyrobotApp_new"
+set :repository, "#{user}@#{domain}:/home/#{user}/git/thelodge"
 set :scm, :git
 set :use_sudo, false
 set :deploy_via, :checkout

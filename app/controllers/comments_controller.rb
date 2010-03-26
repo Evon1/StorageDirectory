@@ -13,6 +13,8 @@ class CommentsController < ApplicationController
   end
 
   def create
+    @form = Form.find(params[:fid])
+    
     unless params[:target_type].blank?
       @comment = params[:target_type].camelcase.constantize.find(params[:target_id]).comments.build(params[:comment])
     else
@@ -21,6 +23,7 @@ class CommentsController < ApplicationController
     end
     
     @comment.user_id = current_user.id if current_user
+    Notifier.deliver_comment_notification @form.recipient, @comment if @form.should_send_email? && @comment.valid?
     
     if @comment.save
       flash[:notice] = params[:target_type].blank? ? 'Thanks for the message! We\'ll get back to you soon' : "#{params[:target_type].titleize} comment created."

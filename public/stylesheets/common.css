@@ -30,7 +30,7 @@ img.right { margin:0 7px 7px 0; }
 .subpage { background:url(/images/ui/page-bg.png) no-repeat top center; padding-top:17px; }
 .content { background:#fff; }
 .uncollapse { overflow:hidden; }
-.hide { display:none; }
+.hide, .hhh { display:none; }
 .note { font-size:12px; font-style:italic; }
 .toggle, .note { font-size:12px; }
 .mtop7 { margin-top:7px; }

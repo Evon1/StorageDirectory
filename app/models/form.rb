@@ -58,6 +58,10 @@ class Form < ActiveRecord::Base
     "#{self.controller}_#{self.action}_#{self.id}"
   end
   
+  def should_send_email?
+    self.send_email && !self.recipient.blank?
+  end
+  
   private
   
   def _add_to_fields_classes(fields)

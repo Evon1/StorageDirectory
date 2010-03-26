@@ -43,6 +43,7 @@ class ApplicationController < ActionController::Base
   # authorization system
   $_crud = [:create, :read, :update, :delete]
   
+  before_filter :reverse_captcha_check, :only => :create
   before_filter :init
   
   layout (session ? (session[:layout] || 'thelodge') : 'thelodge')
@@ -62,6 +63,10 @@ class ApplicationController < ActionController::Base
   end
   
   private # -----------------------------------------------
+  
+  def reverse_captcha_check # hidden field hack_me must pass through empty, cheap reverse captcha trick
+    redirect_to("/#{Page.first.title.downcase}") and return if params.has_key?(:hack_me) && !params[:hack_me].empty?
+  end
   
   def init
     redirect_to("/#{Page.first.title.downcase}") and return if request.path == '/' || (!current_user && action_name =~ /index|edit|update|destroy/)

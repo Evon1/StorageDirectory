@@ -16,7 +16,7 @@ class Comment < ActiveRecord::Base
   # to all commentable types for a given user.
   def self.find_comments_by_user(user)
     find(:all,
-      :conditions => ["user_id = ?", user.id],
+      :conditions => ['user_id = ?', user.id],
       :order => "created_at DESC"
     )
   end
@@ -25,8 +25,8 @@ class Comment < ActiveRecord::Base
   # commentable class name and commentable id.
   def self.find_comments_for_commentable(commentable_str, commentable_id)
     find(:all,
-      :conditions => ["commentable_type = ? and commentable_id = ?", commentable_str, commentable_id],
-      :order => "created_at DESC"
+      :conditions => ['commentable_type = ? and commentable_id = ?', commentable_str, commentable_id],
+      :order => 'created_at DESC'
     )
   end
 
@@ -40,10 +40,6 @@ class Comment < ActiveRecord::Base
   
   def before_save
     self.title = 'Comment ' if self.title.blank?
-  end
-  
-  def after_save
-    Notifier.deliver_comment_notification self
   end
   
 end

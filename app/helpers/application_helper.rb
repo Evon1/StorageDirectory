@@ -138,8 +138,8 @@ module ApplicationHelper
   
   def render_form_hidden_fields(form)
     html =  hidden_field_tag(:update_element, form.field_set_id)
-    html << content_tag(:div, text_field_tag(:hack_me, ''), :class => 'hide') if form.use_reverse_captcha
-    html << hidden_field_tag(:notify, form.recipient) if form.send_email && !form.recipient.blank?
+    html << hidden_field_tag(:fid, form.id)
+    html << content_tag(:div, text_field_tag(:hack_me, ''), :class => 'hhh') if form.use_reverse_captcha
     
     begin
       unless form.scope.blank?
