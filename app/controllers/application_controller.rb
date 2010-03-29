@@ -87,6 +87,7 @@ class ApplicationController < ActionController::Base
     
     @plugins = ['plugins/jquery.formbouncer', 'plugins/jquery.hinty']
     @widgets_js = ['widgets/map_anim']
+
     
     @nav_pages = Page.find_all_by_show_in_nav(true)
     @global_blocks = Block.all(:conditions => ['show_in_all in (?)', regions(false).map(&:to_s)])
@@ -168,11 +169,13 @@ class ApplicationController < ActionController::Base
   end
   
   def _models_having_assoc(for_select = false)
-    models_array = filter_dir_entries('models') do |entry|
-      model_class = entry.camelcase.constantize
+    models_array = []
+    get_list_of_file_names('models').each do |name|
+      model_class = name.camelcase.constantize
+      next unless model_class.respond_to?('column_names')
       
-      model_class.respond_to?('column_names') &&
-      (model_columns.any? { |c| c != 'parent_id' && c =~ /^(.*_id)$/i } || entry =~ /(user)|(page)|(tag)/)
+      model_columns = model_class.column_names
+      models_array << name if model_columns.any? { |mc| mc != 'parent_id' && mc =~ /^(.*_id)$/i } || name =~ /(user)|(page)|(tag)/
     end
     
     fetch_array_for models_array, for_select

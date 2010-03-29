@@ -71,7 +71,7 @@ $.switch_actions = function(action) {
 	
 	var i = action_sets.length; 
 	while (i--) { // return the opposite of the action in question
-		if (action_sets[i].indexOf(action) >= 0) return action_sets[i][ (action_sets[i].indexOf(action) ^ 1) ];
+		if (action_sets[i].indexOf(action) >= 0) return action_sets[i][(action_sets[i].indexOf(action) ^ 1)];
 	}
 }
 
@@ -185,6 +185,20 @@ $.fn.paneSwitcher = function() {
 	});
 }
 
+// use a checkbox to show/hide its parents next sibling div, focus on any child inputs there may be
+$.fn.toggleDiv = function() {
+	return this.each(function() {
+		var $this = $(this);
+		var sibling = $this.parent().next('.toggle_this');
+		
+		this.checked ? sibling.show() : sibling.hide();
+		$this.change(function(){
+			sibling.toggle(); 
+			sibling.find('input, textarea, select').focus();
+		});
+	});
+}
+
 /******************************************* SUCCESS CALLBACKS *******************************************/
 
 $.toggleHelptext = function(clickedLink) {
@@ -207,11 +221,11 @@ $.toggleHelptext = function(clickedLink) {
 	
 	$('.hintable').hinty();  // all matched inputs will display their title attribute
 	$('form').formBouncer(); // form validation, fields with supported validation classes will be processed
-	
 	$('.disabler', '.disabled').disabler(); // checkbox that disables all inputs in its form
 	$('.anchorListener').anchorDispatch();  // a toggle an element when its id is present in the url hash
 	$('.row_checkable').rowCheckable();			// clicking a whole form also enables its first checkbox
 	$('.pane_switch').paneSwitcher();				// use a checkbox to switch between two containers. classes: .pane_0, .pane_1
+	$('.toggle_div').toggleDiv();						// use a checkbox to show/hide its parents next sibling div
 	
 	$('input', '.ajax_form').live('change', function(){
 	  $(this).parent().parent().ajaxSubmit({
@@ -231,17 +245,31 @@ $.toggleHelptext = function(clickedLink) {
 	// admin menu hover behaviors
 	var GR_content_menu_hover_interval,
 			GR_resource_list = $('#resource_list');
+	
 	$('#content_menu_link').mouseover(function() {
 		GR_resource_list.slideDown();
 		return false;
 	});
+	
 	$('#resource_list, #content_menu_link').mouseout(function(){
 		GR_content_menu_hover_interval = setTimeout('GR_resource_list.slideUp()', 1000);
 	});
+	
 	$('#resource_list, #content_menu_link').mouseover(function(){
 		clearInterval(GR_content_menu_hover_interval);
 	});
 	
+	$('li', '#resource_list').hover(function(){
+		var li = $(this).css('position', 'relative');
+		var link = $('a', li);
+		var new_option = $('<a class="admin_new_link" href="'+ link.attr('href') +'/new">New</a>');
+		new_option.addClass('admin_hover_option').appendTo(link).hide().show();
+		new_option.click(function(){ window.location = this.href; return false; });
+	}, function(){
+		$('.admin_new_link', '#resource_list').fadeOut(300, function(){ $(this).remove(); });
+	});
+	
+	// helpers
 	$('.unique_checkbox').click(function() {
 		var $this = $(this);
 		$('input[type=checkbox]', $this.parent().parent().parent()).attr('checked', false);
@@ -283,8 +311,7 @@ $.toggleHelptext = function(clickedLink) {
 		$this.addClass('loading');
 		
 		if (!$this.hasClass('before_confirm') || ($this.hasClass('before_confirm') && confirm($this.attr('title') + '?'))) {
-			$.getJSON(
-				this.href + '&authenticity_token=' + $.get_auth_token(), {},
+			$.getJSON(this.href + '&authenticity_token=' + $.get_auth_token(), {},
 				function(response) {
 					$this.removeClass('loading');
 					
@@ -306,24 +333,33 @@ $.toggleHelptext = function(clickedLink) {
 	});
 	
 	// Partial addables, grab html from a div and add it to the form, used on forms and permissions create and edit
-	if ($('.partial_addable').length > 0) {
-		$('.add_link', '.partial_addable').click(function(){
-			var $this 			= $(this),
-					context 		= '#' + $this.attr('rel'),
-					partial_form = $($('.partial_form_html', context).html());
+	$('.add_link', '.partial_addable').click(function(){
+		var $this 			= $(this),
+				context 		= '#' + $this.attr('rel'),
+				partial_form = $($('.partial_form_html', context).html());
+	
+		$('input, select, checkbox', partial_form).each(function(){ $(this).attr('disabled', false); });
+	
+		partial_form.hide().prependTo('.partial_forms_wrap', context).slideDown(600);
+	
+		return false;
+	});
+	
+	$('.cancel_link', '.partial_addable').click(function(){
+		$(this).parent().parent().remove(); 
+		return false; 
+	});
+	
+	// retrieves a partial via ajax and inserts it into the target div
+	$('.insert_partial').click(function(){
+		var $this = $(this);
 		
-			$('input, select, checkbox', partial_form).each(function(){ $(this).attr('disabled', false); });
+		$.get(this.href, function(response){
+			$('#' + $this.attr('rel')).html(response);
+		})
 		
-			partial_form.hide().prependTo('.partial_forms_wrap', context).slideDown(600);
-		
-			return false;
-		});
-		
-		$('.cancel_link', '.partial_addable').click(function(){
-			$(this).parent().parent().remove(); 
-			return false; 
-		});
-	}
+		return false;
+	});
 	
 /******************************************* PAGE SPECIFIC BEHAVIOR *******************************************/
 	
@@ -375,7 +411,6 @@ $.toggleHelptext = function(clickedLink) {
 			var $this = $(this),
 					field_id = $(this).attr('rel').replace('field_', '');
 			
-			
 			$this.parent().parent().html()
 			
 			return false;
@@ -383,5 +418,9 @@ $.toggleHelptext = function(clickedLink) {
 		
 	} // END Views/Forms Edit
 	
+	// Permissions New
+	if ($.on_page([['new', 'permissions']])) {
+		$('a[rel=PermissionFields]').click();
+	}
 	
 //});

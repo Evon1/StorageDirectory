@@ -70,13 +70,11 @@ module ApplicationHelper
   # Views define what model records to list, and by what scope. Scoping a view retrieves the records of view's
   # model that are owned by either the active instance (e.g. @page, or @block. in the show action of the model) 
   # or a specific instance as defined by the view's owner_id
-  
   # Example 1: ---------------------------
   #  a view whose model is 'comment' will display all comments. Using scope 'post' with no owner_id will 
   # retrieve the comments that are owned by the active post instance, given the view will be rendered in a block
   # or page where that instance variable is set (in this case: @post). For this comment example to work we would have to
   # assign the view to a block and place the block in any post. The view will then render that post's comments
-  
   # Example 1: ---------------------------
   #  a view whose model is 'post' will display all posts. Using scope 'user' with and choosing a user from the resulting
   # dropdown menu in th ui will retrieve all the posts of that specific user. We can then place this view anywhere and it
