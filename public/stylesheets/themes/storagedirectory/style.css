@@ -32,7 +32,7 @@ body {
 
 #map { position:relative; overflow:hidden; height:373px; }
 #map .anim_img, #map .map_marker { position:absolute; top:0; }
-#map h3 { margin:-54px 0 0 10px; font-size:150%; }
+#map h3 { display:none; margin:-54px 0 0 10px; font-size:150%; }
 #map h3 a { text-decoration:none; }
 #body { margin-top:14px; }
 

@@ -1,4 +1,7 @@
+if (window.location.hash == '#anim') setTimeout(GR_anim, 500);
+
 var $GR_map = $('#map'),
+		$GR_heading = $('h3', '#map');
 		GR_css_hide = { 'opacity': 0, 'left': '-320px' },
 		markers = [],
 		GR_sign_img = new Image();
@@ -16,15 +19,14 @@ for (var i = 0; i < 4; i++) {
 }
 
 $GR_sign_img.css(GR_css_hide)
-
-setTimeout(GR_anim, 1000);
+$GR_heading.show().css(GR_css_hide);
 
 function GR_anim() {
 	$GR_sign_img.animate({
 		'opacity': '.8',
 		'top': '50px',
 		'left': '50px'
-	}, 500, function(){
+	}, 400, function(){
 		markers[0].show().animate({ 'opacity': '.8', 'top': '200px', 'left': '50px' }, 200);
 		markers[1].show().animate({ 'opacity': '.8', 'top': '150px', 'left': '250px' }, 400);
 
@@ -32,13 +34,14 @@ function GR_anim() {
 			'top': '20px',
 			'left': '20px'
 		}, 500, function(){
-			markers[2].show().animate({ 'opacity': '.8', 'top': '70px', 'left': '420px' }, 200);
-			markers[3].show().animate({ 'opacity': '.8', 'top': '225px', 'left': '400px' }, 400);
-
+			markers[2].show().animate({ 'opacity': '.8', 'top': '70px', 'left': '420px' }, 300);
+			markers[3].show().animate({ 'opacity': '.8', 'top': '225px', 'left': '400px' }, 500);
+			$GR_heading.animate({ 'opacity': 1 }, 700);
+			
 			$(this).animate({
 				'top': '30px',
 				'left': '30px'
-			}, 1300);
+			}, 1000);
 		});
 	});
 }
