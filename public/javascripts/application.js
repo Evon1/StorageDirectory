@@ -266,7 +266,7 @@ $.toggleHelptext = function(clickedLink) {
 		new_option.addClass('admin_hover_option').appendTo(link).hide().show();
 		new_option.click(function(){ window.location = this.href; return false; });
 	}, function(){
-		$('.admin_new_link', '#resource_list').fadeOut().addClass('admin_hover_option');
+		$('.admin_new_link', '#resource_list').fadeOut(300, function(){ $(this).remove(); });
 	});
 	
 	// helpers
