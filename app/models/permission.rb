@@ -10,6 +10,8 @@ class Permission < ActiveRecord::Base
     results = { :permissions => [], :updated => 0, :created => 0 }
     
     params.each do |permission|
+      next if permission[:role_id].blank?
+      
       if permission[:id].blank?
         results[:permissions] << create(permission)
         results[:created] += 1
@@ -26,6 +28,22 @@ class Permission < ActiveRecord::Base
   
   def title
     "#{self.role.title} #{self.action} #{self.resource}" unless self.new_record?
+  end
+  
+  # map REST actions to CRUD actions
+  def allows?(action)
+    case action.to_sym
+    when :new, :create
+      self.action == 'create'
+    when :index, :show
+      self.action == 'read'
+    when :edit, :update
+      self.action == 'update'
+    when :destroy
+      self.action == 'delete'
+    else # if action is already a CRUD action
+      self.action == action
+    end
   end
   
 end

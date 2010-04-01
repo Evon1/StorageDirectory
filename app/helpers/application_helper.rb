@@ -16,7 +16,6 @@ module ApplicationHelper
         @html << '</div>'
       end
     end
-    
   end
   
   def render_region_top(region)
@@ -173,7 +172,7 @@ module ApplicationHelper
   def display_message(flash)
     if flash.keys.any? { |k| k.to_s =~ /notice|warning|error/ }
       type = flash.keys.detect { |k| k.to_s =~ /notice|warning|error/ }
-      "<div class='#{type}'>#{flash[type]}</div>"
+      "<div class='flash #{type}'>#{flash[type]}</div>"
     end
   end
   
@@ -192,6 +191,8 @@ module ApplicationHelper
       str << "#{params[:model].titleize} Tagged With \"#{params[:tag]}\""
     elsif !params[:user_id].blank?
       str << @user.name.possessive + ' ' + controller_name.titleize
+    else
+      str << controller_name.titleize
     end
     str
   rescue

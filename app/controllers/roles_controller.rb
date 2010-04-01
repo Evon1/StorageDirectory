@@ -11,15 +11,27 @@ class RolesController < ApplicationController
   def new
     @role = Role.new
   end
-
+  
+  # TODO: too much code in this controller, fix it!
   def create
-    @role = Role.new(params[:roles])
+    error = ''
     
-    if @role.save
-      flash[:notice] = "#{@roles.title} has been created."
+    if params[:roles]
+      params[:roles].each do |role|
+        @role = Role.new(role) unless role[:title].blank?
+        error << model_errors(@role) unless @role.save
+      end
+    else
+      @role = Role.new(params[:roles])
+      error << model_errors(@role) unless @role.save
+    end
+    
+    if error.blank?
+      flash[:notice] = "#{params[:roles].nil? ? 'Role has' : 'Roles have'} been created."
       redirect_back_or_default roles_path
     else
-      render :action => 'edit'
+      flash[:error] = 'Oops, something went wrong.'
+      @role.nil? ? render(:action => 'edit') : redirect_back_or_default(roles_path)
     end    
   end
 

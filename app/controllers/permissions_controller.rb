@@ -10,11 +10,12 @@ class PermissionsController < ApplicationController
 
   def new
     @permission = Permission.new
+    @roles = Role.all
   end
 
   def create
     results = Permission.create_or_update_many(params[:permissions])
-    @permissions = results[:models]
+    @permissions = results[:permissions]
     
     if @permissions
       flash[:notice] = "#{@permissions.size} #{@permissions.size > 1 ? 'permissions have' : 'permission has'} been processed.<br />" +

@@ -6,6 +6,7 @@
     	  <%= link_to 'Content', '#', :id => 'content_menu_link' %>
     		<ul id="resource_list" class="plain grey1 hide">
     			<% @controllers.each do |controller| %>
+    			  <% next unless current_user.has_permission?(controller, 'index') %>
     				<% path = eval("#{controller}_path") %>
     				<li><%= link_to controller.titleize, path, :class => active_page(path) %></li>
     			<% end %>

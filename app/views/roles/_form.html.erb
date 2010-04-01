@@ -1,0 +1,11 @@
+<div id="RoleFields" class="roleFields partial_addable">
+	
+	<%= render :partial => 'shared/model_addable_fields', 
+			       :locals => { 
+			         :f          => f, 
+			         :_for       => 'roles', 
+			         :context    => 'RoleFields', 
+			         :collection => @roles, 
+			         :new_model  => Role.new } %>
+	
+</div>

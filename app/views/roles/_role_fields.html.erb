@@ -1,0 +1,19 @@
+<div class="framed round box stack uncollapse <%= cycle('odd', 'even') %>">
+	
+	<div class="right">
+		<%= render :partial => 'shared/addable_cancel_delete_links', :locals => { :model => model, :disabled => disabled } %>
+		<%= hidden_field_tag 'roles[][id]', model.id unless model.new_record? %>
+	</div>
+	
+	<div class="left right_space">
+		<div class="html_wrap left right_space">
+			<%= label_tag (disabled ? 'New' : "Role ##{model.id}") %>
+		</div>
+	</div>
+	
+	<div class="left right_space">
+		<%= label_tag 'roles[][title]', 'Title' %>
+		<%= text_field_tag 'roles[][title]' %>
+	</div>
+
+</div>

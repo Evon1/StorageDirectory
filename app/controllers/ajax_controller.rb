@@ -11,36 +11,52 @@ class AjaxController < ApplicationController
       @models = _get_model_class.all
     end
     
-    render :json => { :success => true, :data => @models }
+    authorize_and_perform_restful_action_on_model @models.first.class.to_controller_str, 'index' do
+      render :json => { :success => true, :data => @models }
+    end
     
   rescue => e
-    render :json => { :success => false, :data => _prep_error(e) }
+    render :json => { :success => false, :data => e.message }
   end
   
   def get_partial
     @model = params[:model].constantize.find params[:id]
     render :partial => params[:partial], :locals => { params[:model].downcase.to_sym => @model }
+    
   rescue => e
     render :text => "<div class='error'>#{e.message}</div>"
   end
   
   def update
-    @model = _get_model_class.find(params[:id])
-    render :json => { :success => @model.update_attribute(params[:attribute].to_sym, params[:value]) }
+    authorize_and_perform_restful_action_on_model @model.class.to_controller_str, 'update' do
+      render :json => { :success => @model.update_attribute(params[:attribute].to_sym, params[:value]) }
+    end
+    
   rescue => e
-    render :json => { :success => false, :data => _prep_error(e) }
+    render :json => { :success => false, :data => e.message }
   end
   
   def destroy
-    @model.destroy
-    @model.image = nil if @model.respond_to?('image')
+    authorize_and_perform_restful_action_on_model @model.class.to_controller_str, 'destroy' do
+      @model.destroy
+      @model.image = nil if @model.respond_to?('image')
     
-    render :json => { :success => get_model.nil? }
+      render :json => { :success => get_model.nil? }
+    end
+    
   rescue => e
-    render :json => { :success => false, :data => _prep_error(e) }
+    render :json => { :success => false, :data => e.message }
   end
   
   private
+  
+  def authorize_and_perform_restful_action_on_model(resource, action, &block)
+    if current_user && current_user.has_permission?(resource, action, params)
+      yield
+    else
+      render :json => { :success => false, :data => "You don't have permission to #{action_name} this #{@model.class.name}" }
+    end
+  end
   
   def validate_params
     return if params[:model].nil?
@@ -52,10 +68,6 @@ class AjaxController < ApplicationController
   
   def _get_model_class
     @model_class ||= params[:model].camelcase.constantize
-  end
-  
-  def _prep_error(e)
-    e.pretty_inspect.gsub(/^(#<)|>$/, '')
   end
   
 end

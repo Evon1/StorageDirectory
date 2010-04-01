@@ -216,6 +216,7 @@ $.toggleHelptext = function(clickedLink) {
 	var $ = jQuery;
 	$('body').addClass('js');
 	$('.hide_if_js').hide();
+	$('.flash').hide().slideDown();
 	
 	$.toggleAction(window.location.href, true); // toggle a container if its id is in the url hash
 	
@@ -306,7 +307,7 @@ $.toggleHelptext = function(clickedLink) {
 	// model id, the attribute to update, and the value, see the ajax_controller for other actions and required params
 	// use conditional logic to handle the success callback based on attributes of the clicked link, 
 	// such as what element to update on success, or what part of the dom should change 
-	$('.ajax_action').click(function(){
+	$('.ajax_action').live('click', function(){
 		var $this = $(this);
 		$this.addClass('loading');
 		
@@ -333,7 +334,7 @@ $.toggleHelptext = function(clickedLink) {
 	});
 	
 	// Partial addables, grab html from a div and add it to the form, used on forms and permissions create and edit
-	$('.add_link', '.partial_addable').click(function(){
+	$('.add_link', '.partial_addable').live('click', function(){
 		var $this 			= $(this),
 				context 		= '#' + $this.attr('rel'),
 				partial_form = $($('.partial_form_html', context).html());
@@ -345,13 +346,13 @@ $.toggleHelptext = function(clickedLink) {
 		return false;
 	});
 	
-	$('.cancel_link', '.partial_addable').click(function(){
-		$(this).parent().parent().remove(); 
+	$('.cancel_link', '.partial_addable').live('click', function(){
+		$(this).parent().parent().slideUp(300, function(){ $(this).remove(); }); 
 		return false; 
 	});
 	
 	// retrieves a partial via ajax and inserts it into the target div
-	$('.insert_partial').click(function(){
+	$('.insert_partial').live('click', function(){
 		var $this = $(this);
 		
 		$.get(this.href, function(response){
@@ -419,8 +420,8 @@ $.toggleHelptext = function(clickedLink) {
 	} // END Views/Forms Edit
 	
 	// Permissions New
-	if ($.on_page([['new', 'permissions']])) {
-		$('a[rel=PermissionFields]').click();
+	if ($.on_page([['new', 'permissions, roles']])) {
+		$('a.add_link', '.partial_addable').click();
 	}
 	
 //});

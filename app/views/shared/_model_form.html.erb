@@ -1,7 +1,7 @@
 <% declare_content_for %>
 <%= display_message flash %>
 
-<h2><%= defined?(heading) ? heading : model_form_heading %></h2>
+<h2><%= local_assigns.keys.include?(:heading) ? heading : model_form_heading %></h2>
 
 <%= render_model_helptext(controller_name) %>
 
@@ -13,7 +13,7 @@
 		
 		<div class="uncollapse stack">
 			<div class="buttons left">
-				<% submit_text = defined?(heading) ? "Update #{heading}" : (model.new_record? ? "Add #{model_name(model).titleize}" : 'Save Changes') %>
+				<% submit_text = local_assigns.keys.include?(:heading) && action_name == 'edit' ? "Update #{heading}" : (model.new_record? || action_name == 'new' ? "Add #{model_name(model).titleize}" : 'Save Changes') %>
 				<%= submit_tag submit_text %>
 			</div>
 			

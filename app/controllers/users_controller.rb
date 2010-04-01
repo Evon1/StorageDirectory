@@ -26,6 +26,7 @@ class UsersController < ApplicationController
   end
 
   def edit
+    @roles = Role.all
   end
   
   def update
