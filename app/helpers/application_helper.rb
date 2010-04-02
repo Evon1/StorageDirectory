@@ -2,7 +2,7 @@
 module ApplicationHelper
   
   def declare_content_for # renders blocks in regions based on current page
-    title = (@page ? @page.title  : @controller_name.titleize).to_s
+    title = (@page ? @page.title  : controller_name.titleize).to_s
     content_for :title, "#{title.blank? ? 'Manage - ' : title + ' - '}GreyCMS"
     
     regions(false).each do |region|
@@ -11,7 +11,7 @@ module ApplicationHelper
         
           render_region_top(region)
           render_global_blocks_for(region)
-          render_local_blocks_for(region.to_s)
+          render_local_blocks_for(region.to_s) unless action_name == 'edit'
 
         @html << '</div>'
       end
@@ -185,7 +185,9 @@ module ApplicationHelper
     "<h2>#{model.title}</h2>" if (model.respond_to?(:show_title) && model.show_title) || !model.respond_to?(:show_title)
   end
   
-  def contextual_index_view_title
+  def contextual_index_view_title(title = nil)
+    return title unless title.nil?
+    
     str = ''
     if !params[:model].blank?
       str << "#{params[:model].titleize} Tagged With \"#{params[:tag]}\""

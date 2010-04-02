@@ -263,9 +263,13 @@ $.toggleHelptext = function(clickedLink) {
 	$('li', '#resource_list').hover(function(){
 		var li = $(this).css('position', 'relative');
 		var link = $('a', li);
-		var new_option = $('<a class="admin_new_link" href="'+ link.attr('href') +'/new">New</a>');
-		new_option.addClass('admin_hover_option').appendTo(link).hide().show();
-		new_option.click(function(){ window.location = this.href; return false; });
+		
+		if (link.hasClass('access_denied')) return;
+		
+		var new_option = $('<a class="admin_new_link admin_hover_option" href="'+ link.attr('href') +'/new">New</a>');
+				new_option.appendTo(link)
+									.hide().show()
+									.click(function(){ window.location = this.href; return false; });
 	}, function(){
 		$('.admin_new_link', '#resource_list').fadeOut(300, function(){ $(this).remove(); });
 	});

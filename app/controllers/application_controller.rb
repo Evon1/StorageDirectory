@@ -124,7 +124,7 @@ class ApplicationController < ActionController::Base
       session[:view_type] = 'table'
     elsif model_class.respond_to?('column_names') && model_class.column_names.include?('image_file_name')
       session[:view_type] = 'box'
-    elsif controller_name == 'images'
+    elsif controller_name =~ /(images)|(galleries)/
       session[:view_type] = 'gallery'
     else
       session[:view_type] = 'list'
@@ -139,7 +139,7 @@ class ApplicationController < ActionController::Base
     
     unless current_user.has_role?('Admin')
       @controllers.reject! do |c|
-        !current_user.has_permission?(c, 'index', params)
+        !current_user.has_permission?(c, 'index')
       end
     end
   end

@@ -1,7 +1,7 @@
 <% declare_content_for %>
 <%= display_message flash %>
 
-<h2><%= contextual_index_view_title %></h2>
+<h2><%= contextual_index_view_title((local_assigns.has_key?(:title) ? title : nil)) %></h2>
 
 <%= render_model_helptext(controller_name) %>
 
