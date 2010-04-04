@@ -1,23 +1,3 @@
-/* RESET */
-html, body, div, span, applet, object, iframe,h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,del, dfn, em, font, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,b, u, i, center,dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,table, caption, tbody, tfoot, thead, tr, th, td {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	outline: 0;
-	font-size: 100%;
-	vertical-align: baseline;
-	background: transparent;
-}
-body { line-height: 1; }
-ul { list-style: none; }
-/* remember to define focus styles! */
-:focus { outline: 0; }
-/* tables still need 'cellspacing="0"' in the markup */
-table { border-collapse: collapse; border-spacing: 0; }
-
 /* overrides */
 body { background:#261b0d; text-align:center; font-family:"Book Antiqua", Palatino, serif; }
 h1, h2, h3, h4 { margin-bottom:7px; font-size:200%; }
@@ -64,7 +44,7 @@ a:hover, a:active { color:#8a265b; }
 #specials { width:112px; height:136px; top:-77px; left:340px; line-height:1.2; text-align:center; padding:30px 7px 0 7px; color:#687d39; background:url(/images/ui/thelodge/postit-bg.png) no-repeat top center; }
 #facebook { right:8px; top:-82px; }
 
-/* lodge theme customizations */
+/******* lodge theme customizations ********/
 #greyrobot { width:740px; margin:0 auto; position:absolute; top:180px; }
 #users_controller #content .round { color:yellow; text-shadow:0 1px 1px #000; }
 .region_footer .model_options { position:absolute; right:-40px; }

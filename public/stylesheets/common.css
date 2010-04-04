@@ -1,4 +1,23 @@
 @charset "utf-8";
+/* RESET */
+html, body, div, span, applet, object, iframe,h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,b, u, i, center,dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,table, caption, tbody, tfoot, thead, tr, th, td {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+	background: transparent;
+}
+body { line-height: 1; }
+ul { list-style: none; }
+/* remember to define focus styles! */
+:focus { outline: 0; }
+/* tables still need 'cellspacing="0"' in the markup */
+table { border-collapse: collapse; border-spacing: 0; }
 
 #greyrobot { font-size:12px; color:#ebebeb; padding:10px; }
 #greyrobot a:link, #greyrobot a:visited { text-decoration:none; }
@@ -45,11 +64,27 @@ span.active { cursor:default; }
 .w80 { width:80px; }
 .has_hoverable_list ul li { padding:3px 3px 3px 5px; cursor:default; }
 .has_hoverable_list ul li:hover { background:#ebebeb; opacity:.6; }
+
 /* admin menu */
-#admin_menu { height:16px; font-size:12px; padding:3px; background:#ebebeb; }
+#admin_menu {
+	width:99.9%;
+	height:16px;
+	font-size:12px;
+	padding:3px 5px 5px 5px;
+	border-bottom:1px solid #818181;
+	background:#ebebeb;
+	position:fixed;
+	opacity:.5;
+	top:0;
+	z-index:1000;
+	}
 #content_menu { position:relative; }
-#resource_list { position:absolute; top:17px; z-index:1000; background:#ebebeb; }
-#resource_list li a { padding:3px 5px; display:block; }
+#resource_list { position:absolute; top:21px; z-index:1000; background:#ebebeb; }
+#admin_menu a { text-decoration:none; color:#333; }
+#resource_list li a:link, #resource_list li a:visited { padding:3px 5px; display:block; }
+#resource_list li:hover, #resource_list li:active { background:#818181; }
+#session_links a { padding:3px 5px; }
+#session_links a:hover, #session_links a:active { text-decoration:underline; }
 
 /********************* added in from old greyCMS stylesheet **********************/
 /* model index */
