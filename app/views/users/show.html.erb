@@ -4,52 +4,60 @@
 
 <h2><%= user_account_title %></h2>
 
-<div class="right framed">
-	<%= link_to image_tag(@user.profile_image.image.url(:thumb), :alt => @user.name), @user.profile_image unless @user.images.empty? %>
+<div class="round box framed uncollapse stack">
+  <div class="right framed">
+  	<%= link_to image_tag(@user.profile_image.image.url(:thumb), :alt => @user.name), @user.profile_image unless @user.images.empty? %>
+  </div>
+  
+  <ul class="plain with_floats spaced_list_items">
+	  <li>
+  	  <b class="block left w110">Login:</b>
+  	  <%=h @user.name %>
+  	</li>
+
+  	<li>
+  	  <b class="block left w110">Email:</b>
+  	  <%=h @user.email %>
+  	</li>
+  	
+  	<li>
+  	  <b class="block left w110">Role:</b>
+  	  <%=h @user.role.title %>
+  	</li>
+
+  	<li>
+  	  <b class="block left w110">Login count:</b>
+  	  <%=h @user.login_count %>
+  	</li>
+
+  	<li>
+  	  <b class="block left w110">Last request at:</b>
+  	  <%=h @user.last_request_at %>
+  	</li>
+
+  	<li>
+  	  <b class="block left w110">Last login at:</b>
+  	  <%=h @user.last_login_at %>
+  	</li>
+
+  	<li>
+  	  <b class="block left w110">Current login at:</b>
+  	  <%=h @user.current_login_at %>
+  	</li>
+
+  	<li>
+  	  <b class="block left w110">Last login ip:</b>
+  	  <%=h @user.last_login_ip %>
+  	</li>
+
+  	<li>
+  	  <b class="block left w110">Current login ip:</b>
+  	  <%=h @user.current_login_ip %>
+  	</li>
+  </ul>
 </div>
 
-<div class="round box framed">
-	<p>
-	  <b>Login:</b>
-	  <%=h @user.name %>
-	</p>
-
-	<p>
-	  <b>Email:</b>
-	  <%=h @user.email %>
-	</p>
-
-	<p>
-	  <b>Login count:</b>
-	  <%=h @user.login_count %>
-	</p>
-
-	<p>
-	  <b>Last request at:</b>
-	  <%=h @user.last_request_at %>
-	</p>
-
-	<p>
-	  <b>Last login at:</b>
-	  <%=h @user.last_login_at %>
-	</p>
-
-	<p>
-	  <b>Current login at:</b>
-	  <%=h @user.current_login_at %>
-	</p>
-
-	<p>
-	  <b>Last login ip:</b>
-	  <%=h @user.last_login_ip %>
-	</p>
-
-	<p>
-	  <b>Current login ip:</b>
-	  <%=h @user.current_login_ip %>
-	</p>
-
-	<p class="buttons">
-		<%= link_to 'Edit', edit_user_path %>
-	</p>
+<div class="uncollapse">
+  <div class="right"><%= link_to "#{@user.name.possessive} Images", user_images_path(@user) %></div>
+  <div class="buttons"><%= button_to 'Edit', edit_user_path, { :method => 'get' } %></div>
 </div>

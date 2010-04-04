@@ -4,6 +4,7 @@ class UsersController < ApplicationController
   
   def index
     @users = User.all_for_index_view
+    @roles = Role.all
   end
   
   def show
@@ -25,10 +26,11 @@ class UsersController < ApplicationController
   end
 
   def edit
+    @roles = Role.all
   end
   
   def update
-    if @user.update_attributes(params[:user])
+    if @user.update_attributes(params)
       flash[:notice] = "#{@user.name.possessive} account has been updated!"
       redirect_back_or_default user_path(@user)
     else

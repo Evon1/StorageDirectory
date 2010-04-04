@@ -200,6 +200,8 @@ input[type='reset'], a.cancel:link { color:#a63217; }
 .bg_lightbrown1 { background-color:#ffb074; }
 
 /* options */
+#resource_list { border-right:1px solid #818181; border-bottom:1px solid #818181; border-left:1px solid #818181; }
+#resource_list li a { text-align:left; color:#000; }
 #banner_region_label { position:absolute; }
 .region_label {
 	padding:2px 4px 3px 4px;
@@ -221,87 +223,6 @@ input[type='reset'], a.cancel:link { color:#a63217; }
 #sidebar .buttons .toggle_action { top:-17px; right:0; }
 #sidebar .edit_link { top:-17px; right:15px; }
 
-/* model_views partial styles */
-#Views > div { font-size:90%; }
-#Views .row_checkable > div:first-child { width:auto; }
-#Views .row_checkable > div { width:18%; }
-#Views p { margin:0 0 7px 0; }
-
-#body .box_view { margin:10px -10px 0 -10px; }
-div.box_view > div {
-	float:left;
-	width:30.5%;
-	margin: 0 10px 20px 10px;
-	padding:7px 0 32px 0;
-	position:relative;
-	line-height:;
-}
-.box_view > div .inner { padding:0 0 0 7px; height:177px; overflow:auto; }
-#body .box_view > div .inner .content { padding:0; margin:5px; }
-.box_view > div > span { display:block; }
-.box_view > div img { width:100%; }
-.box_view > div > .buttons { position:absolute; bottom:10px; padding-left:7px; }
-.box_view .html_wrap {
-	-moz-border-radius-topleft: 7px;
-	-moz-border-radius-bottomleft: 7px;
-	-webkit-border-radius-top-left:7px;
-	-webkit-border-radius-bottom-left:7px;
-	border-top-left-radius:7px;
-	border-bottom-left-radius:7px;
-}
-
-.blog_roll_view h4 { margin-right:6px; }
-.blog_roll_view .post_info {  }
-
-#body .list_view { margin-top:10px; }
-.list_view li { padding:8px 8px 10px; margin:7px 0; overflow:hidden; }
-.list_view li.even { background-color:#fff; }
-.list_view li > a { display:block; float:left; min-width:180px; }
-.list_view li img { width:10%; }
-#left .list_view , #right .list_view { font-size:85%; }
-#left .list_view .timestamp , #right .list_view .timestamp { display:block; }
-.block_models_view .buttons a.edit_link:link,
-.block_models_view .buttons a.edit_link:hover,
-.block_models_view .buttons a.edit_link:visited,
-.block_models_view .buttons a.delete_link:link,
-.block_models_view .buttons a.delete_link:hover,
-.block_models_view .buttons a.delete_link:visited { border:0 none }
-
-#body .table_view { width:100%; }
-.table_view { margin:10px 5px; }
-.table_view thead th { text-align:center; padding:5px 0 7px 0; }
-.table_view td { padding:10px 15px; vertical-align:middle; max-width:130px; }
-.table_view td:first-child { max-width:150px; }
-.table_view td img { width:150px; }
-.table_view .admin_options { text-align:center; }
-.table_view { background-color:#fff; }
-
-.block h5 { margin:0 0 10px 0;}
-
-.timestamp, .owner { font-size:70%; }
-.timestamp { font-style:italic; }
-
-/* form controls */
-.buttons label, .buttons div { font-size:12px;  margin:0 !important; padding:0; }
-.view_options { margin-right:10px; }
-
-input.small_text_field, input.tiny_text_field { font-size:10px; }
-input.small_text_field { width:100px; display:block; margin-bottom:3px; }
-input.tiny_text_field { width:30px; }
-
-.control_bar > div { margin-right:7px; }
-#body form fieldset.subfields { border-top:10px solid #EBEBEB; margin-bottom:15px; }
-#body form fieldset.subfields legend { margin-bottom:5px; }
-
-.field_wrap .even input { background-color:#ebebeb; }
-.field_wrap p { margin:0; }
-.check_box_wrap { padding-right:15px; }
-
-.half_fields .left { width:49.2%; }
-.half_fields .left input { width:98%; }
-.field_form > div { padding:4px 0; }
-.option_group { padding:2px 4px; background-color:#ebebeb; }
-
 /* posts */
 .post { margin-bottom:20px; }
 
@@ -311,14 +232,9 @@ input.tiny_text_field { width:30px; }
 .comment_title { }
 .comment_date { font-size:10px !important; }
 
-
 /* hovers */
 .shadow_wrap:hover,
 .shadow_wrap:hover input,
 .shadow_wrap:hover textarea { background-color:#ebebeb; }
 .shadow_wrap:hover .small_text_field { background:none; }
 .edit .shadow_wrap:hover { background:none; }
-
-
-
-

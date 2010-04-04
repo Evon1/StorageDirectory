@@ -2,8 +2,8 @@
 module ApplicationHelper
   
   def declare_content_for # renders blocks in regions based on current page
-    title = (@page ? @page.title  : @controller_name.titleize).to_s
-    content_for :title, "#{title.blank? ? 'Manage - ' : title + ' - '}The Lodge Beer &amp; Grill in Boca Raton, FL"
+    title = (@page ? @page.title  : controller_name.titleize).to_s
+    content_for :title, "#{title.blank? ? 'Manage - ' : title + ' - '}GreyCMS"
     
     regions(false).each do |region|
       content_for region do
@@ -11,12 +11,11 @@ module ApplicationHelper
         
           render_region_top(region)
           render_global_blocks_for(region)
-          render_local_blocks_for(region.to_s)
+          render_local_blocks_for(region.to_s) unless action_name == 'edit'
 
         @html << '</div>'
       end
     end
-    
   end
   
   def render_region_top(region)
@@ -173,7 +172,7 @@ module ApplicationHelper
   def display_message(flash)
     if flash.keys.any? { |k| k.to_s =~ /notice|warning|error/ }
       type = flash.keys.detect { |k| k.to_s =~ /notice|warning|error/ }
-      "<div class='#{type}'>#{flash[type]}</div>"
+      "<div class='flash #{type}'>#{flash[type]}</div>"
     end
   end
   
@@ -186,20 +185,40 @@ module ApplicationHelper
     "<h2>#{model.title}</h2>" if (model.respond_to?(:show_title) && model.show_title) || !model.respond_to?(:show_title)
   end
   
+  def contextual_index_view_title(title = nil)
+    return title unless title.nil?
+    
+    str = ''
+    if !params[:model].blank?
+      str << "#{params[:model].titleize} Tagged With \"#{params[:tag]}\""
+    elsif !params[:user_id].blank?
+      str << @user.name.possessive + ' ' + controller_name.titleize
+    else
+      str << controller_name.titleize
+    end
+    str
+  rescue
+    controller_name.titleize
+  end
+  
   def model_class(model_or_controller_name)
     model_or_controller_name.singular.camelcase.constantize
   end
   
   def model_form_heading
+    str = params[:user_id].blank? ? '' : ' for ' + @user.name
+    "#{action_name} #{controller_name.singular}".titleize + str
+  rescue
     "#{action_name} #{controller_name.singular}".titleize
   end
   
+  # monkey patched parameterize method. see: /lib/utility_methods.rb:31
   def nice_page_path(page)
-    # monkey patched parameterize method. see: /lib/utility_methods.rb:31
     "/#{page.title.parameterize}"
   end
   
-  def model_index_path(name, options = {}) # index action for a resource
+  # index action for a resource
+  def model_index_path(name, options = {}) 
     eval "#{name}_path(options)"
   end
   
@@ -213,16 +232,24 @@ module ApplicationHelper
     eval "new_#{name.downcase.singular}_path(options)"
   end
   
-  def model_path(model, options = {}) # a resource's named route
+  # a resource's named route
+  def model_path(model, options = {})
     eval "#{model_name(model)}_path(model, options)"
   end
   
-  def model_crud_title(crud, name) # link title for resource crud action
+  # link title for resource crud action
+  def model_crud_title(crud, name)
     "#{crud} #{name.singular}".titleize
   end
   
-  def model_name(models) # require a model or array of models
+  # require a model or array of models
+  def model_name(models)
     models.kind_of?(Array) ? models.first.class.name : models.class.name.underscore.singular
+  end
+  
+  # takes an AR object and returns the controller name for it
+  def model_controller(model)
+    model.class.name.downcase.pluralize
   end
   
   def model_name_or_title(model)

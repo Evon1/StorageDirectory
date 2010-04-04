@@ -5,4 +5,8 @@ class Role < ActiveRecord::Base
   
   access_shared_methods
   
+  def select_list_options
+    self.map { |r| "#{r.id}-#{r.title}"}
+  end
+  
 end

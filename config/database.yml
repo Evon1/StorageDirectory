@@ -1,14 +1,14 @@
 development:
   adapter: mysql
   encoding: utf8
-  database: thelodge
+  database: greycms_development
   username: root
   password: 
 
 production:
   adapter: mysql
   encoding: utf8
-  database: greyrob_thelodge
+  database: greyrob_production
   username: greyrob_admin
   password: -pX8.PK2{4AW
 
