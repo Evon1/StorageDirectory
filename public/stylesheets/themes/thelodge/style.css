@@ -36,7 +36,7 @@ a:hover, a:active { color:#8a265b; }
 #logo { width:316px; height:168px; position:absolute; top:-55px; left:-57px; background:url(/images/ui/thelodge/lodge-logo.png) no-repeat top center; }
 #address { padding:20px 7px 0 0; }
 
-#content_wrapper { padding:100px 15px 40px 15px; clear:both; }
+#content_wrapper { padding:100px 15px 40px 15px; clear:both; min-height:340px; }
 #nav { float:left; width:178px; padding:10px 0 0 18px; }
 #nav ul li a { color:#000; display:block; padding:3px 0; font-family:Impact, Arial, sans-serif; font-size:195%; text-decoration:none; }
 #nav ul li a.active, #nav ul li a:hover, #nav ul li a:active { text-shadow:0 0 13px #e1d7a7; }
