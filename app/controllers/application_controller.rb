@@ -238,7 +238,7 @@ class ApplicationController < ActionController::Base
   
   # for the shared blocks_model_form
   def get_blocks
-    @blocks = Block.all(:conditions => 'show_in_all IS NULL OR show_in_all = ""')
+    @blocks = Block.all(:conditions => 'show_in_all IS NULL')
   end
   
   def blocks_models
