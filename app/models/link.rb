@@ -1,6 +1,6 @@
 class Link < ActiveRecord::Base
   
-  belongs_to :group, :conditions => 'group_id IS NOT NULL'
+  has_one :group, :as => :node, :conditions => 'group_id IS NOT NULL'
   has_many :blocks_model, :as => :model
   
   validates_uniqueness_of :title
@@ -17,7 +17,8 @@ class Link < ActiveRecord::Base
   
   # Instance Methods
   
-  def scope # used by shared model methods to build a select lists of all instances of a resource
+  # used by shared model methods to build a select lists of all instances of a resource
+  def scope
     self.resource
   end
   

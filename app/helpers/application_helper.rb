@@ -2,8 +2,8 @@
 module ApplicationHelper
   
   def declare_content_for # renders blocks in regions based on current page
-    title = (@page ? @page.title  : @controller_name.titleize).to_s
-    content_for :title, "#{title.blank? ? 'Manage - ' : title + ' - '}The Lodge Beer &amp; Grill in Boca Raton, FL"
+    title = (@page ? @page.title  : controller_name.titleize).to_s
+    content_for :title, "#{title.blank? ? 'Manage - ' : title + ' - '}GreyCMS"
     
     regions(false).each do |region|
       content_for region do
@@ -11,12 +11,11 @@ module ApplicationHelper
         
           render_region_top(region)
           render_global_blocks_for(region)
-          render_local_blocks_for(region.to_s)
+          render_local_blocks_for(region.to_s) unless action_name == 'edit'
 
         @html << '</div>'
       end
     end
-    
   end
   
   def render_region_top(region)
@@ -59,7 +58,7 @@ module ApplicationHelper
   end
   
   def setup_gallery(widget, region)
-    content_tag(:script, 
+    content_tag(:script,
       "jQuery(function(){
         #{images_for_js(widget, region)};
         jQuery('#slideshow').GreyRobotSlideShow();
@@ -71,14 +70,14 @@ module ApplicationHelper
   # Views define what model records to list, and by what scope. Scoping a view retrieves the records of view's
   # model that are owned by either the active instance (e.g. @page, or @block. in the show action of the model) 
   # or a specific instance as defined by the view's owner_id
-  
-  # Example 1: ---------------------------
+  #
+  # Example 1
   #  a view whose model is 'comment' will display all comments. Using scope 'post' with no owner_id will 
   # retrieve the comments that are owned by the active post instance, given the view will be rendered in a block
   # or page where that instance variable is set (in this case: @post). For this comment example to work we would have to
   # assign the view to a block and place the block in any post. The view will then render that post's comments
-  
-  # Example 1: ---------------------------
+  #
+  # Example 2
   #  a view whose model is 'post' will display all posts. Using scope 'user' with and choosing a user from the resulting
   # dropdown menu in th ui will retrieve all the posts of that specific user. We can then place this view anywhere and it
   # will render all posts by that user if they exist, otherwise it will render all posts.
@@ -97,8 +96,10 @@ module ApplicationHelper
       html << render(:partial => "views/#{models_view.view_type}", :locals => { :data => data })
     end
     html
-  rescue => e
-    #raise [@view, @option_hash,e].pretty_inspect
+  rescue
+    resource = block.class.to_controller_str
+    block_str = current_user && current_user.has_permission?(resource, 'edit', params) ? "<a href='/#{resource}/#{block.id}/edit'>#{block.title}</a>" : block.title
+    "<div class='error'>And error occured loading view in block: #{block_str}</div>"
   end
   
   def render_forms_in_this(block)
@@ -169,11 +170,11 @@ module ApplicationHelper
     "SlideShowImages = #{images.to_json}"
   end
   
-  # => @param flash = flash message object
+  # => @param flash: flash message object
   def display_message(flash)
     if flash.keys.any? { |k| k.to_s =~ /notice|warning|error/ }
       type = flash.keys.detect { |k| k.to_s =~ /notice|warning|error/ }
-      "<div class='#{type}'>#{flash[type]}</div>"
+      "<div class='flash #{type}'>#{flash[type]}</div>"
     end
   end
   
@@ -186,26 +187,47 @@ module ApplicationHelper
     "<h2>#{model.title}</h2>" if (model.respond_to?(:show_title) && model.show_title) || !model.respond_to?(:show_title)
   end
   
+  def contextual_index_view_title(title = nil)
+    return title unless title.nil?
+    
+    str = ''
+    if !params[:model].blank?
+      str << "#{params[:model].titleize} Tagged With \"#{params[:tag]}\""
+    elsif !params[:user_id].blank?
+      str << @user.name.possessive + ' ' + controller_name.titleize
+    else
+      str << controller_name.titleize
+    end
+    str
+  rescue
+    controller_name.titleize
+  end
+  
+  # return the actual class object of a model
   def model_class(model_or_controller_name)
-    model_or_controller_name.singular.camelcase.constantize
+    @model_class ||= model_or_controller_name.singular.camelcase.constantize
   end
   
   def model_form_heading
+    str = params[:user_id].blank? ? '' : ' for ' + @user.name
+    "#{action_name} #{controller_name.singular}".titleize + str
+  rescue
     "#{action_name} #{controller_name.singular}".titleize
   end
   
+  # monkey patched parameterize method. see: /lib/utility_methods.rb:31
   def nice_page_path(page)
-    # monkey patched parameterize method. see: /lib/utility_methods.rb:31
     "/#{page.title.parameterize}"
   end
   
-  def model_index_path(name, options = {}) # index action for a resource
+  # index action path for a resource
+  def model_index_path(name, options = {}) 
     eval "#{name}_path(options)"
   end
   
   def edit_model_path(model, options = {})
     eval "edit_#{model_name(model)}_path(model, options)"
-  rescue # the role model doesn't have routes
+  rescue
     "##{model_name(model)}"
   end
   
@@ -213,23 +235,33 @@ module ApplicationHelper
     eval "new_#{name.downcase.singular}_path(options)"
   end
   
-  def model_path(model, options = {}) # a resource's named route
+  # a resource instance path
+  def model_path(model, options = {})
     eval "#{model_name(model)}_path(model, options)"
   end
   
-  def model_crud_title(crud, name) # link title for resource crud action
+  # link title for resource crud action
+  def model_crud_title(crud, name)
     "#{crud} #{name.singular}".titleize
   end
   
-  def model_name(models) # require a model or array of models
+  # return a string name of a resource, require a model or array of models
+  def model_name(models)
     models.kind_of?(Array) ? models.first.class.name : models.class.name.underscore.singular
   end
   
+  # takes an AR object and returns the controller name for it
+  def model_controller(model)
+    model.class.name.downcase.pluralize
+  end
+  
+  # the title or name of an instance of a resource
   def model_name_or_title(model)
     model.respond_to?('title') ? model.title : model.name
   end
   
-  def model_id(model) # form a string to set the id of html elements that wrap a resource
+  # form a string to set the id of html elements that wrap a resource
+  def model_id(model)
     "#{model.class.name}_#{model.id}"
   end
   
@@ -249,6 +281,7 @@ module ApplicationHelper
     end
   end
   
+  # check if we're on the index path of a resource
   def current_controller?(path)
     "/#{controller_name}" == path
   end
@@ -278,13 +311,13 @@ module ApplicationHelper
     end
   end
   
+  # get the name or title of the instance of the associated model
   def name_of_associated_model(attribute, id)
     attr_cap = attribute.sub(/_id$/, '').capitalize
     model_class = attr_cap.constantize
     model = model_class.find(id)
-    name = model.respond_to?('name') ? model.name : model.title
     str = label_tag 'Owned By'
-    str << name
+    str << model_name_or_title(model)
   rescue
     attr_cap
   end

@@ -1,6 +1,6 @@
 # Filters added to this controller apply to all controllers in the application.
 # Likewise, all the methods added will be available for all controllers.
-#require 'PP' if RAILS_ENV == 'development'
+require 'PP' if RAILS_ENV == 'development'
 class ApplicationController < ActionController::Base
   helper :all # include all helpers, all the time
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
@@ -30,8 +30,9 @@ class ApplicationController < ActionController::Base
   include UtilityMethods
   
   # for the SharedModelMethod module
-  $regions    = [:header, :content_bottom, :footer]
-  $view_types = [:list, :blog_roll, :box, :table]
+  
+  $regions    = [:header, :banner, :sidebar, :left, :right, :content_bottom, :column_5, :column_6, :column_7, :column_8, :footer]
+  $view_types = [:list, :blog_roll, :box, :table, :gallery]
   
   # for the virtual forms, build forms
   $_actions     = [:index, :show, :create, :update]
@@ -41,81 +42,93 @@ class ApplicationController < ActionController::Base
   $_page_actions = [:index, :show, :new, :edit]
   
   # authorization system
-  $_crud = [:create, :read, :update, :delete]
+  $_crud = [:all, :create, :read, :update, :delete]
+  
+  # sets layout file and css
+  $_theme = 'thelodge'
+  
+  layout (session ? (session[:layout] || $_theme) : $_theme)
   
   before_filter :reverse_captcha_check, :only => :create
-  before_filter :init
+  before_filter :clean_home_url, :authorize_user, :init
   
-  layout (session ? (session[:layout] || 'thelodge') : 'thelodge')
-  
-  def local_request? # display full error message when logged in
-    true if current_user
-  end
-  
-  protected # ---------------------------------------------
-  
-  def model_errors(model)
-    model.errors.full_messages.map { |e| "<p>#{e}</p>" }
-  end
-  
-  def return_or_back(params)
-    params[:return].nil? ? redirect_to(:back) : redirect_to(params[:return])
+  # display full error message when logged in as an Admin
+  def local_request?
+    current_user && current_user.has_role?('Admin')
   end
   
   private # -----------------------------------------------
   
-  def reverse_captcha_check # hidden field hack_me must pass through empty, cheap reverse captcha trick
-    redirect_to("/#{Page.first.title.downcase}") and return if params.has_key?(:hack_me) && !params[:hack_me].empty?
+  # keep a clean home URL by redirecting to the main page
+  def clean_home_url
+    redirect_to(home_page) and return if request.path == '/'
   end
   
   def init
-    redirect_to("/#{Page.first.title.downcase}") and return if request.path == '/' || (!current_user && action_name =~ /index|edit|update|destroy/)
-    
     set_session_vars
     get_content_vars
     get_list_of_controllers_for_menu if current_user
   end
   
+  # the 'frontend' of the website is a page's show action
+  def authorize_user
+    # simple authorization: kick out anonymous users from backend actions
+    if !current_user
+      redirect_back_or_default(home_page) and return if action_name =~ /index|edit|update|destroy/
+      
+    # skip checking permission if user is an admin
+    elsif !current_user.has_role?('Admin')
+      unless current_user.has_permission?(controller_name, action_name, params)
+        flash[:warning] = 'Access Denied'
+        redirect_back_or_default(home_page) and return
+      end
+    end
+  end
+  
+  # hidden field hack_me must pass through empty, cheap reverse captcha trick
+  def reverse_captcha_check
+    redirect_to("/#{home_page}") and return if params.has_key?(:hack_me) && !params[:hack_me].empty?
+  end
+  
+  # we set some return path variables in the session, mostly for the backend.
+  # also try to guess which view type would be best by looking at the content's properties
   def set_session_vars
     if params[:return_to]
       session[:return_to] = params[:return_to]
-    elsif current_user && in_mode?('index', 'edit', 'show')
+    elsif (current_user.nil? && in_mode?('show')) || (current_user && in_mode?('index', 'edit', 'show'))
       store_location
     end
     set_default_view_type
   end
   
+  # instance variables for the helpers and templates
   def get_content_vars
-    @controller_name = controller_name
-    @action_name = action_name
-    
+    @controller_name   = controller_name
+    @action_name       = action_name
     @default_view_type = session[:view_type]
-    
-    @theme_css = theme_css(session[:theme] || 'thelodge')
-    
-    @plugins = ['plugins/jquery.formbouncer', 'plugins/jquery.hinty']
-    @widgets_js = []
-    
-    @nav_pages = Page.find_all_by_show_in_nav(true)
-    @global_blocks = Block.all(:conditions => ['show_in_all in (?)', regions(false).map(&:to_s)])
-
-    @roles = Role.all
+    @theme_css         = theme_css(session[:theme] || $_theme)
+    @plugins           = ['plugins/jquery.formbouncer', 'plugins/jquery.hinty', 'plugins/inflector']
+    @widgets_js        = []
+    @nav_pages         = Page.find_all_by_show_in_nav true
+    @global_blocks     = Block.all :conditions => ['show_in_all in (?)', regions(false).map(&:to_s)]
+    #@roles             = Role.all
+    @user              = User.find(params[:user_id]) unless params[:user_id].blank?
   end
   
   # TODO move this feature into the database and save state through AJAX, using a key-val pair { :controller_name => :view_type }
   def set_default_view_type
     model_class = controller_name.singular.camelcase.constantize
-    
+      
     if !params[:view_type].blank?
       session[:view_type] = params[:view_type]
-    elsif controller_name == 'posts'
+    elsif controller_name == 'posts' || (controller_name == 'tags' && action_name == 'show')
       session[:view_type] = 'blog_roll'
-    elsif controller_name == 'permissions'
+    elsif model_class.respond_to?('column_names') && model_class.column_names.include?('content')
       session[:view_type] = 'table'
     elsif model_class.respond_to?('column_names') && model_class.column_names.include?('image_file_name')
       session[:view_type] = 'box'
-    elsif model_class.respond_to?('column_names') && model_class.column_names.include?('content')
-      session[:view_type] = 'table'
+    elsif controller_name =~ /(images)|(galleries)/
+      session[:view_type] = 'gallery'
     else
       session[:view_type] = 'list'
     end
@@ -124,8 +137,14 @@ class ApplicationController < ActionController::Base
   #--------------------- Fetch Arrays, for select lists, etc. ---------------------
   
   def get_list_of_controllers_for_menu
-    @controllers ||= get_list_of_file_names('controllers').reject! { |c| c =~ /^application|^user_sessions|^ajax|^controllers/i }
+    @controllers = get_list_of_file_names('controllers').reject! { |c| c =~ /^application|^user_sessions|^ajax/i }
     @controllers.map { |c| c.gsub!('_controller', '') }
+    
+    unless current_user.has_role?('Admin')
+      @controllers.reject! do |c|
+        !current_user.has_permission?(c, 'index')
+      end
+    end
   end
   
   def get_list_of_file_names(dir, remove = '.rb')
@@ -176,11 +195,13 @@ class ApplicationController < ActionController::Base
   end
   
   def _models_having_assoc(for_select = false)
-    models_array = filter_dir_entries('models') do |entry|
-      model_class = entry.camelcase.constantize
+    models_array = []
+    get_list_of_file_names('models').each do |name|
+      model_class = name.camelcase.constantize
+      next unless model_class.respond_to?('column_names')
       
-      model_class.respond_to?('column_names') &&
-      (model_class.column_names.any? { |c| c != 'parent_id' && c =~ /^(.*_id)$/i } || entry =~ /(user)|(page)|(tag)/)
+      model_columns = model_class.column_names
+      models_array << name if model_columns.any? { |mc| mc != 'parent_id' && mc =~ /^(.*_id)$/i } || name =~ /(user)|(page)|(tag)/
     end
     
     fetch_array_for models_array, for_select
@@ -248,6 +269,14 @@ class ApplicationController < ActionController::Base
   
   #--------------------- Authlogic ---------------------
   
+  def model_errors(model)
+    model.errors.full_messages.map { |e| "<p>#{e}</p>" }
+  end
+  
+  def return_or_back(params)
+    params[:return].nil? ? redirect_to(:back) : redirect_to(params[:return])
+  end
+  
   def current_user_session
     @current_user_session ||= UserSession.find
   end
@@ -289,7 +318,13 @@ class ApplicationController < ActionController::Base
   
   #--------------------- Utility Methods ---------------------
   
-  def theme_css(name) # => output a theme css path for the stylesheet_link helper
+  # get the relative path of the first page of the website
+  def home_page
+    @home_page ||= "/#{Page.first.title.downcase}"
+  end
+  
+  # output a theme css path for the stylesheet_link helper
+  def theme_css(name)
     "themes/#{name}/style"
   end
   
@@ -297,6 +332,7 @@ class ApplicationController < ActionController::Base
     in_mode?('edit')
   end
   
+  # returns a boolean if the the current action matches any of the action passed in as a string or an array
   def in_mode?(*modes)
     [modes].flatten.any? { |m| action_name == m }
   end

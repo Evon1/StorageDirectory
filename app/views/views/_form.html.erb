@@ -28,8 +28,8 @@
 		<div id="scope_owner_fields" class="view_options left">
 			<%= hidden_field_tag 'owner_id', @view.owner_id, :class => 'scope_down_hidden' unless @view.owner_id.blank? %>
 			
-			<%= f.label :owner_id, 'Owner', :title => 'Choose a specific model to scope by, rather than just the one loaded on the page where this view will reside' %>
-			<%= f.select :owner_id, @view.get_scope_models, { :prompt => 'Active Context' }, :class => 'scoping_dropdown' %>
+			<%= f.label :owner_id, 'Owner' %>
+			<%= f.select :owner_id, @view.get_scope_models, { :prompt => 'Active Context' }, :class => 'scoping_dropdown', :title => 'Choose a specific model to scope by, rather than just the one loaded on the page where this view will reside' %>
 		</div>
 	</div>
 	

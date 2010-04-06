@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100317043322) do
+ActiveRecord::Schema.define(:version => 20100405041841) do
 
   create_table "block_forms", :force => true do |t|
     t.integer  "block_id"
@@ -99,6 +99,13 @@ ActiveRecord::Schema.define(:version => 20100317043322) do
     t.datetime "updated_at"
   end
 
+  create_table "groups", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "helptexts", :force => true do |t|
     t.string   "model"
     t.text     "text"
@@ -120,20 +127,13 @@ ActiveRecord::Schema.define(:version => 20100317043322) do
     t.text     "content"
   end
 
-  create_table "link_groups", :force => true do |t|
-    t.string   "name"
-    t.text     "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "links", :force => true do |t|
     t.string   "title"
     t.string   "path"
     t.boolean  "relative"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "link_group_id"
+    t.integer  "group_id"
     t.string   "resource"
     t.integer  "target_id"
   end

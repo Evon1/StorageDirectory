@@ -3,12 +3,12 @@
 	<div class="uncollapse stack">
 		
 		<% unless @user.profile_image.blank? %>
-			<div class="left right_space">
+			<div class="right right_space">
 				<%= link_to image_tag(@user.profile_image.image.url(:thumb), :alt => @user.name), @user.profile_image %>
 			</div>
 		<% end %>
 		
-		<div class="left stack">
+		<div class="left stack right_space">
 			<%= f.label :name %>
 			<div class="shadow_wrap">
 				<%= f.text_field :name, :class => 'required' %>
@@ -21,7 +21,7 @@
 				<%= f.text_field :email, :class => 'email' %>
 			</div>
 		</div>
-	
+	  
 	</div>
 	
 	<div class="half_fields uncollapse">
@@ -32,32 +32,24 @@
 			</div>
 		</div>
 
-		<div class="left">
+		<div class="left stack">
 			<%= f.label :password_confirmation %>
 			<div class="shadow_wrap">
 				<%= f.password_field :password_confirmation, :class => 'confirm' %>
 			</div>
 		</div>
+		
+		<div class="stack">
+	    <%= f.label :role_id %>
+			<%= f.select :role_id, @roles.map { |r| [r.title, r.id] }, { :include_blank => true }, :class => 'required' %>
+	  </div>
 	</div>
 	
-	<% f.fields_for :profile_image, (@user.profile_image ? @user.profile_image : @user.build_profile_image) do |image_field| %>
-		<div id="user_image_fields" class="framed round box stack">
-			<%= image_field.label :image %>
-			
-			<div class="stack">
-				<div class="shadow_wrap">
-					<%= image_field.text_field :title, :class => 'hintable', :title => 'Image Title' %>
-				</div>
-			</div>
-			
-			<div>
-				<div class="shadow_wrap">
-					<%= image_field.file_field :image %>
-					<%= image_field.hidden_field :user_id, :value => current_user.id %>
-				</div>
-			</div>
-		
-		</div>
-	<% end %>
+	<div class="stack">
+	  <p>
+	    <%= link_to 'Add Profile Image', "/ajax/get_partial?model=User#{@user.new_record? ? '' : '&id=' + @user.id.to_s}&partial=users/profile_image_fields", :class => 'insert_partial add_link icon16', :rel => 'profile_image_fields' %>
+	  </p>
+	  <div id="profile_image_fields"></div>
+	</div>
 	
 </fieldset>

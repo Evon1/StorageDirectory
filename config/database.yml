@@ -8,7 +8,7 @@ development:
 production:
   adapter: mysql
   encoding: utf8
-  database: greyrob_thelodge
-  username: greyrob_admin
+  database: thelodge
+  username: greyrob
   password: -pX8.PK2{4AW
 
