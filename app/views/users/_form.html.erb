@@ -47,7 +47,7 @@
 	
 	<div class="stack">
 	  <p>
-	    <%= link_to 'Add Profile Image', "/ajax/get_partial?model=User&id=#{@user.id}&partial=users/profile_image_fields", :class => 'insert_partial add_link icon16', :rel => 'profile_image_fields' %>
+	    <%= link_to 'Add Profile Image', "/ajax/get_partial?model=User#{@user.new_record? ? '' : '&id=' + @user.id.to_s}&partial=users/profile_image_fields", :class => 'insert_partial add_link icon16', :rel => 'profile_image_fields' %>
 	  </p>
 	  <div id="profile_image_fields"></div>
 	</div>

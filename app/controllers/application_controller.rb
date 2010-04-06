@@ -44,12 +44,13 @@ class ApplicationController < ActionController::Base
   # authorization system
   $_crud = [:all, :create, :read, :update, :delete]
   
+  # sets layout file and css
   $_theme = 'greyrobotRD'
   
   layout (session ? (session[:layout] || $_theme) : $_theme)
   
   before_filter :reverse_captcha_check, :only => :create
-  before_filter :authorize_user, :init
+  before_filter :clean_home_url, :authorize_user, :init
   
   # display full error message when logged in as an Admin
   def local_request?
@@ -57,6 +58,11 @@ class ApplicationController < ActionController::Base
   end
   
   private # -----------------------------------------------
+  
+  # keep a clean home URL by redirecting to the main page
+  def clean_home_url
+    redirect_to(home_page) and return if request.path == '/'
+  end
   
   def init
     set_session_vars
@@ -66,9 +72,6 @@ class ApplicationController < ActionController::Base
   
   # the 'frontend' of the website is a page's show action
   def authorize_user
-    # keep a clean home URL by redirecting to the main page
-    redirect_to(home_page) and return if request.path == '/' 
-    
     # simple authorization: kick out anonymous users from backend actions
     if !current_user
       redirect_back_or_default(home_page) and return if action_name =~ /index|edit|update|destroy/
@@ -92,7 +95,7 @@ class ApplicationController < ActionController::Base
   def set_session_vars
     if params[:return_to]
       session[:return_to] = params[:return_to]
-    elsif current_user && in_mode?('index', 'edit', 'show')
+    elsif (current_user.nil? && in_mode?('show')) || (current_user && in_mode?('index', 'edit', 'show'))
       store_location
     end
     set_default_view_type
