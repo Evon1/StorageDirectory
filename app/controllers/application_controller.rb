@@ -45,7 +45,7 @@ class ApplicationController < ActionController::Base
   $_crud = [:all, :create, :read, :update, :delete]
   
   # sets layout file and css
-  $_theme = 'greyrobotRD'
+  $_theme = 'thelodge'
   
   layout (session ? (session[:layout] || $_theme) : $_theme)
   
