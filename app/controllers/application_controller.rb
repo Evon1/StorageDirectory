@@ -46,6 +46,7 @@ class ApplicationController < ActionController::Base
   
   # sets layout file and css
   $_theme = 'thelodge'
+  $website_title = 'The Lodge Beer &amp; Grill in Boca Raton, FL'
   
   layout (session ? (session[:layout] || $_theme) : $_theme)
   
