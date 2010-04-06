@@ -20,7 +20,8 @@ class AjaxController < ApplicationController
   end
   
   def get_partial
-    @model = params[:model].constantize.find params[:id]
+    model_class = params[:model].constantize
+    @model = params[:id].blank? ? model_class.new : model_class.find(params[:id])
     render :partial => params[:partial], :locals => { params[:model].downcase.to_sym => @model }
     
   rescue => e

@@ -10,7 +10,7 @@ class PermissionsController < ApplicationController
 
   def new
     @permission = Permission.new
-    @roles = Role.all
+    @roles = Role.all :conditions => 'title != "Admin"'
   end
 
   def create

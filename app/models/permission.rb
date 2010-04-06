@@ -30,8 +30,10 @@ class Permission < ActiveRecord::Base
     "#{self.role.title} #{self.action} #{self.resource}" unless self.new_record?
   end
   
-  # map REST actions to CRUD actions
+  # map REST action to CRUD action
   def allows?(action)
+    return true if self.action == 'all'
+    
     case action.to_sym
     when :new, :create
       self.action == 'create'
@@ -41,7 +43,7 @@ class Permission < ActiveRecord::Base
       self.action == 'update'
     when :destroy
       self.action == 'delete'
-    else # if action is already a CRUD action
+    else # fallback: if @param action is already a CRUD action
       self.action == action
     end
   end

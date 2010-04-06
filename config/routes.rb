@@ -29,7 +29,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :images
   map.resources :virtual_models
   map.resources :links
-  map.resources :link_groups
+  map.resources :groups
   map.resources :helptexts
   map.resources :forms
   map.resources :suggestions
@@ -75,8 +75,8 @@ ActionController::Routing::Routes.draw do |map|
     block.resources :images
   end
   
-  map.resources :link_groups do |link_group|
-    link_group.resources :links
+  map.resources :groups do |group|
+    group.resources :links
   end
   
   # Sample resource route within a namespace:

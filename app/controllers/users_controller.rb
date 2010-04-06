@@ -1,10 +1,10 @@
 class UsersController < ApplicationController
-  before_filter :get_user, :only => [:show, :edit, :update, :destroy]
+  before_filter :get_model, :only => [:show, :edit, :update, :destroy]
+  before_filter :get_roles, :onlt => [:index, :new, :edit]
   before_filter :require_user, :except => [:new, :create]
   
   def index
     @users = User.all_for_index_view
-    @roles = Role.all
   end
   
   def show
@@ -26,7 +26,6 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @roles = Role.all
   end
   
   def update
@@ -50,8 +49,8 @@ class UsersController < ApplicationController
   
   private
   
-  def get_user
-    @user = User.find(params[:id])
+  def get_roles
+    @roles = Role.all
   end
   
 end
