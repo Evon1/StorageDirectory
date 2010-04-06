@@ -216,7 +216,6 @@ $.toggleHelptext = function(clickedLink) {
 	var $ = jQuery;
 	$('body').addClass('js');
 	$('.hide_if_js').hide();
-	$('.flash').hide().slideDown();
 	
 	$.toggleAction(window.location.href, true); // toggle a container if its id is in the url hash
 	
@@ -246,35 +245,17 @@ $.toggleHelptext = function(clickedLink) {
 	// admin menu hover behaviors
 	var GR_content_menu_hover_interval,
 			GR_resource_list = $('#resource_list');
-	
 	$('#content_menu_link').mouseover(function() {
 		GR_resource_list.slideDown();
 		return false;
 	});
-	
 	$('#resource_list, #content_menu_link').mouseout(function(){
 		GR_content_menu_hover_interval = setTimeout('GR_resource_list.slideUp()', 1000);
 	});
-	
 	$('#resource_list, #content_menu_link').mouseover(function(){
 		clearInterval(GR_content_menu_hover_interval);
 	});
 	
-	$('li', '#resource_list').hover(function(){
-		var li = $(this).css('position', 'relative');
-		var link = $('a', li);
-		
-		if (link.hasClass('access_denied')) return;
-		
-		var new_option = $('<a class="admin_new_link admin_hover_option" href="'+ link.attr('href') +'/new">New</a>');
-				new_option.appendTo(link)
-									.hide().show()
-									.click(function(){ window.location = this.href; return false; });
-	}, function(){
-		$('.admin_new_link', '#resource_list').fadeOut(300, function(){ $(this).remove(); });
-	});
-	
-	// helpers
 	$('.unique_checkbox').click(function() {
 		var $this = $(this);
 		$('input[type=checkbox]', $this.parent().parent().parent()).attr('checked', false);
@@ -311,12 +292,13 @@ $.toggleHelptext = function(clickedLink) {
 	// model id, the attribute to update, and the value, see the ajax_controller for other actions and required params
 	// use conditional logic to handle the success callback based on attributes of the clicked link, 
 	// such as what element to update on success, or what part of the dom should change 
-	$('.ajax_action').live('click', function(){
+	$('.ajax_action').click(function(){
 		var $this = $(this);
 		$this.addClass('loading');
 		
 		if (!$this.hasClass('before_confirm') || ($this.hasClass('before_confirm') && confirm($this.attr('title') + '?'))) {
-			$.getJSON(this.href + '&authenticity_token=' + $.get_auth_token(), {},
+			$.getJSON(
+				this.href + '&authenticity_token=' + $.get_auth_token(), {},
 				function(response) {
 					$this.removeClass('loading');
 					
@@ -338,33 +320,24 @@ $.toggleHelptext = function(clickedLink) {
 	});
 	
 	// Partial addables, grab html from a div and add it to the form, used on forms and permissions create and edit
-	$('.add_link', '.partial_addable').live('click', function(){
-		var $this 			= $(this),
-				context 		= '#' + $this.attr('rel'),
-				partial_form = $($('.partial_form_html', context).html());
-	
-		$('input, select, checkbox', partial_form).each(function(){ $(this).attr('disabled', false); });
-	
-		partial_form.hide().prependTo('.partial_forms_wrap', context).slideDown(600);
-	
-		return false;
-	});
-	
-	$('.cancel_link', '.partial_addable').live('click', function(){
-		$(this).parent().parent().slideUp(300, function(){ $(this).remove(); }); 
-		return false; 
-	});
-	
-	// retrieves a partial via ajax and inserts it into the target div
-	$('.insert_partial').live('click', function(){
-		var $this = $(this);
+	if ($('.partial_addable').length > 0) {
+		$('.add_link', '.partial_addable').click(function(){
+			var $this 			= $(this),
+					context 		= '#' + $this.attr('rel'),
+					partial_form = $($('.partial_form_html', context).html());
 		
-		$.get(this.href, function(response){
-			$('#' + $this.attr('rel')).html(response);
-		})
+			$('input, select, checkbox', partial_form).each(function(){ $(this).attr('disabled', false); });
 		
-		return false;
-	});
+			partial_form.hide().prependTo('.partial_forms_wrap', context).slideDown(600);
+		
+			return false;
+		});
+		
+		$('.cancel_link', '.partial_addable').click(function(){
+			$(this).parent().parent().remove(); 
+			return false; 
+		});
+	}
 	
 /******************************************* PAGE SPECIFIC BEHAVIOR *******************************************/
 	
@@ -423,9 +396,5 @@ $.toggleHelptext = function(clickedLink) {
 		
 	} // END Views/Forms Edit
 	
-	// Permissions New
-	if ($.on_page([['new', 'permissions, roles']])) {
-		$('a.add_link', '.partial_addable').click();
-	}
 	
 //});

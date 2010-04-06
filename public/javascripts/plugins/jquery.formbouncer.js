@@ -29,7 +29,7 @@ jQuery.fn.formBouncer = function(){
 				var input = jQuery(this);
 				input.removeClass('invalid');
 				
-				if (!input.attr('disabled') || input.is(':visible')) {
+				if (!input.attr('disabled')) {
 					if (input.hasClass('required') && (input.val() == '' || input.val() == input.attr('title')) ) {
 						error += '<p>' + input.attr('id').replace('_', ' ') + ' is required.</p>';
 						markInvalid(input, form);
