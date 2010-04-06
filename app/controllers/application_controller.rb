@@ -111,7 +111,6 @@ class ApplicationController < ActionController::Base
     @widgets_js        = []
     @nav_pages         = Page.find_all_by_show_in_nav true
     @global_blocks     = Block.all :conditions => ['show_in_all in (?)', regions(false).map(&:to_s)]
-    #@roles             = Role.all
     @user              = User.find(params[:user_id]) unless params[:user_id].blank?
   end
   
