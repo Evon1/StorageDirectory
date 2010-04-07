@@ -1,6 +1,7 @@
 class PagesController < ApplicationController
   before_filter :get_page, :only => [:show, :edit, :update, :destroy]
   before_filter :get_blocks, :only => [:new, :edit]
+  before_filter :get_page_positions, :only => [:new, :edit]
   
   def index
     @pages = Page.all_for_index_view
@@ -58,6 +59,10 @@ class PagesController < ApplicationController
       flash[:warning] = "Page Not Found"
       @page = Page.find_by_title('Home')
     end
+  end
+  
+  def get_page_positions
+    @page_positions ||= Page.page_positions
   end
 
 end

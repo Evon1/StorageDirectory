@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100405041841) do
+ActiveRecord::Schema.define(:version => 20100407004449) do
 
   create_table "block_forms", :force => true do |t|
     t.integer  "block_id"
@@ -79,9 +79,9 @@ ActiveRecord::Schema.define(:version => 20100405041841) do
     t.datetime "updated_at"
     t.string   "scope"
     t.integer  "target_id"
-    t.boolean  "send_email"
-    t.string   "recipient"
-    t.boolean  "use_reverse_captcha"
+    t.boolean  "send_email",          :null => false
+    t.string   "recipient",           :null => false
+    t.boolean  "use_reverse_captcha", :null => false
   end
 
   create_table "galleries", :force => true do |t|
@@ -162,6 +162,7 @@ ActiveRecord::Schema.define(:version => 20100405041841) do
     t.text     "content"
     t.text     "description"
     t.boolean  "show_title"
+    t.integer  "position",    :default => 0
   end
 
   create_table "permissions", :force => true do |t|

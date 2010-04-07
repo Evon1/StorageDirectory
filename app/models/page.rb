@@ -15,11 +15,25 @@ class Page < ActiveRecord::Base
   access_shared_methods
   
   # Class Methods
+  
   def self.all_for_index_view
-    find(:all, :select => 'title, description, content, id, parent_id')
+    all :select => 'title, description, content, id, parent_id'
+  end
+  
+  def self.nav_pages
+    all :conditions => 'show_in_nav IS TRUE', :order => 'position, id'
+  end
+  
+  def self.page_positions
+    positions = []
+    0.upto(self.nav_pages.size) { |i| positions << i }
+    positions
   end
   
   # Instance Methods
   
+  def before_save
+    
+  end
   
 end

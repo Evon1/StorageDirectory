@@ -110,7 +110,7 @@ class ApplicationController < ActionController::Base
     @theme_css         = theme_css(session[:theme] || $_theme)
     @plugins           = ['plugins/jquery.formbouncer', 'plugins/jquery.hinty', 'plugins/inflector']
     @widgets_js        = []
-    @nav_pages         = Page.find_all_by_show_in_nav true
+    @nav_pages         = Page.nav_pages
     @global_blocks     = Block.all :conditions => ['show_in_all in (?)', regions(false).map(&:to_s)]
     @user              = User.find(params[:user_id]) unless params[:user_id].blank?
   end

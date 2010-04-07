@@ -67,6 +67,7 @@ span.active { cursor:default; }
 .has_hoverable_list ul li { padding:3px 3px 3px 5px; cursor:default; }
 .has_hoverable_list ul li:hover { background:#ebebeb; opacity:.6; }
 .with_floats li { overflow:hidden; }
+.third_width { width:33%; }
 
 /* admin menu */
 #admin_menu {
@@ -134,6 +135,7 @@ label[for="content"] { float:none; }
 .medium_textarea { height:150px; }
 .small_textarea { height:75px; }
 .small_textfield { width:50% !important; }
+.smaller_textfield { width:25% !important; }
 
 div.field_wrap, div.available { margin:0; }
 
