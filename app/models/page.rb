@@ -26,7 +26,7 @@ class Page < ActiveRecord::Base
   
   def self.page_positions
     positions = []
-    1.upto(self.nav_pages.size + 1) { |i| positions << i }
+    1.upto(self.nav_pages.size) { |i| positions << i }
     positions
   end
   
