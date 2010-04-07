@@ -32,9 +32,4 @@ class Page < ActiveRecord::Base
   
   # Instance Methods
   
-  def before_save
-    # check positions
-    
-  end
-  
 end
