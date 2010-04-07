@@ -1,6 +1,6 @@
 class RenameLinkGroups < ActiveRecord::Migration
   def self.up
-    rename_table :link_groups, :groups
+    #rename_table :link_groups, :groups
   end
 
   def self.down
