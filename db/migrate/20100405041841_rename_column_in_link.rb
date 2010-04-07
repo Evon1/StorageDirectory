@@ -1,6 +1,6 @@
 class RenameColumnInLink < ActiveRecord::Migration
   def self.up
-    rename_column :links, :link_group_id, :group_id
+    #rename_column :links, :link_group_id, :group_id
   end
 
   def self.down
