@@ -216,7 +216,7 @@ $.updateModels = function(e, ui) {
 	
 	$.post('/ajax/update_many', data, function(response){
 		if (response.success) {
-			$this.effect('bounce', {}, 200);
+			$this.effect('highlight', {}, 200);
 		} else {
 			alert('n ' + response.data)
 		}
@@ -279,6 +279,11 @@ $.toggleHelptext = function(clickedLink) {
 			GR_resource_list = $('#resource_list');
 	
 	$('#content_menu_link').mouseover(function() {
+		GR_resource_list.slideDown();
+		return false;
+	});
+	
+	$('#content_menu_link').click(function() {
 		GR_resource_list.slideDown();
 		return false;
 	});

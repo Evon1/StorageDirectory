@@ -20,7 +20,7 @@ class Block < ActiveRecord::Base
   
   # Class Methods
   def self.all_for_index_view
-    find(:all, :select => 'title, description, id')
+    all :select => 'title, description, id'
   end
 
   # Instance Methods

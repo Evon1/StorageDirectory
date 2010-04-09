@@ -79,9 +79,9 @@ ActiveRecord::Schema.define(:version => 20100407004449) do
     t.datetime "updated_at"
     t.string   "scope"
     t.integer  "target_id"
-    t.boolean  "send_email",          :null => false
-    t.string   "recipient",           :null => false
-    t.boolean  "use_reverse_captcha", :null => false
+    t.boolean  "send_email"
+    t.string   "recipient"
+    t.boolean  "use_reverse_captcha"
   end
 
   create_table "galleries", :force => true do |t|

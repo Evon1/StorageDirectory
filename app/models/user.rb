@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
   # Class Methods
   
   def self.all_for_index_view
-    find(:all, :select => 'name, email, last_login_at, id')
+    all :select => 'name, email, last_login_at, id'
   end
   
   # Instance Methods

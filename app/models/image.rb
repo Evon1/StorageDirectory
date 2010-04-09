@@ -20,7 +20,7 @@ class Image < ActiveRecord::Base
   # Class Methods
   
   def self.all_for_index_view
-    find(:all, :select => 'title, description, image_file_name, id')
+    all :select => 'title, description, image_file_name, id'
   end
   
   # Instance Methods

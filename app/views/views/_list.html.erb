@@ -1,18 +1,18 @@
 <ul class="list_view plain">
 	<% data.each do |model| %>
 	
-		<li class="medium_round <%= cycle('odd', 'even') %>">
+		<li id="<%= model_class_and_id(model) %>" class="medium_round <%= cycle('odd', 'even') %>">
 			
 			<div class="buttons right">
 				<%= render :partial => 'shared/edit_delete_link', :locals => { :model => model } %>
 			</div>
 			
-			<span class="left">
-				<%= image_tag model.image.url if model.respond_to?('image') %>
-			</span>
+			<% if model.respond_to?('image') %>
+  			<span class="left"><%= link_to image_tag(model.image.url), model.image %></span>
+			<% end %>
 			
 			<span class="title">
-				<%= link_to model_name_or_title(model), model %>
+				<%= link_to model_name_or_title(model), model_path(model) %>
 			</span>
 			
 			<% if model.respond_to?('user') && model.user %>

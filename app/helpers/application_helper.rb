@@ -205,7 +205,7 @@ module ApplicationHelper
   
   # return the actual class object of a model
   def model_class(model_or_controller_name)
-    @model_class ||= model_or_controller_name.singular.camelcase.constantize
+    @model_class = model_or_controller_name.singular.camelcase.constantize
   end
   
   def model_form_heading
@@ -237,7 +237,23 @@ module ApplicationHelper
   
   # a resource instance path
   def model_path(model, options = {})
-    eval "#{model_name(model)}_path(model, options)"
+    if model.is_a? Link
+      dynamic_link_path(model, options)
+    else
+      eval "#{model_name(model)}_path(model, options)"
+    end
+  end
+  
+  # return a either a links absolute path or get the target resource path
+  def dynamic_link_path(link, options = {})
+    if link.relative && !link.target_id.blank?
+      model_instance = model_class(link.resource).find(link.target_id)
+      model_instance.is_a?(Page) ? nice_page_path(model_instance) : model_path(model_instance, options)
+    elsif link.relative && link.target_id.blank?
+      model_index_path(model_name(link.resource), options)
+    else
+      link.path
+    end
   end
   
   # link title for resource crud action

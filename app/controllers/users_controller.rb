@@ -50,7 +50,7 @@ class UsersController < ApplicationController
   private
   
   def get_roles
-    @roles = Role.all
+    @roles = is_admin? ? Role.all : Role.non_admin_roles
   end
   
 end

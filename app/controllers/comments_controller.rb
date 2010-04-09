@@ -23,7 +23,7 @@ class CommentsController < ApplicationController
     end
     
     @comment.user_id = current_user.id if current_user
-    Notifier.deliver_comment_notification @form.recipient, @comment if @form.should_send_email? && @comment.valid?
+    Notifier.deliver_comment_notification(@form.recipient, @comment, request.host) if @form.should_send_email? && @comment.valid?
     
     if @comment.save
       flash[:notice] = params[:target_type].blank? ? 'Thanks for the message! We\'ll get back to you soon' : "#{params[:target_type].titleize} comment created."

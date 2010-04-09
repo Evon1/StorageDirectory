@@ -39,17 +39,21 @@
 			</div>
 		</div>
 		
-		<div class="stack">
-	    <%= f.label :role_id %>
-			<%= f.select :role_id, @roles.map { |r| [r.title, r.id] }, { :include_blank => true }, :class => 'required' %>
-	  </div>
+		<% if allowed?('users', 'update', params) %>
+		  <div class="stack">
+  	    <%= f.label :role_id %>
+  			<%= f.select :role_id, @roles.map { |r| [r.title, r.id] }, { :include_blank => true }, :class => 'required' %>
+  	  </div>
+  	<% end %>
 	</div>
 	
-	<div class="stack">
-	  <p>
-	    <%= link_to 'Add Profile Image', "/ajax/get_partial?model=User#{@user.new_record? ? '' : '&id=' + @user.id.to_s}&partial=users/profile_image_fields", :class => 'insert_partial add_link icon16', :rel => 'profile_image_fields' %>
-	  </p>
-	  <div id="profile_image_fields"></div>
-	</div>
+	<% unless @user.new_record? %>
+  	<div class="stack">
+  	  <p>
+  	    <%= link_to 'Add Profile Image', "/ajax/get_partial?model=User#{@user.new_record? ? '' : '&id=' + @user.id.to_s}&partial=users/profile_image_fields", :class => 'insert_partial add_link icon16', :rel => 'profile_image_fields' %>
+  	  </p>
+  	  <div id="profile_image_fields"></div>
+  	</div>
+	<% end %>
 	
 </fieldset>

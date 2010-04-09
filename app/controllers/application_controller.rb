@@ -23,6 +23,7 @@ class ApplicationController < ActionController::Base
                 :_models_having_assoc,
                 :_models_with_title,
                 :in_edit_mode?,
+                :allowed?,
                 :reject_blocks_enabled_on_this, # for the blocks_fields
                 :reject_views_enabled_on_this,  # for the blocks_fields
                 :reject_forms_enabled_on_this   # for the blocks_fields
@@ -44,9 +45,10 @@ class ApplicationController < ActionController::Base
   # authorization system
   $_crud = [:all, :create, :read, :update, :delete]
   
+  
   # sets layout file and css
-  $_theme = 'thelodge'
-  $website_title = 'The Lodge Beer &amp; Grill in Boca Raton, FL'
+  $_theme = 'greyrobotRD'
+  $website_title = 'GreyCMS'
   
   layout $_theme
   
@@ -285,7 +287,15 @@ class ApplicationController < ActionController::Base
   def current_user
     @current_user ||= current_user_session ? current_user_session.record : nil
   end
-
+  
+  def is_admin?
+    current_user && current_user.has_role?('Admin')
+  end
+  
+  def allowed?(resource, action, params = {})
+    current_user && current_user.has_permission?(resource, action, params)
+  end
+  
   def require_user
     unless current_user
       store_location

@@ -55,7 +55,7 @@ class LinksController < ApplicationController
   end
   
   def get_associations
-    @link_groups = LinkGroup.all
+    @groups = Group.all
   end
 
 end
