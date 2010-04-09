@@ -1,5 +1,8 @@
 <div class="comment_wrap">
 	<div class="inner">
+		<% if comment.email %>
+			<span class="comment_email">From <%= comment.email %> </span>
+		<% end %>
 		
 		<% if comment.title %>
 			<span class="comment_title"><%=h comment.title %> </span>
