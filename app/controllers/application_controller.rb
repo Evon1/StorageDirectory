@@ -45,9 +45,10 @@ class ApplicationController < ActionController::Base
   $_crud = [:all, :create, :read, :update, :delete]
   
   # sets layout file and css
-  $_theme = 'greyrobotRD'
+  $_theme = 'thelodge'
+  $website_title = 'The Lodge Beer &amp; Grill in Boca Raton, FL'
   
-  layout (session ? (session[:layout] || $_theme) : $_theme)
+  layout $_theme
   
   before_filter :reverse_captcha_check, :only => :create
   before_filter :clean_home_url, :authorize_user, :init
@@ -109,9 +110,8 @@ class ApplicationController < ActionController::Base
     @theme_css         = theme_css(session[:theme] || $_theme)
     @plugins           = ['plugins/jquery.formbouncer', 'plugins/jquery.hinty', 'plugins/inflector']
     @widgets_js        = []
-    @nav_pages         = Page.find_all_by_show_in_nav true
+    @nav_pages         = Page.nav_pages
     @global_blocks     = Block.all :conditions => ['show_in_all in (?)', regions(false).map(&:to_s)]
-    #@roles             = Role.all
     @user              = User.find(params[:user_id]) unless params[:user_id].blank?
   end
   
@@ -239,7 +239,7 @@ class ApplicationController < ActionController::Base
   
   # for the shared blocks_model_form
   def get_blocks
-    @blocks = Block.all(:conditions => 'show_in_all IS NULL OR show_in_all = ""')
+    @blocks = Block.all(:conditions => 'show_in_all IS NULL')
   end
   
   def blocks_models
@@ -269,8 +269,9 @@ class ApplicationController < ActionController::Base
   
   #--------------------- Authlogic ---------------------
   
-  def model_errors(model)
-    model.errors.full_messages.map { |e| "<p>#{e}</p>" }
+  def model_errors(model, usePtags = true)
+    error = model.errors.full_messages.map { |e| usePtags ? "<p>#{e}</p>" : e }
+    usePtags ? error : error * ', '
   end
   
   def return_or_back(params)
@@ -320,7 +321,7 @@ class ApplicationController < ActionController::Base
   
   # get the relative path of the first page of the website
   def home_page
-    @home_page ||= "/#{Page.first.title.downcase}"
+    @home_page ||= "/#{(Page.find_by_title('Home') || Page.first(:order => 'position')).title.downcase.parameterize}"
   end
   
   # output a theme css path for the stylesheet_link helper

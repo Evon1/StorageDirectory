@@ -3,7 +3,7 @@ module ApplicationHelper
   
   def declare_content_for # renders blocks in regions based on current page
     title = (@page ? @page.title  : controller_name.titleize).to_s
-    content_for :title, "#{title.blank? ? 'Manage - ' : title + ' - '}GreyCMS"
+    content_for :title, "#{title.blank? ? 'Manage - ' : title + ' - '}#{$website_title}"
     
     regions(false).each do |region|
       content_for region do

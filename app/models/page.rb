@@ -15,11 +15,15 @@ class Page < ActiveRecord::Base
   access_shared_methods
   
   # Class Methods
+  
   def self.all_for_index_view
     all :select => 'title, description, content, id, parent_id'
   end
   
-  # Instance Methods
+  def self.nav_pages
+    all :conditions => 'show_in_nav IS TRUE', :order => 'position, id'
+  end
   
+  # Instance Methods
   
 end

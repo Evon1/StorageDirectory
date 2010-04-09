@@ -11,7 +11,7 @@
 	</head>
 	<body id="<%= controller_name %>_controller" class="<%= action_name %>_action">
     
-	  <%= render :partial => 'menus/admin_menu' %>
+	  <%= render :partial => 'menus/menu' %>
     
 		<div id="outer_wrapper">
 			<div id="inner_wrapper">
@@ -22,7 +22,7 @@
 				<div id="content_wrapper">
 					
 					<div id="nav" class="region">
-						<ul>
+						<ul class="sortable">
 							<%= render :partial => 'menus/nav', :collection => @nav_pages %>
 						</ul>
 					</div> <!-- /#nav_wrap -->

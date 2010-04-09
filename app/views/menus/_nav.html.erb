@@ -1,1 +1,3 @@
-<li><%= link_to h(nav.title), nice_page_path(nav), :class => "page_updater #{active_page(nav)}" %></li>
+<li id="<%= model_name_and_id(nav) %>" rel="position">
+  <%= link_to h(nav.title), nice_page_path(nav), :class => "page_updater #{active_page(nav)}" %>
+</li>

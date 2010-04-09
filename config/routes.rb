@@ -29,7 +29,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :images
   map.resources :virtual_models
   map.resources :links
-  map.resources :groups
+  map.resources :link_groups
   map.resources :helptexts
   map.resources :forms
   map.resources :suggestions
