@@ -288,6 +288,10 @@ class ApplicationController < ActionController::Base
     @current_user ||= current_user_session ? current_user_session.record : nil
   end
   
+  def is_admin?
+    current_user && current_user.has_role?('Admin')
+  end
+  
   def allowed?(resource, action, params = {})
     current_user && current_user.has_permission?(resource, action, params)
   end
