@@ -46,8 +46,8 @@ class ApplicationController < ActionController::Base
   $_crud = [:all, :create, :read, :update, :delete]
   
   # sets layout file and css
-  $_theme = 'greycms'
-  $website_title = 'GreyCMS'
+  $_theme = 'thelodge'
+  $website_title = 'The Lodge Beer &amp; Grill in Boca Raton, FL'
   
   layout $_theme
   
@@ -122,7 +122,7 @@ class ApplicationController < ActionController::Base
       
     if !params[:view_type].blank?
       session[:view_type] = params[:view_type]
-    elsif controller_name == 'posts' || (controller_name == 'tags' && action_name == 'show')
+    elsif controller_name =~ /posts/ || (controller_name == 'tags' && action_name == 'show')
       session[:view_type] = 'blog_roll'
     elsif model_class.respond_to?('column_names') && model_class.column_names.include?('content')
       session[:view_type] = 'table'

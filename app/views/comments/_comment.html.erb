@@ -1,7 +1,9 @@
 <div class="comment_wrap">
 	<div class="inner">
-		<% if comment.email %>
-			<span class="comment_email">From <%= comment.email %> </span>
+	  <% if comment.email %>
+			<p class="comment_email">
+			  From: <%= mail_to comment.email, nil, :subject => "In response to your comment \"#{comment.title}\" on #{request.host}" %>
+			</p>
 		<% end %>
 		
 		<% if comment.title %>
