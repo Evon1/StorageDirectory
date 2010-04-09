@@ -21,14 +21,13 @@ $.log = function(msg) {
 // take an array of actions and controllers to see if any pair of those match the page we're on
 // either set can be a single action or controller as a string or a comma separated string of multiple actions or controllers
 $.on_page = function(route_sets) { // routes looks like: [ ['edit, new', 'views, forms, links'], ['index', 'pages'] ]
-	var actions,
+	var i = route_sets.length,
+			actions,
 			controllers,
 			route = [
 				$('body').attr('class').split(' ')[0].replace('_action', ''),
 				$('body').attr('id').replace('_controller', '')
-			]
-	
-	var i = route_sets.length;
+			];
 	
 	while (i--) { // iterate through all the action/controller sets
 		actions 		= route_sets[i][0].split(/,\W?/);
@@ -61,13 +60,14 @@ $.switch_action_hash = function(this_el, action, elementClass, contextClass) {
 	$(this_el).toggleClass('toggle_down');
 }
 
+// return the opposite action
 $.switch_actions = function(action) {
 	var action_sets = [
 		['show',						'hide'],
 		['fadeIn',			 'fadeOut'],
 		['slideDown',		 'slideUp'],
 		['addClass', 'removeClass']
-	]
+	];
 	
 	var i = action_sets.length; 
 	while (i--) { // return the opposite of the action in question
@@ -199,6 +199,30 @@ $.fn.toggleDiv = function() {
 	});
 }
 
+// first implemented for the sortable nav bar to update position via ajax
+$.updateModels = function(e, ui) {
+	var list_items  = ui.item.parent().children(),
+			$this			 	= $(ui.item),
+			data 				= '';
+
+	$(list_items).each(function(i){
+		var model_class = this.id.split('_')[0],
+				model_id 		= this.id.split('_')[1],
+				model_attr 	= $this.attr('rel');
+				
+		data += 'models['+ i +'][model]='+ model_class + '&models['+ i +'][id]='+ model_id +
+						'&models['+ i +'][attribute]='+ model_attr +'&models['+ i +'][value]='+ i + '&';
+	});
+	
+	$.post('/ajax/update_many', data, function(response){
+		if (response.success) {
+			$this.effect('bounce', {}, 200);
+		} else {
+			alert('n ' + response.data)
+		}
+	}, 'json');
+}
+
 /******************************************* SUCCESS CALLBACKS *******************************************/
 
 $.toggleHelptext = function(clickedLink) {
@@ -227,6 +251,13 @@ $.toggleHelptext = function(clickedLink) {
 	$('.row_checkable').rowCheckable();			// clicking a whole form also enables its first checkbox
 	$('.pane_switch').paneSwitcher();				// use a checkbox to switch between two containers. classes: .pane_0, .pane_1
 	$('.toggle_div').toggleDiv();						// use a checkbox to show/hide its parents next sibling div
+	//$('textarea').resizable({ handle: true });
+	$('.sortable').sortable({
+		opacity: 0.3,
+		update: function(e, ui) {
+			$.updateModels(e, ui);
+		}
+	});
 	
 	$('input', '.ajax_form').live('change', function(){
 	  $(this).parent().parent().ajaxSubmit({

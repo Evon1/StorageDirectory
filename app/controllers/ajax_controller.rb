@@ -2,7 +2,7 @@ class AjaxController < ApplicationController
   
   skip_before_filter :init
   before_filter :validate_params
-  before_filter :get_model, :only => [:update, :destroy]
+  before_filter :_get_model, :only => [:update, :destroy]
   
   def get_all
     if (has_name = _get_model_class.first.respond_to?('name')) || _get_model_class.first.respond_to?('title')
@@ -30,11 +30,30 @@ class AjaxController < ApplicationController
   
   def update
     authorize_and_perform_restful_action_on_model @model.class.to_controller_str, 'update' do
-      render :json => { :success => @model.update_attribute(params[:attribute].to_sym, params[:value]) }
+      render :json => { :success => @model.update_attribute(params[:attribute], params[:value]) }
     end
     
   rescue => e
     render :json => { :success => false, :data => e.message }
+  end
+  
+  def update_many
+    errors = []
+    
+    params[:models].each do |val, hash|
+      model = _get_model(hash[:model], hash[:id])
+      
+      authorize_and_perform_restful_action_on_model model.class.to_controller_str, 'update' do
+        unless model.update_attribute(hash[:attribute], hash[:value])
+          errors << "Error updating #{model.class.name} #{model.name_or_title}: #{model_errors(model, false)}"
+        end
+      end
+    end
+    
+    response = "#{errors * ', '}"
+    render :json => { :success => errors.empty?, :data => response }
+  #rescue => e
+  #  render :json => { :success => false, :data => "Error: #{e.message}" }
   end
   
   def destroy
@@ -42,7 +61,7 @@ class AjaxController < ApplicationController
       @model.destroy
       @model.image = nil if @model.respond_to?('image')
     
-      render :json => { :success => get_model.nil? }
+      render :json => { :success => _get_model.nil? }
     end
     
   rescue => e
@@ -63,12 +82,13 @@ class AjaxController < ApplicationController
     return if params[:model].nil?
   end
   
-  def get_model
-    @model = _get_model_class.find(params[:id]) if _get_model_class.exists?(params[:id])
+  def _get_model(model_str = nil, id = nil)
+    @model_str = model_str unless model_str.blank?
+    @model = _get_model_class(model_str).find(id || params[:id]) if _get_model_class.exists?(id || params[:id])
   end
   
-  def _get_model_class
-    @model_class ||= params[:model].camelcase.constantize
+  def _get_model_class(model_str = nil)
+    @model_class ||= (model_str || @model_str || params[:model]).camelcase.constantize
   end
   
 end

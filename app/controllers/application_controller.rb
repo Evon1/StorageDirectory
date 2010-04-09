@@ -48,7 +48,7 @@ class ApplicationController < ActionController::Base
   $_theme = 'thelodge'
   $website_title = 'The Lodge Beer &amp; Grill in Boca Raton, FL'
   
-  layout (session ? (session[:layout] || $_theme) : $_theme)
+  layout $_theme
   
   before_filter :reverse_captcha_check, :only => :create
   before_filter :clean_home_url, :authorize_user, :init
@@ -269,8 +269,9 @@ class ApplicationController < ActionController::Base
   
   #--------------------- Authlogic ---------------------
   
-  def model_errors(model)
-    model.errors.full_messages.map { |e| "<p>#{e}</p>" }
+  def model_errors(model, usePtags = true)
+    error = model.errors.full_messages.map { |e| usePtags ? "<p>#{e}</p>" : e }
+    usePtags ? error : error * ', '
   end
   
   def return_or_back(params)
@@ -320,7 +321,7 @@ class ApplicationController < ActionController::Base
   
   # get the relative path of the first page of the website
   def home_page
-    @home_page ||= "/#{Page.first.title.downcase}"
+    @home_page ||= "/#{(Page.find_by_title('Home') || Page.first(:order => 'position')).title.downcase.parameterize}"
   end
   
   # output a theme css path for the stylesheet_link helper

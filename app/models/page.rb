@@ -24,12 +24,6 @@ class Page < ActiveRecord::Base
     all :conditions => 'show_in_nav IS TRUE', :order => 'position, id'
   end
   
-  def self.page_positions
-    positions = []
-    1.upto(self.nav_pages.size) { |i| positions << i }
-    positions
-  end
-  
   # Instance Methods
   
 end

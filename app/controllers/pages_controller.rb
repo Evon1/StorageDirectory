@@ -1,7 +1,6 @@
 class PagesController < ApplicationController
   before_filter :get_page, :only => [:show, :edit, :update, :destroy]
   before_filter :get_blocks, :only => [:new, :edit]
-  before_filter :get_page_positions, :only => [:new, :edit]
   
   def index
     @pages = Page.all_for_index_view
@@ -53,16 +52,12 @@ class PagesController < ApplicationController
   
   def get_page
     # monkey patched parameterize method. see: /lib/utility_methods.rb:31
-    @page = params[:title] ? Page.all.detect { |page| page.title.parameterize == params[:title] } : Page.find(params[:id])
+    @page = params[:title] ? Page.all.detect { |page| page.title.parameterize == params[:title] } : (Page.find(params[:id]) rescue nil)
     
     if @page.nil?
       flash[:warning] = "Page Not Found"
       @page = Page.find_by_title('Home')
     end
-  end
-  
-  def get_page_positions
-    @page_positions ||= Page.page_positions
   end
 
 end

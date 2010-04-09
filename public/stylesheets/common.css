@@ -331,11 +331,19 @@ input[type='reset'], a.cancel:link { color:#a63217; }
 .subfields { margin:0 0 7px 0; }
 
 /* Rails defaults */
-.notice, .warning, .error, .flash-error { padding:7px 12px; width:80%; font-weight:bold; margin:0 0 10px 0; border:2px solid; }
-.notice p, .warning p, .error p, .flash-error p { margin:3px 0; }
-.notice { color:#5b732d; border-color:#5b732d; }
-.warning { color:#ff9646; border-color:#ff9646; }
-.error, .flash-error { color:#a63217; border-color:#a63217; }
+.flash {
+	padding:7px 12px;
+	width:80%;
+	font-weight:bold;
+	margin:0 0 10px 0;
+	border:2px solid;
+	opacity:.7;
+	box-shadow:3px 3px 5px #333;
+}
+.flash p { margin:3px 0; opacity:1; }
+.notice { color:#334215; background-color:#5b732d; border-color:#334215; }
+.warning { color:#A55112; background-color:#ff9646; border-color:#A55112; }
+.error, .flash-error { color:#6F2211; background-color:#a63217; border-color:#6F2211; }
 
 .invalid { color:#fff; }
 .fieldWithErrors, .invalid {
