@@ -46,8 +46,8 @@ class ApplicationController < ActionController::Base
   $_crud = [:all, :create, :read, :update, :delete]
   
   # sets layout file and css
-  $_theme = 'thelodge'
-  $website_title = 'The Lodge Beer &amp; Grill in Boca Raton, FL'
+  $_theme = 'greycms'
+  $website_title = 'GreyCMS'
   
   layout $_theme
   
