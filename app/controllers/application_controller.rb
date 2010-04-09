@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
                 :_models_having_assoc,
                 :_models_with_title,
                 :in_edit_mode?,
-                :allowed?,
+                :user_allowed?,
                 :reject_blocks_enabled_on_this, # for the blocks_fields
                 :reject_views_enabled_on_this,  # for the blocks_fields
                 :reject_forms_enabled_on_this   # for the blocks_fields
@@ -45,10 +45,9 @@ class ApplicationController < ActionController::Base
   # authorization system
   $_crud = [:all, :create, :read, :update, :delete]
   
-  
   # sets layout file and css
-  $_theme = 'greyrobotRD'
-  $website_title = 'GreyCMS'
+  $_theme = 'thelodge'
+  $website_title = 'The Lodge Beer &amp; Grill in Boca Raton, FL'
   
   layout $_theme
   
@@ -292,7 +291,7 @@ class ApplicationController < ActionController::Base
     current_user && current_user.has_role?('Admin')
   end
   
-  def allowed?(resource, action, params = {})
+  def user_allowed?(resource, action, params = {})
     current_user && current_user.has_permission?(resource, action, params)
   end
   
@@ -337,6 +336,10 @@ class ApplicationController < ActionController::Base
   # output a theme css path for the stylesheet_link helper
   def theme_css(name)
     "themes/#{name}/style"
+  end
+  
+  def get_default_role
+    @default_role ||= Role.find_by_title('User') || Role.find_by_title('Subscriber') || Role.last
   end
   
   def in_edit_mode?

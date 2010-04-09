@@ -23,11 +23,14 @@
   				<%= link_to 'Cancel', (session[:return_to] || :back), :class => 'iconOnly16 cancel_link right', :title => "Cancel editing #{model.name_or_title}" %>
 				<% end %>
 				
-				<% unless params[:user_id].blank? %>
+				<% unless params[:user_id].blank? && !user_allowed?(@user.class.to_controller_str, 'show', params) %>
 				  <%= link_to "Back to #{@user.name.possessive} Profile", @user %>
 				  &nbsp;|&nbsp;
 				<% end %>
-				<%= link_to "Back to #{controller_name.titleize}", model_index_path(controller_name), :class => 'right_space' %> 
+				
+				<% if user_allowed?(controller_name, 'index', params) %>
+				  <%= link_to "Back to #{controller_name.titleize}", model_index_path(controller_name), :class => 'right_space' %> 
+				<% end %>
 			</div>
 		
 		</div>

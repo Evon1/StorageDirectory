@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_filter :get_model, :only => [:show, :edit, :update, :destroy]
-  before_filter :get_roles, :onlt => [:index, :new, :edit]
+  before_filter :get_roles, :only => [:index, :new, :edit]
+  before_filter :get_default_role, :only => :new
   before_filter :require_user, :except => [:new, :create]
   
   def index

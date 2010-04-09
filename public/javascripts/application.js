@@ -216,7 +216,7 @@ $.updateModels = function(e, ui) {
 	
 	$.post('/ajax/update_many', data, function(response){
 		if (response.success) {
-			$this.effect('highlight', {}, 200);
+			$this.effect('bounce', {}, 200);
 		} else {
 			alert('n ' + response.data)
 		}

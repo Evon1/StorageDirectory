@@ -111,3 +111,5 @@ a:hover, a:active { color:#8a265b; }
 .h210 { height: 210px; }
 .h230 { height: 230px; }
 .h260 { height: 260px; }
+.staticContent img { border:2px solid #835F30; }
+.staticContent a img:hover { border-color:#E0A75D; }

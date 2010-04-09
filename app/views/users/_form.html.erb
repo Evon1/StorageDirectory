@@ -1,5 +1,4 @@
 <fieldset>
-	
 	<div class="uncollapse stack">
 		
 		<% unless @user.profile_image.blank? %>
@@ -7,6 +6,16 @@
 				<%= link_to image_tag(@user.profile_image.image.url(:thumb), :alt => @user.name), @user.profile_image %>
 			</div>
 		<% end %>
+		
+		<div class="stack">
+  		<% if user_allowed?('users', 'update', params) %>
+  	    <%= f.label :role_id %>
+  			<%= f.select :role_id, @roles.map { |r| [r.title, r.id] }, { :include_blank => true }, :class => 'required' %>
+    	<% else %>
+    	  <%= f.label :role_id, @default_role.title %>
+        <%= f.hidden_field :role_id, :value => @default_role.id %>
+    	<% end %>
+  	</div>
 		
 		<div class="left stack right_space">
 			<%= f.label :name %>
@@ -38,13 +47,6 @@
 				<%= f.password_field :password_confirmation, :class => 'confirm' %>
 			</div>
 		</div>
-		
-		<% if allowed?('users', 'update', params) %>
-		  <div class="stack">
-  	    <%= f.label :role_id %>
-  			<%= f.select :role_id, @roles.map { |r| [r.title, r.id] }, { :include_blank => true }, :class => 'required' %>
-  	  </div>
-  	<% end %>
 	</div>
 	
 	<% unless @user.new_record? %>
@@ -55,5 +57,4 @@
   	  <div id="profile_image_fields"></div>
   	</div>
 	<% end %>
-	
 </fieldset>

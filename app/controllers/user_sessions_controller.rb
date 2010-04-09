@@ -12,7 +12,7 @@ class UserSessionsController < ApplicationController
     @user_session = UserSession.new(params[:user_session])
     
     if @user_session.save
-      flash[:notice] = "Hello #{current_user.name}"
+      flash[:notice] = "Hello #{current_user.name}, welcome back.<br />You last logged in on #{current_user.last_login_at.asctime}"
       redirect_back_or_default user_path(current_user)
     else
       render :action => :new
