@@ -122,7 +122,7 @@ class ApplicationController < ActionController::Base
       
     if !params[:view_type].blank?
       session[:view_type] = params[:view_type]
-    elsif controller_name =~ /posts|comments/ || (controller_name == 'tags' && action_name == 'show')
+    elsif controller_name =~ /posts/ || (controller_name == 'tags' && action_name == 'show')
       session[:view_type] = 'blog_roll'
     elsif model_class.respond_to?('column_names') && model_class.column_names.include?('content')
       session[:view_type] = 'table'
