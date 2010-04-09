@@ -7,11 +7,12 @@
 
 <div class="stack uncollapse">
   <div class="left right_space">
-	  <%= f.label :link_group_id, 'Group' %>
-  	<%= f.select :link_group_id, @link_groups.map { |lg| [lg.name, lg.id] }, { :include_blank => true }, :title => 'You may put this link in a group for easy display' %>
+	  <%= f.label :group_id, 'Group' %>
+  	<%= f.select :group_id, @groups.map { |lg| [lg.name, lg.id] }, { :include_blank => true }, :title => 'You may put this link in a group for easy display' %>
 	</div>
 	
 	<div class="check_box_wrap left">
+	  <%= f.hidden_field :relative, :value => 0 %>
 		<%= f.check_box :relative, :class => 'pane_switch', :title => 'Are you linking to content within the site?' %>
 		<%= f.label :relative, 'Internal?' %>
 	</div>

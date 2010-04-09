@@ -16,7 +16,7 @@ class Page < ActiveRecord::Base
   
   # Class Methods
   def self.all_for_index_view
-    find(:all, :select => 'title, description, content, id, parent_id')
+    all :select => 'title, description, content, id, parent_id'
   end
   
   # Instance Methods

@@ -252,6 +252,11 @@ $.toggleHelptext = function(clickedLink) {
 		return false;
 	});
 	
+	$('#content_menu_link').click(function() {
+		GR_resource_list.slideDown();
+		return false;
+	});
+	
 	$('#resource_list, #content_menu_link').mouseout(function(){
 		GR_content_menu_hover_interval = setTimeout('GR_resource_list.slideUp()', 1000);
 	});
