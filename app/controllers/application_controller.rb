@@ -23,6 +23,7 @@ class ApplicationController < ActionController::Base
                 :_models_having_assoc,
                 :_models_with_title,
                 :in_edit_mode?,
+                :allowed?,
                 :reject_blocks_enabled_on_this, # for the blocks_fields
                 :reject_views_enabled_on_this,  # for the blocks_fields
                 :reject_forms_enabled_on_this   # for the blocks_fields
@@ -286,7 +287,11 @@ class ApplicationController < ActionController::Base
   def current_user
     @current_user ||= current_user_session ? current_user_session.record : nil
   end
-
+  
+  def allowed?(resource, action, params = {})
+    current_user && current_user.has_permission?(resource, action, params)
+  end
+  
   def require_user
     unless current_user
       store_location

@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_filter :get_model, :only => [:show, :edit, :update, :destroy]
-  before_filter :get_roles, :onlt => [:index, :new, :edit]
+  before_filter :get_roles, :onlt => [:index, :edit]
   before_filter :require_user, :except => [:new, :create]
   
   def index
@@ -45,12 +45,6 @@ class UsersController < ApplicationController
       flash[:error] = 'Error destroying ' + @user.name
       render :action => 'edit'
     end
-  end
-  
-  private
-  
-  def get_roles
-    @roles = Role.all
   end
   
 end
