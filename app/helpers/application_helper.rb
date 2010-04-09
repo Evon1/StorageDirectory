@@ -260,7 +260,7 @@ module ApplicationHelper
     model.respond_to?('title') ? model.title : model.name
   end
   
-  def model_name_and_id(model)
+  def model_class_and_id(model)
     "#{model.class.name}_#{model.id}"
   end
   
