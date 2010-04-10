@@ -281,7 +281,7 @@ $.toggleHelptext = function(clickedLink) {
 	$('.pane_switch').paneSwitcher();				// use a checkbox to switch between two containers. classes: .pane_0, .pane_1
 	$('.toggle_div').toggleDiv();						// use a checkbox to show/hide its parents next sibling div
 	//$('textarea').resizable({ handle: true });
-	$('.sortable').sortable({
+	$('.sortable', '.authenticated').sortable({
 		opacity: 0.3,
 		update: function(e, ui) {
 			$.updateModels(e, ui);

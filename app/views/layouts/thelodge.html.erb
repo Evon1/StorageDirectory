@@ -9,7 +9,7 @@
 		<title><%= yield :title %></title>
 		<%= javascript_include_tag 'jquery.all' %>
 	</head>
-	<body id="<%= controller_name %>_controller" class="<%= action_name %>_action">
+	<body id="<%= controller_name %>_controller" class="<%= action_name %>_action<%= current_user ? ' authenticated' : '' %>">
     
 	  <%= render :partial => 'menus/menu' %>
     
