@@ -240,7 +240,7 @@ class ApplicationController < ActionController::Base
   
   # for the shared blocks_model_form
   def get_blocks
-    @blocks = Block.all(:conditions => 'show_in_all IS NULL')
+    @blocks ||= Block.find :all, :conditions => { :show_in_all => '' }
   end
   
   def blocks_models
