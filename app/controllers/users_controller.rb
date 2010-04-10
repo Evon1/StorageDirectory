@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_filter :get_model, :only => [:show, :edit, :update, :destroy]
-  before_filter :get_roles, :only => [:index, :new, :edit]
+  before_filter :get_roles, :only => [:index, :new, :edit, :create]
   before_filter :get_default_role, :only => :new
   before_filter :require_user, :except => [:new, :create]
   
@@ -17,9 +17,11 @@ class UsersController < ApplicationController
   
   def create
     @user = User.new(params[:user])
+    role = Role.find @user.role_id
     
-    if @user.save
-      flash[:notice] = 'Account registered!'
+    # skip validation for subscribers, they dont need passwords
+    if @user.save((role.title !~ /subscriber/i))
+      flash[:notice] = 'Great! Thanks for signing up!'
       redirect_back_or_default user_path(@user)
     else
       render :action => :new

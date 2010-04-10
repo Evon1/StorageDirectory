@@ -44,7 +44,12 @@
 			<%= f.label :enabled %>
 		</div>
 		
-		<div class="check_box_wrap left left_space">
+		<div class="check_box_wrap left">
+			<%= f.check_box :show_title %>
+			<%= f.label :show_title %>
+		</div>
+		
+		<div class="check_box_wrap left">
 			<%= f.check_box :use_reverse_captcha, :title => 'Places a hidden field that must validate as blank. Simple reverse captcha trick.' %>
 			<%= f.label :use_reverse_captcha %>
 		</div>
@@ -56,16 +61,14 @@
 			<%= f.label :send_email %>
 		</div>
 		
-		<div class="inline left_space toggle_this">
+		<div class="inline toggle_this">
 			<%= f.text_field :recipient, :class => 'small_textfield email hintable', :title => 'Notification Recipient' %>
 		</div>
 	</div>
-	
+  
 	<div id="form_builder" class="partial_addable">
-		
 		<%= render :partial => 'shared/model_addable_fields', 
-				:locals => { :f => f, :_for => 'fields', :context => 'form_builder', :collection => @form.fields, :new_model => Field.new(:form_id => @form.id) } %>
-		
+				:locals => { :f => f, :_for => 'fields', :context => 'form_builder', :collection => @form.fields, :new_model => @field } %>
 	</div>
 	
 </fieldset>

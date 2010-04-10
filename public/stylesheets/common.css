@@ -67,6 +67,7 @@ span.active { cursor:default; }
 .has_hoverable_list ul li { padding:3px 3px 3px 5px; cursor:default; }
 .has_hoverable_list ul li:hover { background:#ebebeb; opacity:.6; }
 .with_floats li { overflow:hidden; }
+.half_width { width:50%; }
 .third_width { width:33%; }
 
 /* admin menu */

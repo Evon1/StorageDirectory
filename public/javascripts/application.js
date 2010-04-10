@@ -14,6 +14,16 @@ $.option_tags_from_model = function(model_class, models, options) {
 	return option_tags;
 }
 
+$.option_tags_from_array = function(options, selected) {
+	var options_tags = '';
+	
+	$.each(options, function(){
+		options_tags += '<option'+ (selected && selected == this ? 'selected="selected"' : '') +' value="'+ this +'">'+ this + '</option>';
+	});
+	
+	return options_tags;
+}
+
 $.log = function(msg) {
 	if (typeof console != 'undefined') console.log(msg); else alert(msg);
 }
@@ -112,6 +122,49 @@ $.toggleAction = function(href, scroll_to_it) {
 	
 }
 
+// first implemented for the sortable nav bar to update position via ajax
+$.updateModels = function(e, ui) {
+	var list_items  = ui.item.parent().children(),
+			$this			 	= $(ui.item),
+			data 				= '';
+
+	$(list_items).each(function(i){ // html element id is <ModelClass>_<int ID>
+		var model_class = this.id.split('_')[0],
+				model_id 		= this.id.split('_')[1],
+				model_attr 	= $this.attr('rel'); // attribute to update
+				
+		data += 'models['+ i +'][model]='+ model_class + '&models['+ i +'][id]='+ model_id +
+						'&models['+ i +'][attribute]='+ model_attr +'&models['+ i +'][value]='+ i + '&';
+	});
+	
+	$.post('/ajax/update_many', data, function(response){
+		if (response.success) {
+			$this.effect('bounce', {}, 200);
+		} else {
+			alert('Error: '+ response.data)
+		}
+	}, 'json');
+}
+
+// retrieve the attributes/columns of given resource/model, e.g. pages, users, posts
+$.getModelAttributes = function(resource, callback) {
+	var attributes = [];
+	
+	$.getJSON('/ajax/get_attributes?model='+ singularize(resource), function(response){
+		if (response.success) {
+			if (callback && typeof callback == 'function') callback.call(this, response.data);
+			else return response.data;
+			
+		} else {
+			alert('Error: '+ response.data);
+		}
+	});
+}
+
+$.injectOptionsInSelectLists = function(field_name_selects, option_tag_html) {
+	$.each(field_name_selects, function(){ $(this).html(option_tag_html) });
+}
+
 /******************************************* JQUERY PLUGINS *******************************************/
 
 $.fn.disabler = function(d) { // master switch checkbox, disables all form inputs when unchecked
@@ -197,30 +250,6 @@ $.fn.toggleDiv = function() {
 			sibling.find('input, textarea, select').focus();
 		});
 	});
-}
-
-// first implemented for the sortable nav bar to update position via ajax
-$.updateModels = function(e, ui) {
-	var list_items  = ui.item.parent().children(),
-			$this			 	= $(ui.item),
-			data 				= '';
-
-	$(list_items).each(function(i){ // html element id is <ModelClass>_<int ID>
-		var model_class = this.id.split('_')[0],
-				model_id 		= this.id.split('_')[1],
-				model_attr 	= $this.attr('rel'); // attribute to update
-				
-		data += 'models['+ i +'][model]='+ model_class + '&models['+ i +'][id]='+ model_id +
-						'&models['+ i +'][attribute]='+ model_attr +'&models['+ i +'][value]='+ i + '&';
-	});
-	
-	$.post('/ajax/update_many', data, function(response){
-		if (response.success) {
-			$this.effect('bounce', {}, 200);
-		} else {
-			alert('n ' + response.data)
-		}
-	}, 'json');
 }
 
 /******************************************* SUCCESS CALLBACKS *******************************************/
@@ -448,20 +477,65 @@ $.toggleHelptext = function(clickedLink) {
 			} else scoping_fields.hide(300);
 		}); // END .scope_dropdown.change()
 		
+		// get the attributes of the resource selected from #form_controller in the form new/edit page
+		$('#form_controller', '#FormsForm').change(function(){
+			fillInFormFieldSelectLists($(this).val()); 
+		});
+		
+		// create a custom event on the select lists so that when they finish loading the options, we can select the
+		// field's field_name that matches in the list
+		$('.field_attr_name', '#form_builder').bind('filled', function(){
+			$('.field_attr_name', '#form_builder').each(function(){
+				var $this = $(this),
+						name = $this.prev('span.field_name').text(); // we stored the field_name value in a hidden span
+				
+				$this.children('option').each(function(){
+					var $this_option = $(this);
+					if ($this_option.val() == name) $this_option.attr('selected', true);
+				});
+			});
+			
+			// this field name is useful for specifying a hidden field with a return path for after submit the form
+			$(this).append('<option value="return_to">return_to</option>');
+		});
+		
 		$('.delete_link', '#form_builder').live('click', function(){
 			var $this = $(this),
 					field_id = $(this).attr('rel').replace('field_', '');
-			
-			$this.parent().parent().html()
-			
+
+			$this.parent().parent().html();
 			return false;
 		});
-		
-	} // END Views/Forms Edit
+	} // END Edit/New Views/Forms/Links
 	
-	// Permissions New
+	// Edit Forms
+	if ($.on_page([['edit', 'forms']])) {
+		// fill in the field name select lists
+		var resource = $('#form_controller', '#FormsForm').val();
+		fillInFormFieldSelectLists(resource);
+		
+	} // END Edit Forms
+	
+	// New Permissions
 	if ($.on_page([['new', 'permissions, roles']])) {
 		$('a.add_link', '.partial_addable').click();
-	}
+	} // END New Permissions
 	
 //});
+
+/**************** some utility functions ****************/
+function fillInFormFieldSelectLists(resource) {
+	var $field_name_selects = $('.field_attr_name', '#form_builder');
+			
+	// show progress indicator in field name select lists
+	$.injectOptionsInSelectLists($field_name_selects, '<option>Loading..</option>');
+	
+	// get the options and then inject them as option tags into all the select lists
+	$.getModelAttributes(resource, function(attributes){
+		$.injectOptionsInSelectLists($field_name_selects, $.option_tags_from_array(attributes));
+		
+		// in the form edit page, triggering this custom event invokes the function that selects the correct field name
+		// in each of the fields field_name select list
+		$field_name_selects.trigger('filled');
+	});
+}

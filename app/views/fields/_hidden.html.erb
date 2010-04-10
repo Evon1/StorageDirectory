@@ -1,0 +1,7 @@
+<div class="<%= field.field_type %>">
+  <% if field.use_own_name? %>
+    <%= hidden_field_tag field.name.downcase, field.name, field.field_attributes_hash_for_form_helper %>
+	<% else %>
+	  <%= f.hidden_field field.name.downcase, field.field_attributes_hash_for_form_helper %>
+	<% end %>
+</div>
