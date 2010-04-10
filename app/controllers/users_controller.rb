@@ -16,11 +16,14 @@ class UsersController < ApplicationController
   end
   
   def create
+    @form = Form.find(params[:fid]) unless params[:fid].blank?
     @user = User.new(params[:user])
     role = Role.find @user.role_id
     
     # skip validation for subscribers, they dont need passwords
     if @user.save((role.title !~ /subscriber/i))
+      Notifier.deliver_subscriber_notification(@form.recipient, @user, request.host) if @form && @form.should_send_email?
+      
       flash[:notice] = 'Great! Thanks for signing up!'
       redirect_back_or_default user_path(@user)
     else
