@@ -1,9 +1,19 @@
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
   
+  def site_meta_tags
+    ApplicationController.app_config.map do |meta|
+      "<meta name='#{meta[0].to_s}' content='#{meta[1]}' />\n" if meta[0].to_s =~ meta_tag_keys_regex
+    end
+  end
+  
+  def meta_tag_keys_regex
+    /(keywords)|(description)|(google-site-verification)/i
+  end
+  
   def declare_content_for # renders blocks in regions based on current page
     title = (@page ? @page.title  : controller_name.titleize).to_s
-    content_for :title, "#{title.blank? ? 'Manage - ' : title + ' - '}#{$website_title}"
+    content_for :title, "#{title.blank? ? 'Manage - ' : title + ' - '}#{ApplicationController.app_config[:title]}"
     
     regions(false).each do |region|
       content_for region do
@@ -205,7 +215,8 @@ module ApplicationHelper
   
   # return the actual class object of a model
   def model_class(model_or_controller_name)
-    @model_class = model_or_controller_name.singular.camelcase.constantize
+    # site settings isn't a model so it isn't defined
+    @model_class = model_or_controller_name.singular.camelcase.constantize rescue nil
   end
   
   def model_form_heading

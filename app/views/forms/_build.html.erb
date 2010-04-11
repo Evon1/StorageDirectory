@@ -1,6 +1,8 @@
 <% form_for virtual_form_path(form), :url => form.get_url_hash do |f| %>
 	<fieldset id="<%= form.field_set_id %>" class="virtual_form">
-		<legend><%= form.name %></legend>
+		<% if form.show_title? %>
+		  <legend><%= form.name %></legend>
+		<% end %>
 		
 		<% form.fields.each do |field| %>
 			<%= render :partial => "fields/#{field.field_type}", :locals => { :f => f, :field => field } %>

@@ -14,6 +14,16 @@ $.option_tags_from_model = function(model_class, models, options) {
 	return option_tags;
 }
 
+$.option_tags_from_array = function(options, selected) {
+	var options_tags = '';
+	
+	$.each(options, function(){
+		options_tags += '<option'+ (selected && selected == this ? 'selected="selected"' : '') +' value="'+ this +'">'+ this + '</option>';
+	});
+	
+	return options_tags;
+}
+
 $.log = function(msg) {
 	if (typeof console != 'undefined') console.log(msg); else alert(msg);
 }
@@ -112,8 +122,74 @@ $.toggleAction = function(href, scroll_to_it) {
 	
 }
 
-/******************************************* JQUERY PLUGINS *******************************************/
+// first implemented for the sortable nav bar to update position via ajax
+$.updateModels = function(e, ui) {
+	var list_items  = ui.item.parent().children(),
+			$this			 	= $(ui.item),
+			data 				= '';
 
+	$(list_items).each(function(i){ // html element id is <ModelClass>_<int ID>
+		var model_class = this.id.split('_')[0],
+				model_id 		= this.id.split('_')[1],
+				model_attr 	= $this.attr('rel'); // attribute to update
+				
+		data += 'models['+ i +'][model]='+ model_class + '&models['+ i +'][id]='+ model_id +
+						'&models['+ i +'][attribute]='+ model_attr +'&models['+ i +'][value]='+ i + '&';
+	});
+	
+	$.post('/ajax/update_many', data, function(response){
+		if (response.success) {
+			$this.effect('bounce', {}, 200);
+		} else {
+			alert('Error: '+ response.data)
+		}
+	}, 'json');
+}
+
+// retrieve the attributes/columns of given resource/model, e.g. pages, users, posts
+$.getModelAttributes = function(resource, callback) {
+	var attributes = [];
+	
+	$.getJSON('/ajax/get_attributes?model='+ singularize(resource), function(response){
+		if (response.success) {
+			if (callback && typeof callback == 'function') callback.call(this, response.data);
+			else return response.data;
+			
+		} else {
+			alert('Error: '+ response.data);
+		}
+	});
+}
+
+$.injectOptionsInSelectLists = function(field_name_selects, option_tag_html) {
+	$.each(field_name_selects, function(){ $(this).html(option_tag_html) });
+}
+
+// cause the text_field to turn back into a label on blur, but leave behind a hidden field with its value
+$.revertSettingsTextFieldToLabel = function(text_field, old_val) {
+	text_field.blur(function(){
+		var this_field 			= $(this),
+				new_val					= this_field.val(),
+				field_container = this_field.parent().parent(),
+				setting_field 	= $('.setting_field input', field_container),
+				old_field_name 	= setting_field.attr('name');
+
+		this_field.fieldToLabel();
+		
+		// update the setting field name with the new value from the setting label
+		setting_field.attr('name', old_field_name.replace(old_val.toLowerCase(), new_val.toLowerCase()))
+		
+		if (field_container.hasClass('new_setting_field')) {
+			field_container.removeClass('new_setting_field').addClass('existing_setting_field');
+		}
+	});
+}
+
+$.mayContinue = function(link) {
+	return !link.hasClass('before_confirm') || (link.hasClass('before_confirm') && confirm(link.attr('title')))
+}
+
+/******************************************* JQUERY PLUGINS *******************************************/
 $.fn.disabler = function(d) { // master switch checkbox, disables all form inputs when unchecked
 	var disablees = d || 'input, textarea, select, checkbox, radio';
 	return this.each(function(i){
@@ -199,28 +275,38 @@ $.fn.toggleDiv = function() {
 	});
 }
 
-// first implemented for the sortable nav bar to update position via ajax
-$.updateModels = function(e, ui) {
-	var list_items  = ui.item.parent().children(),
-			$this			 	= $(ui.item),
-			data 				= '';
+$.fn.textFieldable = function(text_field_html, callback) {
+	return this.each(function(){
+		var $this 			= $(this),
+				$text_field = $(text_field_html);
 
-	$(list_items).each(function(i){ // html element id is <ModelClass>_<int ID>
-		var model_class = this.id.split('_')[0],
-				model_id 		= this.id.split('_')[1],
-				model_attr 	= $this.attr('rel'); // attribute to update
-				
-		data += 'models['+ i +'][model]='+ model_class + '&models['+ i +'][id]='+ model_id +
-						'&models['+ i +'][attribute]='+ model_attr +'&models['+ i +'][value]='+ i + '&';
+		$this.parent().html($text_field);
+		$text_field.focus();
+		
+		// recall hinty
+		$.bindPlugins();
+		
+		if (typeof callback == 'function') callback.call(this, $text_field);
 	});
+}
+
+$.fn.fieldToLabel = function() {
+	return this.each(function(){
+			var $this = $(this),
+					label = '<label for="'+ $this.attr('name') +'" class="block w110 small_round textFieldable">'+ $this.val() +'</label>';
+			
+			$this.parent().prepend(label);
+			$this.remove();
+	});
+}
+
+$.fn.slideUpAndRemove = function(speed) {
+	if (typeof speed == 'null') speed = 300;
 	
-	$.post('/ajax/update_many', data, function(response){
-		if (response.success) {
-			$this.effect('bounce', {}, 200);
-		} else {
-			alert('n ' + response.data)
-		}
-	}, 'json');
+	return this.each(function(){
+		var $this = $(this);
+		$this.slideUp(speed, function(){ $this.remove(); });
+	});
 }
 
 /******************************************* SUCCESS CALLBACKS *******************************************/
@@ -233,6 +319,9 @@ $.toggleHelptext = function(clickedLink) {
 }
 
 /******************************************* EVENT HANDLERS *******************************************/
+$.bindPlugins = function() {
+	$('.hintable').hinty(); // all matched inputs will display their title attribute
+}
 
 // removed jQuery ready call since the scripts are at the bottom of the layout
 //jQuery(function(){
@@ -244,7 +333,7 @@ $.toggleHelptext = function(clickedLink) {
 	
 	$.toggleAction(window.location.href, true); // toggle a container if its id is in the url hash
 	
-	$('.hintable').hinty();  // all matched inputs will display their title attribute
+	$.bindPlugins(); // calls a few common plugins, also used after a new element that uses a plugin is created in the dom
 	$('form').formBouncer(); // form validation, fields with supported validation classes will be processed
 	$('.disabler', '.disabled').disabler(); // checkbox that disables all inputs in its form
 	$('.anchorListener').anchorDispatch();  // a toggle an element when its id is present in the url hash
@@ -252,7 +341,7 @@ $.toggleHelptext = function(clickedLink) {
 	$('.pane_switch').paneSwitcher();				// use a checkbox to switch between two containers. classes: .pane_0, .pane_1
 	$('.toggle_div').toggleDiv();						// use a checkbox to show/hide its parents next sibling div
 	//$('textarea').resizable({ handle: true });
-	$('.sortable').sortable({
+	$('.sortable', '.authenticated').sortable({
 		opacity: 0.3,
 		update: function(e, ui) {
 			$.updateModels(e, ui);
@@ -272,6 +361,29 @@ $.toggleHelptext = function(clickedLink) {
 	      // Will set that image tag to display the uploaded image.
 	    },
 	  });
+	});
+	
+	// edit site settings page
+	// turns a label into a textfield on mouseover, then uses callback to bind an event
+	// to the new textfield to turn it back into a label when it blurs
+	$('.textFieldable', '#SiteSettingFields .new_setting_field').live('mouseover', function(){
+		var $this = $(this),
+				settings_field_html = '<input name="new_site_settings[][key]" value="'+ $this.text() +'" class="hintable required" title="Enter a setting name" />';
+		
+		$(this).textFieldable(settings_field_html, function(text_field){
+			$.revertSettingsTextFieldToLabel(text_field, $this.text());
+		});
+	});
+	
+	$('.textFieldable', '#SiteSettingFields .existing_setting_field').live('click', function(){
+		var $this = $(this),
+				existing_settings_html = '<input name="site_settings['+ $this.text() +']" value="'+ $this.text() +'" class="hintable required" title="Enter a setting name" />';
+		
+		$this.textFieldable(existing_settings_html, function(text_field){
+			$.revertSettingsTextFieldToLabel(text_field, $this.text());
+		});
+		
+		return false;
 	});
 	
 	// admin menu hover behaviors
@@ -351,7 +463,7 @@ $.toggleHelptext = function(clickedLink) {
 		var $this = $(this);
 		$this.addClass('loading');
 		
-		if (!$this.hasClass('before_confirm') || ($this.hasClass('before_confirm') && confirm($this.attr('title') + '?'))) {
+		if ($.mayContinue($this)) {
 			$.getJSON(this.href + '&authenticity_token=' + $.get_auth_token(), {},
 				function(response) {
 					$this.removeClass('loading');
@@ -365,7 +477,10 @@ $.toggleHelptext = function(clickedLink) {
 							$this.parent().parent().slideUp(300, function(){ $(this).remove(); });
 						}
 						
-					} else alert(response.data);
+					} else {
+						alert(response.data);
+						$this.removeClass('loading');
+					}
 				}
 			);
 		} else $this.removeClass('loading');
@@ -382,7 +497,8 @@ $.toggleHelptext = function(clickedLink) {
 		$('input, select, checkbox', partial_form).each(function(){ $(this).attr('disabled', false); });
 	
 		partial_form.hide().prependTo('.partial_forms_wrap', context).slideDown(600);
-	
+		$.bindPlugins(); // first implemented to call hinty
+		
 		return false;
 	});
 	
@@ -398,6 +514,17 @@ $.toggleHelptext = function(clickedLink) {
 		$.get(this.href, function(response){
 			$('#' + $this.attr('rel')).html(response);
 		})
+		
+		return false;
+	});
+	
+	$('.inline_delete_link').live('click', function(){
+		var $this = $(this);
+		
+		if ($.mayContinue($this)) {
+			if (this.rel.split('_')[1] == '0') $this.parent().parent().slideUpAndRemove();
+			else $('#'+ $this.attr('rel')).slideUpAndRemove();
+		}
 		
 		return false;
 	});
@@ -448,20 +575,67 @@ $.toggleHelptext = function(clickedLink) {
 			} else scoping_fields.hide(300);
 		}); // END .scope_dropdown.change()
 		
+		// get the attributes of the resource selected from #form_controller in the form new/edit page
+		$('#form_controller', '#FormsForm').change(function(){
+			fillInFormFieldSelectLists($(this).val()); 
+		});
+		
+		// create a custom event on the select lists so that when they finish loading the options, we can select the
+		// field's field_name that matches in the list
+		$('.field_attr_name', '#form_builder').bind('filled', function(){
+			$('.field_attr_name', '#form_builder').each(function(){
+				var $this = $(this),
+						name = $this.prev('span.field_name').text(); // we stored the field_name value in a hidden span
+				
+				$this.children('option').each(function(){
+					var $this_option = $(this);
+					if ($this_option.val() == name) $this_option.attr('selected', true);
+				});
+			});
+			
+			// this field name is useful for specifying a hidden field with a return path for after submit the form
+			$(this).append('<option value="return_to">return_to</option>');
+		});
+		
 		$('.delete_link', '#form_builder').live('click', function(){
 			var $this = $(this),
 					field_id = $(this).attr('rel').replace('field_', '');
-			
-			$this.parent().parent().html()
-			
+
+			$this.parent().parent().html();
 			return false;
 		});
-		
-	} // END Views/Forms Edit
+	} // END Edit/New Views/Forms/Links
 	
-	// Permissions New
+	// Edit Forms
+	if ($.on_page([['edit', 'forms']])) {
+		// fill in the field name select lists
+		var resource = $('#form_controller', '#FormsForm').val();
+		fillInFormFieldSelectLists(resource);
+		
+	} // END Edit Forms
+	
+	// New Permissions
 	if ($.on_page([['new', 'permissions, roles']])) {
 		$('a.add_link', '.partial_addable').click();
-	}
+	} // END New Permissions
 	
 //});
+
+/**************** some utility functions ****************/
+
+// fill up the field_name select tag in the forms new/edit page
+function fillInFormFieldSelectLists(resource) {
+	var $field_name_selects = $('.field_attr_name', '#form_builder');
+			
+	// show progress indicator in field name select lists
+	$.injectOptionsInSelectLists($field_name_selects, '<option>Loading..</option>');
+	
+	// get the options and then inject them as option tags into all the select lists
+	$.getModelAttributes(resource, function(attributes){
+		$.injectOptionsInSelectLists($field_name_selects, $.option_tags_from_array(attributes));
+		
+		// in the form edit page, triggering this custom event invokes the function that selects the correct field name
+		// in each of the fields field_name select list
+		$field_name_selects.trigger('filled');
+	});
+}

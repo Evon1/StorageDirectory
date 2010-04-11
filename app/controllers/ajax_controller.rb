@@ -1,8 +1,11 @@
 class AjaxController < ApplicationController
   
+  skip_before_filter :authorize_user, :except => :get_partial
   skip_before_filter :init
+  
   before_filter :validate_params
   before_filter :_get_model, :only => [:update, :destroy]
+  before_filter :_get_model_class, :only => :get_attributes
   
   def get_all
     if (has_name = _get_model_class.first.respond_to?('name')) || _get_model_class.first.respond_to?('title')
@@ -13,6 +16,15 @@ class AjaxController < ApplicationController
     
     authorize_and_perform_restful_action_on_model @models.first.class.to_controller_str, 'index' do
       render :json => { :success => true, :data => @models }
+    end
+    
+  rescue => e
+    render :json => { :success => false, :data => e.message }
+  end
+  
+  def get_attributes
+    authorize_and_perform_restful_action_on_model @model_class.name.underscore.pluralize, 'index' do
+      render :json => { :success => true, :data => @model_class.column_names }
     end
     
   rescue => e
@@ -74,8 +86,12 @@ class AjaxController < ApplicationController
     if current_user && current_user.has_permission?(resource, action, params)
       yield
     else
-      render :json => { :success => false, :data => "You don't have permission to #{action_name} this #{@model.class.name}" }
+      render :json => { :success => false, :data => "You don't have permission to #{action_name} this #{object_in_question}" }
     end
+  end
+  
+  def object_in_question
+    (@model || @models.first).class.name rescue @model_class.name rescue 'Object'
   end
   
   def validate_params

@@ -1,16 +1,13 @@
-<% unless action_name == 'edit' %>
-  <div class="stack">
-  	<%= link_to _for.singular.titleize, '#', :class => 'icon16 add_link', :rel => context %>
-  </div>
-<% end %>
+<div class="stack">
+	<%= link_to _for.singular.titleize, '#', :class => 'icon16 add_link', :rel => context %>
+</div>
 
 <div class="partial_forms_wrap">
-	<% collection.each do |model| %>
-	  <% next if action_name == 'edit' && params[:id].to_i != model.id %>
-		<%= render :partial => "#{_for}/#{_for.singular}_fields", :locals => { :f => f, :disabled => false, :model => model } %>
+	<% collection.each_with_index do |model, i| %>
+		<%= render :partial => "#{_for}/#{_for.singular}_fields", :locals => { :f => f, :disabled => false, :model => model, :i => i+1 } %>
 	<% end unless action_name == 'new' %>
 </div>
 
 <div class="hide partial_form_html">
-	<%= render :partial => "#{_for}/#{_for.singular}_fields", :locals => { :f => f, :disabled => true, :model => new_model } %>
+	<%= render :partial => "#{_for}/#{_for.singular}_fields", :locals => { :f => f, :disabled => true, :model => new_model, :i => 0 } %>
 </div>

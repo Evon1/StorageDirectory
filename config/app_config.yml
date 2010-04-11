@@ -1,0 +1,25 @@
+--- 
+development: !map:HashWithIndifferentAccess 
+  plugins: jquery.hinty, jquery.formbouncer, inflector
+  theme: thelodge
+  title: The Lodge Beer & Grill in Boca Raton, FL
+  google-site-verification: mwkC_bd3HmEdRzW8gE8YFHZfSX-xqL1eSPfQ-zHF-yU
+  widgets: ""
+  description: The Lodge is a Boca Raton sports pub where the emphasis is on craft beer and fresh food. We offer an extensive selection of 24 draft beers, which are constantly rotated, and wines by the glass and bottle. We are constantly rotating our beer selection to reflect customer preferences and seasonal availability. Sit back at the bar and watch sports, drink your favorite craft brew, and sample our menu. We hope to see you soon.
+  keywords: the lodge boca raton, the lodge boca, beer lodge, lodge boca, the lodge beer and grill, sports bar boca raton, sports pub boca raton, beer bar, bar and grill boca raton
+production: 
+  plugins: jquery.hinty, jquery.formbouncer, inflector
+  theme: thelodge
+  title: The Lodge Beer & Grill in Boca Raton, FL
+  google-site-verification: mwkC_bd3HmEdRzW8gE8YFHZfSX-xqL1eSPfQ-zHF-yU
+  widgets: ""
+  description: The Lodge is a Boca Raton sports pub where the emphasis is on craft beer and fresh food. We offer an extensive selection of 24 draft beers, which are constantly rotated, and wines by the glass and bottle. We are constantly rotating our beer selection to reflect customer preferences and seasonal availability. Sit back at the bar and watch sports, drink your favorite craft brew, and sample our menu. We hope to see you soon.
+  keywords: the lodge boca raton, the lodge boca, beer lodge, lodge boca, the lodge beer and grill, sports bar boca raton, sports pub boca raton, beer bar, bar and grill boca raton
+test: 
+  plugins: jquery.hinty, jquery.formbouncer, inflector
+  theme: thelodge
+  title: The Lodge Beer & Grill in Boca Raton, FL
+  google-site-verification: mwkC_bd3HmEdRzW8gE8YFHZfSX-xqL1eSPfQ-zHF-yU
+  widgets: ""
+  description: The Lodge is a Boca Raton sports pub where the emphasis is on craft beer and fresh food. We offer an extensive selection of 24 draft beers, which are constantly rotated, and wines by the glass and bottle. We are constantly rotating our beer selection to reflect customer preferences and seasonal availability. Sit back at the bar and watch sports, drink your favorite craft brew, and sample our menu. We hope to see you soon.
+  keywords: the lodge boca raton, the lodge boca, beer lodge, lodge boca, the lodge beer and grill, sports bar boca raton, sports pub boca raton, beer bar, bar and grill boca raton

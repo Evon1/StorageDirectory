@@ -26,7 +26,7 @@
 		
 	</head>
 
-	<body id="<%= action_name %>" class="<%= controller_name %>">
+	<body id="<%= action_name %>" class="<%= controller_name %><%= current_user ? ' authenticated' : '' %>">
 	<section>
 	
 			<nav>	

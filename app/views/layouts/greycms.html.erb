@@ -28,7 +28,7 @@
 		
 	</head>
 
-	<body id="<%= controller_name %>_controller" class="<%= action_name %>_action">
+	<body id="<%= controller_name %>_controller" class="<%= action_name %>_action<%= current_user ? ' authenticated' : '' %>">
 		
 		<div id="admin_menu">
 		  <%= render :partial => 'menus/menu' %>

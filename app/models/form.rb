@@ -27,10 +27,16 @@ class Form < ActiveRecord::Base
   def fields_attributes=(params)
     params.each_with_index do |fields, i|
       _add_to_fields_classes(fields) if fields['required'] || fields['hintable']
-      type = fields.delete('field_type').downcase
+      
+      use_own_name = fields.delete('use_own_name')
+      type         = fields.delete('field_type').downcase
       
       unless fields[:id].blank?
-        self.fields.find(fields.delete(:id)).update_attributes(:field_type => type, :field_attributes => fields.to_json)
+        self.fields.find(fields.delete(:id)).update_attributes(
+          :field_type       => type,
+          :field_attributes => fields.to_json,
+          :use_own_name     => use_own_name
+        )
       else
         self.fields.build(:field_type => type, :field_attributes => fields.to_json)
       end

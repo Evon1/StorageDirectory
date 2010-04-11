@@ -34,6 +34,8 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :forms
   map.resources :suggestions
   
+  map.site_settings '/site_settings/edit', :controller => 'site_settings', :action => 'edit'
+  
   # Sample resource route with options:
   #   map.resources :products, :member => { :short => :get, :toggle => :post }, :collection => { :sold => :get }
   

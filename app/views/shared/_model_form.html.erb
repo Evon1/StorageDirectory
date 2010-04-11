@@ -23,7 +23,7 @@
   				<%= link_to 'Cancel', (session[:return_to] || :back), :class => 'iconOnly16 cancel_link right', :title => "Cancel editing #{model.name_or_title}" %>
 				<% end %>
 				
-				<% if @user && user_allowed?(model.class.to_controller_str, 'show', params) %>
+				<% if @user && !@user.new_record? && user_allowed?(model.class.to_controller_str, 'show', params) %>
 				  <%= link_to "Back to #{@user.name.possessive} Profile", @user %>
 				  &nbsp;|&nbsp;
 				<% end %>
