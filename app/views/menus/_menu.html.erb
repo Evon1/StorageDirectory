@@ -4,7 +4,7 @@
   	  <%= link_to 'Content', '#', :id => 'content_menu_link' %>
   		<ul id="resource_list" class="plain grey1 hide">
   			<% @controllers.each do |controller| path = model_index_path(controller) %>
-  				<li><%= link_to controller.titleize, path, :class => active_page(path) + " #{user_auth_status(controller, 'new')}" %></li>
+  				<li><%= link_to controller.titleize, path, :class => active_page(path) + " #{user_auth_status(controller, 'new')}#{controller == 'site_settings' ? ' access_denied' : ''}" %></li>
   			<% end %>
   		</ul>
   	</div>

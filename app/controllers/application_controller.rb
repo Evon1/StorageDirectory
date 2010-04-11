@@ -45,18 +45,22 @@ class ApplicationController < ActionController::Base
   # authorization system
   $_crud = [:all, :create, :read, :update, :delete]
   
-  # sets layout file and css
-  $_theme = 'thelodge'
-  $website_title = 'The Lodge Beer &amp; Grill in Boca Raton, FL'
-  
-  layout $_theme
+  before_filter :load_app_config
+  cattr_accessor :app_config
   
   before_filter :reverse_captcha_check, :only => :create
   before_filter :clean_home_url, :authorize_user, :init
   
+  layout Proc.new { |c| c.app_config[:theme] }
+  
   # display full error message when logged in as an Admin
   def local_request?
     current_user && current_user.has_role?('Admin')
+  end
+  
+  def load_app_config
+    raw_config   = File.read(RAILS_ROOT + "/config/app_config.yml")
+    @@app_config = YAML.load(raw_config)[RAILS_ENV].symbolize_keys
   end
   
   private # -----------------------------------------------
@@ -108,9 +112,11 @@ class ApplicationController < ActionController::Base
     @controller_name   = controller_name
     @action_name       = action_name
     @default_view_type = session[:view_type]
-    @theme_css         = theme_css(session[:theme] || $_theme)
-    @plugins           = ['plugins/jquery.formbouncer', 'plugins/jquery.hinty', 'plugins/inflector']
-    @widgets_js        = []
+    @theme_css         = theme_css(session[:theme] || @@app_config[:theme])
+    @meta_keywords     = @@app_config[:keywords] || @@app_config[:title]
+    @meta_description  = @@app_config[:description] || @@app_config[:title]
+    @plugins           = (@@app_config[:plugins] || '').split(/,\W?/).map { |w| "plugins/#{w}" }
+    @widgets_js        = (@@app_config[:widgets] || '').split(/,\W?/).map { |w| "widgets/#{w}" }
     @nav_pages         = Page.nav_pages
     @global_blocks     = Block.all :conditions => ['show_in_all in (?)', regions(false).map(&:to_s)]
     @user              = User.find(params[:user_id]) unless params[:user_id].blank?
@@ -118,18 +124,20 @@ class ApplicationController < ActionController::Base
   
   # TODO move this feature into the database and save state through AJAX, using a key-val pair { :controller_name => :view_type }
   def set_default_view_type
-    model_class = controller_name.singular.camelcase.constantize
-      
+    model_class = controller_name.singular.camelcase.constantize rescue nil
+    
     if !params[:view_type].blank?
       session[:view_type] = params[:view_type]
+    elsif controller_name == 'site_settings'
+      session[:view_type] = 'table'
     elsif controller_name =~ /posts/ || (controller_name == 'tags' && action_name == 'show')
       session[:view_type] = 'blog_roll'
+    elsif controller_name =~ /(images)|(galleries)/
+      session[:view_type] = 'gallery'
     elsif model_class.respond_to?('column_names') && model_class.column_names.include?('content')
       session[:view_type] = 'table'
     elsif model_class.respond_to?('column_names') && model_class.column_names.include?('image_file_name')
       session[:view_type] = 'box'
-    elsif controller_name =~ /(images)|(galleries)/
-      session[:view_type] = 'gallery'
     else
       session[:view_type] = 'list'
     end

@@ -3,9 +3,7 @@
 	<head>
 		<%= stylesheet_link_tag 'common', @theme_css %>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-		<meta name="google-site-verification" content="mwkC_bd3HmEdRzW8gE8YFHZfSX-xqL1eSPfQ-zHF-yU" />
-		<meta name="description" content="The Lodge is a Boca Raton sports pub where the emphasis is on craft beer and fresh food. We offer an extensive selection of 24 draft beers, which are constantly rotated, and wines by the glass and bottle. We are constantly rotating our beer selection to reflect customer preferences and seasonal availability. Sit back at the bar and watch sports, drink your favorite craft brew, and sample our menu. We hope to see you soon." />
-		<meta name="keywords" content="the lodge boca raton, the lodge boca, beer lodge, lodge boca, the lodge beer and grill, sports bar boca raton, sports pub boca raton, beer bar, bar and grill boca raton" />
+		<%= site_meta_tags %>
 		<title><%= yield :title %></title>
 		<%= javascript_include_tag 'jquery.all' %>
 	</head>
