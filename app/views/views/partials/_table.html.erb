@@ -1,0 +1,92 @@
+<% one_of_these = /^commentable|_type$/i %>
+
+<table class="table_view round box" cellpadding="0" cellspacing="0">
+	<thead>
+		
+		<tr>
+			<% if data.first.respond_to?('image') %>
+				<th>Image</th>
+			<% end %>
+			
+			<% data.first.attributes.keys.each do |field_name| %>
+				<% next if field_name =~ one_of_these %>
+				<th><%= field_name.titleize %></th>
+			<% end %>
+			
+			<% if current_user %>
+				<th>Options</th>
+			<% end %>
+			
+		</tr>
+		
+	</thead>
+	<tbody>
+		<% data.each do |model| %>
+	
+			<tr class="<%= cycle('odd', 'even') %>">
+				<% if model.respond_to?('image') %>
+					<td><%= link_to image_tag(model.image.url(:thumb)), model %></td>
+				<% end %>
+				
+				<% model.attributes.each_pair do |key, val| %>
+					<% next if key =~ one_of_these %>
+					<% case key; when /(title)|(name)/ %>
+						
+						<td>
+							<span class="title">
+								<%= link_to val.titleize, model %>
+							</span>
+						</td>
+						
+					<% when 'content' %>
+					
+						<td class="attribute">
+							<% unless val.blank? %>
+								<div class="html_wrap">
+									<%= val.stripped_teaser(75) %>
+								</div>
+							<% end %>
+						</td>
+						
+					<% when 'parent_id' %>
+					
+						<td class="attribute">
+							<% unless val.blank? %>
+								<span class="parent">
+									<% parent = model.class.find(val) %>
+									<%= link_to parent.name_or_title, edit_model_path(parent) %>
+								</span>
+							<% end %>
+						</td>
+						
+					<% when /^.*_id$/ %>
+					
+						<td class="attribute">
+							<% unless val.blank? %>
+								<span class="assoc">
+									<% assoc = model.get_assoc_instance(key, val) %>
+									<%= link_to assoc.name_or_title, edit_model_path(assoc) if assoc %>
+								</span>
+							<% end %>
+						</td>
+						
+					<% else %>
+						<td class="attribute">
+							<% unless val.blank? %>
+								<span class="text"><%= val %></span>
+							<% end %>
+						</td>
+					<% end %>
+				<% end %>
+				
+				<% if current_user %>
+					<td class="admin_options buttons">
+							<%= render :partial => 'shared/edit_delete_link', :locals => { :model => model } %>
+					</td>
+				<% end %>
+				
+			</tr>
+	
+		<% end %>
+	</tbody>
+</table>

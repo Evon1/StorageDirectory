@@ -1,0 +1,34 @@
+<div class="blog_roll_view">
+	<% data.each do |model| %>
+		
+		<% begin %>
+			<%= render(:partial => model) %>
+		<% rescue %>
+			<div class="uncollapse stack divided">
+				<h4 class="left"><%= link_to model_name_or_title(model), model %></h4>
+			
+				<div class="post_info">
+					<% if model.respond_to?('user') && !model.user.nil? %>
+						<span> by <%= link_to model.user.name, model.user %></span>
+					<% end %>
+				
+					<% unless model.timestamp.nil? %>
+						<span> on: <%= model.timestamp.asctime %></span>
+					<% end %>
+				</div>
+				
+				<% if model.respond_to?('image') %>
+					<div><%= link_to image_tag(model.image.url(:thumb)), model %></div>
+				<% end %>
+				
+				<% if model.attributes.keys.include?('content') %>
+					<div><%= model.content_teaser %></div>
+				<% end %>
+				
+				<%= render :partial => 'posts/meta', :locals => { :post => model } if model.respond_to?('comments') %>
+			
+			</div>
+		<% end %>
+	
+	<% end %>
+</div>

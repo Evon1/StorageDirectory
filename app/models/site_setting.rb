@@ -13,9 +13,14 @@ class SiteSetting
     # strip out default values
     settings.delete :field
     
+    # convert arrays to comma separated strings
+    [:plugins, :widgets].each do |set|
+      next if settings[set].nil?
+      settings[set] = settings[set] * ', ' rescue ''
+    end
+    
     full_config = get_full_config
     
-    # update only this environments settings
     full_config[RAILS_ENV] = settings
     
     File.open(config_file, 'w') do |file|

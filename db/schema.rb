@@ -80,9 +80,9 @@ ActiveRecord::Schema.define(:version => 20100410100145) do
     t.datetime "updated_at"
     t.string   "scope"
     t.integer  "target_id"
-    t.boolean  "send_email",          :null => false
-    t.string   "recipient",           :null => false
-    t.boolean  "use_reverse_captcha", :null => false
+    t.boolean  "send_email"
+    t.string   "recipient"
+    t.boolean  "use_reverse_captcha"
     t.boolean  "show_title"
   end
 
@@ -129,20 +129,13 @@ ActiveRecord::Schema.define(:version => 20100410100145) do
     t.text     "content"
   end
 
-  create_table "link_groups", :force => true do |t|
-    t.string   "name"
-    t.text     "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "links", :force => true do |t|
     t.string   "title"
     t.string   "path"
     t.boolean  "relative"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "link_group_id"
+    t.integer  "group_id"
     t.string   "resource"
     t.integer  "target_id"
   end
@@ -158,16 +151,6 @@ ActiveRecord::Schema.define(:version => 20100410100145) do
     t.datetime "updated_at"
     t.string   "view_type"
     t.text     "fields"
-    t.boolean  "enabled"
-  end
-
-  create_table "page_blocks", :force => true do |t|
-    t.integer  "order"
-    t.string   "place"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "page_id"
-    t.integer  "block_id"
     t.boolean  "enabled"
   end
 
@@ -229,8 +212,8 @@ ActiveRecord::Schema.define(:version => 20100410100145) do
     t.datetime "created_at"
   end
 
-  add_index "taggings", ["context", "taggable_id", "taggable_type"], :name => "index_taggings_on_taggable_id_and_taggable_type_and_context"
   add_index "taggings", ["tag_id"], :name => "index_taggings_on_tag_id"
+  add_index "taggings", ["taggable_id", "taggable_type", "context"], :name => "index_taggings_on_taggable_id_and_taggable_type_and_context"
 
   create_table "tags", :force => true do |t|
     t.string "name"

@@ -103,7 +103,7 @@ module ApplicationHelper
         data = view.model.all(view_find_options(view, models_view))
       end
       
-      html << render(:partial => "views/#{models_view.view_type}", :locals => { :data => data })
+      html << render(:partial => "#{view_types_dir}#{models_view.view_type}", :locals => { :data => data })
     end
     html
   rescue

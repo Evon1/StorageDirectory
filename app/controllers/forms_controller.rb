@@ -53,7 +53,7 @@ class FormsController < ApplicationController
   end
   
   def get_field
-    @field ||= Field.new :form_id => @form.id
+    @field ||= Field.new :form_id => (@form.try(:id) || 0)
   end
   
 end

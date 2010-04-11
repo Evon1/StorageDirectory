@@ -2,14 +2,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 	<head>
 		
-		<%= stylesheet_link_tag 'common', @theme_css %>	
-		<%= stylesheet_link_tag 'print', :media => 'print' %>
-		
+		<%= stylesheet_link_tag 'common', @theme_css %>
 		<meta charset="utf-8">
+		<%= site_meta_tags %>
 		<title><%= yield :title %></title>
-
-		<meta name="description" content="" />
-		<meta name="keywords" content="" />
 
 		<link rel="shortcut icon" type="image/x-ico" href="images/icons/favicon.ico" />
 		

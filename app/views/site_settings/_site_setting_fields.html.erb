@@ -3,8 +3,8 @@
     <%= f.label model[0], nil, :class => "block w110 textFieldable small_round#{new_setting?(model) ? ' new_setting' : ''}", :title => 'Click on this label to edit it' %>
   </div>
   
-  <div class="setting_field shadow_wrap">
-    <%= text_field_tag "site_settings[#{model[0]}]", nil, setting_field_options(model) %>
+  <div class="setting_field shadow_wrap uncollapse">
+    <%= render_site_setting_field(model) %>
     <%= link_to 'Delete', '#', :rel => "setting_#{i}", :class => 'iconOnly16 inline_delete_link before_confirm right note', :title => "Delete #{model[0]} field?" %>
   </div>
 </div>

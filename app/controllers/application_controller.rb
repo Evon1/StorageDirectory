@@ -13,6 +13,7 @@ class ApplicationController < ActionController::Base
                 :regions,    # for blocks_model_form
                 :view_types, # for model_view_form
                 :models,     # for model_view_form
+                :view_types_dir,
                 :blocks_models,           # for the add_blocks_for helper
                 :model_blocks_for_region, # for the add_blocks_for helper
                 :rest_methods,  # for the virtual forms builder
@@ -22,6 +23,9 @@ class ApplicationController < ActionController::Base
                 :_page_actions, # suggestions form
                 :_models_having_assoc,
                 :_models_with_title,
+                :_themes,  # for the site_settings form
+                :_plugins, # for the site_settings form
+                :_widgets, # for the site_settings form
                 :in_edit_mode?,
                 :user_allowed?,
                 :reject_blocks_enabled_on_this, # for the blocks_fields
@@ -31,9 +35,7 @@ class ApplicationController < ActionController::Base
   include UtilityMethods
   
   # for the SharedModelMethod module
-  
   $regions    = [:header, :banner, :sidebar, :left, :right, :content_bottom, :column_5, :column_6, :column_7, :column_8, :footer]
-  $view_types = [:list, :blog_roll, :box, :table, :gallery]
   
   # for the virtual forms, build forms
   $_actions     = [:index, :show, :create, :update]
@@ -42,16 +44,17 @@ class ApplicationController < ActionController::Base
   # suggestions form
   $_page_actions = [:index, :show, :new, :edit]
   
-  # authorization system
+  # restful actions for the authorization system
   $_crud = [:all, :create, :read, :update, :delete]
   
+  # loads website title and theme, meta info, widgets and plugins
   before_filter :load_app_config
   cattr_accessor :app_config
   
   before_filter :reverse_captcha_check, :only => :create
   before_filter :clean_home_url, :authorize_user, :init
   
-  layout Proc.new { |c| c.app_config[:theme] }
+  layout lambda { app_config[:theme] }
   
   # display full error message when logged in as an Admin
   def local_request?
@@ -145,8 +148,9 @@ class ApplicationController < ActionController::Base
   
   #--------------------- Fetch Arrays, for select lists, etc. ---------------------
   
+  # gets the list of resources for the content menu
   def get_list_of_controllers_for_menu
-    @controllers = get_list_of_file_names('controllers').reject! { |c| c =~ /^application|^user_sessions|^ajax/i }
+    @controllers = get_list_of_file_names('app/controllers').reject! { |c| c =~ /^application|^site_settings|^user_sessions|^ajax/i }
     @controllers.map { |c| c.gsub!('_controller', '') }
     
     unless current_user.has_role?('Admin')
@@ -157,14 +161,15 @@ class ApplicationController < ActionController::Base
   end
   
   def get_list_of_file_names(dir, remove = '.rb')
-    Dir.new("#{RAILS_ROOT}/app/#{dir}").entries.reject { |f| f =~ /^\.|^\.\./i }.map { |f| f.gsub(remove, '') }
+    Dir.new("#{RAILS_ROOT}/#{dir}").entries.reject { |f| f =~ /^\.|^\.\./i }.map { |f| f.gsub(remove, '') }
   end
   
   def models(for_select = true, plural = true)
-    models = get_models_with_name_or_title(get_list_of_file_names('models'))
+    models = get_models_with_name_or_title(get_list_of_file_names('app/models'))
     fetch_array_for models, for_select, plural
   end
   
+  # get those data models that respond to name or title
   def get_models_with_name_or_title(model_names)
     model_names.map do |name|
       model_class = name.camelcase.constantize
@@ -175,20 +180,24 @@ class ApplicationController < ActionController::Base
     end.reject(&:nil?)
   end
   
+  # create, read, update, delete
   def _crud(for_select = true)
     fetch_array_for $_crud, for_select
   end
   
+  # get the defined actions for the layout
   def regions(for_select = true)
     fetch_array_for $regions, for_select
   end
   
-  def view_types(for_select = true)
-    fetch_array_for $view_types, for_select
+  # TODO move this to a config file or something
+  def view_types_dir() 'views/partials/' end
+  def get_view_types
+    get_list_of_file_names("/app/views/#{view_types_dir}", '.html.erb').map { |v| v.sub(/^_/, '').to_sym }
   end
   
   def _controllers(for_select = true)
-    fetch_array_for get_list_of_file_names('controllers', '_controller.rb'), for_select
+    fetch_array_for get_list_of_file_names('app/controllers', '_controller.rb'), for_select
   end
   
   def _actions(for_select = true)
@@ -203,9 +212,27 @@ class ApplicationController < ActionController::Base
     fetch_array_for $_field_types, for_select
   end
   
+  # get a list of view_types, themes, widgets, and plugins
+  # TODO: move directory paths to a config, validate themes (they need both a layout file and a css file)
+  def view_types(for_select = true) # get the defined view type partials. e.g. views/views/list.html.erb
+    fetch_array_for get_view_types, for_select
+  end
+  
+  def _themes(for_select = true)
+    fetch_array_for get_list_of_file_names('app/views/layouts', '.html.erb'), for_select
+  end
+  
+  def _plugins(for_select = true)
+    fetch_array_for get_list_of_file_names('public/javascripts/plugins', '.js'), for_select
+  end
+  
+  def _widgets(for_select = true)
+    fetch_array_for get_list_of_file_names('public/javascripts/widgets', '.js'), for_select
+  end
+  
   def _models_having_assoc(for_select = false)
     models_array = []
-    get_list_of_file_names('models').each do |name|
+    get_list_of_file_names('app/models').each do |name|
       model_class = name.camelcase.constantize
       next unless model_class.respond_to?('column_names')
       
@@ -217,7 +244,7 @@ class ApplicationController < ActionController::Base
   end
   
   def _models_with_title(for_select = false)
-    models_array = filter_dir_entries('models') do |entry|
+    models_array = filter_dir_entries('app/models') do |entry|
       model_class = entry.camelcase.constantize
       model_class.respond_to?('title')
     end
@@ -226,7 +253,7 @@ class ApplicationController < ActionController::Base
   end
   
   def filter_dir_entries(dir, &filter)
-    get_list_of_file_names('models').each do |entry|
+    get_list_of_file_names(dir).each do |entry|
       (entries ||= []) << entry if yield(entry)
     end
   end

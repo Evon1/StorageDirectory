@@ -333,8 +333,11 @@ $.bindPlugins = function() {
 	
 	$.toggleAction(window.location.href, true); // toggle a container if its id is in the url hash
 	
-	$.bindPlugins(); // calls a few common plugins, also used after a new element that uses a plugin is created in the dom
-	$('form').formBouncer(); // form validation, fields with supported validation classes will be processed
+	try { // to load external plugins, ignore failure
+		$.bindPlugins(); // calls a few common plugins, also used after a new element that uses a plugin is created in the dom
+		$('form').formBouncer(); // form validation, fields with supported validation classes will be processed
+	} catch (e){};
+	
 	$('.disabler', '.disabled').disabler(); // checkbox that disables all inputs in its form
 	$('.anchorListener').anchorDispatch();  // a toggle an element when its id is present in the url hash
 	$('.row_checkable').rowCheckable();			// clicking a whole form also enables its first checkbox

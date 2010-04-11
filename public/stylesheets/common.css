@@ -146,6 +146,7 @@ div.field_wrap, div.available { margin:0; }
 .setting_label label { padding:0 4px; }
 .setting_label input { opacity:.6; border:1px dotted #333; padding:1px 3px; font-size:100%; }
 div.setting_field input { width:93%; }
+div.setting_field .check_box_wrap label { border:0 none; cursor:default; }
 
 /* helpers */
 .wysiwyg { font-size:80%; font-family:Geneva, Courier, monospace; }

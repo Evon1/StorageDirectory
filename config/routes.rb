@@ -35,6 +35,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :suggestions
   
   map.site_settings '/site_settings/edit', :controller => 'site_settings', :action => 'edit'
+  map.paperclip_attachment '/images/:id', :controller => 'images', :action => 'show'
   
   # Sample resource route with options:
   #   map.resources :products, :member => { :short => :get, :toggle => :post }, :collection => { :sold => :get }

@@ -7,6 +7,7 @@
   				<li><%= link_to controller.titleize, path, :class => active_page(path) + " #{user_auth_status(controller, 'new')}#{controller == 'site_settings' ? ' access_denied' : ''}" %></li>
   			<% end %>
   		</ul>
+  		<%= site_settings_link_for_menu %>
   	</div>
   <% end %>
 
