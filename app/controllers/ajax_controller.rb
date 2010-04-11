@@ -1,6 +1,8 @@
 class AjaxController < ApplicationController
   
+  skip_before_filter :authorize_user, :except => :get_partial
   skip_before_filter :init
+  
   before_filter :validate_params
   before_filter :_get_model, :only => [:update, :destroy]
   before_filter :_get_model_class, :only => :get_attributes

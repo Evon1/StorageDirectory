@@ -477,7 +477,10 @@ $.bindPlugins = function() {
 							$this.parent().parent().slideUp(300, function(){ $(this).remove(); });
 						}
 						
-					} else alert(response.data);
+					} else {
+						alert(response.data);
+						$this.removeClass('loading');
+					}
 				}
 			);
 		} else $this.removeClass('loading');
