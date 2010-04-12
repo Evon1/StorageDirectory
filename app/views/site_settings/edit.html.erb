@@ -1,0 +1,28 @@
+<% declare_content_for %>
+<%= display_message flash %>
+
+<h2>Edit Site Settings</h2>
+
+<%= render_model_helptext(controller_name) %>
+
+<div class="clear">
+  <% form_for :site_settings, :url => { :controller => 'site_settings', :action => 'update' }, :method => :put do |f| %>
+    <div id="SiteSettingFields" class="site_settingsFields partial_addable">
+      
+      <div class="stack">
+    	  <%= render :partial => 'shared/model_addable_fields', 
+      			       :locals => { 
+      			         :f          => f, 
+      			         :_for       => 'site_settings', 
+      			         :context    => 'SiteSettingFields', 
+      			         :collection => @site_settings, 
+      			         :new_model  => @new_setting_field } %>
+    	</div>
+      
+      <div class="submit">
+        <%= f.submit 'Save Settings', :confirm => 'I assume you know what you\'re doing?', :disable_with => 'Ok, wait a sec...' %>
+      </div>
+      
+    </div>
+  <% end %>
+</div>

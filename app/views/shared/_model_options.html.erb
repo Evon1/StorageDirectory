@@ -1,4 +1,4 @@
-<% if current_user %>
+<% if current_user && current_user.has_permission?(model_name(model).pluralize, 'edit') %>
   <div id="<%= model_name(model) %>_buttons" class="model_options buttons right">
 		<%= link_to 'Hide', { :anchor => hide_anchor }, 
         :class => 'iconOnly16 toggle_action toggle_right right note', 

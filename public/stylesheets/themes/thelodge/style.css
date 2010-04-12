@@ -7,7 +7,7 @@ fieldset, form, label, legend,table, caption, tbody, tfoot, thead, tr, th, td {
 	padding: 0;
 	border: 0;
 	outline: 0;
-	font-size: 100%;
+	font-size: 101.01%;
 	vertical-align: baseline;
 	background: transparent;
 }
@@ -19,7 +19,7 @@ ul { list-style: none; }
 table { border-collapse: collapse; border-spacing: 0; }
 
 /* overrides */
-body { background:#000; text-align:center; font-family:"Book Antiqua", Palatino, serif; }
+body { background:#261b0d; text-align:center; font-family:"Book Antiqua", Palatino, serif; }
 h1, h2, h3, h4 { margin-bottom:7px; font-size:200%; }
 h1 { font-size:250%; }
 h2 { font-size:150%; }
@@ -29,42 +29,43 @@ a:link, a:visited { color:#5B732D; }
 a:hover, a:active { color:#8a265b; }
 
 /* LAYOUT */
-#outer_wrapper { width:1153px; min-height:765px; text-align:left; margin:0 auto; padding-top:105px; background:url(/images/ui/thelodge/lodge-bg.jpg) no-repeat top center; }
+#outer_wrapper { min-height:610px; text-align:left; margin:0 auto; padding:105px 0 250px 0; background:url(/images/ui/thelodge/lodge-bg.jpg) no-repeat bottom center; }
 #inner_wrapper { width:740px; min-height:541px; margin:0 auto; position:relative; background:url(/images/ui/thelodge/wrapper-bg.jpg) repeat-y top center; }
 
+#header { position:relative; height:60px; background:url(/images/ui/thelodge/wrapper-bg-top.jpg) no-repeat top center; }
 #logo { width:316px; height:168px; position:absolute; top:-55px; left:-57px; background:url(/images/ui/thelodge/lodge-logo.png) no-repeat top center; }
 #address { padding:20px 7px 0 0; }
 
-#content_wrapper { padding:100px 30px 0 30px; clear:both; }
-#nav { float:left; width:178px; padding-top:10px; }
+#content_wrapper { padding:100px 15px 40px 15px; clear:both; min-height:340px; }
+#nav { float:left; width:178px; padding:10px 0 0 18px; }
 #nav ul li a { color:#000; display:block; padding:3px 0; font-family:Impact, Arial, sans-serif; font-size:195%; text-decoration:none; }
 #nav ul li a.active, #nav ul li a:hover, #nav ul li a:active { text-shadow:0 0 13px #e1d7a7; }
+#content_outer { float:left; position:relative; width:491px; }
 #content {
 	font-size:80%;
-	float:left;
-	width:378px;
-	min-height:310px;
 	line-height:1.3;
-	position:relative;
-	padding:30px 50px 0 50px;
-	background:url(/images/ui/thelodge/content-bg.jpg) repeat-y top center;
+	padding:30px 0 25px 0;
+	margin-left:33px;
+	background:url(/images/ui/thelodge/content-bg-top.jpg) no-repeat top center;
 }
+#content .content_inner { padding:0 35px 0 45px; min-height:293px; padding-bottom:10px; padding-top:10px; background:url(/images/ui/thelodge/content-bg-mid.jpg) repeat-y; }
+#btm_content_bg { height:39px; background:url(/images/ui/thelodge/content-bg-btm.jpg) no-repeat bottom center; }
 #content h2 { font-size:140%; }
 #content p { margin:0 0 7px 0; }
-#content > form, #content > div { margin-bottom:10px; }
-#content fieldset { color:yellow; text-shadow:0 1px 1px #000; }
+#content > form { margin-bottom:10px; }
+#content fieldset { color:#261b0d; text-shadow:0 1px 1px yellow; font-family:"Lucida Console", Monaco, sans-serif; }
 #content fieldset legend { font-size:110%; margin:5px 0 7px 0; }
 #content fieldset .collapseable { color:#818181; }
 #content .notice { position:absolute; top:-40px; width:73%; }
 
-#footer { position:relative; }
+#footer { position:relative; top:33px; }
 #twitter, #specials, #facebook { position:absolute; }
-#twitter { top:-28px; left:3px; }
-#specials { width:112px; height:136px; top:14px; left:340px; line-height:1.2; text-align:center; padding:30px 7px 0 7px; color:#687d39; background:url(/images/ui/thelodge/postit-bg.png) no-repeat top center; }
-#facebook { right:8px; }
+#twitter { top:-108px; left:3px; }
+#specials { width:112px; height:136px; top:-77px; left:340px; line-height:1.2; text-align:center; padding:30px 7px 0 7px; color:#687d39; background:url(/images/ui/thelodge/postit-bg.png) no-repeat top center; }
+#facebook { right:8px; top:-82px; }
 
 /* lodge theme customizations */
-#greyrobot { width:740px; margin:0 auto; }
+#greyrobot { width:740px; margin:0 auto; position:absolute; top:180px; }
 #users_controller #content .round { color:yellow; text-shadow:0 1px 1px #000; }
 .region_footer .model_options { position:absolute; right:-40px; }
 #food_menu_page h4 { text-align:center; }
@@ -110,3 +111,5 @@ a:hover, a:active { color:#8a265b; }
 .h210 { height: 210px; }
 .h230 { height: 230px; }
 .h260 { height: 260px; }
+.staticContent img { border:2px solid #835F30; }
+.staticContent a img:hover { border-color:#E0A75D; }

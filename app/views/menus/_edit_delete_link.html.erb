@@ -1,5 +1,0 @@
-<% if current_user %>
-	<%= link_to 'Delete', ajax_action_path(:destroy, :model => model_name(model), :id => model.id), :class => 'ajax_action before_confirm iconOnly16 delete_link right note', :rel => 'list_view', :title => "Delete this #{model_name(model)}" %>
-
-	<%= link_to 'Edit', edit_model_path(model), :class => 'iconOnly16 edit_link right note', :title => "Edit this #{model_name(model)}" %>
-<% end %>

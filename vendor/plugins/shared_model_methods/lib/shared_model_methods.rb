@@ -11,6 +11,10 @@ module SharedModelMethods #:nodoc:
       extend SharedModelMethods::SingletonMethods
     end
     
+    def to_controller_str
+      self.name.downcase.pluralize
+    end
+    
   end
   
   module SingletonMethods

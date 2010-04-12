@@ -13,8 +13,15 @@ class Gallery < ActiveRecord::Base
   access_shared_methods
   
   # Class Methods
+  
   def self.all_for_index_view
-    find(:all, :select => 'title, description, id')
+    all :select => 'title, description, id'
+  end
+  
+  # Instance Methods
+  
+  def to_param
+    "#{id}-#{title.parameterize}"
   end
   
 end

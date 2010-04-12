@@ -67,6 +67,8 @@ span.active { cursor:default; }
 .has_hoverable_list ul li { padding:3px 3px 3px 5px; cursor:default; }
 .has_hoverable_list ul li:hover { background:#ebebeb; opacity:.6; }
 .with_floats li { overflow:hidden; }
+.half_width { width:50%; }
+.third_width { width:33%; }
 
 /* admin menu */
 #admin_menu {
@@ -78,20 +80,23 @@ span.active { cursor:default; }
 	background:#ebebeb;
 	position:fixed;
 	opacity:.6;
+	text-align:left;
+	line-height:1.3;
 	top:0;
 	z-index:1000;
-	}
+}
 #content_menu { position:relative; }
 #resource_list { position:absolute; top:21px; z-index:1000; background:#ebebeb; }
 #admin_menu a { text-decoration:none; color:#333; }
 #resource_list li a:link, #resource_list li a:visited { padding:3px 5px; display:block; }
-#resource_list li:hover, #resource_list li:active { background:#818181; }
+#resource_list li:hover, #resource_list li:active, #resource_list li a.active { background:#818181; }
 #session_links a { padding:3px 5px; }
 #session_links a:hover, #session_links a:active { text-decoration:underline; }
 .admin_hover_option { 
 	position:absolute; 
 	top:0px; 
-	right:-45%; 
+	right:-42px;
+	width:30px;
 	z-index:1001; 
 	border:1px solid #818181;
 	background:#dadada; 
@@ -132,8 +137,16 @@ label[for="content"] { float:none; }
 .medium_textarea { height:150px; }
 .small_textarea { height:75px; }
 .small_textfield { width:50% !important; }
+.smaller_textfield { width:25% !important; }
 
 div.field_wrap, div.available { margin:0; }
+
+/* Edit Settings page */
+.new_setting, .existing_setting_field label { border:1px dotted #666; cursor:pointer; }
+.setting_label label { padding:0 4px; }
+.setting_label input { opacity:.6; border:1px dotted #333; padding:1px 3px; font-size:100%; }
+div.setting_field input { width:93%; }
+div.setting_field .check_box_wrap label { border:0 none; cursor:default; }
 
 /* helpers */
 .wysiwyg { font-size:80%; font-family:Geneva, Courier, monospace; }
@@ -172,6 +185,7 @@ div.field_wrap, div.available { margin:0; }
 #Views p { margin:0 0 7px 0; }
 
 #body .box_view { margin:10px -10px 0 -10px; }
+#body .gallery_view, #body .blog_roll_view { margin:10px -10px 10px 0; }
 div.box_view > div {
 	float:left;
 	width:30.5%;
@@ -269,7 +283,7 @@ input.tiny_text_field { width:30px; }
 .block .buttons a.iconOnly16,
 #view_type_link_wrap .iconOnly16 { text-indent:-999999px; background-repeat:no-repeat; display:block; padding:1px 9px; }
 .add_link { background-image:url(/images/ui/plus_sign.png); }
-.delete_link,
+.delete_link, .inline_delete_link,
  .block_models_view .buttons a.delete_link, .plain .buttons a.delete_link { background-image:url(/images/ui/delete_icon.png); }
 .cancel_link { background-image:url(/images/ui/cancel_icon.png); }
 .question_mark { background-image:url(/images/ui/question_mark.png); }
@@ -326,11 +340,19 @@ input[type='reset'], a.cancel:link { color:#a63217; }
 .subfields { margin:0 0 7px 0; }
 
 /* Rails defaults */
-.notice, .warning, .error, .flash-error { padding:7px 12px; width:80%; font-weight:bold; margin:0 0 10px 0; border:2px solid; }
-.notice p, .warning p, .error p, .flash-error p { margin:3px 0; }
-.notice { color:#5b732d; border-color:#5b732d; }
-.warning { color:#ff9646; border-color:#ff9646; }
-.error, .flash-error { color:#a63217; border-color:#a63217; }
+.flash {
+	padding:7px 12px;
+	width:80%;
+	font-weight:bold;
+	margin:0 0 10px 0;
+	border:2px solid;
+	opacity:.7;
+	box-shadow:3px 3px 5px #333;
+}
+.flash p { margin:3px 0; opacity:1; }
+.notice { color:#334215; background-color:#5b732d; border-color:#334215; }
+.warning { color:#A55112; background-color:#ff9646; border-color:#A55112; }
+.error, .flash-error { color:#6F2211; background-color:#a63217; border-color:#6F2211; }
 
 .invalid { color:#fff; }
 .fieldWithErrors, .invalid {

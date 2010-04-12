@@ -1,5 +1,6 @@
 class FormsController < ApplicationController
   before_filter :get_form, :except => [:index, :new, :create]
+  before_filter :get_field, :only => [:new, :edit]
   
   def index
     @forms = Form.all
@@ -48,7 +49,11 @@ class FormsController < ApplicationController
   private
   
   def get_form
-    @form = Form.find(params[:id])
+    @form ||= Form.find params[:id]
+  end
+  
+  def get_field
+    @field ||= Field.new :form_id => (@form.try(:id) || 0)
   end
   
 end

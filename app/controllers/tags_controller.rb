@@ -1,11 +1,12 @@
 class TagsController < ApplicationController
-  before_filter :get_tag, :only => [:show, :edit, :update, :destroy]
+  before_filter :get_tag, :only => [:edit, :update, :destroy]
   
   def index
     @tags = Tag.all
   end
   
   def show
+    @models = params[:model].singularize.titleize.constantize.tagged_with params[:tag]
   end
   
   def new

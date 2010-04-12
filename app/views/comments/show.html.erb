@@ -2,4 +2,8 @@
 
 <%= display_message flash %>
 
-<%= render :partial => @comment %>
+<div class="stack">
+  <%= render :partial => @comment %>
+</div>
+
+<p class="right"><%= link_to '&laquo; Back to Comments', comments_path %></p>

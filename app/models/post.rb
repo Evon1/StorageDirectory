@@ -14,7 +14,7 @@ class Post < ActiveRecord::Base
   
   # Class Methods
   def self.all_for_index_view
-    find(:all, :select => 'title, content, published, id, user_id, updated_at')
+    all :select => 'title, content, published, id, user_id, updated_at'
   end
   
   # Instance Methods

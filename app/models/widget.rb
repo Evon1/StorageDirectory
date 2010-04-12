@@ -13,7 +13,7 @@ class Widget < ActiveRecord::Base
   
   # Class Methods
   def self.all_for_index_view
-    #find(:all, :select => 'title, content, id')
+    #all :select => 'title, content, id'
   end
   
 end

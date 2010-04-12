@@ -9,8 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100115031926) do
-
+ActiveRecord::Schema.define(:version => 20100410100145) do
   create_table "block_forms", :force => true do |t|
     t.integer  "block_id"
     t.integer  "form_id"
@@ -67,6 +66,7 @@ ActiveRecord::Schema.define(:version => 20100115031926) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "form_id"
+    t.boolean  "use_own_name"
   end
 
   create_table "forms", :force => true do |t|
@@ -79,6 +79,10 @@ ActiveRecord::Schema.define(:version => 20100115031926) do
     t.datetime "updated_at"
     t.string   "scope"
     t.integer  "target_id"
+    t.boolean  "send_email"
+    t.string   "recipient"
+    t.boolean  "use_reverse_captcha"
+    t.boolean  "show_title"
   end
 
   create_table "galleries", :force => true do |t|
@@ -92,6 +96,13 @@ ActiveRecord::Schema.define(:version => 20100115031926) do
     t.integer  "gallery_id"
     t.integer  "image_id"
     t.integer  "order"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "groups", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -117,20 +128,17 @@ ActiveRecord::Schema.define(:version => 20100115031926) do
     t.text     "content"
   end
 
-  create_table "link_groups", :force => true do |t|
-    t.string   "name"
-    t.text     "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "links", :force => true do |t|
     t.string   "title"
     t.string   "path"
     t.boolean  "relative"
     t.datetime "created_at"
     t.datetime "updated_at"
+<<<<<<< HEAD
     t.integer  "link_group_id"
+=======
+    t.integer  "group_id"
+>>>>>>> 777f71ed958123e0b81b6e2efcc73fc9dcceacdb
     t.string   "resource"
     t.integer  "target_id"
   end
@@ -158,6 +166,8 @@ ActiveRecord::Schema.define(:version => 20100115031926) do
     t.boolean  "show_in_nav"
     t.text     "content"
     t.text     "description"
+    t.boolean  "show_title"
+    t.integer  "position",    :default => 0
   end
 
   create_table "permissions", :force => true do |t|

@@ -1,29 +1,38 @@
 <% declare_content_for %>
 <%= display_message flash %>
 
-<h2><%= defined?(heading) ? heading : model_form_heading %></h2>
+<h2><%= local_assigns.keys.include?(:heading) ? heading : model_form_heading %></h2>
 
 <%= render_model_helptext(controller_name) %>
 
 <div class="clear">
-	<% form_for model, :html => (defined?(html) ? html : {}) do |f| %>
+	<% form_for model, :html => (local_assigns.keys.include?(:html) ? html : {}) do |f| %>
 		<%= f.error_messages %>
 		
 		<%= render :partial => "#{controller_name}/form", :locals => { :f => f } %>
 		
 		<div class="uncollapse stack">
 			<div class="buttons left">
-				<% submit_text = defined?(heading) ? "Update #{heading}" : (model.new_record? ? "Add #{model_name(model).titleize}" : 'Save Changes') %>
+				<% submit_text = local_assigns.keys.include?(:heading) && action_name == 'edit' ? "Update #{heading}" : (model.new_record? || action_name == 'new' ? "Add #{model_name(model).titleize}" : 'Save Changes') %>
 				<%= submit_tag submit_text %>
 			</div>
 			
-			<% unless defined?(hide_delete_link) && hide_delete_link %>
-				<div class="buttons right">
-					<%= link_to 'Delete', ajax_action_path(:destroy, :model => model_name(model), :id => model.id), :rel => "model_form", :class => 'ajax_action before_confirm iconOnly16 delete_link right note', :title => "Delete #{model.name_or_title}" %>
-					<%= link_to 'Cancel', (session[:return_to] || :back), :class => 'iconOnly16 cancel_link right', :title => "Cancel editing #{model.name_or_title}" %>
-				</div>
-			<% end %>
-			
+			<div class="buttons right">
+			  <% unless defined?(hide_delete_link) && hide_delete_link %>
+  				<%= link_to 'Delete', ajax_action_path(:destroy, :model => model_name(model), :id => model.id), :rel => "model_form", :class => 'ajax_action before_confirm iconOnly16 delete_link right note', :title => "Delete #{model.name_or_title}" %>
+  				<%= link_to 'Cancel', (session[:return_to] || :back), :class => 'iconOnly16 cancel_link right', :title => "Cancel editing #{model.name_or_title}" %>
+				<% end %>
+				
+				<% if @user && !@user.new_record? && user_allowed?(model.class.to_controller_str, 'show', params) %>
+				  <%= link_to "Back to #{@user.name.possessive} Profile", @user %>
+				  &nbsp;|&nbsp;
+				<% end %>
+				
+				<% if user_allowed?(controller_name, 'index', params) %>
+				  <%= link_to "Back to #{controller_name.titleize}", model_index_path(controller_name), :class => 'right_space' %> 
+				<% end %>
+			</div>
+		
 		</div>
 		
 	<% end %>
