@@ -1,14 +1,14 @@
-if (window.location.hash == '#anim') setTimeout(GR_anim, 500);
+setTimeout(GR_anim, 500);
 
-var $GR_map = $('#map'),
-		$GR_heading = $('h3', '#map');
-		GR_css_hide = { 'opacity': 0, 'left': '-320px' },
-		markers = [],
-		GR_sign_img = new Image();
-		GR_sign_img.src = '/images/ui/storagedirectory/sign.png';
-		GR_sign_img.id = 'map_sign';
+var $GR_map 							= $('#map'),
+		$GR_heading 					= $('h3', '#map');
+		GR_css_hide 					= { 'opacity': 0, 'left': '-320px' },
+		markers 							= [],
+		GR_sign_img 					= new Image();
+		GR_sign_img.src 			= '/images/ui/storagedirectory/sign.png';
+		GR_sign_img.id 				= 'map_sign';
 		GR_sign_img.className = 'anim_img';
-		GR_sign_img.alt = 'Sign';
+		GR_sign_img.alt 			= 'Sign';
 
 $GR_map.append(GR_sign_img);
 var $GR_sign_img = $(GR_sign_img);

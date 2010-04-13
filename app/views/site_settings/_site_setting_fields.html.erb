@@ -1,4 +1,4 @@
-<div id="setting_<%= i %>" class="stack <%= new_setting?(model) ? 'new_setting_field' : 'existing_setting_field' %>">
+<div id="setting_<%= i %>" class="stack framed round box <%= new_setting?(model) ? 'new_setting_field' : 'existing_setting_field' %> <%= cycle 'odd', 'even' %>">
   <div class="setting_label small_stack">
     <%= f.label model[0], nil, :class => "block w110 textFieldable small_round#{new_setting?(model) ? ' new_setting' : ''}", :title => 'Click on this label to edit it' %>
   </div>

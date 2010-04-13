@@ -143,7 +143,7 @@ div.field_wrap, div.available { margin:0; }
 
 /* Edit Settings page */
 .new_setting, .existing_setting_field label { border:1px dotted #666; cursor:pointer; }
-.setting_label label { padding:0 4px; }
+.setting_label label, .setting_label input { padding:0 4px; width:100px; }
 .setting_label input { opacity:.6; border:1px dotted #333; padding:1px 3px; font-size:100%; }
 div.setting_field input { width:93%; }
 div.setting_field .check_box_wrap label { border:0 none; cursor:default; }

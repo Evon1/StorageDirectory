@@ -10,6 +10,7 @@
 # It's strongly recommended to check this file into your version control system.
 
 ActiveRecord::Schema.define(:version => 20100410100145) do
+
   create_table "block_forms", :force => true do |t|
     t.integer  "block_id"
     t.integer  "form_id"
@@ -134,11 +135,7 @@ ActiveRecord::Schema.define(:version => 20100410100145) do
     t.boolean  "relative"
     t.datetime "created_at"
     t.datetime "updated_at"
-<<<<<<< HEAD
-    t.integer  "link_group_id"
-=======
     t.integer  "group_id"
->>>>>>> 777f71ed958123e0b81b6e2efcc73fc9dcceacdb
     t.string   "resource"
     t.integer  "target_id"
   end

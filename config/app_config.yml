@@ -1,22 +1,22 @@
 --- 
 development: !map:HashWithIndifferentAccess 
   plugins: inflector, jquery.formbouncer, jquery.hinty
-  theme: storagedirectory
   title: US Self Storage Locator
+  theme: storagelocator
+  widgets: map_anim
+  description: ""
+  keywords: ""
+test: 
+  plugins: inflector, jquery.formbouncer, jquery.hinty
+  title: US Self Storage Locator
+  theme: storagelocator
   widgets: ""
   description: 
   keywords: 
 production: 
   plugins: inflector, jquery.formbouncer, jquery.hinty
-  theme: storagedirectory
   title: US Self Storage Locator
+  theme: storagelocator
   widgets: ""
   description: 
-  keywords:
-test: 
-  plugins: inflector, jquery.formbouncer, jquery.hinty
-  theme: storagedirectory
-  title: US Self Storage Locator
-  widgets: ""
-  description: 
-  keywords:
+  keywords: 
