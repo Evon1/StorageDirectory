@@ -28,13 +28,211 @@
   		</div>
 		<% end %>
 		
-		<div id="wrapper" class="wrap">
+		<div id="wrapper">
 
+	    <div id="header">
+	      <div class="inner_wrap">
+	        <div id="top_btns" class="half_round_btns right">
+  	        <div id="btn1">
+  	          <div><a href="/login" class="white dark_text_shadow plain_link">Login</a></div>
+  	        </div>
+  	        <div id="btn2">
+  	          <div><a href="/login" class="white dark_text_shadow plain_link">Help</a></div>
+  	        </div>
+  	      </div>
+  	      
+  	      <div id="logo">
+  	        <a href="/"><img src="/images/ui/storagelocator/us-self-storage-locator-logo.png" alt="US Self Storage Locator" /></a>
+  	      </div>
+  	    </div>
+  	    <div id="header_btm"></div>
+	    </div>  <!-- /#header -->
+	    
+	    <div id="nav" class="region block_center inner_wrap">
+        <div class="right">
+          <ul class="sortable">
+            <li><a href="/home">Home</a></li>
+            <li><a href="/storage-locator">Storage Locator</a></li>
+            <li><a href="/storage-tips">Storage Tips</a></li>
+            <li><a class="last" href="/add-your-facility">Add Your Facility</a></li>
+          </ul>
+        </div>
+      </div>
+	    
+	    <div id="garage_door_wrap">
+	      <div class="content_wrap">
+	        
+    	    <div class="wrap content_round_top"></div>
+    	    <div id="inner_wrap" class="wrap content_round_inner">
+    	       <div class="content_inner">
+    	         
+    	         <% if yield(:sidebar) %>
+     						<div id="sidebar" class="region stack">
+
+     							<%#= yield :sidebar %>
+     							<div id="main_image" class="right">
+                    <img src="/images/ui/storagelocator/storage-pic.png" alt="Find Self Storage" />
+                    <h3 class="dark_text_shadow center"><a href="#">Get a FREE Storage Rental Quote!</a></h3>
+                  </div>
+     							
+     							<div id="main_search">
+     							  <div class="inner">
+     							    <div id="search_header">
+     							      <div id="loupe"></div>
+     							      <div class="inner">
+     							        Your Self Storage Search Starts Here.
+     							      </div>
+     							    </div>
+     							    <div id="search_form" class="bottom_round border_box box_shadow">
+     							      <div class="inner">
+     							        <form action="/search" method="get">
+     							          <fieldset>
+     							            <p>To find your closest self storage facility, search by:</p>
+     							            <p><input type="text" name="search" class="hintable inner_shadow medium_round text" title="Address or Zip Code" /></p>
+     							            <p><input type="image" src="/images/ui/storagelocator/search-btn.png" name="commit" value="Search" /><a id="open_advanced_search" class="right" href="#">More Options</a></p>
+     							          </fieldset>
+     							          <fieldset>
+     							            <p>Or choose a city near you:</p>
+     							            <div id="near_city" class="uncollapse inner_shadow">
+     							              <a href="#">Boca Raton</a>
+     							              <a href="#">Delray Beach</a>
+     							              <a href="#">Deefield Beach</a>
+     							              <a href="#">Margate</a>
+     							              <a href="#">Coral Springs</a>
+     							              <a href="#">Parkland</a>
+     							              <a href="#">Tamarac</a>
+     							              <a href="#">Pompano Beach</a>
+     							            </div>
+     							          </fieldset>
+     							        </form>
+     							      </div>
+     							    </div>
+     							  </div>
+     							</div> <!-- /#main_search -->
+                  
+     						</div> <!-- /#sidebar -->
+     					<% end %>
+
+     					<% if yield(:column_5) %>
+     				    <div id="column_5" class="region">
+     				      
+                  <%#= yield :column_5 %>
+                  <div id="steps" class="large_round box">
+                    <div id="step1" class="left">
+                      <div class="inner">
+                        <img class="step_icon" src="/images/ui/storagelocator/steps/step1.png" alt="Step 1: Search" />
+                        <div class="step_pic">
+                      
+                        </div>
+                        <div class="step_text">
+                          <h4>Search</h4>
+                          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        </div>
+                      </div>
+                    </div> <!-- /#step1 -->
+                  
+                    <div id="step2" class="left">
+                      <div class="inner">
+                        <img class="step_icon" src="/images/ui/storagelocator/steps/step2.png" alt="Step 2: Locate" />
+                        <div class="step_pic">
+                      
+                        </div>
+                        <div class="step_text">
+                          <h4>Locate</h4>
+                          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+                        </div>
+                      </div>
+                    </div> <!-- /#step2 -->
+                  
+                    <div id="step3" class="left last">
+                      <div class="inner">
+                        <img class="step_icon" src="/images/ui/storagelocator/steps/step3.png" alt="Step 3 icon" />
+                        <div class="step_pic">
+                          <img src="/images/ui/storagelocator/steps/img-step3.png" alt="Step 3: Reserve">
+                        </div>
+                        <div class="step_text">
+                          <h4>Reserve</h4>
+                          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        </div>
+                      </div>
+                    </div> <!-- /#step3 -->
+                  </div> <!-- /#steps -->
+                  
+                  <div id="more_info" class="hide">
+                  </div>
+                  
+                  <div id="click_for_more">
+                    <h4 class="white dark_text_shadow">Click Here For More</h4>
+                  </div>
+                  
+     				    </div> <!-- /#column_5 -->
+     				  <% end %>
+
+     					<div id="body" class="region">
+     						<%= yield %>
+     					   <!-- /the stuff -->
+     						<div id="content_bottom" class="region">
+     							<%#= yield :content_bottom %>
+                  
+     						</div>
+     					</div> <!-- /#body -->
+    	         
+    	       </div>
+    	    </div>
+    	    <div class="wrap content_round_btm"></div>
+    	  </div>
+    	  <div id="handle" class="block_center"></div>
+	    </div> <!-- /#garage_door_wrap -->
 	    
 	  </div> <!-- /#wrapper -->
 	  
-	  <div id="footer" class="region wrap">
-      <%= yield :footer %>
+	  
+	  <div id="footer">
+	    <div class="inner">
+	      <div class="wrap">
+          <%#= yield :footer %>
+          <ul class="plain horizontal">
+            <li><a href="#">About Us</a></li>
+            <li><span>•</span></li>
+            <li><a href="#">Member Login</a></li>
+            <li><span>•</span></li>
+            <li><a href="#">Help</a></li>
+            <li><span>•</span></li>
+            <li><a href="#">Sitemap</a></li>
+            <li><span>•</span></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><span>•</span></li>
+            <li><a href="#">Terms of Service</a></li>
+            <li><span>•</span></li>
+            <li><a href="#">Self Storage Directory</a></li>
+            <li><span>•</span></li>
+            <li><a href="#">Storage Tips/Blog</a></li>
+          </ul>
+          
+          <div class="content_round_top"></div>
+          <div class="content_round_inner">
+    	      <div class="content_inner">
+    	        inner
+    	      </div>
+    	    </div>
+    	    <div class="content_round_btm"></div>
+    	    
+    	    <div class="framed">
+    	      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    	      <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    	    </div>
+    	    
+        </div> <!-- /.wrap -->
+      </div>
+      
+      <div id="footer_btm">
+        <div class="wrap">
+          <span class="left">Copyright &copy; 2010 USSelfStorageLocator.com</span>
+          <span class="right">
+            <sup class="font75">Powered by</sup><a id="greyrobot" title="Design and Development" href="http://greyrobot.com"><span>Grey</span> Robot</a>
+          </span>
+        </div>
+      </div>
     </div> <!-- /#footer -->
 	  
 	  <%= javascript_include_tag 'ckeditor/ckeditor.js', 'jquery.all', @plugins %>

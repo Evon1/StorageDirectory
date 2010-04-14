@@ -1,4 +1,4 @@
-setTimeout(GR_anim, 500);
+//setTimeout(GR_anim, 500);
 
 var $GR_map 							= $('#map'),
 		$GR_heading 					= $('h3', '#map');

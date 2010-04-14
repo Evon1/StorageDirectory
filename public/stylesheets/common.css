@@ -54,6 +54,7 @@ img.right { margin:0 7px 7px 0; }
 .toggle, .note { font-size:12px; }
 .mtop7 { margin-top:7px; }
 .plain { list-style-type:none; }
+.plain_link { text-decoration:none; }
 .spaced_list_items li { margin-bottom:7px; }
 .form_buttons input { width:auto; margin:0 7px 0 0; }
 .html_wrap { padding:5px 7px; background-color:#ebebeb; font-size:10px; }
@@ -61,6 +62,7 @@ img.right { margin:0 7px 7px 0; }
 .horizontal li { display:inline; }
 span.active { cursor:default; }
 .light_text_shadow { text-shadow:0 1px 2px #E1D7A7; }
+.dark_text_shadow { text-shadow:0 1px 2px #333; }
 .block { display:block; }
 .w80 { width:80px; }
 .w110 { width:110px; }
@@ -69,6 +71,15 @@ span.active { cursor:default; }
 .with_floats li { overflow:hidden; }
 .half_width { width:50%; }
 .third_width { width:33%; }
+.block_center { margin:0 auto; }
+.pos_rel { position:relative; }
+.font110 { font-size:110%;}
+.font85 { font-size:85%; }
+.font75 { font-size:75%; }
+.inner_shadow { -moz-box-shadow:1px 1px 8px #666 inset; -webkit-box-shadow:1px 1px 8px #666 inset; box-shadow:1px 1px 8px #666 inset; }
+
+/* common colors */
+.white, a.white, a.white:link, a.white:visited { color:#fff; }
 
 /* admin menu */
 #admin_menu {
@@ -157,6 +168,11 @@ div.setting_field .check_box_wrap label { border:0 none; cursor:default; }
 	-moz-border-radius:10px;
 	-webkit-border-radius:10px;
 	border-radius:10px;
+}
+.large_round {
+	-moz-border-radius:15px;
+	-webkit-border-radius:15px;
+	border-radius:15px;
 }
 .medium_round, .html_wrap {
 	-moz-border-radius:7px;
