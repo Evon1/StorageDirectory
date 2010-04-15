@@ -19,8 +19,7 @@
 			
 			<div class="buttons right">
 			  <% unless defined?(hide_delete_link) && hide_delete_link %>
-  				<%= link_to 'Delete', ajax_action_path(:destroy, :model => model_name(model), :id => model.id), :rel => "model_form", :class => 'ajax_action before_confirm iconOnly16 delete_link right note', :title => "Delete #{model.name_or_title}" %>
-  				<%= link_to 'Cancel', (session[:return_to] || :back), :class => 'iconOnly16 cancel_link right', :title => "Cancel editing #{model.name_or_title}" %>
+  			  <%= render :partial => 'shared/model_delete_cancel_link', :locals => { :model => model }%>
 				<% end %>
 				
 				<% if @user && !@user.new_record? && user_allowed?(model.class.to_controller_str, 'show', params) %>

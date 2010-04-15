@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100410100145) do
+ActiveRecord::Schema.define(:version => 20100415105309) do
 
   create_table "block_forms", :force => true do |t|
     t.integer  "block_id"
@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(:version => 20100410100145) do
     t.text     "content"
     t.boolean  "show_title"
     t.string   "show_in_all"
+    t.integer  "position",    :default => 0
   end
 
   create_table "blocks_models", :force => true do |t|

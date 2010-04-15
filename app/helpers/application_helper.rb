@@ -8,6 +8,10 @@ module ApplicationHelper
     end
   end
   
+  def page_name
+    request.path.sub('/', '')
+  end
+  
   def declare_content_for # renders blocks in regions based on current page
     title = (@page ? @page.title  : controller_name.titleize).to_s
     content_for :title, "#{title.blank? ? 'Manage - ' : title + ' - '}#{ApplicationController.app_config[:title]}"

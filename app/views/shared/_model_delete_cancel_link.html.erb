@@ -1,0 +1,2 @@
+<%= link_to 'Delete', ajax_action_path(:destroy, :model => model_name(model), :id => model.id), :rel => "model_form", :class => 'ajax_action before_confirm iconOnly16 delete_link right note', :title => "Delete #{model.name_or_title}" unless model.new_record? %>
+<%= link_to 'Cancel', (session[:return_to] || :back), :class => 'iconOnly16 cancel_link right', :title => "Cancel editing #{model.name_or_title}" %>

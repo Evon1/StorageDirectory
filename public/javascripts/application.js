@@ -112,6 +112,7 @@ $.toggleAction = function(href, scroll_to_it) {
 			var context = $('.' + contextClass);
 			var actionLink = $('.toggle_action', context);
 			
+			// change the state of the toggle_action link
 			if (actionLink.length) $.switch_action_hash($('.toggle_action', context), action, elementClass, contextClass);
 			
 			if (scroll_to_it) $(document).scrollTo(context, 800);
@@ -127,7 +128,8 @@ $.updateModels = function(e, ui) {
 	var list_items  = ui.item.parent().children(),
 			$this			 	= $(ui.item),
 			data 				= '';
-
+			
+	// build query string
 	$(list_items).each(function(i){ // html element id is <ModelClass>_<int ID>
 		var model_class = this.id.split('_')[0],
 				model_id 		= this.id.split('_')[1],
@@ -192,7 +194,7 @@ $.mayContinue = function(link) {
 /******************************************* JQUERY PLUGINS *******************************************/
 $.fn.disabler = function(d) { // master switch checkbox, disables all form inputs when unchecked
 	var disablees = d || 'input, textarea, select, checkbox, radio';
-	return this.each(function(i){
+	return this.each(function(){
 		var $this = $(this);
 		
 		$this.data('enabled', $this.is(':checked'));
@@ -239,7 +241,7 @@ $.fn.anchorDispatch = function() {
 $.fn.rowCheckable = function() {
 	return this.each(function() {
 		var $this = $(this),
-		 		checkbox = $('input[type=checkbox]', $this).eq(0);//$this.children().eq(0).children('input[type=checkbox]');
+		 		checkbox = $('input[type=checkbox]', $this).eq(0);
 		
 		$this.click(function(e) { // trigger checkbox unless a link is clicked
 			if (e.target.tagName == e.currentTarget.tagName) {
@@ -275,6 +277,7 @@ $.fn.toggleDiv = function() {
 	});
 }
 
+// converts an element (e.g. label) into a textfield when function is called, useful within a click or hover handler
 $.fn.textFieldable = function(text_field_html, callback) {
 	return this.each(function(){
 		var $this 			= $(this),
@@ -290,6 +293,7 @@ $.fn.textFieldable = function(text_field_html, callback) {
 	});
 }
 
+// oposite of textFieldable, but used exclusively when the original element is a label, used within a blur event handler
 $.fn.fieldToLabel = function() {
 	return this.each(function(){
 			var $this = $(this),
@@ -300,12 +304,35 @@ $.fn.fieldToLabel = function() {
 	});
 }
 
+// hide element with a slide anim and remove from DOM
 $.fn.slideUpAndRemove = function(speed) {
 	if (typeof speed == 'null') speed = 300;
 	
 	return this.each(function(){
 		var $this = $(this);
 		$this.slideUp(speed, function(){ $this.remove(); });
+	});
+}
+
+// animates from transparent to opaque on hover, css sets initial opacity
+$.fn.animOpacity = function() {
+	return this.each(function(){
+		var $this				 = $(this),
+				orig_opacity = $this.css('opacity');
+				
+		$this.hover(function(){
+			$this.stop().animate({ 'opacity': 1 }, 300);
+		}, function(){
+			$this.stop().animate({ 'opacity': orig_opacity }, 150);
+		});
+	});
+}
+
+// attack a click event to divs that wrap a link to follow the href
+$.fn.linkDiv = function() {
+	return this.each(function(){
+		var $this = $(this), href = $this.find('a').attr('href');
+		$this.click(function(){ window.location = href; });
 	});
 }
 
@@ -319,6 +346,7 @@ $.toggleHelptext = function(clickedLink) {
 }
 
 /******************************************* EVENT HANDLERS *******************************************/
+// used to rebind the plugin to elements loaded into the DOM dynamically or through AJAX
 $.bindPlugins = function() {
 	$('.hintable').hinty(); // all matched inputs will display their title attribute
 }
@@ -333,7 +361,7 @@ $.bindPlugins = function() {
 	
 	$.toggleAction(window.location.href, true); // toggle a container if its id is in the url hash
 	
-	try { // to load external plugins, ignore failure
+	try { // to load external plugins, ignore failure (if plugins weren't selected in site settings)
 		$.bindPlugins(); // calls a few common plugins, also used after a new element that uses a plugin is created in the dom
 		$('form').formBouncer(); // form validation, fields with supported validation classes will be processed
 	} catch (e){};
@@ -343,27 +371,13 @@ $.bindPlugins = function() {
 	$('.row_checkable').rowCheckable();			// clicking a whole form also enables its first checkbox
 	$('.pane_switch').paneSwitcher();				// use a checkbox to switch between two containers. classes: .pane_0, .pane_1
 	$('.toggle_div').toggleDiv();						// use a checkbox to show/hide its parents next sibling div
-	//$('textarea').resizable({ handle: true });
+	$('.trans2opaq').animOpacity();					// animates from transparent to opaque on hover, css sets initial opacity
+	$('.link_div').linkDiv();								// attack a click event to divs that wrap a link to follow the href
+	
+	// sortable nav bar, first implemented to update the position attr of a page (only when logged in)
 	$('.sortable', '.authenticated').sortable({
 		opacity: 0.3,
-		update: function(e, ui) {
-			$.updateModels(e, ui);
-		}
-	});
-	
-	$('input', '.ajax_form').live('change', function(){
-	  $(this).parent().parent().ajaxSubmit({
-	    beforeSubmit: function(a,f,o) {
-	      o.dataType = 'json';
-	    },
-	    complete: function(XMLHttpRequest, textStatus) {
-	      // XMLHttpRequest.responseText will contain the URL of the uploaded image.
-	      // Put it in an image element you create, or do with it what you will.
-	      // For example, if you have an image elemtn with id "my_image", then
-	      //  $('#my_image').attr('src', XMLHttpRequest.responseText);
-	      // Will set that image tag to display the uploaded image.
-	    },
-	  });
+		update: function(e, ui) { $.updateModels(e, ui); }
 	});
 	
 	// edit site settings page
@@ -424,6 +438,7 @@ $.bindPlugins = function() {
 	}, function(){
 		$('.admin_new_link', '#resource_list').fadeOut(300, function(){ $(this).remove(); });
 	});
+	// END admin menu
 	
 	// helpers
 	$('.unique_checkbox').click(function() {
