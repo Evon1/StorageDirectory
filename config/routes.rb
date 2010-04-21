@@ -12,6 +12,9 @@ ActionController::Routing::Routes.draw do |map|
   map.signup '/signup', :controller => 'users',         :action => 'new'
   map.logout '/logout', :controller => 'user_sessions', :action => 'destroy'
   
+  # grey module
+
+  
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   map.resources :products
   map.resources :users
@@ -33,8 +36,11 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :helptexts
   map.resources :forms
   map.resources :suggestions
+  map.resource :site_setting
   
-  map.site_settings '/site_settings/edit', :controller => 'site_settings', :action => 'edit'
+  # greyresults
+  map.resources :listings
+  
   map.paperclip_attachment '/images/:id', :controller => 'images', :action => 'show'
   
   # Sample resource route with options:
@@ -54,6 +60,7 @@ ActionController::Routing::Routes.draw do |map|
     user.resources :comments
     user.resources :tags
     user.resources :permissions
+    user.resources :listings
   end
   
   map.resources :pages do |page|
@@ -90,6 +97,9 @@ ActionController::Routing::Routes.draw do |map|
   
   map.ajax '/ajax/:action', :controller => 'ajax', :action => nil 
   map.tagged_with '/:model/tagged-with/:tag', :controller => 'tags', :action => 'show'
+  
+  # search results module
+  map.connect ':title/:query', :controller => 'pages', :action => 'show', :title => nil, :query => nil
   
   # You can have the root of your site routed with map.root -- just remember to delete public/index.html.
   map.root :controller => 'pages', :action => 'show', :title => 'home'

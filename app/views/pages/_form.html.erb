@@ -26,12 +26,17 @@
 		</div>
 	</div>
 	
-	<div>
+	<div class="stack">
 		<%= f.label :content, nil, :class => 'block_label' %>
 		<div class="shadow_wrap">
 			<%= f.text_area :content, :class => 'wysiwyg' %>
 		</div>
 	</div>
+	
+	<div class="stack uncollapse">
+	  <%= render :partial => 'shared/models_module_fields', :locals => { :f => f, :model => @page } %>
+	</div>
+	
 </fieldset>
 
 <%= render :partial => 'shared/assoc_form',

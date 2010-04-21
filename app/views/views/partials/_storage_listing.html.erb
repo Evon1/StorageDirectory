@@ -1,0 +1,94 @@
+<div id="listings" class="large_bottom_round">
+  <div id="listings_header" class="large_top_round">
+    <div class="inner large_top_round">
+    
+      <div id="listings_search_wrap" class="round">
+        <div class="inner round border_box">
+          <h4>We found <span id="result_count" class="medium_round purple">15</span> self storage facilities</h4>
+           
+          <div>
+            <input type="text" name="query" id="query_main" class="hintable medium_round border_box" title="address city and state or zip" />
+            <input type="image" src="/images/ui/storagelocator/results-search-btn.png" id="main_search_btn" class="vAlignBtm white dark_text_shadow trans2opaq" value="Search" />
+          </div>
+           
+        </div>
+      </div>
+      
+      <div id="sorting_by" class="white bold font90">
+        Your <span class="black">nearest</span> self storage is being displayed first.
+      </div>
+    
+      <div id="listings_table_head" class="large_top_round border_box">
+        
+      </div>
+    </div>
+  </div>
+  
+  <div id="listings_main">
+    <div class="inner large_bottom_round box_shadow box_shadow_bottom">
+      <div class="mesh round box_border">
+        
+        <div class="listings_wrap">
+        <% unless @model_data.blank? %>
+          <% @model_data.each do |listing| %>
+            
+            <div id="listing_<%= listing.id %>" class="listing round box_border font75 pos_rel">
+              <div class="inner round box_shadow pos_rel">
+            
+                <div class="field left">
+                  <div class="small_inset_shadow">
+                    <img src="/images/ui/storagelocator/uncle-bob.jpg" alt="Uncle Bob" />
+                  </div>
+                </div>
+            
+                <div class="contact field left right_border">
+                  <h4 class="dark_green"><%= listing.title %></h4>
+                  <p class="address">
+                    <%= listing.map.address %><br />
+                    <%= listing.map.city_state_zip %>
+                  </p>
+                  <p class="phone purple bold font110"><%= listing.map.phone %></p>
+                </div>
+            
+                <div class="distance field left right_border mleft10">
+                  <div class="field_frame center">
+                    <span class="block bold font110">2</span>
+                    Miles
+                  </div>
+                </div>
+            
+                <div class="tagline field left mleft14">
+                  <h5><%= listing.specials.first.title %></h5>
+                  <%= listing.specials.first.content %>
+                </div>
+            
+                <div class="reserve field left">
+                  <div class="reserve_btn_wrap large_round border_box trans2opaq">
+                    <a class="reserve_btn block white dark_text_shadow" href="#">Reserve</a>
+                  </div>
+                </div>
+            
+              </div> <!-- /.inner -->
+              
+              <div class="panel bottom_round box_shadow mtopneg10"></div>
+              
+              <div class="tabs">
+                <div class="left upcase font85 bold">
+                  <%= link_to 'Map', listing.get_partial_link(:map), :class => 'map tab_link iconLeft21 block left' %>
+                  <%= link_to 'Specials', listing.get_partial_link(:specials), :class => 'specials tab_link iconLeft21 block left' %>
+                  <%= link_to 'Sizes', listing.get_partial_link(:sizes), :class => 'sizes tab_link iconLeft21 block left' %>
+                  <%= link_to 'Pictures', listing.get_partial_link(:pictures), :class => 'pictures tab_link iconLeft21 block left' %>
+                </div>
+            
+                <div class="progress right"></div>
+              </div>
+            </div> <!-- /#.listing -->
+            
+          <% end %>
+        <% end %>
+        </div> <!-- /.listing_wrap -->
+        
+      </div>
+    </div>
+  </div>
+</div> <!-- /#listings -->

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100415105309) do
+ActiveRecord::Schema.define(:version => 20100421044645) do
 
   create_table "block_forms", :force => true do |t|
     t.integer  "block_id"
@@ -141,6 +141,44 @@ ActiveRecord::Schema.define(:version => 20100415105309) do
     t.integer  "target_id"
   end
 
+  create_table "listing_sizes", :force => true do |t|
+    t.integer  "listing_id"
+    t.integer  "size_id"
+    t.integer  "position",   :default => 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "listings", :force => true do |t|
+    t.string   "title"
+    t.text     "description"
+    t.boolean  "enabled"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "maps", :force => true do |t|
+    t.integer  "listing_id"
+    t.string   "address"
+    t.string   "city"
+    t.string   "state"
+    t.integer  "zip"
+    t.string   "lat"
+    t.string   "long"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "phone"
+  end
+
+  create_table "models_modules", :force => true do |t|
+    t.string   "name"
+    t.integer  "model_id"
+    t.string   "model_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "models_views", :force => true do |t|
     t.integer  "view_id"
     t.integer  "model_id"
@@ -177,6 +215,15 @@ ActiveRecord::Schema.define(:version => 20100415105309) do
     t.datetime "updated_at"
   end
 
+  create_table "pictures", :force => true do |t|
+    t.integer  "listing_id"
+    t.string   "title"
+    t.text     "description"
+    t.integer  "position",    :default => 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "posts", :force => true do |t|
     t.string   "title"
     t.text     "content"
@@ -190,6 +237,27 @@ ActiveRecord::Schema.define(:version => 20100415105309) do
 
   create_table "roles", :force => true do |t|
     t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "sizes", :force => true do |t|
+    t.string   "title"
+    t.integer  "x"
+    t.integer  "y"
+    t.string   "unit"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "specials", :force => true do |t|
+    t.integer  "listing_id"
+    t.string   "title"
+    t.string   "description"
+    t.string   "content"
+    t.string   "code"
+    t.boolean  "enabled"
+    t.integer  "position",    :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end

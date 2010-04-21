@@ -5,6 +5,9 @@ class Post < ActiveRecord::Base
   has_many :blocks_model, :as => :model, :dependent => :destroy
   accepts_nested_attributes_for :blocks_model
   
+  has_one :module, :class_name => 'ModelsModule', :as => :model
+  accepts_nested_attributes_for :module, :allow_destroy => true
+  
   validates_uniqueness_of :title
   validates_presence_of :title, :content
   

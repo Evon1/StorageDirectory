@@ -1,6 +1,9 @@
 class PagesController < ApplicationController
   before_filter :get_page, :only => [:show, :edit, :update, :destroy]
   before_filter :get_blocks, :only => [:new, :edit]
+  before_filter :clear_empty_blocks_fields, :only => [:create, :update]
+  before_filter :get_modules, :only => [:new, :edit]
+  before_filter :load_grey_module, :only => :show
   
   def index
     @pages = Page.all_for_index_view

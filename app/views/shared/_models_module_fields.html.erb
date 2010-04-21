@@ -1,0 +1,17 @@
+<%= f.label :module, 'Mode: ', :class => 'left right_space' %>
+         
+<% f.fields_for :module, models_module_object(model) do |mm_fields| %>
+         
+  <div class="check_box_wrap left">
+    <%= mm_fields.radio_button :name, 'normal', :checked => model.has_module?('normal', mm_fields.object), :title => 'Turn off modules' %>
+    <%= mm_fields.label :name, 'Normal' %>
+  </div> 
+         
+  <% @modules.each do |m| %>
+    <div class="check_box_wrap left">
+      <%= mm_fields.radio_button :name, m %>
+      <%= mm_fields.label :name, m.titleize %>
+    </div>
+  <% end %>
+         
+<% end %>

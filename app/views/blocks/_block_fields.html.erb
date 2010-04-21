@@ -3,7 +3,7 @@
 	<% count += precount if defined?(precount) %>
 
 	<div class="row_checkable round <%= cycle('odd', 'even') %>">
-		<%= anchor "#{block.title}Fields" %>
+		<%= anchor "#{block.title}Fields".gsub(/\W|\s/, '_') %>
 		
 		<% model_field.fields_for :blocks_model, blocks_model do |bm_field| %>
 		

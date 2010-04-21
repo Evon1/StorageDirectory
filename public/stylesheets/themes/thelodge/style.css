@@ -82,7 +82,7 @@ a:hover, a:active { color:#8a265b; }
 .inner { padding:3px; }
 .index > div { width:25.5%; }
 .box_view .image img { width:100%; }
-.shadow_wrap input, .shadow_wrap textarea { width:99%; }
+.shadow_wrap input[type!="checkbox"], .shadow_wrap textarea { width:99%; }
 .small_textarea { height:60px; }
 
 /* admin views */

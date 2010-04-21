@@ -28,7 +28,7 @@ module SiteSettingsHelper
   end
   
   def site_settings_link(options = {})
-    link_to 'Settings', '/site_settings/edit', options
+    link_to 'Settings', edit_site_setting_path, options
   end
   
   def site_settings_link_for_menu(options = {})

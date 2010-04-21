@@ -7,8 +7,7 @@
 		<meta charset="utf-8">
 		<title><%= yield :title %></title>
 
-		<meta name="description" content="" />
-		<meta name="keywords" content="" />
+		<%= site_meta_tags %>
 
 		<link rel="shortcut icon" type="image/x-ico" href="/favicon.ico" />
 		
@@ -63,13 +62,14 @@
      					<% end %>
 
      					<% if yield(:column_5) %>
-     				    <div id="column_5" class="region">
+     				    <div id="column_5" class="region<%= shrink_on_locator_page %>">
      				      
                   <%= yield :column_5 %>
-
+                  
      				    </div> <!-- /#column_5 -->
      				  <% end %>
-
+              <br class="clear" />
+              
      					<div id="body" class="region uncollapse">
      					  
      						<%= yield %>
@@ -85,8 +85,16 @@
     	      </div>
     	    </div>
     	    <div class="wrap content_round_btm"></div>
-    	  </div>
+    	    
+    	    <div id="column_6" class="region wrap">
+					  
+						<%= yield :column_6 %>
+						
+					</div>
+    	    
+    	  </div> <!-- /.content_wrap -->
     	  <div id="handle" class="block_center"></div>
+    	  
 	    </div> <!-- /#garage_door_wrap -->
 	    
 	  </div> <!-- /#wrapper -->
@@ -100,7 +108,7 @@
 	  
 	  <%= javascript_include_tag 'ckeditor/ckeditor.js', 'jquery.all', @plugins %>
   	<%= @widgets_js.map { |js| javascript_include_tag js } %>
-  	<%= javascript_include_tag 'application' %>
+  	<%= javascript_include_tag 'application', 'plugins/greyresults' %>
 	
 	</body>
 </html>

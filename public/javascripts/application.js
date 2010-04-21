@@ -220,18 +220,18 @@ $.fn.anchorDispatch = function() {
 	if (!listeningElement) 
 		return false;
 
-	if (url_hash.split('_')[1]) anchor = $('#' + url_hash.split('_')[1]);
-
+	if (url_hash.split('-')[1]) anchor = $('#' + url_hash.split('-')[1]);
+	
 	return this.each(function(i){
 		if (this.id == listeningElement.attr('id')) {
 			listeningElement.show();
 			$('.collapseable', listeningElement).show().removeClass('hide');
 			$('.toggle_action', listeningElement).addClass('toggle_down');
-
-			if (anchor) {
-				$(document).scrollTo(anchor, 2000);
-				anchor.parent().effect('highlight', { color: '#87c881' }, 7000);
-			}
+		}
+		
+		if (anchor) {
+			$(document).scrollTo(anchor, 2000);
+			$('#'+ url_hash.split('-')[0]).effect('highlight', { color: '#87c881' }, 7000);
 		}
 	});
 
@@ -367,7 +367,7 @@ $.bindPlugins = function() {
 	} catch (e){};
 	
 	$('.disabler', '.disabled').disabler(); // checkbox that disables all inputs in its form
-	$('.anchorListener').anchorDispatch();  // a toggle an element when its id is present in the url hash
+	$('.anchorListener').anchorDispatch();  // toggle an element when its id is present in the url hash
 	$('.row_checkable').rowCheckable();			// clicking a whole form also enables its first checkbox
 	$('.pane_switch').paneSwitcher();				// use a checkbox to switch between two containers. classes: .pane_0, .pane_1
 	$('.toggle_div').toggleDiv();						// use a checkbox to show/hide its parents next sibling div

@@ -129,6 +129,10 @@ module SharedModelMethods #:nodoc:
       nil
     end
     
+    def has_module?(module_name, gm_module)
+      gm_module.new_record? || gm_module.name == module_name
+    end
+    
     def json_string_to_hash(string)
       eval(string.gsub(/\\/, '').gsub(':', ' => ')) unless string.nil?
     end

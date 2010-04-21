@@ -9,7 +9,7 @@ module ApplicationHelper
   end
   
   def page_name
-    request.path.sub('/', '')
+    request.path.sub('/', '').gsub(/\W/, '_')
   end
   
   def declare_content_for # renders blocks in regions based on current page
@@ -26,6 +26,7 @@ module ApplicationHelper
 
         @html << '</div>'
       end
+      @html = '' if @html == "<div class='region_#{region} region'></div>"
     end
   end
   
@@ -192,6 +193,10 @@ module ApplicationHelper
   def blocks_model_object(block, model)
     bm = model.blocks_models
     bm.find_by_block_id(block.id) || bm.new
+  end
+  
+  def models_module_object(model)
+    model.module || ModelsModule.new
   end
   
   def show_title(model)
@@ -371,6 +376,12 @@ module ApplicationHelper
   
   def not_on_home_page
     !params[:title] || params[:title] != 'home'
+  end
+  
+  def shrink_on_locator_page
+    if controller_name == 'pages' && action_name == 'show'
+      (params[:title] || Page.find(params[:id]).try(:title)) == 'storage-locator' ? ' storage_locator_wrap' : ''
+    end
   end
   
 end

@@ -1,6 +1,8 @@
 class BlocksController < ApplicationController
   before_filter :get_block, :except => [:index, :new, :create]
   before_filter :get_associations, :only => [:new, :edit]
+  before_filter :get_modules, :only => [:new, :edit]
+  before_filter :load_grey_module, :only => :show
   
   def index
     @blocks = Block.all_for_index_view

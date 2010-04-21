@@ -1,6 +1,8 @@
 class PostsController < ApplicationController
   before_filter :get_post, :only => [:show, :edit, :update, :destroy]
   before_filter :get_blocks, :only => [:new, :edit]
+  before_filter :get_modules, :only => [:new, :edit]
+  before_filter :load_grey_module, :only => :show
   
   def index
     @posts = Post.all_for_index_view

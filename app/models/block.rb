@@ -2,9 +2,12 @@ class Block < ActiveRecord::Base
 
   has_many_polymorphs :models, :from => [:pages, :posts, :links]
   
+  has_one :module, :class_name => 'ModelsModule', :as => :model
+  accepts_nested_attributes_for :module, :allow_destroy => true
   has_one :block_widget
   has_one :widget, :through => :block_widget
   accepts_nested_attributes_for :block_widget
+  
   
   has_many :models_views, :as => :model, :dependent => :destroy
   has_many :views, :through => :models_views

@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  listing_id: 1
+  title: MyString
+  x: 1
+  y: 1
+  unit: MyString
+
+two:
+  listing_id: 1
+  title: MyString
+  x: 1
+  y: 1
+  unit: MyString

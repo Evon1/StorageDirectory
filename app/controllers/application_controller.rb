@@ -30,12 +30,15 @@ class ApplicationController < ActionController::Base
                 :user_allowed?,
                 :reject_blocks_enabled_on_this, # for the blocks_fields
                 :reject_views_enabled_on_this,  # for the blocks_fields
-                :reject_forms_enabled_on_this   # for the blocks_fields
+                :reject_forms_enabled_on_this,  # for the blocks_fields
+                :use_scripts
   
   include UtilityMethods
+  include GreyModules
   
   # for the SharedModelMethod module
-  $regions    = [:header, :banner, :sidebar, :left, :right, :content_bottom, :column_5, :column_6, :column_7, :column_8, :footer]
+  # TODO: move this into a theme config or something since not all layouts have all regions
+  $regions    = [:header, :sidebar, :content_bottom, :column_5, :column_6, :footer]
   
   # for the virtual forms, build forms
   $_actions     = [:index, :show, :create, :update]
@@ -118,8 +121,8 @@ class ApplicationController < ActionController::Base
     @theme_css         = theme_css(session[:theme]  || @@app_config[:theme])
     @meta_keywords     = @@app_config[:keywords]    || @@app_config[:title]
     @meta_description  = @@app_config[:description] || @meta_keywords
-    @plugins           = (@@app_config[:plugins] || '').split(/,\W?/).map { |w| "plugins/#{w}" }
-    @widgets_js        = (@@app_config[:widgets] || '').split(/,\W?/).map { |w| "widgets/#{w}" }
+    @plugins           = use_scripts(:plugins, (@@app_config[:plugins] || '').split(/,\W?/))
+    @widgets_js        = use_scripts(:widgets, (@@app_config[:widgets] || '').split(/,\W?/))
     @nav_pages         = Page.nav_pages
     @global_blocks     = Block.all :conditions => ['show_in_all in (?)', regions(false).map(&:to_s)]
     @user              = User.find(params[:user_id]) unless params[:user_id].blank?
@@ -359,6 +362,15 @@ class ApplicationController < ActionController::Base
     session[:return_to] = nil
   end
   
+  # filters
+  def clear_empty_blocks_fields
+    unless params[controller_name.singularize.to_sym][:blocks_model_attributes].blank?
+      params[controller_name.singularize.to_sym][:blocks_model_attributes].reject! do |param|
+        param[1][:block_id].blank?
+      end
+    end
+  end
+  
   #--------------------- Utility Methods ---------------------
   
   # get the relative path of the first page of the website
@@ -369,6 +381,10 @@ class ApplicationController < ActionController::Base
   # output a theme css path for the stylesheet_link helper
   def theme_css(name)
     "themes/#{name}/style"
+  end
+  
+  def use_scripts(type, *scripts)
+    scripts.flatten.map { |script| "#{type.to_s}/#{script}" }
   end
   
   def get_default_role

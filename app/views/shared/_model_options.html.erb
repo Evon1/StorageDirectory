@@ -2,8 +2,8 @@
   <div id="<%= model_name(model) %>_buttons" class="model_options buttons right">
 		<%= link_to 'Hide', { :anchor => hide_anchor }, 
         :class => 'iconOnly16 toggle_action toggle_right right note', 
-				:title => "Toggle #{model_name(model).titleize} #{model.name_or_title}" %>
-				
+				:title => "Toggle #{model_name(model).titleize}_#{model.name_or_title}" %>
+        
   	<%= link_to "Edit #{model_name(model).titleize}", edit_path, :class => 'iconOnly16 edit_link right note', 
 				:title => "Edit #{model_name(model).titleize}" %>
   </div>

@@ -16,7 +16,7 @@
   		<%= link_to_if current_user.nil?, 'Login', login_path do 
   			link_to current_user.name, user_path(current_user)
   		end unless current_page? login_path %>
-		
+		  |
   		<%= link_to_if current_user.nil?, 'Sign Up', signup_path do
         link_to 'Logout', logout_path
       end unless current_page? signup_path %>
