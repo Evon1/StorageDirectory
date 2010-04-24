@@ -87,6 +87,10 @@ span.active { cursor:default; }
 .less_spacing { letter-spacing:.9px; }
 .upcase { text-transform:uppercase; }
 
+.map_wrap { width:295px; height:202px; position:relative; }
+.map_wrap iframe { height:203px; }
+.map_wrap > div { height:202px; }
+
 /* common colors */
 .white, a.white, a.white:link, a.white:visited { color:#fff; }
 .black, a.black, a.black:link, a.black:visited { color:#222; }

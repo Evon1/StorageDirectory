@@ -13,9 +13,20 @@ class SearchResults < ApplicationController
   
   def self.run_query(params)
     unless params[:query].blank?
-      @model_data = Listing.all :conditions => ['listings.title LIKE ?', params[:query]], :include => [:map, :specials, :sizes]
+      if params[:query].size == 5 || _is_address_query?(params[:query])
+        @model_data = Listing.paginate(:all, 
+                                       :per_page => 7,
+                                       :page => params[:page],
+                                       :origin => params[:query], 
+                                       :within => (params[:within] || 50),
+                                       :include => [:map, :specials, :sizes, :pictures])
+        
+        if params[:order].blank? || params[:order] == 'distance'
+          @model_data.sort_by_distance_from params[:query]
+        end
+      end
     else
-      @model_data = Listing.all :include => [:map, :specials, :sizes]
+      @model_data = Listing.paginate(:all, :per_page => 7, :page => params[:page], :include => [:map, :specials, :sizes, :pictures])
     end
   end
   
@@ -58,6 +69,14 @@ class SearchResults < ApplicationController
 
     block = model.blocks.find_by_title @@block_title
     model.blocks_model.find_by_block_id(block.id).enabled == true
+  end
+  
+  private
+  
+  def self._is_address_query?(query)
+    States.abbrevs.each do |s|
+      return true if query =~ /\s#{s}/i
+    end
   end
   
 end

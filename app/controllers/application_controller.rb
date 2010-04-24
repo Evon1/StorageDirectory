@@ -31,7 +31,8 @@ class ApplicationController < ActionController::Base
                 :reject_blocks_enabled_on_this, # for the blocks_fields
                 :reject_views_enabled_on_this,  # for the blocks_fields
                 :reject_forms_enabled_on_this,  # for the blocks_fields
-                :use_scripts
+                :use_scripts,
+                :get_coords
   
   include UtilityMethods
   include GreyModules
@@ -270,6 +271,11 @@ class ApplicationController < ActionController::Base
     eval "@#{controller_name} = #{controller_name.singular.camelcase}.all"
   end
   
+  def get_models_paginated
+    @paginated = true
+    eval "@#{controller_name} = #{controller_name.singular.camelcase}.paginate :all, :per_page => 10, :page => params[:page]"
+  end
+  
   def get_model
     eval "@#{controller_name.singular} = #{controller_name.singular.camelcase}.find(params[:id])"
   end
@@ -398,6 +404,11 @@ class ApplicationController < ActionController::Base
   # returns a boolean if the the current action matches any of the action passed in as a string or an array
   def in_mode?(*modes)
     [modes].flatten.any? { |m| action_name == m }
+  end
+  
+  include Geokit::Geocoders
+  def get_coords(listing)
+    MultiGeocoder.geocode listing.map.full_address
   end
   
 end

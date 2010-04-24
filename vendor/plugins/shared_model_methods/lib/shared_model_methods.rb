@@ -156,6 +156,10 @@ module SharedModelMethods #:nodoc:
     def _self_or_object_attribute(zelf, object, attribute)
       zelf.respond_to?(attribute) ? zelf.send(attribute) : object.send(attribute)
     end
+    
+    def render_errors
+      self.errors.full_messages.map { |e| "<p>#{e}</p>" }
+    end
    
   end # END InstanceMethods
   

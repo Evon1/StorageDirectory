@@ -4,7 +4,7 @@
     
       <div id="listings_search_wrap" class="round">
         <div class="inner round border_box">
-          <h4>We found <span id="result_count" class="medium_round purple">15</span> self storage facilities</h4>
+          <h4>We found <span id="result_count" class="medium_round purple"><%= @model_data.size %></span> self storage facilities</h4>
            
           <div>
             <input type="text" name="query" id="query_main" class="hintable medium_round border_box" title="address city and state or zip" />
@@ -52,14 +52,13 @@
             
                 <div class="distance field left right_border mleft10">
                   <div class="field_frame center">
-                    <span class="block bold font110">2</span>
-                    Miles
+                    <%= listing_distance(listing) %>
                   </div>
                 </div>
             
                 <div class="tagline field left mleft14">
-                  <h5><%= listing.specials.first.title %></h5>
-                  <%= listing.specials.first.content %>
+                  <h5><%= listing.specials.first.title unless listing.specials.empty? %></h5>
+                  <%= listing.specials.first.content unless listing.specials.empty? %>
                 </div>
             
                 <div class="reserve field left">
@@ -70,21 +69,27 @@
             
               </div> <!-- /.inner -->
               
-              <div class="panel bottom_round box_shadow mtopneg10"></div>
+              <div class="panel hide bottom_round box_shadow mtopneg10"></div>
               
-              <div class="tabs">
+              <div class="tabs uncollapse">
                 <div class="left upcase font85 bold">
-                  <%= link_to 'Map', listing.get_partial_link(:map), :class => 'map tab_link iconLeft21 block left' %>
-                  <%= link_to 'Specials', listing.get_partial_link(:specials), :class => 'specials tab_link iconLeft21 block left' %>
-                  <%= link_to 'Sizes', listing.get_partial_link(:sizes), :class => 'sizes tab_link iconLeft21 block left' %>
-                  <%= link_to 'Pictures', listing.get_partial_link(:pictures), :class => 'pictures tab_link iconLeft21 block left' %>
+                  <%= link_to 'Map', listing.get_partial_link(:map), :rel => 'map', :class => 'map tab_link iconLeft21 block left' %>
+                  <%= link_to 'Specials', listing.get_partial_link(:specials), :rel => 'specials', :class => 'specials tab_link iconLeft21 block left' %>
+                  <%= link_to 'Sizes', listing.get_partial_link(:sizes), :rel => 'sizes', :class => 'sizes tab_link iconLeft21 block left' %>
+                  <%= link_to 'Pictures', listing.get_partial_link(:pictures), :rel => 'pictures', :class => 'pictures tab_link iconLeft21 block left' %>
                 </div>
             
                 <div class="progress right"></div>
               </div>
             </div> <!-- /#.listing -->
-            
           <% end %>
+          
+          <%= will_paginate @model_data %>
+          
+        <% else %>
+          <div class="no_results framed">
+            Sorry, that search didn't return any results. Try using less filter options.
+          </div>
         <% end %>
         </div> <!-- /.listing_wrap -->
         

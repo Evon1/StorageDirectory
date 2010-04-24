@@ -90,8 +90,8 @@ module ApplicationHelper
   # assign the view to a block and place the block in any post. The view will then render that post's comments
   #
   # Example 2
-  #  a view whose model is 'post' will display all posts. Using scope 'user' with and choosing a user from the resulting
-  # dropdown menu in th ui will retrieve all the posts of that specific user. We can then place this view anywhere and it
+  #  a view whose model is 'post' will display all posts. Using scope 'user' and choosing a user from the resulting
+  # dropdown menu in the ui will retrieve all the posts of that specific user. We can then place this view anywhere and it
   # will render all posts by that user if they exist, otherwise it will render all posts.
   def render_views_in_this(block)
     html = ''
@@ -108,16 +108,16 @@ module ApplicationHelper
       html << render(:partial => "#{view_types_dir}#{models_view.view_type}", :locals => { :data => data })
     end
     html
-  rescue
-    resource = block.class.to_controller_str
-    block_str = current_user && current_user.has_permission?(resource, 'edit', params) ? "<a href='/#{resource}/#{block.id}/edit'>#{block.title}</a>" : block.title
-    "<div class='error'>And error occured loading view in block: #{block_str}</div>"
+  #rescue
+  #  resource = block.class.to_controller_str
+  #  block_str = current_user && current_user.has_permission?(resource, 'edit', params) ? "<a href='/#{resource}/#{block.id}/edit'>#{block.title}</a>" : block.title
+  #  "<div class='flash error'>And error occured loading view in block: #{block_str}</div>"
   end
   
   def render_forms_in_this(block)
     html = ''
     block.enabled_forms.each do |form|
-      html << render(:partial => "forms/build", :locals => { :form => form })
+      html << render(:partial => 'forms/build', :locals => { :form => form })
     end
     html
   end
@@ -382,6 +382,10 @@ module ApplicationHelper
     if controller_name == 'pages' && action_name == 'show'
       (params[:title] || Page.find(params[:id]).try(:title)) == 'storage-locator' ? ' storage_locator_wrap' : ''
     end
+  end
+  
+  def paginated?
+    defined? @paginated && @paginated
   end
   
 end

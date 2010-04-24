@@ -4,8 +4,8 @@ class AjaxController < ApplicationController
   skip_before_filter :init
   
   before_filter :validate_params
-  before_filter :_get_model, :only => [:update, :destroy]
-  before_filter :_get_model_class, :only => :get_attributes
+  before_filter :_get_model, :only => [:get_model, :get_map_frame, :get_listing, :update, :destroy]
+  before_filter :_get_model_class, :only => [:get_listing, :get_attributes]
   
   def get_all
     if (has_name = _get_model_class.first.respond_to?('name')) || _get_model_class.first.respond_to?('title')
@@ -19,16 +19,50 @@ class AjaxController < ApplicationController
     end
     
   rescue => e
-    render :json => { :success => false, :data => e.message }
+    render_error e
+  end
+  
+  def get_model
+    authorize_and_perform_restful_action_on_model @model.class.to_controller_str, 'show' do
+      render :json => { :success => true, :data => @model.attributes }
+    end
+    
+  rescue => e
+    render_error e
+  end
+  
+  def get_listing
+    authorize_and_perform_restful_action_on_model @model_class.to_controller_str, 'index' do
+      coords = get_coords(@model)
+      data = { :listing => @model.attributes, :map => @model.map.attributes, :lat => coords.lat, :lng => coords.lng  }
+      render :json => { :success => true, :data => data }
+    end
+    
+  rescue => e
+    render_error e
+  end
+  
+  def get_map_frame
+    @map = @model.map
+    @Gmap = GoogleMap::Map.new
+		@Gmap.center = GoogleMap::Point.new @map.lat, @map.lng
+		@Gmap.zoom = 13 #60km
+		@Gmap.markers << GoogleMap::Marker.new(:map => @Gmap, 
+                                           :lat => @map.lat, 
+                                           :lng => @map.lng,
+                                           :html => "<strong>#{@model.title}</strong><p>#{@model.description}</p>",
+                                           :marker_hover_text => @model.title)
+                                           
+    render :layout => 'map_frame'
   end
   
   def get_attributes
-    authorize_and_perform_restful_action_on_model @model_class.name.underscore.pluralize, 'index' do
+    authorize_and_perform_restful_action_on_model @model_class.to_controller_str, 'index' do
       render :json => { :success => true, :data => @model_class.column_names }
     end
     
   rescue => e
-    render :json => { :success => false, :data => e.message }
+    render_error e
   end
   
   def get_partial
@@ -37,7 +71,7 @@ class AjaxController < ApplicationController
     render :partial => params[:partial], :locals => { params[:model].downcase.to_sym => @model }
     
   rescue => e
-    render :text => "<div class='error'>#{e.message}</div>"
+    render :text => "<div class='flash error'>#{e.message}</div>"
   end
   
   def update
@@ -46,7 +80,7 @@ class AjaxController < ApplicationController
     end
     
   rescue => e
-    render :json => { :success => false, :data => e.message }
+    render_error e
   end
   
   def update_many
@@ -77,7 +111,7 @@ class AjaxController < ApplicationController
     end
     
   rescue => e
-    render :json => { :success => false, :data => e.message }
+    render_error e
   end
   
   private
@@ -105,6 +139,10 @@ class AjaxController < ApplicationController
   
   def _get_model_class(model_str = nil)
     @model_class ||= (model_str || @model_str || params[:model]).camelcase.constantize
+  end
+  
+  def render_error(e)
+    render :json => { :success => false, :data => e.message }
   end
   
 end

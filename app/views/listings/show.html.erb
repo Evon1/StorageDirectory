@@ -1,2 +1,12 @@
-<h1>Listings#show</h1>
-<p>Find me in app/views/listings/show.html.erb</p>
+<% declare_content_for %>
+<%= display_message flash %>
+
+<div class="staticContent">
+  <h2><%= @listing.title %></h2>
+  
+  <div class="map_code"><%= @map.to_html %></div>
+  <div class="map_wrap">
+    <%= @map.div %>
+  </div>
+  
+</div>

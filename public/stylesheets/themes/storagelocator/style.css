@@ -75,12 +75,12 @@ input[type="text"]:hover, input[type="text"]:focus, textarea:hover, textarea:foc
 #sorting_by { margin:8px 0 8px 30px; }
 #listings_table_head { height:38px; margin:0 -18px; position:relative; bottom:-4px; background:url(/images/ui/storagelocator/table-top-bg-strip.png) repeat-x top; }
 #listings_main { padding:1px 2px 0; }
-#listings_main > .inner { width:96%; padding:7px 14px; position:absolute; z-index:650; background:url(/images/ui/storagelocator/listings-grey-bg-strip.png) repeat-x top #e5e5e5; }
+#listings_main > .inner { width:96%; padding:7px 14px; position:relative; z-index:650; background:url(/images/ui/storagelocator/listings-grey-bg-strip.png) repeat-x top #e5e5e5; }
 
 .mesh { padding:0 2px; margin-top:6px; background:url(/images/ui/storagelocator/mesh.gif); }
-.listing { margin:0 0 22px 0; }
+.listing { margin:0 0 7px 0; }
 .listing:last-child { margin-bottom:0; }
-#listings_main .listing > .inner { height:78px; background:url(/images/ui/storagelocator/result-bg-strip.png) repeat-x; }
+#listings_main .listing > .inner { height:78px; background:url(/images/ui/storagelocator/result-bg-strip.png) repeat-x; cursor:pointer; }
 #listings_main .listing > .inner, #listings_main .panel { padding:12px 14px; }
 #listings_main .listing > .inner:hover, #listings_main .listing.active > .inner { background:url(/images/ui/storagelocator/result-bg-strip-over.png) repeat-x; }
 .listing h4 { margin-bottom:10px; }
@@ -88,6 +88,7 @@ input[type="text"]:hover, input[type="text"]:focus, textarea:hover, textarea:foc
 .field_frame { padding:23px 17px 0 22px; }
 .small_field_frame { padding:10px 0 0 0; }
 .listing .contact { width:150px; }
+.listing .distance { width:66px; }
 .tagline, .reserve { padding-right:0; }
 .tagline { width:26%; line-height:1.2; }
 .tagline h5 { margin-bottom:3px; }
@@ -95,11 +96,11 @@ input[type="text"]:hover, input[type="text"]:focus, textarea:hover, textarea:foc
 .reserve_btn { width:65px; height:24px; padding:15px 10px; font-size:140%; background:url(/images/ui/storagelocator/reserve-btn.png) no-repeat }
 .reserve_btn:hover { text-decoration:none; }
 
-#listings_main .panel { width:92%; height:250px; margin:0 auto; background:#ffffda; }
+#listings_main .panel { width:92%; height:250px; margin:0 auto; background:#ffffda; position:relative; z-index:600; }
 .panel h5 { padding:12px 17px; margin-bottom:0; font-size:140%; background:#cc3300; }
 #column_5 .panel .inner { height:72%; padding:13px 16px; position:relative; z-index:550; background:#fff; }
-.panel .inner .left { width:50%; }
-.panel .inner .right { width:42.5%; margin-top:-41px; }
+.panel .inner .left { width:48%; }
+.panel .inner .right { width:47%; margin-top:-41px; }
 .panel .inner h6 { font-size:120%; }
 .panel .inner h6, .panel .inner p { margin-bottom:14px; }
 .tabs { margin-left:30px; }
@@ -107,12 +108,14 @@ input[type="text"]:hover, input[type="text"]:focus, textarea:hover, textarea:foc
 .panel .inner .map_controls li { padding-left:12px; }
 .tabs .tab_link:hover { text-decoration:none; background-color:#444da0; }
 .tabs .map { background:url(/images/ui/storagelocator/icons/map-icon.png) no-repeat 23% 50%; }
+.map_wrap { background:url(/images/ui/ajax-loader-lrg.gif) no-repeat center #fff; border:1px solid #ccc; }
 .tabs .specials { background:url(/images/ui/storagelocator/icons/specials-icon.png) no-repeat 19% 15%; }
 .tabs .sizes { background:url(/images/ui/storagelocator/icons/sizes-icon.png) no-repeat 23% 35%; }
 .tabs .pictures { background:url(/images/ui/storagelocator/icons/pictures-icon.png) no-repeat 16% 13%; }
 .tabs .progress { width:79px; height:38px; margin:-21px 28px 0 0; position:relative; z-index:500; background:url(/images/ui/storagelocator/result-loading-bar.png) no-repeat; }
 .tabs div.active { background:url(/images/ui/storagelocator/result-loading-bar-active.png) no-repeat; }
 .tabs a.active, .tabs a.active:hover { color:#999; background-color:#ffffda; }
+.address { font-size:85%; }
 
 #steps { height:197px; position:relative; z-index:200; background:url(/images/ui/storagelocator/steps/steps-bg-strip.png) repeat-x center; }
 #steps > div { width:27.95%; position:relative; margin-right:25px; padding:25px 0 0 25px; }

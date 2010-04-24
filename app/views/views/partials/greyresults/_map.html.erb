@@ -1,7 +1,9 @@
-<%= greyresult_panel_template listing do 
-  '<div class="left small_framed">
+<h5 class="white dark_text_shadow"><%= listing.title %></h5>
+
+<div class="inner border_box">
+  <div class="left small_framed">
     
-    <h6>Boca\'s Newest and Finest Climate Controller Self Storage</h6>
+    <h6>Boca's Newest and Finest Climate Controller Self Storage</h6>
     
     <p>
       Lorem ipsum dolor sit amet, consectetur adipi sicing elit, sed do eiusmod tempor. sit amet, consectetur adipi sicing elit, sed do eiusmod tempor. 
@@ -16,14 +18,16 @@
   <div class="right">
     
     <div class="google_map">
-      <img src="images/ui/storagelocator/map.gif" alt="map" />
+      <div id="map_<%= listing.map.id %>" class="map_wrap"></div>
       
       <ul class="map_controls horizontal">
-        <li class="bottom_round bg_grey"><a class="white" href="#">Get Directions</a></li>
+        <li class="bottom_round bg_grey">
+          <%= link_to 'Get Directions', google_directions_link(listing.map.full_address), :class => 'white', :target => '_blank' %>
+        </li>
         <li class="bottom_round bg_grey"><a class="white" href="#">Print a Map</a></li>
         <li class="bottom_round bg_grey"><a class="white" href="#">+</a></li>
       </ul>
     </div>
     
-  </div>'
-end %>
+  </div>
+</div>

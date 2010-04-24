@@ -28,6 +28,11 @@ $.log = function(msg) {
 	if (typeof console != 'undefined') console.log(msg); else alert(msg);
 }
 
+$.ajax_error = function(response) {
+	alert(response.data);
+	//$('#body').prepend('<div class="flash error hide">'+ response.data +'</div>').slideDown();
+}
+
 // take an array of actions and controllers to see if any pair of those match the page we're on
 // either set can be a single action or controller as a string or a comma separated string of multiple actions or controllers
 $.on_page = function(route_sets) { // routes looks like: [ ['edit, new', 'views, forms, links'], ['index', 'pages'] ]
@@ -143,7 +148,7 @@ $.updateModels = function(e, ui) {
 		if (response.success) {
 			$this.effect('bounce', {}, 200);
 		} else {
-			alert('Error: '+ response.data)
+			$.ajax_error(response);
 		}
 	}, 'json');
 }
@@ -158,7 +163,7 @@ $.getModelAttributes = function(resource, callback) {
 			else return response.data;
 			
 		} else {
-			alert('Error: '+ response.data);
+			$.ajax_error(response);
 		}
 	});
 }
@@ -496,7 +501,7 @@ $.bindPlugins = function() {
 						}
 						
 					} else {
-						alert(response.data);
+						$.ajax_error(response);
 						$this.removeClass('loading');
 					}
 				}
@@ -576,9 +581,7 @@ $.bindPlugins = function() {
 				scoping_dropdown = $('.scoping_dropdown', scoping_fields);
 				scoping_dropdown.html('<option>Loading ' + $this.val() + '...</option>');
 				
-				$.getJSON(
-					'/ajax/get_all',
-					{ model: $this.val(), authenticity_token: $.get_auth_token() },
+				$.getJSON('/ajax/get_all', { model: $this.val(), authenticity_token: $.get_auth_token() },
 					function(response) {
 						if (response.success) {
 							var args = { attribute: 'name', select_prompt: (scoping_dropdown.hasClass('no_prompt') ? '' : 'Active Context') }

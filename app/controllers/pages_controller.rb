@@ -4,6 +4,7 @@ class PagesController < ApplicationController
   before_filter :clear_empty_blocks_fields, :only => [:create, :update]
   before_filter :get_modules, :only => [:new, :edit]
   before_filter :load_grey_module, :only => :show
+  geocode_ip_address
   
   def index
     @pages = Page.all_for_index_view

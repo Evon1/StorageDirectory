@@ -5,26 +5,4 @@
 
 <%= render_model_helptext(controller_name) %>
 
-<div class="uncollapse">
-
-	<div class="left">
-		<% if current_user %>
-			<div class="buttons grey_buttons">
-				<% case action_name when 'index', 'show' %>
-
-					<%= link_to model_crud_title('new', controller_name), new_model_path(controller_name, :user_id => params[:user_id]) %>
-
-				<% when 'new', 'edit'  %>
-
-					<%= link_to 'Back', model_index_path(controller_name) %>
-
-				<% end %>
-			</div>
-		<% end %>
-	</div>
-
-	<%= render :partial => 'menus/view_type_links' unless data.blank? %>
-
-</div>
-
-<%= render :partial => "#{view_types_dir}#{@default_view_type}", :locals => { :data => data } unless data.blank? %>
+<%= render :partial => 'shared/base_model_index', :locals => { :data => data } %>

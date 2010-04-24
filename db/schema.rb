@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100421044645) do
+ActiveRecord::Schema.define(:version => 20100423023544) do
 
   create_table "block_forms", :force => true do |t|
     t.integer  "block_id"
@@ -165,10 +165,11 @@ ActiveRecord::Schema.define(:version => 20100421044645) do
     t.string   "state"
     t.integer  "zip"
     t.string   "lat"
-    t.string   "long"
+    t.string   "lng"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "phone"
+    t.integer  "distance"
   end
 
   create_table "models_modules", :force => true do |t|
