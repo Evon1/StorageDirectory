@@ -341,6 +341,29 @@ $.fn.linkDiv = function() {
 	});
 }
 
+// fill matching inputs with the param from its rel attr
+$.fn.fillWithParam = function() {
+	var params = window.location.href.split('?')[1];
+	if (!params) return false;
+	
+	return this.each(function(){
+		var $this  = $(this),
+				attr   = $this.attr('rel'),
+				value  = '';
+		
+		$.each(params.split('&'), function(){
+			if (this.split('=')[0] == attr) {
+				value = decodeURIComponent(this.split('=')[1].replace(/\+/g, '%20'));
+				return;
+			}
+		});
+		
+		$this.attr('value', value).removeClass('hint_text');
+		
+		if ($this.hasClass('focus_me')) $this.focus();
+	});
+}
+
 /******************************************* SUCCESS CALLBACKS *******************************************/
 
 $.toggleHelptext = function(clickedLink) {
@@ -371,13 +394,14 @@ $.bindPlugins = function() {
 		$('form').formBouncer(); // form validation, fields with supported validation classes will be processed
 	} catch (e){};
 	
-	$('.disabler', '.disabled').disabler(); // checkbox that disables all inputs in its form
-	$('.anchorListener').anchorDispatch();  // toggle an element when its id is present in the url hash
-	$('.row_checkable').rowCheckable();			// clicking a whole form also enables its first checkbox
-	$('.pane_switch').paneSwitcher();				// use a checkbox to switch between two containers. classes: .pane_0, .pane_1
-	$('.toggle_div').toggleDiv();						// use a checkbox to show/hide its parents next sibling div
-	$('.trans2opaq').animOpacity();					// animates from transparent to opaque on hover, css sets initial opacity
-	$('.link_div').linkDiv();								// attack a click event to divs that wrap a link to follow the href
+	$('.disabler', '.disabled').disabler();  // checkbox that disables all inputs in its form
+	$('.anchorListener').anchorDispatch();   // toggle an element when its id is present in the url hash
+	$('.row_checkable').rowCheckable();			 // clicking a whole form also enables its first checkbox
+	$('.pane_switch').paneSwitcher();				 // use a checkbox to switch between two containers. classes: .pane_0, .pane_1
+	$('.toggle_div').toggleDiv();						 // use a checkbox to show/hide its parents next sibling div
+	$('.trans2opaq').animOpacity();					 // animates from transparent to opaque on hover, css sets initial opacity
+	$('.link_div').linkDiv();								 // attack a click event to divs that wrap a link to follow the href
+	$('input.param_filled').fillWithParam(); // fill matching inputs with the param from its rel attr
 	
 	// sortable nav bar, first implemented to update the position attr of a page (only when logged in)
 	$('.sortable', '.authenticated').sortable({

@@ -3,15 +3,17 @@
     <div class="inner large_top_round">
     
       <div id="listings_search_wrap" class="round">
-        <div class="inner round border_box">
-          <h4>We found <span id="result_count" class="medium_round purple"><%= @model_data.size %></span> self storage facilities</h4>
+        <form action="/storage-locator" method="get">
+          <div class="inner round border_box">
+            <h4>We found <span id="result_count" class="medium_round purple"><%= num_entries @model_data %></span> self storage facilities</h4>
            
-          <div>
-            <input type="text" name="query" id="query_main" class="hintable medium_round border_box" title="address city and state or zip" />
-            <input type="image" src="/images/ui/storagelocator/results-search-btn.png" id="main_search_btn" class="vAlignBtm white dark_text_shadow trans2opaq" value="Search" />
+            <div>
+              <input type="text" name="query" rel="query" id="query_main" class="hintable medium_round border_box param_filled focus_me" title="address city and state or zip" />
+              <input type="image" src="/images/ui/storagelocator/results-search-btn.png" id="main_search_btn" class="vAlignBtm white dark_text_shadow trans2opaq" />
+            </div>
+           
           </div>
-           
-        </div>
+        </form>
       </div>
       
       <div id="sorting_by" class="white bold font90">
@@ -73,6 +75,7 @@
               
               <div class="tabs uncollapse">
                 <div class="left upcase font85 bold">
+                  <%= link_to '+', '#', :class => 'open_tab left block bold white' %>
                   <%= link_to 'Map', listing.get_partial_link(:map), :rel => 'map', :class => 'map tab_link iconLeft21 block left' %>
                   <%= link_to 'Specials', listing.get_partial_link(:specials), :rel => 'specials', :class => 'specials tab_link iconLeft21 block left' %>
                   <%= link_to 'Sizes', listing.get_partial_link(:sizes), :rel => 'sizes', :class => 'sizes tab_link iconLeft21 block left' %>
@@ -84,7 +87,7 @@
             </div> <!-- /#.listing -->
           <% end %>
           
-          <%= will_paginate @model_data %>
+          <%= will_paginate @model_data if @model_data.respond_to? :total_pages %>
           
         <% else %>
           <div class="no_results framed">

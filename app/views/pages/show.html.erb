@@ -1,1 +1,2 @@
+<%= content_for(:scripts, javascript_include_tag("http://maps.google.com/maps?file=api&v=2&key=#{GOOGLE_APPLICATION_ID}")) if params[:title] == 'storage-locator' %>
 <%= render :partial => 'shared/model_content_show', :locals => { :model => @page } %>

@@ -13,7 +13,10 @@ ActionController::Routing::Routes.draw do |map|
   map.logout '/logout', :controller => 'user_sessions', :action => 'destroy'
   
   # grey module
-
+  map.locate '/locate/:state/:city/:address', :controller => 'pages', 
+                                   :action => 'show',
+                                   :title => 'storage-locator',
+                                   :requirements => { :zip => /^\d{5}$/ }
   
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   map.resources :products

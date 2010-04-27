@@ -10,10 +10,10 @@ module GreyModules
     @gm_model = eval "@#{controller_name.singular}"
     
     unless we_need_to_load_one
-      _disabled_module(@gm_model)
+      disabled_module(@gm_model)
     else
-      self.class.require _grey_module
-      @model_data = _grey_module_class.init @gm_model, params
+      self.class.require grey_module
+      @model_data = grey_module_class.init @gm_model, params
     end
   end
   
@@ -23,22 +23,22 @@ module GreyModules
     action_name == 'show' && !@gm_model.nil? && !@gm_model.module.blank? && @gm_model.module.name.downcase != 'normal'
   end
   
-  def _grey_module
+  def grey_module
     ".#{@@module_dir}#{@gm_model.module.name}/#{@gm_model.module.name}.rb"
   end
   
-  def _grey_module_class
+  def grey_module_class
     @gm_model.module.name.camelcase.constantize
   end
   
-  def _disabled_module(model)
-    if block = _has_search_block(model)
+  def disabled_module(model)
+    if block = get_search_block(model)
       model.blocks_model.find_by_block_id(block.id).update_attribute :enabled, false
     end
   end
   
-  def _has_search_block(model)
-    model.blocks.detect { |b| b.title == 'Search Results' }
+  def get_search_block(model)
+    model.blocks.detect { |b| b.title == 'Search Results' } if model.respond_to? :blocks
   end
   
 end

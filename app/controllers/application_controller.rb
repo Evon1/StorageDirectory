@@ -60,6 +60,9 @@ class ApplicationController < ActionController::Base
   
   layout lambda { app_config[:theme] }
   
+  # storage locator
+  rescue_from Geokit::Geocoders::GeocodeError, :with => :refresh_without_params
+  
   # display full error message when logged in as an Admin
   def local_request?
     current_user && current_user.has_role?('Admin')
@@ -273,7 +276,7 @@ class ApplicationController < ActionController::Base
   
   def get_models_paginated
     @paginated = true
-    eval "@#{controller_name} = #{controller_name.singular.camelcase}.paginate :all, :per_page => 10, :page => params[:page]"
+    eval "@#{controller_name} = #{controller_name.singular.camelcase}.paginate :all, :per_page => 14, :page => params[:page]"
   end
   
   def get_model

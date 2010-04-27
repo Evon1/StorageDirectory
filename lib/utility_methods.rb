@@ -1,5 +1,9 @@
 module UtilityMethods
   
+  def refresh_without_params
+    redirect_to request.request_uri.split('?')[0]
+  end
+  
   # add methods to Ruby classes
   String.class_eval do
 

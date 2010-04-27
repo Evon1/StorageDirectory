@@ -323,6 +323,10 @@ module ApplicationHelper
     "/#{controller_name}" == path
   end
   
+  def current_model
+    @current_model ||= eval "@#{controller_name.singularize}"
+  end
+  
   def is_ignored_attribute?(attribute) # skip these when printing out a model's attributes
     ['created_at', 'updated_at'].include? attribute
   end
@@ -384,8 +388,8 @@ module ApplicationHelper
     end
   end
   
-  def paginated?
-    defined? @paginated && @paginated
+  def paginated?(data = {})
+    data.respond_to? :total_pages || defined? @paginated && @paginated
   end
   
 end

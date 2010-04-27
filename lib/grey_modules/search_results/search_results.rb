@@ -13,7 +13,7 @@ class SearchResults < ApplicationController
   
   def self.run_query(params)
     unless params[:query].blank?
-      if params[:query].size == 5 || _is_address_query?(params[:query])
+      if is_address_query?(params[:query])
         @model_data = Listing.paginate(:all, 
                                        :per_page => 7,
                                        :page => params[:page],
@@ -24,9 +24,11 @@ class SearchResults < ApplicationController
         if params[:order].blank? || params[:order] == 'distance'
           @model_data.sort_by_distance_from params[:query]
         end
+      else
+        @model_data = []
       end
     else
-      @model_data = Listing.paginate(:all, :per_page => 7, :page => params[:page], :include => [:map, :specials, :sizes, :pictures])
+      []
     end
   end
   
@@ -73,10 +75,13 @@ class SearchResults < ApplicationController
   
   private
   
-  def self._is_address_query?(query)
-    States.abbrevs.each do |s|
-      return true if query =~ /\s#{s}/i
-    end
+  def self.is_address_query?(query)
+    # zip code
+    return true if query.size == 5
+    
+    # has a state name or abbrev
+    regex = States::NAMES.map { |s| "(#{s[0]})|\s#{s[1]}$" } * '|'
+    query.match /#{regex}/i
   end
   
 end

@@ -7,7 +7,7 @@ body {
 p { margin-bottom:10px; }
 a:link, a:visited { text-decoration:none; }
 a:hover, a:active { text-decoration:underline; }
-input[type="text"]:hover, input[type="text"]:focus, textarea:hover, textarea:focus { background:#ebebeb; }
+input[type="text"]:hover, input[type="text"]:focus, textarea:hover, textarea:focus { background-color:#ebebeb; }
 
 /***** LAYOUT *****/
 #header { height:220px; }
@@ -70,7 +70,7 @@ input[type="text"]:hover, input[type="text"]:focus, textarea:hover, textarea:foc
 #listings_search_wrap h4 { margin:3px 0 0 30px; font-size:120%; }
 #listings_search_wrap h4 span { border:1px solid; padding:1px 5px; background:#eee; }
 #listings_search_wrap .inner div { margin:24px 0 0 50px; }
-#query_main { width:250px; padding:3px 7px; font-size:110%; }
+#query_main { width:275px; padding:4px 7px; font-size:100%; color:#333; }
 #main_search_btn { margin-left:-12px; }
 #sorting_by { margin:8px 0 8px 30px; }
 #listings_table_head { height:38px; margin:0 -18px; position:relative; bottom:-4px; background:url(/images/ui/storagelocator/table-top-bg-strip.png) repeat-x top; }
@@ -96,6 +96,8 @@ input[type="text"]:hover, input[type="text"]:focus, textarea:hover, textarea:foc
 .reserve_btn { width:65px; height:24px; padding:15px 10px; font-size:140%; background:url(/images/ui/storagelocator/reserve-btn.png) no-repeat }
 .reserve_btn:hover { text-decoration:none; }
 
+.listings_wrap .pagination { margin-top:14px; }
+
 #listings_main .panel { width:92%; height:250px; margin:0 auto; background:#ffffda; position:relative; z-index:600; }
 .panel h5 { padding:12px 17px; margin-bottom:0; font-size:140%; background:#cc3300; }
 #column_5 .panel .inner { height:72%; padding:13px 16px; position:relative; z-index:550; background:#fff; }
@@ -104,7 +106,9 @@ input[type="text"]:hover, input[type="text"]:focus, textarea:hover, textarea:foc
 .panel .inner h6 { font-size:120%; }
 .panel .inner h6, .panel .inner p { margin-bottom:14px; }
 .tabs { margin-left:30px; }
-.tabs .left a, .panel .inner .map_controls li { padding:2px 12px 3px 40px; margin:0 4px 0 0; color:#fff; background-color:#ccc; }
+.tabs .left a, .panel .inner .map_controls li { padding:2px 12px 3px 12px; margin:0 4px 0 0; color:#fff; background-color:#ccc; }
+.tabs .left .tab_link { padding-left:40px; }
+.tabs .left a:first-child { padding:1px 4px 2px; text-decoration:none; color:#ccc; background-color:#fff; }
 .panel .inner .map_controls li { padding-left:12px; }
 .tabs .tab_link:hover { text-decoration:none; background-color:#444da0; }
 .tabs .map { background:url(/images/ui/storagelocator/icons/map-icon.png) no-repeat 23% 50%; }

@@ -31,6 +31,23 @@ module SharedModelMethods #:nodoc:
   
   # This module contains instance methods
   module InstanceMethods
+    
+    def columns_with_assoc(*assoc)
+      columns = []
+      self.class.column_names.each do |column|
+        next if column.to_s =~ /id$|_at$/
+        columns << { self.class.name => column }
+      end
+      
+      assoc.each do |klass|
+        klass.to_s.camelcase.constantize.column_names.each do |column|
+          next if column.to_s =~ /id$|_at$/
+          columns << { klass.to_s.camelcase => column }
+        end
+      end
+      
+      columns
+    end
    
     def blocks_for_region(region)
       self.blocks.find(:all, :conditions => ['place = ? AND enabled IS TRUE', region])

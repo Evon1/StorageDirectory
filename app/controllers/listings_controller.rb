@@ -2,7 +2,7 @@ class ListingsController < ApplicationController
   before_filter :get_models_paginated, :only => :index
   before_filter :get_model, :only => [:show, :edit]
   
-  require 'csv'
+  include Greycsv
   
   def index
   end
@@ -23,18 +23,6 @@ class ListingsController < ApplicationController
   end
 
   def edit
-  end
-  
-  def import
-    result = Listing.import_from_csv CSV::Reader.parse(params[:listings][:file])
-
-    if result[:success]
-      flash[:notice] = "CSV Import Successful,  #{result[:message]} new listings added."
-    else
-      flash[:error] = result[:message]
-    end
-    
-    redirect_to :action => 'index'
   end
 
 end

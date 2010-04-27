@@ -1,8 +1,7 @@
-<div class="uncollapse">
+<div class="uncollapse stack">
 	<%= render :partial => 'shared/model_new_back_buttons' %>
 	<%= render :partial => 'menus/view_type_links' unless data.blank? %>
 </div>
 
-<%= will_paginate @listings if paginated? %>
 <%= render :partial => "#{view_types_dir}#{@default_view_type}", :locals => { :data => data } unless data.blank? %>
-<%= will_paginate @listings if paginated? %>
+<%= will_paginate data if paginated?(data) %>

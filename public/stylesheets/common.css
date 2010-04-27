@@ -69,7 +69,11 @@ span.active { cursor:default; }
 .block { display:block; }
 .w80 { width:80px; }
 .w110 { width:110px; }
+.w150 { width:150px; }
+.w300 { width:300px; }
+.h500 { height:500px; }
 .w75per { width:75%; }
+.autoscroll { overflow:auto; }
 .mtopneg10 { margin-top:-10px; }
 .has_hoverable_list ul li { padding:3px 3px 3px 5px; cursor:default; }
 .has_hoverable_list ul li:hover { background:#ebebeb; opacity:.6; }
@@ -88,7 +92,7 @@ span.active { cursor:default; }
 .upcase { text-transform:uppercase; }
 
 .map_wrap { width:295px; height:202px; position:relative; }
-.map_wrap iframe { height:203px; }
+.map_wrap iframe { height:203px; overflow:hidden; }
 .map_wrap > div { height:202px; }
 
 /* common colors */
@@ -129,6 +133,12 @@ span.active { cursor:default; }
 	background:#dadada; 
 }
 .admin_hover_option:hover, .admin_hover_option:active { border:1px solid #626262; background:#a4a4a4; }
+
+/* pagination */
+.pagination { text-align:center; margin-bottom:7px; }
+.pagination a, .pagination span { padding:4px 6px; border:2px solid #999; -moz-border-radius:5px; -webkit-border-radius:5px; border-radius:5px; }
+.pagination a { text-decoration:none; }
+.pagination a:hover, .pagination a:active { background-color:#818181; }
 
 /********************* added in from old greyCMS stylesheet **********************/
 /* model index */

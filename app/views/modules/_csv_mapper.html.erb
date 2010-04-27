@@ -1,0 +1,35 @@
+<div id="csv_mapper" class="stack framed round box uncollapse">
+  <% form_tag "#{controller_name}/import?csv_tempfile=#{params[:csv_tempfile]}", :method => :post do %>
+    <fieldset>
+      <legend class="stack bold">CSV Column Mapper</legend>
+    
+      <div class="stack left right_space">
+        <p><%= model.class.name %> Model Columns</p>
+        <% model.columns_with_assoc(:map).each do |key_val| %>
+          <div class="box small_framed">
+            <%= label_tag "#{key_val.keys.first}: #{key_val.values.first}", nil, :class => 'block left w110 font85' %>
+            <%= text_field_tag "mapped[#{key_val.keys.first}][#{key_val.values.first}]", nil, :size => 7 %>
+          </div>
+        <% end %>
+      </div>
+    
+      <div class="stack font85">
+        <p>CSV File Columns</p>
+        
+        <div class="autoscroll h500">
+          <% params[:header_column].split(/,\s?/).each_with_index do |heading, i| %>
+            <div class="left w150 right_space box small_framed">
+              <%= label_tag "#{i} - #{heading}", nil, :class => 'block left w150' %>
+              <%= hidden_field_tag "header[#{i}][#{heading}]" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      
+      <div class="submit clear">
+        <%= hidden_field_tag :csv_tempfile, params[:csv_tempfile] %>
+        <%= submit_tag 'Finish Import' %>
+      </div>
+    </fieldset>
+  <% end %>
+</div>

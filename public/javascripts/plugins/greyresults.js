@@ -10,8 +10,9 @@ $.clicked_on_different_tab = function($tab_link, $listing) {
 			active_panel		= $open_panel.attr('rel'),
 			clicked_listing = $open_panel.parent().attr('id'),
 			active_listing 	= $listing.attr('id');
-			
+	
 	if ($open_panel.length == 0) return true;
+	if (active_listing != clicked_listing) return true;
 	
 	// true when clicking on a different tab in the same result, or the same tab in a different result
 	return (clicked_tab != active_panel && active_listing == clicked_listing) || 
@@ -20,9 +21,28 @@ $.clicked_on_different_tab = function($tab_link, $listing) {
 
 $.fn.greyresults = function() {
 	return this.each(function() {
-		$('.inner', '.listing').click(function(){ $('.tab_link[rel=map]', $(this).parent()).click(); })
+		// panel openers
+		$('.inner', '.listing').click(function(){ $('.tab_link[rel=map]', $(this).parent()).click(); });
+		$('.open_tab', '.tabs').click(function(){
+			var $this = $(this),
+					$panel = $('.panel', $this.parent().parent().parent());
+			
+			$('.open_tab').text('+');
+			
+			if (!$this.data('active')) {
+				$('.tab_link[rel=map]', $this.parent()).click();
+				$this.data('active', true);
+				$this.text('x');
+			} else {
+				$panel.slideUp();
+				$this.data('active', false);
+				$('.open_tab').text('+');
+			}
+			
+			return false
+		})
 		
-		// slide open the panel below a result containing a partial loaded via ajax, as per the href in the clicked link
+		// slide open the panel below a result containing a partial loaded via ajax, as per the rel in the clicked tab link
 		$('.tab_link', this).live('click', function() {
 			var $this			= $(this),
 					$listing	= $this.parent().parent().parent(),
@@ -42,12 +62,9 @@ $.fn.greyresults = function() {
 					$panel.addClass('active');
 
 					$('.panel:not(.active)').slideUp();
-
 					$panel.html(response);
-
-					if ($panel.is(':hidden')) $panel.slideDown(300, function(){
-						$('.progress', '.tabs').removeClass('active');
-					});
+					if ($panel.is(':hidden')) $panel.slideDown(300, function(){ $('.open_tab', $listing).text('x'); comm});
+					$('.progress', '.tabs').removeClass('active');
 					
 					// load the google map into an iframe
 					if ($this.attr('rel') == 'map') {

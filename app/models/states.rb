@@ -53,7 +53,11 @@ class States
     [ "Wyoming", "WY" ]
   ]
   
+  def names
+     @state_names ||= NAMES.map { |n| n[2] }
+  end
+  
   def self.abbrevs
-    @abbrevs ||= NAMES.map { |n| n[1] }
+    @state_abbrevs ||= NAMES.map { |n| n[1] }
   end
 end
