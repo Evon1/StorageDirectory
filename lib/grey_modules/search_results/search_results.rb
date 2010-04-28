@@ -28,7 +28,7 @@ class SearchResults < ApplicationController
         @model_data = []
       end
     else
-      raise ApplicationController.geoloc.pretty_inspect
+      raise ApplicationController.geoloc.inspect
     end
   end
   

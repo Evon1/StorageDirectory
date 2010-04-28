@@ -327,6 +327,7 @@ module Geokit
         # Replace :within, :beyond and :range distance tokens with the appropriate distance 
         # where clauses.  Removes these tokens from the options hash.
         def apply_distance_scope(options)
+          #adapter.class.name.index('PostgreSQL')
           distance_condition = if options.has_key?(:within)
             "#{distance_column_name} <= #{options[:within]}"
           elsif options.has_key?(:beyond)
@@ -334,7 +335,7 @@ module Geokit
           elsif options.has_key?(:range)
             "#{distance_column_name} >= #{options[:range].first} AND #{distance_column_name} <#{'=' unless options[:range].exclude_end?} #{options[:range].last}"
           end
-
+          
           if distance_condition
             [:within, :beyond, :range].each { |option| options.delete(option) }
             options[:conditions] = merge_conditions(options[:conditions], distance_condition)
