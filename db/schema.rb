@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100428074941) do
+ActiveRecord::Schema.define(:version => 20100428084820) do
 
   create_table "block_forms", :force => true do |t|
     t.integer  "block_id"
@@ -287,6 +287,16 @@ ActiveRecord::Schema.define(:version => 20100428074941) do
   create_table "tags", :force => true do |t|
     t.string "name"
   end
+
+  create_table "us_cities", :force => true do |t|
+    t.string   "state"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "us_cities", ["name"], :name => "index_us_cities_on_name"
+  add_index "us_cities", ["state"], :name => "index_us_cities_on_state"
 
   create_table "users", :force => true do |t|
     t.string   "name"
