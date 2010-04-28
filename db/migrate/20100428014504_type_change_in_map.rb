@@ -20,8 +20,8 @@ class TypeChangeInMap < ActiveRecord::Migration
   end
 
   def self.down
-    #add_column :maps, :lat, :integer
-    #add_column :maps, :lng, :integer
+    add_column :maps, :lat, :integer
+    add_column :maps, :lng, :integer
     remove_column :maps, :nlat
     remove_column :maps, :nlng
   end
