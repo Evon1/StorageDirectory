@@ -24,9 +24,12 @@ $.get_slider_value_from_param = function(key) {
 			val;
 	
 	$.each(href.split('&'), function(){
-		if (this.split('=')[0] == key) val = this.split('=')[1];
+		if (this.split('=')[0] == key) {
+			val = this.split('=')[1];
+			return;
+		}
 	});
-	
+	$.log(val)
 	val ? val : 50;
 }
 
