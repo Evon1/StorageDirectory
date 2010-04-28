@@ -144,6 +144,8 @@ input[type="text"]:hover, input[type="text"]:focus, textarea:hover, textarea:foc
 #steps h4 { font-size:140%; color:#333; }
 #steps h4, #steps p { margin:0; display:inline; }
 #steps p { font-size:75%; letter-spacing:-.2px; }
+#step1 .step_pic img { margin-top:-3px; }
+#step2 .step_pic img { margin-top:-5px; }
 
 #click_for_more { width:226px; height:56px; padding-top:18px; text-align:center; position:absolute; z-index:100; cursor:pointer; left:44px; bottom:-64px; background:url(/images/ui/storagelocator/click-for-more.png) no-repeat; }
 
