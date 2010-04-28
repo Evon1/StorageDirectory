@@ -19,10 +19,21 @@ $.clicked_on_different_tab = function($tab_link, $listing) {
 				 (clicked_tab == active_panel && active_listing != clicked_listing);
 }
 
+$.get_slider_value_from_param = function(key) {
+	var href = window.location.href.split('?')[1],
+			val;
+	
+	$.each(href.split('&'), function(){
+		if (this.split('=')[0] == key) val = this.split('=')[1];
+	});
+	
+	val ? val : 50;
+}
+
 // narrow search form sliders
 $('.slider').slider({
 	max: 50,
-	value: 50,
+	value: $.get_slider_value_from_param('within'),
 	slide: function(e, ui) {
 		var slider = $('.slider_val', $(e.target).parent());
 		if (slider.attr('disabled')) slider.attr('disabled', false);
