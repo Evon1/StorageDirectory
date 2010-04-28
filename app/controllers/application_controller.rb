@@ -396,11 +396,15 @@ class ApplicationController < ActionController::Base
     redirect_to request.request_uri.split('?')[0]
   end
   
-  $geolocation = session[:geo_location] || cookie[:geo_session] rescue nil
   def geolocation
     @geolocation ||= $geolocation
   end
-  def self.geoloc() $geolocation end # needed to call this from a /lib/grey_modules/search_results/search_results.rb
+  
+   # needed to call this from a /lib/grey_modules/search_results/search_results.rb like: ApplicationController.geoloc
+  def self.geoloc
+    geocode_ip_address
+    $geolocation ||= session[:geo_location] || cookie[:geo_session] rescue nil
+  end
   
   def use_scripts(type, *scripts)
     scripts.flatten.map { |script| "#{type.to_s}/#{script}" }

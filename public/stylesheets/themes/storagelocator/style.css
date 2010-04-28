@@ -7,7 +7,7 @@ body {
 p { margin-bottom:10px; }
 a:link, a:visited { text-decoration:none; }
 a:hover, a:active { text-decoration:underline; }
-input[type="text"] { width:99.2%; }
+input[type="text"], input[type="password"] { width:99.2%; }
 input[type="text"]:hover, input[type="text"]:focus, textarea:hover, textarea:focus { background-color:#ebebeb; }
 
 /***** LAYOUT *****/
