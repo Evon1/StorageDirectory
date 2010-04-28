@@ -4,10 +4,8 @@ class TypeChangeInMap < ActiveRecord::Migration
     #change_column :maps, :lng, :numeric
     # couldn't type cast
     
-    Map.transaction do
-      add_column :maps, :nlat, :numeric
-      add_column :maps, :nlng, :numeric
-    end
+    add_column :maps, :nlat, :numeric
+    add_column :maps, :nlng, :numeric
     
     Map.find_each do |m|
       m.update_attributes :nlat => m.lat, :nlng => m.lng
@@ -16,11 +14,14 @@ class TypeChangeInMap < ActiveRecord::Migration
     
     remove_column :maps, :lat
     remove_column :maps, :lng
+    
+    rename_column :maps, :nlat, :lat
+    rename_column :maps, :nlng, :lng
   end
 
   def self.down
-    add_column :maps, :lat, :integer
-    add_column :maps, :lng, :integer
+    #add_column :maps, :lat, :integer
+    #add_column :maps, :lng, :integer
     remove_column :maps, :nlat
     remove_column :maps, :nlng
   end
