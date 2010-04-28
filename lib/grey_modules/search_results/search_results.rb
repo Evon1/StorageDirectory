@@ -12,23 +12,23 @@ class SearchResults < ApplicationController
   end
   
   def self.run_query(params)
-    unless params[:query].blank?
-      if is_address_query?(params[:query])
+    unless params[:q].blank?
+      if is_address_query?(params[:q])
         @model_data = Listing.paginate(:all, 
                                        :per_page => 7,
                                        :page => params[:page],
-                                       :origin => params[:query], 
+                                       :origin => params[:q], 
                                        :within => (params[:within] || 50),
                                        :include => [:map, :specials, :sizes, :pictures])
         
         if params[:order].blank? || params[:order] == 'distance'
-          @model_data.sort_by_distance_from params[:query]
+          @model_data.sort_by_distance_from params[:q]
         end
       else
         @model_data = []
       end
     else
-      []
+      raise ApplicationController.geoloc.pretty_inspect
     end
   end
   
@@ -77,7 +77,7 @@ class SearchResults < ApplicationController
   
   def self.is_address_query?(query)
     # zip code
-    return true if query.size == 5
+    return true if query.match /\d{5}/
     
     # has a state name or abbrev
     regex = States::NAMES.map { |s| "(#{s[0]})|\s#{s[1]}$" } * '|'

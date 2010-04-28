@@ -7,6 +7,7 @@ body {
 p { margin-bottom:10px; }
 a:link, a:visited { text-decoration:none; }
 a:hover, a:active { text-decoration:underline; }
+input[type="text"] { width:99.2%; }
 input[type="text"]:hover, input[type="text"]:focus, textarea:hover, textarea:focus { background-color:#ebebeb; }
 
 /***** LAYOUT *****/
@@ -15,10 +16,10 @@ input[type="text"]:hover, input[type="text"]:focus, textarea:hover, textarea:foc
 #header .inner_wrap { margin-top:40px; }
 #logo { width:650px; position:relative; z-index:350; top:-9px; }
 
-#nav { position:relative; top:-107px; }
+#nav { position:relative; top:-105px; }
 #nav .right { position:relative; z-index:500; padding-left:10px; background:url(/images/ui/storagelocator/nav-bg-lft.png) no-repeat top left; }
 #nav .right > ul { overflow:hidden; padding-right:10px; background:url(/images/ui/storagelocator/nav-bg-rgt.png) no-repeat top right; }
-#nav .right > ul > li { float:left; padding:5px 0; background:url(/images/ui/storagelocator/nav-bg-strip.png) repeat-x; }
+#nav .right > ul > li { float:left; padding:3px 0; background:url(/images/ui/storagelocator/nav-bg-strip.png) repeat-x; }
 #nav a { color:#333; padding:3px 8px 3px 28px; font-size:85%; margin-right:10px; display:block; border-right:1px solid #d1d1d1; }
 #nav li:last-child a { border:0 none; margin-right:0; }
 #nav a[href="/home"] { background:url(/images/ui/storagelocator/icons/home-icon.png) no-repeat 0 45%; }
