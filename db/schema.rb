@@ -169,7 +169,8 @@ ActiveRecord::Schema.define(:version => 20100428014504) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "phone"
-    t.integer  "distance"
+    t.integer  "nlat",       :limit => 10, :precision => 10, :scale => 0
+    t.integer  "nlng",       :limit => 10, :precision => 10, :scale => 0
   end
 
   create_table "models_modules", :force => true do |t|
