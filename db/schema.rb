@@ -164,8 +164,8 @@ ActiveRecord::Schema.define(:version => 20100428014504) do
     t.string   "city"
     t.string   "state"
     t.integer  "zip"
-    t.float    "lat"
-    t.float    "lng"
+    t.integer  "lat",        :limit => 10, :precision => 10, :scale => 0
+    t.integer  "lng",        :limit => 10, :precision => 10, :scale => 0
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "phone"
