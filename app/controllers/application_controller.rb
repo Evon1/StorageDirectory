@@ -39,7 +39,7 @@ class ApplicationController < ActionController::Base
   
   # for the SharedModelMethod module
   # TODO: move this into a theme config or something since not all layouts have all regions
-  $regions    = [:header, :sidebar, :content_bottom, :column_5, :column_6, :footer]
+  $regions    = [:header, :sidebar, :content_bottom, :column_5, :column_6, :column_7, :footer]
   
   # for the virtual forms, build forms
   $_actions     = [:index, :show, :create, :update]
@@ -123,6 +123,7 @@ class ApplicationController < ActionController::Base
     @action_name       = action_name
     @default_view_type = session[:view_type]
     @theme_css         = theme_css(session[:theme]  || @@app_config[:theme])
+    @plugin_css        = plugin_css 'jquery.ui.css'
     @meta_keywords     = @@app_config[:keywords]    || @@app_config[:title]
     @meta_description  = @@app_config[:description] || @meta_keywords
     @plugins           = use_scripts(:plugins, (@@app_config[:plugins] || '').split(/,\W?/))
@@ -390,6 +391,10 @@ class ApplicationController < ActionController::Base
   # output a theme css path for the stylesheet_link helper
   def theme_css(name)
     "themes/#{name}/style"
+  end
+  
+  def plugin_css(name)
+    "plugins/#{name}"
   end
   
   def refresh_without_params

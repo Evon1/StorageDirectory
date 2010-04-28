@@ -1,4 +1,4 @@
-<div id="listings" class="large_bottom_round">
+<div id="listings" class="large_bottom_round right">
   <div id="listings_header" class="large_top_round">
     <div class="inner large_top_round">
     
@@ -20,8 +20,9 @@
         Your <span class="black">nearest</span> self storage is being displayed first.
       </div>
     
-      <div id="listings_table_head" class="large_top_round border_box">
-        
+      <div id="listings_table_head" class="large_top_round border_box uncollapse">
+        <div class="name_sort table_sort white_bg border_box left trans2opaq">Facility Name</div>
+        <div class="distance_sort table_sort white_bg border_box left trans2opaq">Distance</div>
       </div>
     </div>
   </div>
@@ -34,8 +35,8 @@
         <% unless @model_data.blank? %>
           <% @model_data.each do |listing| %>
             
-            <div id="listing_<%= listing.id %>" class="listing round box_border font75 pos_rel">
-              <div class="inner round box_shadow pos_rel">
+            <div id="listing_<%= listing.id %>" class="listing round font75 pos_rel">
+              <div class="inner round border_box pos_rel">
             
                 <div class="field left">
                   <div class="small_inset_shadow">
@@ -71,7 +72,7 @@
             
               </div> <!-- /.inner -->
               
-              <div class="panel hide bottom_round box_shadow mtopneg10"></div>
+              <div class="panel hide bottom_round borderButTop mtopneg10"></div>
               
               <div class="tabs uncollapse">
                 <div class="left upcase font85 bold">
@@ -87,8 +88,6 @@
             </div> <!-- /#.listing -->
           <% end %>
           
-          <%= will_paginate @model_data if @model_data.respond_to? :total_pages %>
-          
         <% else %>
           <div class="no_results framed">
             Sorry, that search didn't return any results. Try using less filter options.
@@ -97,6 +96,9 @@
         </div> <!-- /.listing_wrap -->
         
       </div>
+      
+      <%= will_paginate @model_data if @model_data.respond_to? :total_pages %>
+      
     </div>
   </div>
 </div> <!-- /#listings -->

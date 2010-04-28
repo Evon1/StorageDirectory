@@ -382,12 +382,6 @@ module ApplicationHelper
     !params[:title] || params[:title] != 'home'
   end
   
-  def shrink_on_locator_page
-    if controller_name == 'pages' && action_name == 'show'
-      (params[:title] || Page.find(params[:id]).try(:title)) == 'storage-locator' ? ' storage_locator_wrap' : ''
-    end
-  end
-  
   def paginated?(data = {})
     data.respond_to? :total_pages || defined? @paginated && @paginated
   end

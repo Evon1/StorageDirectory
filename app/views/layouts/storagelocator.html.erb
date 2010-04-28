@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 	<head>
-		<%= stylesheet_link_tag 'common' %>
+		<%= stylesheet_link_tag @plugin_css, 'common' %>
 		<%= stylesheet_link_tag @theme_css %>
 		
 		<meta charset="utf-8">
@@ -50,49 +50,48 @@
 	    
 	    <div id="garage_door_wrap">
 	      <div class="content_wrap">
-	        
-    	    <div class="wrap content_round_top"></div>
-    	    <div id="inner_wrap" class="wrap content_round_inner">
-    	       <div class="content_inner">
-    	         
-    	         <% if yield(:sidebar) %>
-     						<div id="sidebar" class="region">
+	    
+	      <div class="wrap content_round_top"></div>
+  	    <div id="inner_wrap" class="wrap content_round_inner">
+  	       <div class="content_inner">
+          
+            <% if yield(:sidebar) %>
+  						<div id="sidebar" class="region">
 
-     							<%= yield :sidebar %>
-                  
-     						</div> <!-- /#sidebar -->
-     					<% end %>
+  							<%= yield :sidebar %>
 
-     					<% if yield(:column_5) %>
-     				    <div id="column_5" class="region<%= shrink_on_locator_page %>">
-     				      
-                  <%= yield :column_5 %>
-                  
-     				    </div> <!-- /#column_5 -->
-     				  <% end %>
-              <br class="clear" />
-              
-     					<div id="body" class="region uncollapse">
-     					  
-     						<%= yield %>
-     					   <!-- /the stuff -->
-     					   
-     						<div id="content_bottom" class="region">
-     						  
-     							<%= yield :content_bottom %>
-     							
-     						</div>
-     					</div> <!-- /#body -->
-    	        
-    	      </div>
-    	    </div>
-    	    <div class="wrap content_round_btm"></div>
+  						</div> <!-- /#sidebar -->
+    				<% end %>
+          
+   					<div id="body" class="region">
+ 					  
+   						<%= yield %>
+   					  <!-- /the stuff -->
+ 					   
+   						<div id="content_bottom" class="region">
+   							<%= yield :content_bottom %>
+   						</div>
+   					</div> <!-- /#body -->
+	          
+	          <%= '<br class="clear" />' if params[:title] == 'storage-locator' %>
+	          
+  	      </div>
+  	    </div>
+  	    <div class="wrap content_round_btm"></div>
     	    
     	    <div id="column_6" class="region wrap">
 					  
 						<%= yield :column_6 %>
 						
 					</div>
+					
+					<% if yield(:column_7) %>
+ 				    <div id="column_7" class="region wrap">
+ 				      
+              <%= yield :column_7 %>
+              
+ 				    </div> <!-- /#column_5 -->
+ 				  <% end %>
     	    
     	  </div> <!-- /.content_wrap -->
     	  <div id="handle" class="block_center"></div>

@@ -13,7 +13,7 @@ module GreyModules
       disabled_module(@gm_model)
     else
       self.class.require grey_module
-      @model_data = grey_module_class.init @gm_model, params
+      @model_data = grey_module_class.init @gm_model, params, session
     end
   end
   

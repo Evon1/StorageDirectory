@@ -6,27 +6,32 @@ class SearchResults < ApplicationController
   @@view_type   = 'storage_listing'
   @@region      = 'column_5'
   
-  def self.init(model, params = {})
+  def self.init(model, params = {}, session = {})
     _check_setup model
-    run_query params
+    run_query params, session
   end
   
-  def self.run_query(params)
-    unless params[:q].blank?
-      if is_address_query?(params[:q])
-        @model_data = Listing.paginate(:all, 
-                                       :per_page => 7,
-                                       :page => params[:page],
-                                       :origin => params[:q], 
-                                       :within => (params[:within] || 50),
-                                       :include => [:map, :specials, :sizes, :pictures])
-        
-        if params[:order].blank? || params[:order] == 'distance'
-          @model_data.sort_by_distance_from params[:q]
-        end
+  def self.run_query(params, session)
+    q = params[:q]; per_page = 5
+    options = {
+      :per_page => per_page,
+      :page => params[:page],
+      :within => (params[:within] || 50),
+      :include => [:map, :specials, :sizes, :pictures]
+    }
+    
+    unless q.blank?
+      if is_address_query?(q)
+        @model_data = Listing.paginate :all, options.merge(:origin => q)
+      elsif !session[:geo_location].nil?
+        @model_data = Listing.paginate :all, options.merge(:origin => session[:geo_location])
       else
-        @model_data = []
+        options.delete :within
+        @model_data = Listing.paginate :all, options.merge(:conditions => ['listings.title LIKE ?', "%#{q}%"])
       end
+      
+      # geokit says to sort after the call to find() when using :include
+      @model_data.sort_by_distance_from(q) if params[:order].blank? || params[:order] == 'distance'
     else
       #raise ApplicationController.geoloc.inspect
       []

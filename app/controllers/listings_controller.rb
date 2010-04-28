@@ -2,8 +2,6 @@ class ListingsController < ApplicationController
   before_filter :get_models_paginated, :only => :index
   before_filter :get_model, :only => [:show, :edit]
   
-  include Greycsv
-  
   def index
   end
 
@@ -24,5 +22,5 @@ class ListingsController < ApplicationController
 
   def edit
   end
-
+  
 end

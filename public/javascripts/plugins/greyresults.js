@@ -19,29 +19,43 @@ $.clicked_on_different_tab = function($tab_link, $listing) {
 				 (clicked_tab == active_panel && active_listing != clicked_listing);
 }
 
+// narrow search form sliders
+$('.slider').slider({
+	max: 50,
+	value: 50,
+	slide: function(e, ui) {
+		var slider = $('.slider_val', $(e.target).parent());
+		if (slider.attr('disabled')) slider.attr('disabled', false);
+		
+		$('.slider_val', $(this).parent()).val(ui.value)
+	}
+});
+
+// panel openers
+$('.inner', '.listing').click(function(){ $('.tab_link[rel=map]', $(this).parent()).click(); });
+$('.open_tab', '.tabs').click(function(){
+	var $this = $(this),
+			$panel = $('.panel', $this.parent().parent().parent());
+	
+	$('.open_tab').text('+');
+	
+	if (!$this.data('active')) {
+		$('.tab_link[rel=map]', $this.parent()).click();
+		$this.data('active', true);
+		$this.text('x');
+	} else {
+		$panel.slideUp();
+		$('.tab_link, .listing, .panel').removeClass('active');
+		$('.tab_link').removeClass('borderButTop');
+		$this.data('active', false);
+		$('.open_tab').text('+');
+	}
+	
+	return false
+})
+
 $.fn.greyresults = function() {
 	return this.each(function() {
-		// panel openers
-		$('.inner', '.listing').click(function(){ $('.tab_link[rel=map]', $(this).parent()).click(); });
-		$('.open_tab', '.tabs').click(function(){
-			var $this = $(this),
-					$panel = $('.panel', $this.parent().parent().parent());
-			
-			$('.open_tab').text('+');
-			
-			if (!$this.data('active')) {
-				$('.tab_link[rel=map]', $this.parent()).click();
-				$this.data('active', true);
-				$this.text('x');
-			} else {
-				$panel.slideUp();
-				$this.data('active', false);
-				$('.open_tab').text('+');
-			}
-			
-			return false
-		})
-		
 		// slide open the panel below a result containing a partial loaded via ajax, as per the rel in the clicked tab link
 		$('.tab_link', this).live('click', function() {
 			var $this			= $(this),
@@ -55,15 +69,18 @@ $.fn.greyresults = function() {
 				$panel.attr('rel', this.rel);
 				
 				$.get(this.href, function(response) {
-					$('.tab_link, .listing, .panel').removeClass('active').removeClass('box_shadow_bottom');
+					$('.tab_link, .listing, .panel').removeClass('active');
+					$('.tab_link').removeClass('borderButTop');
 
-					$this.addClass('active box_shadow_bottom');
+					$this.addClass('active borderButTop');
 					$listing.addClass('active');
 					$panel.addClass('active');
 
 					$('.panel:not(.active)').slideUp();
 					$panel.html(response);
-					if ($panel.is(':hidden')) $panel.slideDown(300, function(){ $('.open_tab', $listing).text('x'); comm});
+					$('.listing:not(.active) .open_tab').text('+');
+					$('.open_tab', $listing).text('x');
+					if ($panel.is(':hidden')) $panel.slideDown();
 					$('.progress', '.tabs').removeClass('active');
 					
 					// load the google map into an iframe
