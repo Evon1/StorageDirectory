@@ -29,7 +29,7 @@ $.get_slider_value_from_param = function(key) {
 			return;
 		}
 	});
-	$.log(val)
+	
 	val ? val : 50;
 }
 
