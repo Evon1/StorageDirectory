@@ -8,7 +8,6 @@ p { margin-bottom:10px; }
 a:link, a:visited { text-decoration:none; }
 a:hover, a:active { text-decoration:underline; }
 input[type="text"], input[type="password"] { width:99.2%; }
-input[type="text"]:hover, input[type="text"]:focus, textarea:hover, textarea:focus { background-color:#ebebeb !important; }
 
 /***** LAYOUT *****/
 #header { height:220px; }
@@ -63,10 +62,10 @@ input[type="text"]:hover, input[type="text"]:focus, textarea:hover, textarea:foc
 .floating_ads:last-child { margin-bottom:0; }
 
 .storage_locator #garage_door_wrap .content_wrap { overflow:hidden; }
-.storage_locator #inner_wrap { height:395px; }
+.storage_locator #inner_wrap { height:335px; }
 .storage_locator #sidebar { width:22%; float:left; }
 .storage_locator #body { width:78%; float:right; }
-.storage_locator .notice { margin-bottom:45px; }
+.storage_locator .notice { margin-bottom:36px; }
 #small_loupe { width:41px; height:46px; margin:-4px 3px 0 -12px; float:left; background:url(/images/ui/storagelocator/loupe-sm.png) no-repeat top center; }
 #narrow_search_form .small_textfield { width:23% !important; }
 #narrow_search_form .stack span.right { font-size:70%; display:block; margin:-2px -17px 0 0; }
@@ -176,7 +175,9 @@ a#greyrobot:link, a#greyrobot:visited { color:#aaa; }
 /** helpers and plugins **/
 .trans2opaq { opacity:.7; } /* initial value before js animates to opacity 1 on hover */
 .link_div { cursor:pointer; }
-.ui-slider-horizontal { margin-top:15px; height:1px; }
+.slider_wrap > div { margin-bottom:14px; }
+.slider_wrap > div:first-child { margin-bottom:28px; }
+.ui-slider-horizontal { margin-top:15px; height:2px; cursor:pointer; }
 .ui-slider-horizontal .ui-slider-handle { width:25px; height:19px; top:-9px; border:0 none; cursor:pointer; background:url(/images/ui/storagelocator/grey-slider.png) no-repeat }
 
 /** Colors **/

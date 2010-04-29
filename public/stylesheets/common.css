@@ -193,7 +193,7 @@ div.setting_field .check_box_wrap label { border:0 none; cursor:default; }
 
 /* helpers */
 .wysiwyg { font-size:80%; font-family:Geneva, Courier, monospace; }
-.hint_text { font-style:italic; color:#999; }
+.hint_text { font-style:italic; color:#999 !important; }
 
 /* round borders */
 .round, .shadow_wrap { 

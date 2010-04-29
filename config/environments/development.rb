@@ -20,3 +20,4 @@ config.action_mailer.raise_delivery_errors = false
 config.gem 'hirb'
 
 GOOGLE_APPLICATION_ID = 'ABQIAAAALpG_-PAeF4LXKTM6JqFu2BTJQa0g3IQ9GZqIMmInSLzwtGDKaBSNojJ59l416c_5H1dXEmzZt3yWnw'
+Geokit::Geocoders::google = GOOGLE_APPLICATION_ID

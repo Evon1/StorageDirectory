@@ -12,26 +12,26 @@ class SearchResults < ApplicationController
   end
   
   def self.run_query(params, session)
-    q = params[:q]; per_page = 5
+    q = params[:q]
     options = {
-      :per_page => per_page,
-      :page => params[:page],
-      :within => (params[:within] || 50),
-      :include => [:map, :specials, :sizes, :pictures]
+      :page     => params[:page],
+      :order    => (params[:order]    || 'distance'),
+      :within   => (params[:within]   || 50),
+      :per_page => (params[:per_page] || 7)
     }
     
     unless q.blank?
       if is_address_query?(q)
-        @model_data = Listing.paginate :all, options.merge(:origin => q)
+        options.merge! :origin => q
       elsif !session[:geo_location].nil?
-        @model_data = Listing.paginate :all, options.merge(:origin => session[:geo_location])
+        options.merge! :origin => session[:geo_location]
       else
         options.delete :within
-        @model_data = Listing.paginate :all, options.merge(:conditions => ['listings.title LIKE ?', "%#{q}%"])
+        options[:order] = 'title'
+        options.merge! :conditions => ['listings.title LIKE ?', "%#{q}%"]
       end
       
-      # geokit says to sort after the call to find() when using :include
-      @model_data.sort_by_distance_from(q) if params[:order].blank? || params[:order] == 'distance'
+      @model_data = Listing.paginate :all, options
     else
       #raise ApplicationController.geoloc.inspect
       []

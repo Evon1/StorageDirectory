@@ -26,10 +26,11 @@ if defined? Geokit
 	# This is your Google Maps geocoder key. 
 	# See http://www.google.com/apis/maps/signup.html
 	# and http://www.google.com/apis/maps/documentation/#Geocoding_Examples
-	Geokit::Geocoders::google = {
-	  'localhost' => 'ABQIAAAALpG_-PAeF4LXKTM6JqFu2BTJQa0g3IQ9GZqIMmInSLzwtGDKaBSNojJ59l416c_5H1dXEmzZt3yWnw',
-	  'storagelocator.heroku.com' => 'ABQIAAAALpG_-PAeF4LXKTM6JqFu2BRr_2tWjaRtZSAUCEDqSPiw8R7KmxSDLwHhFSM8wxLOt_2aL5uhHL0hyw'
-	}
+	# moved to environment files
+	#Geokit::Geocoders::google = {
+	#  'localhost' => 'ABQIAAAALpG_-PAeF4LXKTM6JqFu2BTJQa0g3IQ9GZqIMmInSLzwtGDKaBSNojJ59l416c_5H1dXEmzZt3yWnw',
+	#  'storagelocator.heroku.com' => 'ABQIAAAALpG_-PAeF4LXKTM6JqFu2BRr_2tWjaRtZSAUCEDqSPiw8R7KmxSDLwHhFSM8wxLOt_2aL5uhHL0hyw'
+	#}
     
 	# This is your username and password for geocoder.us.
 	# To use the free service, the value can be set to nil or false.  For 

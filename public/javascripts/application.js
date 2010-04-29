@@ -347,20 +347,19 @@ $.fn.fillWithParam = function() {
 	if (!params) return false;
 	
 	return this.each(function(){
-		var $this  = $(this),
-				attr   = $this.attr('rel'),
-				value  = '';
+		var $this = $(this),
+				attr  = $this.attr('rel'),
+				value = false;
 		
 		$.each(params.split('&'), function(){
-			if (this.split('=')[0] == attr) {
-				value = decodeURIComponent(this.split('=')[1].replace(/\+/g, '%20'));
-				return;
-			}
+			if (this.split('=')[0] == attr) { value = this.split('=')[1]; return; }
 		});
 		
-		$this.attr('value', value).removeClass('hint_text');
+		if (value) 
+			$this.attr('value', decodeURIComponent(value.replace(/\+/g, '%20'))).removeClass('hint_text').attr('disabled', false);
 		
-		if ($this.hasClass('focus_me')) $this.focus();
+		if ($this.hasClass('focus_me'))
+			$this.focus();
 	});
 }
 
@@ -401,7 +400,7 @@ $.bindPlugins = function() {
 	$('.toggle_div').toggleDiv();						 // use a checkbox to show/hide its parents next sibling div
 	$('.trans2opaq').animOpacity();					 // animates from transparent to opaque on hover, css sets initial opacity
 	$('.link_div').linkDiv();								 // attack a click event to divs that wrap a link to follow the href
-	$('input.param_filled').fillWithParam(); // fill matching inputs with the param from its rel attr
+	$('.param_filled').fillWithParam(); 		 // fill matching inputs with the param from its rel attr
 	
 	// sortable nav bar, first implemented to update the position attr of a page (only when logged in)
 	$('.sortable', '.authenticated').sortable({

@@ -5,44 +5,38 @@
 // first implemented for storage locator
 
 $.clicked_on_different_tab = function($tab_link, $listing) {
-	var $open_panel			= $('.panel:not(:hidden)', '.listing'),
-			clicked_tab 		= $tab_link.attr('rel'),
-			active_panel		= $open_panel.attr('rel'),
-			clicked_listing = $open_panel.parent().attr('id'),
-			active_listing 	= $listing.attr('id');
-	
+	var $open_panel = $('.panel:not(:hidden)', '.listing');
 	if ($open_panel.length == 0) return true;
+	
+	var clicked_listing = $open_panel.parent().attr('id'),
+			active_listing 	= $listing.attr('id');
 	if (active_listing != clicked_listing) return true;
+	
+	var clicked_tab  = $tab_link.attr('rel'),
+			active_panel = $open_panel.attr('rel');
 	
 	// true when clicking on a different tab in the same result, or the same tab in a different result
 	return (clicked_tab != active_panel && active_listing == clicked_listing) || 
 				 (clicked_tab == active_panel && active_listing != clicked_listing);
 }
 
-$.get_slider_value_from_param = function(key) {
-	var href = window.location.href.split('?')[1],
-			val;
+// narrow search form sliders
+$('.slider').each(function(){
+	var $this = $(this),
+			value = $('.slider_val', $this.parent()).val();
 	
-	$.each(href.split('&'), function(){
-		if (this.split('=')[0] == key) {
-			val = this.split('=')[1];
-			return;
+	$this.slider({
+		max: 50,
+		animate: true,
+		value: Math.abs(value - 50), // reverse the direction of the slider
+		start: function(e, ui) {
+			var slider = $('.slider_val', $(e.target).parent());
+			if (slider.attr('disabled')) slider.attr('disabled', false);
+		},
+		slide: function(e, ui) {
+			$('.slider_val', $(this).parent()).val(Math.abs(ui.value - 50));
 		}
 	});
-	
-	val ? val : 50;
-}
-
-// narrow search form sliders
-$('.slider').slider({
-	max: 50,
-	value: $.get_slider_value_from_param('within'),
-	slide: function(e, ui) {
-		var slider = $('.slider_val', $(e.target).parent());
-		if (slider.attr('disabled')) slider.attr('disabled', false);
-		
-		$('.slider_val', $(this).parent()).val(ui.value)
-	}
 });
 
 // panel openers
