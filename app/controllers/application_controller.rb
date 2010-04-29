@@ -402,12 +402,7 @@ class ApplicationController < ActionController::Base
   end
   
   def geolocation
-    @geolocation ||= $geolocation
-  end
-  
-   # needed to call this from a /lib/grey_modules/search_results/search_results.rb like: ApplicationController.geoloc
-  def self.geoloc
-    $geolocation ||= Geokit::Geocoders::MultiGeocoder.geocode(request.remote_ip) rescue nil
+    @geolocation ||= session[:geo_location] || cookie[:geo_session]
   end
   
   def use_scripts(type, *scripts)
@@ -425,11 +420,6 @@ class ApplicationController < ActionController::Base
   # returns a boolean if the the current action matches any of the action passed in as a string or an array
   def in_mode?(*modes)
     [modes].flatten.any? { |m| action_name == m }
-  end
-  
-  include Geokit::Geocoders
-  def get_coords(listing)
-    MultiGeocoder.geocode listing.map.full_address
   end
   
 end
