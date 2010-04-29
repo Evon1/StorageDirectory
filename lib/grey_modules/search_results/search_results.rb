@@ -33,7 +33,7 @@ class SearchResults < ApplicationController
     else
       options.merge! :origin => ApplicationController.geoloc
     end
-    raise options.pretty_inspect
+    raise options.inspect
     @model_data = Listing.paginate :all, options
   end
   
