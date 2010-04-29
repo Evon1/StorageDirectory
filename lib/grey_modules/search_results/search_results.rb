@@ -35,6 +35,7 @@ class SearchResults < ApplicationController
     end
     
     options.delete :within
+    options.delete :order
     @model_data = Listing.paginate :all, options
   end
   
