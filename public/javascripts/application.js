@@ -351,9 +351,7 @@ $.fn.fillWithParam = function() {
 				attr  = $this.attr('rel'),
 				value = false;
 		
-		$.each(params.split('&'), function(){
-			if (this.split('=')[0] == attr) { value = this.split('=')[1]; return; }
-		});
+		
 		
 		if (value) 
 			$this.attr('value', decodeURIComponent(value.replace(/\+/g, '%20'))).removeClass('hint_text').attr('disabled', false);

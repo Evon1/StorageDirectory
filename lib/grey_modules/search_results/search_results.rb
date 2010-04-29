@@ -30,12 +30,11 @@ class SearchResults < ApplicationController
         options[:order] = 'title'
         options.merge! :conditions => ['listings.title LIKE ?', "%#{q}%"]
       end
-      
-      @model_data = Listing.paginate :all, options
     else
-      #raise ApplicationController.geoloc.inspect
-      []
+      options.merge! :origin => ApplicationController.geoloc
     end
+    
+    @model_data = Listing.paginate :all, options
   end
   
   private

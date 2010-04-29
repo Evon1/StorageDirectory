@@ -407,8 +407,7 @@ class ApplicationController < ActionController::Base
   
    # needed to call this from a /lib/grey_modules/search_results/search_results.rb like: ApplicationController.geoloc
   def self.geoloc
-    geocode_ip_address
-    $geolocation ||= session[:geo_location] || cookie[:geo_session] rescue nil
+    $geolocation ||= Geokit::Geocoders::MultiGeocoder.geocode(request.remote_ip) rescue nil
   end
   
   def use_scripts(type, *scripts)
