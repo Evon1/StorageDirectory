@@ -34,6 +34,7 @@ class SearchResults < ApplicationController
       options.merge! :origin => ApplicationController.geoloc
     end
     
+    options.delete :within
     @model_data = Listing.paginate :all, options
   end
   
