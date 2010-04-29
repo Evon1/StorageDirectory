@@ -27,6 +27,7 @@ if defined? Geokit
 	# See http://www.google.com/apis/maps/signup.html
 	# and http://www.google.com/apis/maps/documentation/#Geocoding_Examples
 	# moved to environment files
+	Geokit::Geocoders::google = 'ABQIAAAALpG_-PAeF4LXKTM6JqFu2BRr_2tWjaRtZSAUCEDqSPiw8R7KmxSDLwHhFSM8wxLOt_2aL5uhHL0hyw' # heroku key
 	#Geokit::Geocoders::google = {
 	#  'localhost' => 'ABQIAAAALpG_-PAeF4LXKTM6JqFu2BTJQa0g3IQ9GZqIMmInSLzwtGDKaBSNojJ59l416c_5H1dXEmzZt3yWnw',
 	#  'storagelocator.heroku.com' => 'ABQIAAAALpG_-PAeF4LXKTM6JqFu2BRr_2tWjaRtZSAUCEDqSPiw8R7KmxSDLwHhFSM8wxLOt_2aL5uhHL0hyw'

@@ -51,7 +51,7 @@ module Geokit
       # and create your own AR callback to handle geocoding.
       def acts_as_mappable(options = {})
         metaclass = (class << self; self; end)
-
+        
         # Mix in the module, but ensure to do so just once.
         return if !defined?(Geokit::Mappable) || metaclass.included_modules.include?(Geokit::ActsAsMappable::SingletonMethods)
 

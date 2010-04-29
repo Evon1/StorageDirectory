@@ -29,4 +29,3 @@ config.action_view.cache_template_loading            = true
 
 # key for storagelocator.heroku.com
 GOOGLE_APPLICATION_ID = 'ABQIAAAALpG_-PAeF4LXKTM6JqFu2BRr_2tWjaRtZSAUCEDqSPiw8R7KmxSDLwHhFSM8wxLOt_2aL5uhHL0hyw'
-Geokit::Geocoders::google = GOOGLE_APPLICATION_ID
