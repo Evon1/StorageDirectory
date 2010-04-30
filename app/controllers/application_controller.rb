@@ -398,7 +398,7 @@ class ApplicationController < ActionController::Base
   end
   
   def refresh_without_params
-    render :action => :show
+    redirect_to request.request_uri.split('?')[0]
   end
   
   def geolocation

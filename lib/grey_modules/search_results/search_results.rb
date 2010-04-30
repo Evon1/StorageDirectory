@@ -14,8 +14,11 @@ class SearchResults < ApplicationController
   def self.run_query(params, session)
     q = params[:q]
     options = {
-      :order    => (params[:order]    || 'distance'),
-      :within   => (params[:within]   || 50)
+      :page     => params[:page], 
+      :per_page => (params[:per_page] || 7),
+      :order    => (params[:order] || 'distance'),
+      :within   => (params[:within] || 50),
+      :limit => 7
     }
     
     unless q.blank?
@@ -32,7 +35,8 @@ class SearchResults < ApplicationController
       options.merge! :origin => session[:geo_location]
     end
     
-    @model_data = Listing.find_closest(options).paginate(:page => params[:page], :per_page => (params[:per_page] || 7))
+    @model_data = Listing.paginate :all, options
+    @model_data.sort_by_distance_from q if !params[:order] || params[:order] == 'distance'
   end
   
   private

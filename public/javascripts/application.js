@@ -351,13 +351,42 @@ $.fn.fillWithParam = function() {
 				attr  = $this.attr('rel'),
 				value = false;
 		
-		
+		$.each(params.split('&'), function(){
+			if (this.split('=')[0] == attr) { value = this.split('=')[1]; return; }
+		});
 		
 		if (value) 
 			$this.attr('value', decodeURIComponent(value.replace(/\+/g, '%20'))).removeClass('hint_text').attr('disabled', false);
 		
 		if ($this.hasClass('focus_me'))
 			$this.focus();
+	});
+}
+
+$.fn.appendParamAndGo = function() {
+	return this.each(function(){
+		var $this = $(this);
+		
+		$this.click(function(){
+			var key   = $this.attr('rel').split('-')[0]
+					val   = $this.attr('rel').split('-')[1],
+					href	= window.location.href,
+					new_href = '',
+					has_param = href.indexOf('?') >= 0,
+					param = (has_param ? '&' : '?') + key +'='+ val;
+			if(!val) return false;
+			
+			// replace any preexisting param values if the key is present
+			if (href.indexOf(key) >= 0) {
+				new_href = href.split(key)[0].replace(/\&$/, '') + param;
+			} else {
+				new_href = href + param
+			}
+			
+			// go if its a different button that was clicked
+			if (href.indexOf(val) < 0)
+				window.location = new_href;
+		});
 	});
 }
 
@@ -399,6 +428,7 @@ $.bindPlugins = function() {
 	$('.trans2opaq').animOpacity();					 // animates from transparent to opaque on hover, css sets initial opacity
 	$('.link_div').linkDiv();								 // attack a click event to divs that wrap a link to follow the href
 	$('.param_filled').fillWithParam(); 		 // fill matching inputs with the param from its rel attr
+	$('.table_sort').appendParamAndGo();		 // append the key-val in the elements rel attr to the href and go to it
 	
 	// sortable nav bar, first implemented to update the position attr of a page (only when logged in)
 	$('.sortable', '.authenticated').sortable({

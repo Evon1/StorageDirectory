@@ -21,8 +21,8 @@
       </div>
     
       <div id="listings_table_head" class="large_top_round border_box uncollapse">
-        <div class="name_sort table_sort white_bg border_box left trans2opaq">Facility Name</div>
-        <div class="distance_sort table_sort white_bg border_box left trans2opaq">Distance</div>
+        <div rel="order-title" class="name_sort table_sort white_bg border_box left trans2opaq">Facility Name</div>
+        <div rel="order-distance" class="distance_sort table_sort white_bg border_box left trans2opaq">Distance</div>
       </div>
     </div>
   </div>
@@ -76,7 +76,7 @@
               
               <div class="tabs uncollapse">
                 <div class="left upcase font85 bold">
-                  <%= link_to '+', '#', :class => 'open_tab left block bold white' %>
+                  <%= link_to '+', '#', :class => 'open_tab left block bold white borderButTop' %>
                   <%= link_to 'Map', listing.get_partial_link(:map), :rel => 'map', :class => 'map tab_link iconLeft21 block left' %>
                   <%= link_to 'Specials', listing.get_partial_link(:specials), :rel => 'specials', :class => 'specials tab_link iconLeft21 block left' %>
                   <%= link_to 'Sizes', listing.get_partial_link(:sizes), :rel => 'sizes', :class => 'sizes tab_link iconLeft21 block left' %>

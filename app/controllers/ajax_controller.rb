@@ -42,6 +42,7 @@ class AjaxController < ApplicationController
     render_error e
   end
   
+  # this is called by js to load an iframed map into the map partial in greyresults
   def get_map_frame
     @map = @model.map
     @Gmap = GoogleMap::Map.new

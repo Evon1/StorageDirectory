@@ -24,7 +24,7 @@ $.clicked_on_different_tab = function($tab_link, $listing) {
 $('.slider').each(function(){
 	var $this = $(this),
 			value = $('.slider_val', $this.parent()).val();
-	
+			
 	$this.slider({
 		max: 50,
 		animate: true,
