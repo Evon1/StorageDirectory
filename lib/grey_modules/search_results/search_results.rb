@@ -30,13 +30,12 @@ class SearchResults < ApplicationController
         guessed    = (session[:geo_location] || Listing.first(conditions).map.full_address)
         location   = Geokit::Geocoders::MultiGeocoder.geocode(guessed)
         
-        options[:order] = 'title'
         options.merge! conditions
         options.merge! :origin => location
       end
     else
-      location = session[:geo_location]
-      options.merge! :origin => (location || Geokit::Geocoders::MultiGeocoder.geocode('99.157.198.126'))
+      location = session[:geo_location] || Geokit::Geocoders::MultiGeocoder.geocode('99.157.198.126')
+      options.merge! :origin => location
     end
     
     @model_data = Listing.paginate(:all, options)

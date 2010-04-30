@@ -74,7 +74,7 @@ input[type="text"], input[type="password"] { width:99.2%; }
 .name_sort { width:200px; margin-left:20px; background-position:97% 50%; }
 .distance_sort { width:100px; margin-left:10px; background-position:95% 50%; }
 
-#listings { width:765px; margin:-19px -23px 0 0; padding-bottom:3px; float:right; position:relative; z-index:700; }
+#listings { width:770px; margin:-19px -23px 0 0; padding-bottom:3px; float:right; position:relative; z-index:700; }
 #listings_header .inner { height:177px; padding:17px; margin:1px 1px 0 1px; background:url(/images/ui/storagelocator/results-bg-top-strip.png) repeat-x top; }
 #listings_search_wrap { background:#fff; padding:1px; }
 #listings_search_wrap .inner { height:85px; padding:15px; margin:0; background:url(/images/ui/storagelocator/results-bg-img.jpg) no-repeat bottom right #fff; }
@@ -103,7 +103,7 @@ input[type="text"], input[type="password"] { width:99.2%; }
 .tagline, .reserve { padding-right:0; }
 .tagline { width:26%; line-height:1.2; }
 .tagline h5 { margin-bottom:3px; }
-.reserve_btn_wrap { width:94px; height:78px; padding:22px 0 0 9px; margin-left:21px; position:relative; z-index:675; top:-13px; cursor:pointer; background:url(/images/ui/storagelocator/reserve-bg-strip.png) repeat-x; }
+.reserve_btn_wrap { width:94px; height:80px; padding:22px 0 0 9px; margin-left:27px; position:relative; z-index:675; top:-13px; cursor:pointer; background:url(/images/ui/storagelocator/reserve-bg-strip.png) repeat-x; }
 .reserve_btn { width:65px; height:24px; padding:15px 10px; font-size:140%; background:url(/images/ui/storagelocator/reserve-btn.png) no-repeat }
 .reserve_btn:hover { text-decoration:none; }
 
