@@ -16,6 +16,10 @@ module ListingsHelper
     end
   end
   
+  def display_location(location)
+    "in #{location.city}, #{location.state}" if location.respond_to? :city
+  end
+  
   def num_entries(data)
     data.respond_to?(:total_entries) ? data.total_entries : 0
   end

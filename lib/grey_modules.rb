@@ -13,7 +13,9 @@ module GreyModules
       disabled_module(@gm_model)
     else
       self.class.require grey_module
-      @model_data = grey_module_class.init @gm_model, params, session
+      result = grey_module_class.init @gm_model, params, session
+      @model_data = result[:data]
+      @location = result[:location]
     end
   end
   

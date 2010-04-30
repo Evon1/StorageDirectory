@@ -16,27 +16,32 @@ class SearchResults < ApplicationController
     options = {
       :page     => params[:page], 
       :per_page => (params[:per_page] || 7),
-      :order    => (params[:order] || 'distance'),
-      :within   => (params[:within] || 50),
-      :limit => 7
+      :order    => (params[:order]    || 'distance'),
+      :within   => (params[:within]   || 50),
+      :include => [:map, :specials, :sizes, :pictures]
     }
     
     unless q.blank?
       if is_address_query?(q)
-        options.merge! :origin => q
-      elsif !session[:geo_location].nil?
-        options.merge! :origin => session[:geo_location]
-      else
-        options.delete :within
+        location = Geokit::Geocoders::MultiGeocoder.geocode(q)
+        options.merge! :origin => location
+      else # query by name?
+        conditions = { :conditions => ['listings.title LIKE ?', "%#{q}%"] }
+        guessed    = (session[:geo_location] || Listing.first(conditions).map.full_address)
+        location   = Geokit::Geocoders::MultiGeocoder.geocode(guessed)
+        
         options[:order] = 'title'
-        options.merge! :conditions => ['listings.title LIKE ?', "%#{q}%"]
+        options.merge! conditions
+        options.merge! :origin => location
       end
     else
-      options.merge! :origin => session[:geo_location]
+      location = session[:geo_location]
+      options.merge! :origin => (location || Geokit::Geocoders::MultiGeocoder.geocode('99.157.198.126'))
     end
     
-    @model_data = Listing.paginate :all, options
-    @model_data.sort_by_distance_from q if !params[:order] || params[:order] == 'distance'
+    @model_data = Listing.paginate(:all, options)
+    @model_data.sort_by_distance_from location if !params[:order] || params[:order] == 'distance'
+    { :data => @model_data, :location => location }
   end
   
   private
@@ -79,8 +84,6 @@ class SearchResults < ApplicationController
     block = model.blocks.find_by_title @@block_title
     model.blocks_model.find_by_block_id(block.id).enabled == true
   end
-  
-  private
   
   def self.is_address_query?(query)
     # zip code

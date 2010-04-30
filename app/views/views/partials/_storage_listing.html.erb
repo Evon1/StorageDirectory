@@ -5,7 +5,7 @@
       <div id="listings_search_wrap" class="round">
         <form action="/storage-locator" method="get">
           <div class="inner round border_box">
-            <h4>We found <span id="result_count" class="medium_round purple"><%= num_entries @model_data %></span> self storage facilities</h4>
+            <h4>We found <span id="result_count" class="medium_round purple"><%= num_entries @model_data %></span> facilities <%= display_location(@location) %></h4>
            
             <div>
               <input type="text" name="q" rel="q" id="query_main" class="hintable medium_round border_box param_filled focus_me" title="address city and state or zip" />
