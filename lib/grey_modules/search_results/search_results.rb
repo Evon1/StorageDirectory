@@ -42,7 +42,7 @@ class SearchResults < ApplicationController
     end
     
     @model_data = Listing.paginate(:all, options)
-    @model_data.sort_by_distance_from location if !params[:order] || params[:order] == 'distance'
+    @model_data.sort_by_distance_from @location if !params[:order] || params[:order] == 'distance'
     { :data => @model_data, :location => location }
   end
   
