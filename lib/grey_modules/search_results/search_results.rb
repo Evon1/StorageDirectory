@@ -17,8 +17,7 @@ class SearchResults < ApplicationController
       :page     => params[:page], 
       :per_page => (params[:per_page] || 7),
       :order    => (params[:order]    || 'distance'),
-      :within   => (params[:within]   || 50),
-      :include => [:map, :specials, :sizes, :pictures]
+      :within   => (params[:within]   || 50)
     }
     
     unless q.blank?
@@ -26,7 +25,7 @@ class SearchResults < ApplicationController
         location = Geokit::Geocoders::MultiGeocoder.geocode(q)
         options.merge! :origin => location
       else # query by name?
-        conditions = { :conditions => ['listings.title LIKE ?', "%#{q}%"] }
+        conditions = { :conditions => ['title LIKE ?', "%#{q}%"] }
         guessed    = (session[:geo_location] || Listing.first(conditions).map.full_address)
         location   = Geokit::Geocoders::MultiGeocoder.geocode(guessed)
         
