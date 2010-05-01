@@ -22,19 +22,23 @@ class SearchResults < ApplicationController
     
     unless q.blank?
       if is_address_query?(q)
-        location = Geokit::Geocoders::MultiGeocoder.geocode(q)
+        @location = Geokit::Geocoders::MultiGeocoder.geocode(q)
         options.merge! :origin => location
       else # query by name?
         conditions = { :conditions => ['title LIKE ?', "%#{q}%"] }
-        guessed    = (session[:geo_location] || Listing.first(conditions).map.full_address)
-        location   = Geokit::Geocoders::MultiGeocoder.geocode(guessed)
-        
         options.merge! conditions
-        options.merge! :origin => location
+        
+        unless session[:geo_location].blank?
+          options.merge! :origin => [session[:geo_location][:lat], session[:geo_location][:lng]]
+        else
+          guessed = Listing.first(conditions).map.full_address
+          @location = Geokit::Geocoders::MultiGeocoder.geocode(guessed)
+          options.merge! :origin => @location
+        end
       end
     else
-      location = session[:geo_location] || Geokit::Geocoders::MultiGeocoder.geocode('99.157.198.126')
-      options.merge! :origin => location
+      @location = session[:geo_location] || Geokit::Geocoders::MultiGeocoder.geocode('99.157.198.126')
+      options.merge! :origin => @location
     end
     
     @model_data = Listing.paginate(:all, options)
