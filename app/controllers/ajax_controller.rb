@@ -33,7 +33,7 @@ class AjaxController < ApplicationController
   
   def get_listing
     authorize_and_perform_restful_action_on_model @model_class.to_controller_str, 'index' do
-      coords = get_coords(@model)
+      coords = [@model.lat, @model.lng]
       data = { :listing => @model.attributes, :map => @model.map.attributes, :lat => coords.lat, :lng => coords.lng  }
       render :json => { :success => true, :data => data }
     end
@@ -47,13 +47,23 @@ class AjaxController < ApplicationController
     @map = @model.map
     @Gmap = GoogleMap::Map.new
 		@Gmap.center = GoogleMap::Point.new @map.lat, @map.lng
-		@Gmap.zoom = 13 #60km
+		@Gmap.zoom = 13 # 2 miles
 		@Gmap.markers << GoogleMap::Marker.new(:map => @Gmap, 
                                            :lat => @map.lat, 
                                            :lng => @map.lng,
                                            :html => "<strong>#{@model.title}</strong><p>#{@model.description}</p>",
-                                           :marker_hover_text => @model.title)
-                                           
+                                           :marker_hover_text => @model.title,
+                                           :marker_icon_path => '/images/ui/storagelocator/icons/map_marker.png')
+    
+    @others = Listing.find(:all, :limit => 1, :origin => @map, :within => '3')
+    @others.each do |listing|
+      @Gmap.markers << GoogleMap::Marker.new(:map => @Gmap, 
+                                             :lat => listing.map.lat, 
+                                             :lng => listing.map.lng,
+                                             :html => "<strong>#{listing.title}</strong><p>#{listing.description}</p>",
+                                             :marker_hover_text => listing.title)
+    end
+    
     render :layout => 'map_frame'
   end
   

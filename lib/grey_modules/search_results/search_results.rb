@@ -23,7 +23,7 @@ class SearchResults < ApplicationController
     unless q.blank?
       if is_address_query?(q)
         @location = Geokit::Geocoders::MultiGeocoder.geocode(q)
-        options.merge! :origin => location
+        options.merge! :origin => @location
       else # query by name?
         conditions = { :conditions => ['title LIKE ?', "%#{q}%"] }
         options.merge! conditions
@@ -43,7 +43,7 @@ class SearchResults < ApplicationController
     
     @model_data = Listing.paginate(:all, options)
     @model_data.sort_by_distance_from @location if !params[:order] || params[:order] == 'distance'
-    { :data => @model_data, :location => location }
+    { :data => @model_data, :location => @location }
   end
   
   private
