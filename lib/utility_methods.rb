@@ -55,13 +55,13 @@ module UtilityMethods
   	  shortened = string[0, count]
   	  splitted = shortened.split(/\s/)
   	  words = splitted.length
-
+      
   	  # use only first paragraph if short enough
   	  paragraph = shortened[/<p\b[^>]*>(.*?)<\/p>/]
   	  unless paragraph.blank?
   	    string = paragraph[3,(paragraph.length-7)]  # remove <p> tags
   	  else
-  	    string.length <= count ? string : splitted[0, words-1].join(" ") + ' ...'
+  	    string.length <= count ? string : (splitted[0, words-1] || []).join(" ") + ' ...'
       end
     end
 

@@ -22,11 +22,7 @@
 		<![endif]-->
 	</head>
 	<body id="<%= controller_name %>_controller" class="<%= action_name %>_action <%= page_name %>">
-		<% if current_user %>
-  		<div id="admin_menu">
-  		  <%= render :partial => 'menus/menu' %>
-  		</div>
-		<% end %>
+  	<%= render :partial => 'menus/menu' if current_user %>
 		
 		<div id="wrapper">
 
@@ -72,7 +68,7 @@
    						</div>
    					</div> <!-- /#body -->
 	          
-	          <%= '<br class="clear" />' if params[:title] == 'storage-locator' %>
+	          <%= '<br class="clear" />' if params[:title] =~ /(storage\-locator)|(add\-your\-facility)/ || (params[:controller] == 'pages' && params[:id] == '11') %>
 	          
   	      </div>
   	    </div>

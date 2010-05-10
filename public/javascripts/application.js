@@ -390,6 +390,29 @@ $.fn.appendParamAndGo = function() {
 	});
 }
 
+// click a link to open a hidden div near by
+$.fn.openDiv = function() {
+	return this.each(function(){
+		var $this = $(this);
+		
+		$this.click(function() {
+			$('.advanced_options', $this.parent().parent()).slideToggle();
+			return false;
+		});
+	});
+}
+
+// make a link act as a submit button
+$.fn.submitBtn = function() {
+	return this.each(function() {
+		var $this = $(this);
+		
+		$this.click(function(){
+			$this.parents('form').submit();
+		})
+	});
+}
+
 /******************************************* SUCCESS CALLBACKS *******************************************/
 
 $.toggleHelptext = function(clickedLink) {
@@ -429,6 +452,8 @@ $.bindPlugins = function() {
 	$('.link_div').linkDiv();								 // attack a click event to divs that wrap a link to follow the href
 	$('.param_filled').fillWithParam(); 		 // fill matching inputs with the param from its rel attr
 	$('.table_sort').appendParamAndGo();		 // append the key-val in the elements rel attr to the href and go to it
+	$('.open_advanced').openDiv();					 // click a link to open a hidden div near by
+	$('.submit_btn').submitBtn();						 // make a link act as a submit button
 	
 	// sortable nav bar, first implemented to update the position attr of a page (only when logged in)
 	$('.sortable', '.authenticated').sortable({

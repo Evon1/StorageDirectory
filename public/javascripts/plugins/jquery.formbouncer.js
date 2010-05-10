@@ -57,9 +57,9 @@ jQuery.fn.formBouncer = function(){
 				form.data('valid', false);
 
 				if (!form.hasClass('silent')) {
-					jQuery('.flash-error', form).remove();
-					form.prepend('<div class=\'flash-error\'>' + error + '</div>');
-					jQuery('.flash-error', form).hide().slideDown();
+					jQuery('.error', form).remove();
+					form.prepend('<div class=\'flash error\'>' + error + '</div>');
+					jQuery('.error', form).hide().slideDown();
 				}
 				return false;
 			}

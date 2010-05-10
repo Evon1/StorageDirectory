@@ -72,6 +72,7 @@ span.active { cursor:default; }
 .w80 { width:80px; }
 .w110 { width:110px; }
 .w150 { width:150px; }
+.w200 { width:200px; }
 .w300 { width:300px; }
 .h500 { height:500px; }
 .w75per { width:75%; }
@@ -94,6 +95,7 @@ span.active { cursor:default; }
 .vAlignBtm { vertical-align:bottom; }
 .less_spacing { letter-spacing:.9px; }
 .upcase { text-transform:uppercase; }
+.submit_btn { cursor:pointer; }
 
 .map_wrap { width:295px; height:202px; position:relative; }
 .map_wrap iframe { height:203px; overflow:hidden; }
@@ -181,7 +183,7 @@ label[for="content"] { float:none; }
 .small_textarea { height:75px; }
 .small_textfield { width:50% !important; }
 .smaller_textfield { width:25% !important; }
-
+.model_options { position:relative; z-index:9999; }
 div.field_wrap, div.available { margin:0; }
 
 /* Edit Settings page */

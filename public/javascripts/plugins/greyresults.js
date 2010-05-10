@@ -27,6 +27,7 @@ $('.slider').each(function(){
 			
 	$this.slider({
 		max: 50,
+		step: 5,
 		animate: true,
 		value: Math.abs(value - 50), // reverse the direction of the slider
 		start: function(e, ui) {
