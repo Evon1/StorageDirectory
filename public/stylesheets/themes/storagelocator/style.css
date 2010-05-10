@@ -19,7 +19,7 @@ input[type="text"], input[type="password"] { width:99.2%; }
 #nav .right { position:relative; z-index:500; padding-left:10px; background:url(/images/ui/storagelocator/nav-bg-lft.png) no-repeat top left; }
 #nav .right > ul { overflow:hidden; padding-right:10px; background:url(/images/ui/storagelocator/nav-bg-rgt.png) no-repeat top right; }
 #nav .right > ul > li { float:left; padding:3px 0; background:url(/images/ui/storagelocator/nav-bg-strip.png) repeat-x; }
-#nav a { color:#333; padding:3px 8px 3px 28px; font-size:85%; margin-right:10px; display:block; border-right:1px solid #d1d1d1; }
+#nav a { color:#333; padding:4px 8px 3px 28px; font-size:80%; margin-right:10px; display:block; border-right:1px solid #d1d1d1; }
 #nav li:last-child a { border:0 none; margin-right:0; }
 #nav a[href="/home"] { background:url(/images/ui/storagelocator/icons/home-icon.png) no-repeat 0 45%; }
 #nav a[href="/storage-locator"] { background:url(/images/ui/storagelocator/icons/locator-icon.png) no-repeat 0 45%; }
@@ -87,7 +87,7 @@ input[type="text"], input[type="password"] { width:99.2%; }
 #main_search_btn { margin-left:-12px; }
 #sorting_by { margin:8px 0 8px 30px; }
 #listings_table_head, #content_top_round { height:38px; margin:0 -18px; position:relative; bottom:-4px; background:url(/images/ui/storagelocator/table-top-bg-strip.png) repeat-x top; }
-#listings_main, #content_main { padding:1px 0px 0px 1px; }
+#listings_main, #content_main { padding:1px 0 0 0; }
 #listings_main > .inner, #content_main > .inner { padding:7px 14px 14px; position:relative; z-index:650; background:url(/images/ui/storagelocator/listings-grey-bg-strip.png) repeat-x top #e5e5e5; }
 
 #add_facility { margin:-33px -23px 0 0; }
