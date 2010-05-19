@@ -17,7 +17,7 @@ class SearchResults < ApplicationController
       :page     => params[:page], 
       :per_page => (params[:per_page] || 7),
       :order    => (params[:order]    || 'distance'),
-      :within   => (params[:within]   || 50)
+      :within   => (params[:within]   || 5)
     }
     
     unless q.blank?

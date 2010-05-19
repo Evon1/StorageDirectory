@@ -22,7 +22,7 @@ input[type="text"], input[type="password"] { width:99.2%; }
 #nav a { color:#333; padding:4px 8px 3px 28px; font-size:80%; margin-right:10px; display:block; border-right:1px solid #d1d1d1; }
 #nav li:last-child a { border:0 none; margin-right:0; }
 #nav a[href="/home"] { background:url(/images/ui/storagelocator/icons/home-icon.png) no-repeat 0 45%; }
-#nav a[href="/storage-locator"] { background:url(/images/ui/storagelocator/icons/locator-icon.png) no-repeat 0 45%; }
+#nav a[href="/locate-storage"] { background:url(/images/ui/storagelocator/icons/locator-icon.png) no-repeat 0 45%; }
 #nav a[href="/storage-tips"] { background:url(/images/ui/storagelocator/icons/tips-icon.png) no-repeat 0 45%; }
 #nav a[href="/add-your-facility"] { background:url(/images/ui/storagelocator/icons/add-icon.png) no-repeat 0 45%; }
 
@@ -47,6 +47,9 @@ input[type="text"], input[type="password"] { width:99.2%; }
 #search_form input.text { width:86%; font-size:130%; background-color:#fff; }
 #search_form p { margin-bottom:16px; }
 #open_advanced_search { padding:4px 36px 4px 3px; margin-top:18px; color:#333; background:url(/images/ui/storagelocator/icons/more-options.png) no-repeat right center; }
+#search_form .advanced_options { height:110px; }
+#search_form .advanced_options span.right { width:20px; }
+#search_form .advanced_options p.stack { margin-bottom:25px;}
 #near_city { width:93%; padding:9px 0 9px 25px; }
 #near_city a { color:#333; display:block; width:45%; margin:0 12px 0 0; float:left; padding:2px 0; }
 
@@ -62,11 +65,11 @@ input[type="text"], input[type="password"] { width:99.2%; }
 .floating_ads { width:240px; height:300px; background:#ccc; margin-bottom:20px; }
 .floating_ads:last-child { margin-bottom:0; }
 
-.storage_locator #garage_door_wrap .content_wrap { overflow:hidden; }
-.storage_locator #inner_wrap { height:335px; }
-.storage_locator #sidebar { width:22%; float:left; }
-.storage_locator #body { width:78%; float:right; }
-.storage_locator .notice { margin-bottom:36px; }
+.locate_storage #garage_door_wrap .content_wrap { overflow:hidden; }
+.locate_storage #inner_wrap { height:335px; }
+.locate_storage #sidebar { width:22%; float:left; }
+.locate_storage #body { width:78%; float:right; }
+.locate_storage .notice { margin-bottom:36px; }
 #small_loupe, #paper_icon { width:41px; height:46px; margin:-4px 3px 0 -12px; display:block; float:left; background:url(/images/ui/storagelocator/loupe-sm.png) no-repeat top center; }
 #paper_icon { width:36px; height:32px; background-image:url(/images/ui/storagelocator/icons/paper-icon.png); }
 #narrow_search_form .small_textfield { width:23% !important; }
@@ -113,12 +116,12 @@ input[type="text"], input[type="password"] { width:99.2%; }
 .tagline, .reserve { padding-right:0; }
 .tagline { width:26%; line-height:1.2; }
 .tagline h5 { margin-bottom:3px; }
-.reserve_btn_wrap { width:94px; height:80px; padding:22px 0 0 9px; margin-left:27px; position:relative; z-index:675; top:-13px; cursor:pointer; background:url(/images/ui/storagelocator/reserve-bg-strip.png) repeat-x; }
+.reserve_btn_wrap { width:94px; height:75px; padding:25px 0 0 9px; margin-left:27px; position:relative; z-index:675; top:-13px; cursor:pointer; background:url(/images/ui/storagelocator/reserve-bg-strip.png) repeat-x; }
 .reserve_btn { width:65px; height:24px; padding:15px 10px; font-size:140%; background:url(/images/ui/storagelocator/reserve-btn.png) no-repeat }
 .reserve_btn:hover { text-decoration:none; }
 
 .listings_wrap .pagination { margin-top:14px; }
-#listing_subscriber_form { width:71%; }
+#listing_subscriber_form { width:71%; margin-bottom:32px; }
 #listing_subscriber_form fieldset p { overflow:hidden; font-size:85%; color:#444; }
 #listing_subscriber_form label { width:135px; }
 #listing_subscriber_form input { width:60%; padding:4px 7px; font-size:110%; }
@@ -168,7 +171,7 @@ input[type="text"], input[type="password"] { width:99.2%; }
 .tabs .pictures { background:url(/images/ui/storagelocator/icons/pictures-icon.png) no-repeat 16% 13%; }
 .tabs .progress { width:79px; height:38px; margin:-21px 38px 0 0; position:relative; z-index:500; background:url(/images/ui/storagelocator/result-loading-bar.png) no-repeat; }
 .tabs div.active { background:url(/images/ui/storagelocator/result-loading-bar-active.png) no-repeat; }
-.tabs a.active, .tabs a.active:hover { color:#999; background-color:#d3d8e9; }
+.tabs a.active, .tabs a.active:hover { color:#fff; background-color:#444da0; }
 .address { font-size:85%; }
 
 #steps { height:197px; position:relative; z-index:200; background:url(/images/ui/storagelocator/steps/steps-bg-strip.png) repeat-x center; }
@@ -181,8 +184,8 @@ input[type="text"], input[type="password"] { width:99.2%; }
 #steps h4 { font-size:140%; color:#333; }
 #steps h4, #steps p { margin:0; display:inline; }
 #steps p { font-size:75%; letter-spacing:-.2px; }
-#step1 .step_pic img { margin-top:-3px; }
-#step2 .step_pic img { margin-top:-5px; }
+#step1 .step_pic img { margin-top:1px; }
+#step2 .step_pic img { margin-top:-15px; }
 
 #click_for_more { width:226px; height:56px; padding-top:18px; text-align:center; position:absolute; z-index:100; cursor:pointer; left:44px; bottom:-64px; background:url(/images/ui/storagelocator/click-for-more.png) no-repeat; }
 
@@ -215,8 +218,8 @@ a#greyrobot:link, a#greyrobot:visited { color:#aaa; }
 .link_div { cursor:pointer; }
 .slider_wrap > div { margin-bottom:14px; }
 .slider_wrap > div:first-child { margin-bottom:28px; }
-.ui-slider-horizontal { margin-top:15px; height:2px; cursor:pointer; }
-.ui-slider-horizontal .ui-slider-handle { width:25px; height:19px; top:-9px; border:0 none; cursor:pointer; background:url(/images/ui/storagelocator/grey-slider.png) no-repeat }
+X.ui-slider-horizontal { margin-top:15px; height:2px; cursor:pointer; }
+X.ui-slider-horizontal .ui-slider-handle { width:25px; height:19px; top:-9px; border:0 none; cursor:pointer; background:url(/images/ui/storagelocator/grey-slider.png) no-repeat }
 .advanced_options { width:87%; height:100px; padding:5px 20px; position:absolute; z-index:1; background:#fff; -moz-box-shadow:1px 1px 3px #666666; -webkit-box-shadow:1px 1px 3px #666666; box-shadow:1px 1px 3px #666666; }
 
 /** Colors **/

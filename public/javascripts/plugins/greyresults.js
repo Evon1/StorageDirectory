@@ -29,13 +29,13 @@ $('.slider').each(function(){
 		max: 50,
 		step: 5,
 		animate: true,
-		value: Math.abs(value - 50), // reverse the direction of the slider
+		value: value, // reverse the direction of the slider
 		start: function(e, ui) {
 			var slider = $('.slider_val', $(e.target).parent());
 			if (slider.attr('disabled')) slider.attr('disabled', false);
 		},
 		slide: function(e, ui) {
-			$('.slider_val', $(this).parent()).val(Math.abs(ui.value - 50));
+			$('.slider_val', $(this).parent()).val(ui.value);
 		}
 	});
 });

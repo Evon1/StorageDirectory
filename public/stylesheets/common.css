@@ -143,9 +143,9 @@ span.active { cursor:default; }
 
 /* pagination */
 .pagination { text-align:center; margin:20px 0 6px 0; }
-.pagination a, .pagination span { padding:4px 6px; }
-.pagination a { border:1px solid #444DA0; -moz-border-radius:5px; -webkit-border-radius:5px; border-radius:5px; }
-.pagination a:link, .pagination a:visited { text-decoration:none; color:#444DA0; }
+.pagination a, .pagination span { padding:1px 5px; }
+.pagination a { border:1px solid #ccc; -moz-border-radius:5px; -webkit-border-radius:5px; border-radius:5px; }
+.pagination a:link, .pagination a:visited { text-decoration:none; color:#ccc; }
 .pagination a:hover, .pagination a:active { background-color:#444DA0; color:#fff; }
 
 /********************* added in from old greyCMS stylesheet **********************/
@@ -195,7 +195,7 @@ div.setting_field .check_box_wrap label { border:0 none; cursor:default; }
 
 /* helpers */
 .wysiwyg { font-size:80%; font-family:Geneva, Courier, monospace; }
-.hint_text { font-style:italic; color:#999 !important; }
+.hint_text { color:#999 !important; }
 
 /* round borders */
 .round, .shadow_wrap { 
