@@ -1,10 +1,10 @@
 class SearchResults < ApplicationController
   
-  @@block_title = 'Search Results'
-  @@view_name   = 'Greyresults'
-  @@model_name  = 'listing'
-  @@view_type   = 'storage_listing'
-  @@region      = 'column_5'
+  @@block_title = 'Search Results' # title of the block that contains the view
+  @@view_name   = 'Greyresults' # title of the view in the db
+  @@model_name  = 'listing' 
+  @@view_type   = 'greylisting' # name of the partial in app/views/views/partials
+  @@region      = 'column_5' # where to put the block on the page enabled with this module
   
   def self.init(model, params = {}, session = {})
     _check_setup model

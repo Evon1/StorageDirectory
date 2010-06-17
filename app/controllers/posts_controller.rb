@@ -48,6 +48,11 @@ class PostsController < ApplicationController
     end
   end
   
+  def rate
+    @post = Post.find(params[:id])
+    render :json => { :success => @post.rate(params[:stars], current_user, params[:dimension]) }
+  end
+  
   private
   
   def get_post

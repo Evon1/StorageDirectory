@@ -27,6 +27,7 @@ $('.slider').each(function(){
 			
 	$this.slider({
 		max: 50,
+		min:5,
 		step: 5,
 		animate: true,
 		value: value, // reverse the direction of the slider
@@ -71,7 +72,7 @@ $.fn.greyresults = function() {
 					$listing	= $this.parent().parent().parent(),
 					$panel		= $('.panel', $listing).addClass('active'),
 					$progress = $('.progress', $listing);
-			
+					
 			// show progress and do ajax call unless we're clicking on the same tab again
 			if ($.clicked_on_different_tab($this, $listing, $panel)) {
 				$progress.addClass('active');
@@ -90,7 +91,7 @@ $.fn.greyresults = function() {
 					$('.listing:not(.active) .open_tab').text('+');
 					$('.open_tab', $listing).text('x');
 					if ($panel.is(':hidden')) $panel.slideDown();
-					$('.progress', '.tabs').removeClass('active');
+					$('.progress', '.listing').removeClass('active');
 					
 					// load the google map into an iframe
 					if ($this.attr('rel') == 'map') {
@@ -106,4 +107,4 @@ $.fn.greyresults = function() {
 	});
 }
 
-$('.listings_wrap', '#listings_main').greyresults();
+$('.listing', '#rslt-list-bg').greyresults();

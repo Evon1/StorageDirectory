@@ -1,0 +1,46 @@
+<div id="type-one-top-bar">
+  
+	 <div id="type-two-top-bar-head">
+	   <form action="post">
+		   <ul>
+			 		 <li id="sort">Sort by: <a href="">Rating</a> / <a href="">Views</a></li>
+					 <li id="search">Search Tips by keyword <input type="text" /> <a href="">GO</a></li>
+					 <li><a href="/tips/new" class="search-options openDiv" rel="add_new_tip">Add your tips</a></li>
+			 </ul>
+		 </form>
+	 </div>
+	 
+    <div id="add_new_tip" class="hidden">
+      <form action="/tips/create" method="post">
+        Add tips here<br>
+        Add tips here<br>
+        Add tips here
+      </form>
+    </div>
+	 
+	 <% data.each do |tip| %>
+	   <div class="blog-lock">
+  		 <h3><%=h tip.name_or_title %></h3>
+  		 <p>
+  		  <%= tip.content_teaser %>
+  		 </p>
+  		 
+        <ul>
+          <li>Rating&nbsp;&nbsp;&nbsp;</li>
+          <li class="five-star"><%= ratings_for tip, :dimension => :usefulness, :small => true %></li>
+          <li class="share">Share: 
+            <a href="" class="socialmediathree"><span class="hidden">Another</span></a>
+            <a href="" class="socialmediatwo"><span class="hidden">Another</span></a>
+            <a href="" class="socialmediaone"><span class="hidden">Another</span></a>
+            <a href="" class="twitter"><span class="hidden">Twitter</span></a>
+            <a href="" class="facebook"><span class="hidden">Facebook</span></a>
+            <a href="" class="delicious"><span class="hidden">Delicious</span></a>
+          </li>
+          <li class="tags">Tags: <%= tip.display_tag_list_with_links %></li>
+        </ul>
+        
+  	</div>
+  <% end %>
+		
+  <div class="clear"></div>	 
+</div>

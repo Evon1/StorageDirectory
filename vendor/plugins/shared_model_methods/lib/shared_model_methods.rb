@@ -83,6 +83,10 @@ module SharedModelMethods #:nodoc:
       self.content.stripped_teaser(limit) unless self.content.blank?
     end
     
+    def has_extra_options?
+      self.respond_to?(:process_erb)
+    end
+    
     def update_assoc(assoc, params)
       return if params.blank?
       
@@ -152,6 +156,14 @@ module SharedModelMethods #:nodoc:
     
     def json_string_to_hash(string)
       eval(string.gsub(/\\/, '').gsub(':', ' => ')) unless string.nil?
+    end
+    
+    def get_tags(rem = 'tip')
+      self.respond_to?(:tag_list) ? self.tags.reject { |t| t.name == rem }.map(&:name) : []
+    end
+    
+    def display_tag_list_with_links(rem = 'tip', baseUrl = '/tagged/tips/')
+      self.get_tags(rem).map { |t| "<a href='#{baseUrl + t}' class='tag_link'>#{t}</a>" } * ', '
     end
     
     private

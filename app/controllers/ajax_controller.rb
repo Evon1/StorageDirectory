@@ -53,7 +53,7 @@ class AjaxController < ApplicationController
                                            :lng => @map.lng,
                                            :html => "<strong>#{@model.title}</strong><p>#{@model.description}</p>",
                                            :marker_hover_text => @model.title,
-                                           :marker_icon_path => '/images/ui/storagelocator/icons/map_marker.png')
+                                           :marker_icon_path => '/images/ui/map_marker.png')
     
     @others = Listing.find(:all, :limit => 1, :origin => @map, :within => '3')
     @others.each do |listing|

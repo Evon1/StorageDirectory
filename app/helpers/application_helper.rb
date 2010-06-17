@@ -26,7 +26,7 @@ module ApplicationHelper
 
         @html << '</div>'
       end
-      @html = '' if @html == "<div class='region_#{region} region'></div>"
+      @html = '' if @html =~ /(<div class='region_#{region} region'>\W?<\/div>)/i
     end
   end
   
@@ -101,6 +101,9 @@ module ApplicationHelper
       if view.model_name =~ /(tag)|(image)/ && !view.scope.blank?
         scope_model = view.owner_id.blank? ? eval("@#{view.scope}") : model_class(view.scope).find(view.owner_id)
         data = eval("scope_model.#{view.model_name.pluralize}")
+      elsif view.model_name == 'post' &&  view.scope == 'tag'
+        tag = view.owner_id.blank? ? eval("@tag") : Tag.find(view.owner_id)
+        data = Post.tagged_with tag.name
       else
         data = view.model.all(view_find_options(view, models_view))
       end
@@ -169,6 +172,15 @@ module ApplicationHelper
     end
     
     html
+  end
+  
+  # processes any ERB tags in the model's content field, binding instance variables to it
+  def render_model_content(model)
+    if model.respond_to?(:process_erb) && model.process_erb
+      ERB.new(model.content).result(binding)
+    else
+      model.content
+    end
   end
   
   def render_model_helptext(controller_name)

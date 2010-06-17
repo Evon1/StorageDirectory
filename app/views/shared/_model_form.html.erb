@@ -9,7 +9,15 @@
 	<% form_for model, :html => (local_assigns.keys.include?(:html) ? html : {}) do |f| %>
 		<%= f.error_messages %>
 		
-		<%= render :partial => "#{controller_name}/form", :locals => { :f => f } %>
+		<div class="stack">
+		  <%= render :partial => "#{controller_name}/form", :locals => { :f => f } %>
+		</div>
+		
+		<% if model.has_extra_options? %>
+		<div class="uncollapse stack">
+	    <%= render :partial => "shared/extra_model_options", :locals => { :f => f, :model => model } %>
+		</div>
+		<% end %>
 		
 		<div class="uncollapse stack">
 			<div class="buttons left">

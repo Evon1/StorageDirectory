@@ -41,7 +41,7 @@ class View < ActiveRecord::Base
     if scope == 'block'
       errors.add_to_base "#{error_message} and #{scope}.models." unless scoper_class.new.respond_to?('models') || has_assoc
     else
-      add_to_base error_message unless has_assoc
+      errors.add_to_base error_message unless has_assoc
     end
   end
   

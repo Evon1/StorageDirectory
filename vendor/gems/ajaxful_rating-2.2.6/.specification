@@ -1,0 +1,95 @@
+--- !ruby/object:Gem::Specification 
+name: ajaxful_rating
+version: !ruby/object:Gem::Version 
+  prerelease: false
+  segments: 
+  - 2
+  - 2
+  - 6
+  version: 2.2.6
+platform: ruby
+authors: 
+- Edgar J. Suarez
+autorequire: 
+bindir: bin
+cert_chain: []
+
+date: 2010-05-29 00:00:00 -04:00
+default_executable: 
+dependencies: []
+
+description: Provides a simple way to add rating functionality to your application.
+email: edgar.js@gmail.com
+executables: []
+
+extensions: []
+
+extra_rdoc_files: 
+- CHANGELOG
+- README.textile
+- lib/ajaxful_rating.rb
+- lib/axr/css_builder.rb
+- lib/axr/errors.rb
+- lib/axr/helpers.rb
+- lib/axr/locale.rb
+- lib/axr/model.rb
+- lib/axr/stars_builder.rb
+files: 
+- CHANGELOG
+- Manifest
+- README.textile
+- Rakefile
+- ajaxful_rating.gemspec
+- generators/ajaxful_rating/USAGE
+- generators/ajaxful_rating/ajaxful_rating_generator.rb
+- generators/ajaxful_rating/templates/images/star.png
+- generators/ajaxful_rating/templates/images/star_small.png
+- generators/ajaxful_rating/templates/migration.rb
+- generators/ajaxful_rating/templates/model.rb
+- generators/ajaxful_rating/templates/style.css
+- init.rb
+- lib/ajaxful_rating.rb
+- lib/axr/css_builder.rb
+- lib/axr/errors.rb
+- lib/axr/helpers.rb
+- lib/axr/locale.rb
+- lib/axr/model.rb
+- lib/axr/stars_builder.rb
+has_rdoc: true
+homepage: http://github.com/edgarjs/ajaxful-rating
+licenses: []
+
+post_install_message: 
+rdoc_options: 
+- --line-numbers
+- --inline-source
+- --title
+- Ajaxful_rating
+- --main
+- README.textile
+require_paths: 
+- lib
+required_ruby_version: !ruby/object:Gem::Requirement 
+  requirements: 
+  - - ">="
+    - !ruby/object:Gem::Version 
+      segments: 
+      - 0
+      version: "0"
+required_rubygems_version: !ruby/object:Gem::Requirement 
+  requirements: 
+  - - ">="
+    - !ruby/object:Gem::Version 
+      segments: 
+      - 1
+      - 2
+      version: "1.2"
+requirements: []
+
+rubyforge_project: ajaxful_rating
+rubygems_version: 1.3.6
+signing_key: 
+specification_version: 3
+summary: Provides a simple way to add rating functionality to your application.
+test_files: []
+

@@ -1,22 +1,30 @@
 <fieldset>
 	
-	<div>
+	<div class="stack">
 		<%= f.label :title %>
 		<div class="shadow_wrap">
 			<%= f.text_field :title, :class => 'required' %>
 		</div>
 	</div>
 
-	<div>
+	<div class="stack">
 		<%= f.label :content, nil, :class => 'block_label' %>
 		<div class="shadow_wrap">
 			<%= f.text_area :content, :class => 'wysiwyg required' %>
 		</div>
 	</div>
 	
-	<div class="check_box_wrap">
+	<div class="check_box_wrap stack">
 		<%= f.check_box :published %>
 		<%= f.label :published, nil, :class => 'small_label' %>
+	</div>
+	
+	
+	<div>
+		<%= f.label :tag_list %>
+		<div class="shadow_wrap">
+			<%= f.text_field :tag_list, :value => params[:tag_list] %>
+		</div>
 	</div>
 	
 </fieldset>

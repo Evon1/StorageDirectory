@@ -2,6 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 	<head>
 		<%= stylesheet_link_tag @plugin_css, 'common' %>
+		<%= ajaxful_rating_style %>
 		<%= stylesheet_link_tag @theme_css %>
 		
 		<meta charset="utf-8" />
@@ -24,83 +25,88 @@
 	<body id="<%= controller_name %>_controller" class="<%= action_name %>_action <%= page_name %>">
   	<%= render :partial => 'menus/menu' if current_user %>
 		
-		<div id="wrapper">
+		<!-- First set up a page container to take the header and main content -->
+    <div id="page-ctr">
 
-	    <div id="header">
-	      <div class="inner_wrap">
-	        
-	        <%= yield :header %>
-	        
-  	    </div>
-  	    <div id="header_btm"></div>
-	    </div>  <!-- /#header -->
-	    
-	    <div id="nav" class="region block_center inner_wrap">
-        <div class="right">
-          <ul class="sortable">
-            <%= render :partial => 'menus/nav', :collection => @nav_pages %>
-          </ul>
+    		<!-- Now insert the header. This will sit in front of the repeating background --> 
+        <div id="head-ctr">
+    				 <!-- To align everything in the header correctly, it needs an inner container as well -->
+    				 <div id="head-ctr-in">
+        				 <div id="logo">
+                   <img src="/images/ui/storagelocator/us-self-storage-locator-logo.png" alt="US Self Storage Locator" />
+        				 </div>
+        					
+        					<div id="title">
+        							<p class="hidden">US Self Storage Locator - Find self storage anywhere</p>
+        					</div>
+        					
+        					<div id="top-nav">
+      							<ul>
+      									<li class="hidden"><a href="#top">Skip Navigation</a></li>
+      									<li class="top-nav-login"><a href="/login">Login</a></li>
+      									<li class="top-nav-help"><a href="">Help</a></li>
+      							</ul>
+        					</div>
+        					
+        					<div id="main-nav">
+      							<ul class="sortable">
+      								<%= render :partial => 'menus/nav', :collection => @nav_pages %>
+      							</ul> 
+        					</div>
+    				 </div>
         </div>
-      </div>
-	    
-	    <div id="garage_door_wrap">
-	      <div class="content_wrap">
-	    
-	      <div class="wrap content_round_top"></div>
-  	    <div id="inner_wrap" class="wrap content_round_inner">
-  	       <div class="content_inner">
-          
-            <% if yield(:sidebar) %>
-  						<div id="sidebar" class="region">
+    		<!-- End the header container -->
 
-  							<%= yield :sidebar %>
+    		<!-- Now have the page container to hold a bottom background within the main repeating background. -->
+        <div id="page-ctr-in">
 
-  						</div> <!-- /#sidebar -->
-    				<% end %>
-          
-   					<div id="body" class="region">
- 					  
-   						<%= yield %>
-   					  <!-- /the stuff -->
- 					   
-   						<div id="content_bottom" class="region">
-   							<%= yield :content_bottom %>
-   						</div>
-   					</div> <!-- /#body -->
-	          
-	          <%= '<br class="clear" />' if params[:title] =~ /(storage\-locator)|(add\-your\-facility)/ || (params[:controller] == 'pages' && params[:id] == '11') %>
-	          
-  	      </div>
-  	    </div>
-  	    <div class="wrap content_round_btm"></div>
-    	    
-    	    <div id="column_6" class="region wrap">
-					  
-						<%= yield :column_6 %>
-						
-					</div>
-					
-					<% if yield(:column_7) %>
- 				    <div id="column_7" class="region wrap">
- 				      
-              <%= yield :column_7 %>
-              
- 				    </div> <!-- /#column_5 -->
- 				  <% end %>
-    	    
-    	  </div> <!-- /.content_wrap -->
-    	  <div id="handle" class="block_center"></div>
-    	  
-	    </div> <!-- /#garage_door_wrap -->
-	    
-	  </div> <!-- /#wrapper -->
-	  
-	  
-	  <div id="footer">
-	    
-	    <%= yield :footer %>
-	    
-    </div> <!-- /#footer -->
+    				 <!-- This area contains all the page content - The main editable area -  This will be relatively positioned to overlap the header -->
+        		 <div id="page-cnt">
+
+    							<div id="page-cnt-top-bg">
+    							<div id="type-one-cnt-in">
+    							<!-- Start the editable area -->
+    							<a name="top"></a>
+                    
+                    <div id="content">
+                      <div id="sidebar">
+                        <%= yield :sidebar %>
+                      </div>
+                      
+                      <%= yield %>
+                      
+                      <div id="column_5" class="region">
+            						<%= yield :column_5 %>
+            					</div>
+                    </div>
+         					  <!-- /the stuff -->
+
+         						<div id="content_bottom" class="region">
+         							<%= yield :content_bottom %>
+         						</div>
+                    <div class="clear"></div>
+                    
+    							<!-- End the editable area -->
+    							</div>
+        
+    						</div>
+        
+    						<div class="clear"></div>
+
+
+        		 </div>
+
+    				 <!-- End main content area -->
+
+    				 <!-- This empty div is used to create a space before the footer -->
+        		 <div id="cnt-space"></div>
+        </div>
+    		<!-- Now end the page-container-inner -->
+
+    </div>
+    <!-- Now end the page-container-outer -->
+    
+    <%= yield :footer %>
 	  
 	  <%= javascript_include_tag 'ckeditor/ckeditor.js', 'jquery.all', @plugins %>
   	<%= @widgets_js.map { |js| javascript_include_tag js } %>

@@ -6,15 +6,16 @@ class ListingsController < ApplicationController
   end
 
   def show
-    coords = get_coords(@listing)
-    @map = GoogleMap::Map.new
-		@map.center = GoogleMap::Point.new coords.lat, coords.lng
-		@map.zoom = 15 #60km
-		@map.markers << GoogleMap::Marker.new(:map => @map, 
-                                          :lat => coords.lat, 
-                                          :lng => coords.lng,
-                                          :html => @listing.title,
-                                          :marker_hover_text => @listing.description)
+    @map = @listing.map
+    @Gmap = GoogleMap::Map.new
+		@Gmap.center = GoogleMap::Point.new @map.lat, @map.lng
+		@Gmap.zoom = 13 # 2 miles
+		@Gmap.markers << GoogleMap::Marker.new(:map => @Gmap, 
+                                           :lat => @map.lat, 
+                                           :lng => @map.lng,
+                                           :html => "<strong>#{@listing.title}</strong><p>#{@listing.description}</p>",
+                                           :marker_hover_text => @listing.title,
+                                           :marker_icon_path => '/images/ui/map_marker.png')
   end
 
   def new

@@ -6,7 +6,7 @@
 <%= render_model_helptext(controller_name) %>
 
 <div class="clear">
-  <% form_for :site_settings, :url => { :controller => 'site_settings', :action => 'update', :_method => 'put' }, :method => :put do |f| %>
+  <% form_for :site_settings, :url => { :controller => 'site_settings', :action => 'update', }, :method => :put do |f| %>
     <div id="SiteSettingFields" class="site_settingsFields partial_addable">
       
       <div class="stack">

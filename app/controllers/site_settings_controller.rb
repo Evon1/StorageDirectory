@@ -5,7 +5,7 @@ class SiteSettingsController < ApplicationController
     @new_setting_field = [:field, :value]
   end
 
-  def update
+  def create
     if SiteSetting.update(params[:site_settings])
       flash[:notice] = 'Site has been updated.'
       redirect_back_or_default home_page

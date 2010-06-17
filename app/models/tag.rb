@@ -37,4 +37,8 @@ class Tag < ActiveRecord::Base
     read_attribute(:count).to_i
   end
   
+  def posts
+    Posts.tagged_with self.name
+  end
+  
 end

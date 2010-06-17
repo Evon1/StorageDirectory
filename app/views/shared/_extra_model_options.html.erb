@@ -1,0 +1,10 @@
+<fieldset>
+  <legend>Extra Options</legend>
+  
+  <% if model.respond_to? :process_erb %>
+    <div class="left check_box_wrap">
+      <%= f.check_box :process_erb, :class => 'left_space right_space' %><%= f.label :process_erb %>
+    </div>
+  <% end %>
+  
+</fieldset>

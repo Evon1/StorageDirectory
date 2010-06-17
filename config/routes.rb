@@ -18,6 +18,8 @@ ActionController::Routing::Routes.draw do |map|
                                    :title => 'storage-locator',
                                    :requirements => { :zip => /^\d{5}$/ }
   
+  map.resources :tips, :controller => 'posts'
+  
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   map.resources :products
   map.resources :users
@@ -25,7 +27,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :permissions
   map.resources :roles
   map.resources :pages
-  map.resources :posts
+  map.resources :posts, :member => { :rate => :post }
   map.resources :blocks
   map.resources :comments
   map.resources :tags

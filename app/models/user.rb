@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   
   acts_as_authentic
+  ajaxful_rater
   
   belongs_to :role
   has_many :permissions, :finder_sql => 'SELECT * FROM permissions p, users u ' +

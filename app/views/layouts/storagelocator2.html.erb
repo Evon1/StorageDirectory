@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 	<head>
-		<%= stylesheet_link_tag 'common' %>
+		<%= stylesheet_link_tag @plugin_css, 'common' %>
 		<%= stylesheet_link_tag @theme_css %>
 		
-		<meta charset="utf-8">
+		<meta charset="utf-8" />
 		<title><%= yield :title %></title>
 
-		<meta name="description" content="" />
-		<meta name="keywords" content="" />
-
-		<link rel="shortcut icon" type="image/x-ico" href="images/icons/favicon.ico" />
+		<%= site_meta_tags %>
+		<%= yield :scripts %>
+    
+		<link rel="shortcut icon" type="image/x-ico" href="/favicon.ico" />
 		
 		<!--[if IE]>
 			<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -21,66 +21,90 @@
 			<script type="text/javascript" src="javascripts/IE8.js"></script>
 		<![endif]-->
 	</head>
-	<body id="<%= controller_name %>_controller" class="<%= action_name %>_action">
-		<% if current_user %>
-  		<div id="admin_menu">
-  		  <%= render :partial => 'menus/menu' %>
-  		</div>
-		<% end %>
+	<body id="<%= controller_name %>_controller" class="<%= action_name %>_action <%= page_name %>">
+  	<%= render :partial => 'menus/menu' if current_user %>
 		
-		<div id="wrapper" class="wrap">
-		  <div id="header" class="wrap">
-        <div id="green_buttons" class="right">
+		<div id="wrapper">
 
+	    <div id="header">
+	      <div class="inner_wrap">
+	        
+	        <%= yield :header %>
+	        
+  	    </div>
+  	    <div id="header_btm"></div>
+	    </div>  <!-- /#header -->
+	    
+	    <div id="nav" class="region block_center inner_wrap">
+        <div class="right">
+          <ul class="sortable">
+            <%= render :partial => 'menus/nav', :collection => @nav_pages %>
+          </ul>
         </div>
+      </div>
+	    
+	    <div id="garage_door_wrap">
+	      <div class="content_wrap">
+	    
+	      <div class="wrap content_round_top"></div>
+  	    <div id="inner_wrap" class="wrap content_round_inner">
+  	       <div class="content_inner">
+          
+            <% if yield(:sidebar) %>
+  						<div id="sidebar" class="region">
 
-        <a href="/"><img src="/images/ui/storagedirectory/us-self-storage-locator-logo.png" alt="US Self Storage Directory" /></a>
-      </div> <!-- /#header -->
-		  
-	    <div id="content">
-	      <div id="nav" class="region round_bar"><span class="left"></span>
-	        <ul class="sortable">
-					  <%= render :partial => 'menus/nav', :collection => @nav_pages %>
-					</ul>
-				<span class="right"></span></div>
-	      
-	      <div class="content uncollapse">
-	        <% if yield(:sidebar) %>
-						<div id="sidebar" class="region">
+  							<%= yield :sidebar %>
 
-							<%= yield :sidebar %>
-              
-						</div> <!-- /#sidebar -->
-					<% end %>
+  						</div> <!-- /#sidebar -->
+    				<% end %>
+          
+   					<div id="body" class="region">
+ 					  
+   						<%= yield %>
+   					  <!-- /the stuff -->
+ 					   
+   						<div id="content_bottom" class="region">
+   							<%= yield :content_bottom %>
+   						</div>
+   					</div> <!-- /#body -->
+	          
+	          <%= '<br class="clear" />' if params[:title] =~ /(storage\-locator)|(add\-your\-facility)/ || (params[:controller] == 'pages' && params[:id] == '11') %>
+	          
+  	      </div>
+  	    </div>
+  	    <div class="wrap content_round_btm"></div>
+    	    
+    	    <div id="column_6" class="region wrap">
+					  
+						<%= yield :column_6 %>
+						
+					</div>
 					
-					<% if yield(:column_5) %>
-				    <div id="column_5" class="region uncollapse">
-
-              <%= yield :column_5 %>
+					<% if yield(:column_7) %>
+ 				    <div id="column_7" class="region wrap">
+ 				      
+              <%= yield :column_7 %>
               
-				    </div>
-				  <% end %>
-				  
-					<div id="body" class="region">
-						<%= yield %>
-					   <!-- /the stuff -->
-						<div id="content_bottom" class="region">
-							<%= yield :content_bottom %>
-							
-						</div>
-					</div> <!-- /#body -->
-	      </div> <!-- /.content -->
-	    </div> <!-- /#content -->
+ 				    </div> <!-- /#column_5 -->
+ 				  <% end %>
+    	    
+    	  </div> <!-- /.content_wrap -->
+    	  <div id="handle" class="block_center"></div>
+    	  
+	    </div> <!-- /#garage_door_wrap -->
 	    
 	  </div> <!-- /#wrapper -->
 	  
-	  <div id="footer" class="region wrap">
-      <%= yield :footer %>
+	  
+	  <div id="footer">
+	    
+	    <%= yield :footer %>
+	    
     </div> <!-- /#footer -->
 	  
 	  <%= javascript_include_tag 'ckeditor/ckeditor.js', 'jquery.all', @plugins %>
   	<%= @widgets_js.map { |js| javascript_include_tag js } %>
-  	<%= javascript_include_tag 'application' %>
+  	<%= javascript_include_tag 'application', 'plugins/greyresults' %>
 	
 	</body>
 </html>

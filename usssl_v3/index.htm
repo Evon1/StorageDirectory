@@ -1,0 +1,185 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">  
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head> 
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" /> 
+<!-- Site built by ns-designs (www.ns-designs.co.uk) 2010 --> 
+<meta name='Author' content='ns-designs' />
+<meta name='keywords' content='' />
+<meta name='description' content='' />
+
+<title>US Self Storage Locator</title> 
+
+<link rel="stylesheet" href="style.css" type="text/css" /> 
+
+</head> 
+
+<body id="<%= controller_name %>_controller" class="<%= action_name %>_action <%= page_name %>">
+  <%= render :partial => 'menus/menu' if current_user %>
+
+<!-- First set up a page container to take the header and main content -->
+<div id="page-ctr">
+		 
+		<!-- Now insert the header. This will sit in front of the repeating background --> 
+    <div id="head-ctr">
+				 <!-- To align everything in the header correctly, it needs an inner container as well -->
+				 <div id="head-ctr-in">
+    				 <div id="logo">
+    					</div>
+    					<div id="title">
+    							<p class="hidden">US Self Storage Locator - Find self storage anywhere</p>
+    					</div>
+    					<div id="top-nav">
+    							<ul>
+    									<li class="hidden"><a href="#top">Skip Navigation</a></li>
+    									<li class="top-nav-login"><a href="">Login</a></li>
+    									<li class="top-nav-help"><a href="">Help</a></li>
+    							</ul> 
+    					</div>
+    					<div id="main-nav">
+    							<ul>
+    									<li id="home"><a href="">Home</a></li>
+    									<li id="locate"><a href="">Locate storage</a></li>
+    									<li id="tips"><a href="">Storage tips</a></li>
+    									<li id="add"><a href="">Add your facility</a></li>
+    							</ul> 
+    					</div>
+				 </div>
+    </div>
+		<!-- End the header container -->
+    
+		<!-- Now have the page container to hold a bottom background within the main repeating background. -->
+    <div id="page-ctr-in">
+    		 
+				 <!-- This area contains all the page content - The main editable area -  This will be relatively positioned to overlap the header -->
+    		 <div id="page-cnt">
+    		 			
+							<div id="page-cnt-top-bg">
+							<div id="homepage-cnt-in">
+							<!-- Start the editable area -->
+							<a name="top"></a>
+								 				
+												<!-- Start the locater area -->
+  								 	 		<div id="locater">
+												<div id="locater-in">
+												<h1>Your Self Storage Search Starts Here</h1>	
+									 			<p>To find your closest self storage facility, search by:</p>
+  							 						<form action="#">
+  							 			 						<input type="text" id="postcode" value="Address or Zip Code" />
+  										 						<p><a href="#" class="search-button">Search</a> <a href="#" class="search-options">Other options</a></p>											
+  							 			 						
+  													</form>
+												<div class="clear"></div>
+												<p>Or choose a city near you.</p> 
+												<div id="cities">
+												<ul class="city-list">
+							 		 					<li><a href="#">Boca Raton</a></li>
+														<li><a href="#">Delray Beach</a></li>
+									 					<li><a href="#">Deefield Beach</a></li>
+									 					<li><a href="#">Margate</a></li>
+							 					</ul>
+							 					<ul class="city-list">
+							 		 					<li><a href="#">Coral Springs</a></li>
+									 					<li><a href="#">Parkland</a></li>
+									 					<li><a href="#">Tamarac</a></li>
+									 					<li><a href="#">Pompano Beach</a></li>
+							 					</ul>
+												<div class="clear"></div>
+												</div>
+												
+												</div>
+												</div>	
+												<!-- End the locater area -->
+												
+												<!-- Start the feature area -->
+												<div id="feat">
+														 				<div id="feat-pic">
+																				 <div id="feat-txt">
+														 						 <h2>Looking for a storage unit?</h2>
+														 						 </div>
+																		</div>
+																		<p>Get a FREE storage rental quote!</p>
+												</div>	
+												<!-- End the feature area -->
+												<div class="clear"></div>
+  								 			
+												
+												<!-- Start the three boxes area -->
+									 			<div id="three-box">
+							 							 <div class="home-box" id="three-box-search">
+														 <h3 class="hidden">Search</h3> <p><span class="big-text">Search</span> for a facility by typing in an address or zip code above, or by choosing a city near you. Click on More Options above to narrow your choices by distance or unit size.</p>
+							 							 </div>
+							 							 <div class="home-box" id="three-box-locate">
+							 							 <h3 class="hidden">Locate</h3> <p><span class="big-text">Locate</span> the perfect storage units using our advanced yet simple Locator. We show you just want you need to see, in less steps and pages, so you can make the best choice.</p>
+							 							 </div>
+							 							 <div class="home-box" id="three-box-reserve">
+							 							 <h3 class="hidden">Reserve</h3> <p><span class="big-text">Reserve</span> any storage unit in one final easy step. Take advantage of our exclusive discounts. You'll receive a confirmation by email and everything will be set to go. </p>
+							 							 </div>
+							 
+							 							 <div class="clear"></div>
+												
+												</div>
+												
+												<p id="click-more"><a href="">Click here for more</a></p>
+												
+												<!-- End the three boxes area -->
+									 			
+							 						
+							<!-- End the editable area -->
+							</div>
+							
+							</div>
+							
+							<div class="clear"></div>
+							
+							
+    		 </div>
+				 
+				 <!-- End main content area -->
+				 
+				 <!-- This empty div is used to create a space before the footer -->
+    		 <div id="cnt-space"></div>
+    </div>
+		<!-- Now end the page-container-inner -->
+
+</div>
+<!-- Now end the page-container-outer -->
+
+<!-- Insert the page footer container here -->
+<div id="blue-line">
+<ul id="bottom-nav">
+		<li><a href="">About Us</a>&#149;</li>
+		<li><a href="">Member Login</a>&#149;</li>
+		<li><a href="">Help</a>&#149;</li>
+		<li><a href="">Sitemap</a>&#149;</li>
+		<li><a href="">Privacy Policy</a>&#149;</li>
+		<li><a href="">Terms of Use</a>&#149;</li>
+		<li><a href="">Self Storage Directory</a>&#149;</li>
+		<li class="last-item"><a href="">Storage Tips/Blog</a></li>
+</ul>
+</div>
+
+<div id="foot-box-ctr">
+		 <div id="foot-box-cnt">
+		 <div id="foot-box-cnt-in">
+		 <p class="foot-text">Lorem ipsum text...</p>
+		 <p class="foot-text">Lorem ipsum text...</p>
+		 <p class="foot-text">Lorem ipsum text...</p>
+		 </div>
+		 </div>
+</div>
+<div id="foot-box-bottom-bg"></div>
+
+<div id="blue-line">
+		 <div id="blue-line-in">
+		 <p id="foot-text-l">Copyright &copy; 2010 - USSelfStorageSearch.com</p>
+		 <p id="foot-text-r">Website development and design by Grey Robot</p>
+		 </div>						
+</div>
+<!-- End the footer container -->
+
+<!-- Insert empty div to make a lock on the door here if needed -->
+<div id="lock"></div>
+
+</body>
+</html>

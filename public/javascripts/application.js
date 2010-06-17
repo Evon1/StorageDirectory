@@ -393,10 +393,11 @@ $.fn.appendParamAndGo = function() {
 // click a link to open a hidden div near by
 $.fn.openDiv = function() {
 	return this.each(function(){
-		var $this = $(this);
-		
+		var $this = $(this),
+				div_to_open = $this.attr('rel');
+				
 		$this.click(function() {
-			$('.advanced_options', $this.parent().parent()).slideToggle();
+			$('#'+div_to_open).slideToggle();
 			return false;
 		});
 	});
@@ -409,6 +410,29 @@ $.fn.submitBtn = function() {
 		
 		$this.click(function(){
 			$this.parents('form').submit();
+			return false;
+		})
+	});
+}
+
+$.fn.accordion = function() {
+	return this.each(function() {
+		$(this).click(function() {
+			var $this = $(this),
+					info_div = $this.parent().next('.info');
+					
+			$('a', $this.parent().parent()).removeClass('active');
+			$('.info').slideUp();
+			
+			if (info_div.is(':hidden')) {
+				$this.addClass('active');
+				info_div.slideDown().children().hide().fadeIn('slow');
+			} else {
+				$this.removeClass('active');
+				info_div.slideUp();
+			}
+			
+			return false;
 		})
 	});
 }
@@ -452,8 +476,9 @@ $.bindPlugins = function() {
 	$('.link_div').linkDiv();								 // attack a click event to divs that wrap a link to follow the href
 	$('.param_filled').fillWithParam(); 		 // fill matching inputs with the param from its rel attr
 	$('.table_sort').appendParamAndGo();		 // append the key-val in the elements rel attr to the href and go to it
-	$('.open_advanced').openDiv();					 // click a link to open a hidden div near by
-	$('.submit_btn').submitBtn();						 // make a link act as a submit button
+	$('.openDiv').openDiv();					 // click a link to open a hidden div near by
+	$('.search-btn, .search-button').submitBtn();						 // make a link act as a submit button
+	$('h4 a', '#info-accordion').accordion(); // my very own accordion widget :)
 	
 	// sortable nav bar, first implemented to update the position attr of a page (only when logged in)
 	$('.sortable', '.authenticated').sortable({
@@ -735,4 +760,14 @@ function fillInFormFieldSelectLists(resource) {
 		// in each of the fields field_name select list
 		$field_name_selects.trigger('filled');
 	});
+}
+
+/**************** adapter functions ****************/
+
+// Ajaxful ratings uses Prototype's Ajax object, wrap a jQuery function in it
+var Ajax = function(){};
+Ajax.Request = function(url, params) {
+	$.post(url, params.parameters, function(response) {
+		alert(response);
+	}, 'json')
 }
