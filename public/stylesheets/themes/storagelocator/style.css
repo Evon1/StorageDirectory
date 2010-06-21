@@ -258,17 +258,35 @@ border-right: 1px solid #C2C2CC;
 border-left: 1px solid #C2C2CC;
 background-color: #fff;
 float: left;
-border-radius: 10px;
--moz-border-radius: 10px;
--webkit-border-radius: 10px;
+border-radius-topright:10px;
+-moz-border-radius-topright: 10px;
+-webkit-border-top-right-radius: 10px;
+border-radius-topleft:10px;
+-moz-border-radius-topleft: 10px;
+-webkit-border-top-left-radius: 10px;
+border-radius-bottomright: 20px;
+-moz-border-radius-bottomright: 20px;
+-webkit-border-bottom-right-radius: 20px;
+border-radius-bottomleft: 20px;
+-moz-border-radius-bottomleft: 20px;
+-webkit-border-bottom-left-radius: 20px;
 }
 
 #locater-in {
 	padding:0 40px 20px;
 background: url(/images/ui/storagelocator/locate-header.png) no-repeat top left;
-border-radius: 10px;
--moz-border-radius: 10px;
--webkit-border-radius: 10px;
+border-radius-topright:10px;
+-moz-border-radius-topright: 10px;
+-webkit-border-top-right-radius: 10px;
+border-radius-topleft:10px;
+-moz-border-radius-topleft: 10px;
+-webkit-border-top-left-radius: 10px;
+border-radius-bottomright: 20px;
+-moz-border-radius-bottomright: 20px;
+-webkit-border-bottom-right-radius: 20px;
+border-radius-bottomleft: 20px;
+-moz-border-radius-bottomleft: 20px;
+-webkit-border-bottom-left-radius: 20px;
 }
 
 #locater h1 {
@@ -288,12 +306,15 @@ input#postcode {
 border: none;
 margin-top: 10px;
 width: 260px;
-padding:3px 10px;
+padding:6px 10px;
 height: 1.7emit ad;
 line-height: 2em;
 color: #777;
 font-size:1.5em;
-background: url(/images/ui/storagelocator/postcode-area-bg.png) no-repeat top left;
+-moz-border-radius:10px; -webkit-border-radius:10px; border-radius:10px;
+-moz-box-shadow:1px 1px 4px #999 inset; 
+box-shadow:1px 1px 4px rgba(60,60,60,0.1) inset; 
+-webkit-box-shadow:1px 1px 4px rgba(60,60,60,0.1) inset;
 }
 
 #locater p {
@@ -312,7 +333,7 @@ color: #333;
 text-decoration: underline;
 }
  
-#locater a.search-button {
+#locater a.search-btn {
 background: url(/images/ui/storagelocator/search-btn.png) no-repeat top left;
 width: 165px;
 height: 38px;
@@ -428,6 +449,7 @@ background: url(/images/ui/storagelocator/three-boxes-bg.png) repeat-x top left;
 background-color: #DBDBDB; 
 border: 1px solid #C2C2CC;
 width: 939px;
+padding:8px 0;
 border-radius: 20px;
 -moz-border-radius: 20px;
 -webkit-border-radius: 20px;
