@@ -437,6 +437,25 @@ $.fn.accordion = function() {
 	});
 }
 
+$.fn.tabular_content = function() {
+	return this.each(function(){
+		var $this = $(this), // the container
+				tabs = $('.tabular', $this), // ul
+				panels = $('.tab_content', $this);
+				
+		$('a', tabs).click(function(){
+			$('li', tabs).removeClass('active')
+			clicked_tab = $(this);
+			clicked_tab.parent().addClass('active');
+			
+			panels.hide().removeClass('active');
+			$('#'+ clicked_tab.attr('rel'), $this).show().addClass('active');
+			
+			return false;
+		});
+	});
+}
+
 /******************************************* SUCCESS CALLBACKS *******************************************/
 
 $.toggleHelptext = function(clickedLink) {
@@ -479,11 +498,22 @@ $.bindPlugins = function() {
 	$('.openDiv').openDiv();					 // click a link to open a hidden div near by
 	$('.search-btn, .search-button').submitBtn();						 // make a link act as a submit button
 	$('h4 a', '#info-accordion').accordion(); // my very own accordion widget :)
+	$('.tabular_content').tabular_content(); // a div with a list as the tab nav and hidden divs below it as the tabbed content
 	
 	// sortable nav bar, first implemented to update the position attr of a page (only when logged in)
 	$('.sortable', '.authenticated').sortable({
 		opacity: 0.3,
 		update: function(e, ui) { $.updateModels(e, ui); }
+	});
+	
+	// front page
+	$('a', '#click-more').click(function(){
+		var $this = $(this);
+		if ($this.text() == 'Click here for more') {
+			$this.text('Click again to close');
+		} else {
+			$this.text('Click here for more')
+		}
 	});
 	
 	// edit site settings page

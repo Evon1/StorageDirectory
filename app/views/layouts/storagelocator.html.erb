@@ -23,7 +23,7 @@
 		<![endif]-->
 	</head>
 	<body id="<%= controller_name %>_controller" class="<%= action_name %>_action <%= page_name %><%= current_user ? ' authenticated' : '' %>">
-  	<%= render :partial => 'menus/menu' if current_user %>
+  	<%#= render :partial => 'menus/menu' if current_user %>
 		
 		<!-- First set up a page container to take the header and main content -->
     <div id="page-ctr">
@@ -41,6 +41,10 @@
         					</div>
         					
         					<div id="top-nav">
+        					  <span class="left">
+        					   <%= link_to 'English', '#' %>&nbsp;|&nbsp;<%= link_to 'Español', '#' %>
+        					  </span>
+        					  
       							<ul>
       									<li class="hidden"><a href="#top">Skip Navigation</a></li>
       									<li class="top-nav-login"><a href="/login">Login</a></li>
