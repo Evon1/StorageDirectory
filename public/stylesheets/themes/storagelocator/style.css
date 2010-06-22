@@ -68,12 +68,13 @@ width: 980px;
 
 #page-ctr {
 width: 100%;
+position:relative;
 background: url(/images/ui/storagelocator/container-bg.png) repeat bottom left;
 }
 
 #page-ctr-in {
-background: url(/images/ui/storagelocator/container-inner-bg.png) no-repeat bottom center;
-
+/*background: url(/images/ui/storagelocator/container-inner-bg.png) no-repeat bottom center;*/
+background: url(/images/ui/storagelocator/handle.png) no-repeat 50% 95%;
 }
 
 #page-cnt {
@@ -142,7 +143,7 @@ margin-left:35px;
 #title {
 background: url(/images/ui/storagelocator/us-self-storage-locator-heading.png) no-repeat top left;
 float: left;
-margin-top: 40px;
+margin-top: 50px;
 height: 70px;
 width: 513px;
 }
@@ -200,7 +201,7 @@ left: 20px;
 
 #main-nav ul {
 float: right;
-margin-top: 37px;
+margin-top: 27px;
 }
 
 #main-nav ul li {
@@ -443,6 +444,7 @@ float: left;
 .home-box p {
 margin: 100px 0px 20px 35px;
 width: 250px;
+line-height:1.2;
 }
 
 #three-box-search {
@@ -543,7 +545,7 @@ position:relative;
 left: 20px;
 color: #555;
 text-align: center;
-height: 400px;
+height: 200px;
 }
 
 #narrow-box h2{
@@ -666,9 +668,7 @@ color: #333;
 }
 
 #type-one-r-col-in h2 {
-margin: 0 0px 15px 0px;
 font-weight: normal;
-font-size: 1.8em;
 }
 
 .green-head {
@@ -689,7 +689,7 @@ background-color: #fff;
 background: url(/images/ui/storagelocator/tips-hdr-img.png) no-repeat;
 }
 #info-head {
-	
+	background: url(/images/ui/storagelocator/info-hdr-img.png) no-repeat;
 }
 
 #add-fac-head {
@@ -701,8 +701,8 @@ background: url(/images/ui/storagelocator/add-hdr-img.png) no-repeat;
 }
 .green-head .inner, #tips-head-in { 
 	margin:20px 0 0 50px;
-	padding:5px 35px 10px 35px;
-	width:40%;
+	padding:25px;
+	width:45%;
 	background:url(/images/ui/storagelocator/grey-trans-bg.png) repeat;
 	border: 1px solid #d6d6d6;
 	border-radius: 10px;
@@ -736,7 +736,7 @@ margin: 8px;
 }
 
 #rslt-head p {
-margin-top: 30px;
+margin-top: 23px;
 background: url(/images/ui/storagelocator/results-header-search.png) no-repeat top right;
 text-shadow: 1px 1px 2px #000;
 width:300px;
@@ -753,7 +753,6 @@ text-decoration: none;
 }
 
 input#results {
-margin-bottom: 20px;
 border: 1px solid #ccc;
 padding:0 12px;
 border-radius: 8px;
@@ -1287,18 +1286,15 @@ position:relative;
 left: 30px;
 }
 
-#add-fac-head h2,
-#tips-head-in h2{
+div.green-head div.inner h2 {
 font-weight: bold;
-
 margin-bottom: 0px;
 font-size: 3em;
 left: 20px;
 }
 
-#add-fac-head p,
-#tips-head-in p {
-font-size: 1.6em;
+.green-head .inner p {
+font-size: 12px;
 left: 20px;
 color: #666;
 position: relative;
@@ -1616,7 +1612,7 @@ background-color: #fff;
 background: url(/images/ui/storagelocator/fac-tabs-bg-inactive.png) no-repeat top left;
 display:block;
 list-style: none;
-width: 140px;
+width: 138px;
 float: left;
 text-align: center;
 position: relative;
@@ -1657,17 +1653,20 @@ top: -20px;
 
 
 .tab_content h3 {
-margin: 30px 0px 10px 0px;
+margin: 30px 0px 20px 0px;
 background: #E1EBF5;
 line-height: 35px;
 color: #555;
 font-size: 1.5em;
+padding:3px 15px;
 }
 
 
 .tab_content h4, 
 .tab_content p {
 color: #555;
+padding-right:15px;
+padding-left:15px;
 }
 
 .tab_content p {
@@ -1771,6 +1770,8 @@ input.slider_val { width:20px; }
 .table_view { width:100%; }
 .index_action #content, .edit_action #content, .new_action #content { width:100%; float:none; margin-bottom:0; }
 
+#rslt-head h2 { font-size:24px; }
+
 #list-name { background-position:99% 50%; }
 #list-miles { background-position:96% 50%; }
 
@@ -1846,13 +1847,13 @@ border-radius-bottomleft: 10px;
 #more_info_div h4, #more_info_div h5 { font-size:24px; margin-bottom:10px; font-weight:normal; } 
 #more_info_div p { font-size:12px; line-height:1.3; }
 
-#tips-head-in { padding:25px; }
-
 .pagination { margin:20px 0; }
 .pagination a, .pagination span { color:#818181; }
 img.left { margin:0 0 10px 10px; }
 img.right { margin:0 10px 10px 0; }
 
+#latch-img { position:absolute; right:0; top:50%; width:155px; height:78px; background:url(/images/ui/storagelocator/latch.png) no-repeat; }
+
 /* tabs */
-.tabular_content .tab_content { display:none; padding:0 30px; }
+.tabular_content .tab_content { display:none; padding:0 30px 1px 30px; }
 .tabular_content .active { display:block; }

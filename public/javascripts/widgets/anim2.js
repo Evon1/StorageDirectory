@@ -52,7 +52,7 @@ function GR_anim2() {
 	feat_txt.animate({ 'width':'550px' }, 900, function(){
 		feat_txt.css({ 'right':'0' });
 		feat_txt.animate({ 'width':'0', 'left':'570px' }, 600, function(){
-			feat_txt.css({ 'left':'0', 'top':'130px' });
+			feat_txt.css({ 'left':'2px', 'top':'130px' });
 			feat_txt.animate({ 'width':'310px' }, 900, function(){
 				heading.text(msg2).slideDown(900, function(){
 					setTimeout(GR_anim, 3000);
