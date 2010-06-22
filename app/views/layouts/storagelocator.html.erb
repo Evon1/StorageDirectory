@@ -22,7 +22,7 @@
 			<script type="text/javascript" src="javascripts/IE8.js"></script>
 		<![endif]-->
 	</head>
-	<body id="<%= controller_name %>_controller" class="<%= action_name %>_action <%= page_name %>">
+	<body id="<%= controller_name %>_controller" class="<%= action_name %>_action <%= page_name %><%= current_user ? ' authenticated' : '' %>">
   	<%= render :partial => 'menus/menu' if current_user %>
 		
 		<!-- First set up a page container to take the header and main content -->

@@ -222,7 +222,7 @@ width: 117px;
 background: url(/images/ui/storagelocator/home-button.png) no-repeat top left;
 }
 
-#main-nav ul li#locate, #main-nav ul li#Page_2 {
+#main-nav ul li#locate, #main-nav ul li#Page_2, #main-nav ul li#Page_12 {
 width: 133px;
 background: url(/images/ui/storagelocator/locate-button.png) no-repeat top left;
 }
@@ -692,8 +692,6 @@ color: #333;
 
 #type-one-r-col-in h2 {
 margin: 30px 0px 15px 0px;
-position: relative;
-left: 80px;
 font-weight: normal;
 font-size: 1.8em;
 }
@@ -724,9 +722,18 @@ background-color: #fff;
 }
 
 #rslt-head {
-/*background: url(/images/ui/storagelocator/results-header-image.png) no-repeat top right;*/
+	background: url("/images/ui/storagelocator/rslt-hdr-img.png") no-repeat
 }
-
+#rslt-head .inner { 
+	margin:20px 0 0 50px;
+	padding:5px 35px 10px 35px;
+	width:40%;
+	background:url(/images/ui/storagelocator/grey-trans-bg.png) repeat;
+	border: 1px solid #d6d6d6;
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+}
 /* End the header images for each page */
 
 
@@ -738,12 +745,6 @@ border-radius: 5px;
 -webkit-border-radius: 5px;
 color: #3333CB;
 background:#eee;
-}
-
-#rslt-head h2,
-#rslt-head p {
-position: relative;
-top: 30px;
 }
 
 #narrow-box p span#rslt-number {
@@ -762,10 +763,8 @@ margin: 8px;
 #rslt-head p {
 margin-top: 30px;
 background: url(/images/ui/storagelocator/results-header-search.png) no-repeat top right;
-width: 300px;
 text-shadow: 1px 1px 2px #000;
-position: relative;
-left: 130px;
+width:300px;
 }
 
 #rslt-head p a {
