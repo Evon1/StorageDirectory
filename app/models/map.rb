@@ -21,7 +21,7 @@ class Map < ActiveRecord::Base
   end
   
   def prep_zip(zip)
-    zip.size < 5 ? "0#{zip}" : zip
+    zip.to_s.size < 5 ? "0#{zip}" : zip
   end
   
 end

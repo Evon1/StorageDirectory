@@ -145,7 +145,7 @@ margin-left:35px;
 #title {
 background: url(/images/ui/storagelocator/us-self-storage-locator-heading.png) no-repeat top left;
 float: left;
-margin-top: 50px;
+margin-top: 55px;
 height: 70px;
 width: 513px;
 }
@@ -199,6 +199,7 @@ line-height: 50px;
 width: 750px;
 position: relative;
 left: 20px;
+top:-5px;
 }
 
 #main-nav ul {
@@ -274,16 +275,18 @@ background: url(/images/ui/storagelocator/locate-header.png) no-repeat top left;
 }
 
 #locater h1 {
-width: 260px;
-height: 80px;
-font-size: 2em;
-color: #333;
-clear: both;
-text-shadow: 1px 1px 2px #000;
-color: #fff;
-position: relative;
-left: 63px;
-top: 12px;
+clear:both;
+color:#FFFFFF;
+font-size:20px;
+font-weight:normal;
+height:80px;
+left:59px;
+letter-spacing:0.7px;
+line-height:1.2;
+position:relative;
+text-shadow:1px 1px 2px #333333;
+top:12px;
+width:260px;
 }
 
 input#postcode {
@@ -714,8 +717,7 @@ background: url(/images/ui/storagelocator/add-hdr-img.png) no-repeat;
 /* End the header images for each page */
 
 
-#narrow-box p span#rslt-number,
-#rslt-head h2 span#rslt-number {
+#rslt-number {
 border: 1px solid #ccc;
 border-radius: 5px;
 -moz-border-radius: 5px;
@@ -724,12 +726,13 @@ color: #3333CB;
 background:#eee;
 }
 
-#narrow-box p span#rslt-number {
+#narrow-box p span#rslt-number, .sl-dist #rslt-number {
 color: #000;
 }
 
 #narrow-box p span span,
-#rslt-head h2 span span {
+#rslt-head h2 span span,
+.sl-dist #rslt-number span {
 margin: 8px;
 }
 
@@ -930,13 +933,13 @@ margin-top: 10px;
 }
 
 .rslt-contact h3 {
-margin:10px 0 3px 0;
+margin:4px 0 7px;
 }
 .rslt-contact h3 a{
 color: #006600;
 font-size:12px;
 }
-.rslt-contact p.rslt-phone {
+.listing .rslt-contact p.rslt-phone {
 color: #3F3FCC;
 font-weight: bold;
 font-size: 1.2em;
@@ -1785,7 +1788,6 @@ position:relative;
 left: 18px;
 color: #555;
 text-align: center;
-margin-top:20px;
 }
 
 #add-fac-box {
@@ -3171,6 +3173,7 @@ border-radius-bottomleft: 10px;
 
 .panel .inner { height:72%; padding:13px 16px; position:relative; z-index:550; background:#fff; }
 .listing:hover .inner { border-color:#aaa; }
+.listing .rslt-contact p { margin-bottom:5px; font-size:12px; line-height:1.2; }
 .panel h5 { padding:12px 17px; margin-bottom:0; font-size:140%; background:#cc3300; }
 .panel .inner h6 { font-size:120%; }
 .panel .inner h6, .panel .inner p { margin-bottom:14px; font-size:14px; }

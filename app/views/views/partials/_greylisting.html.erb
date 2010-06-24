@@ -19,7 +19,6 @@
 		 
   <div class="pagination">
     <p class="rslt-foot">
-      <%= image_tag '/images/ui/ajax-loader-facebook.gif', :class => 'ajax_loader right' %>&nbsp;
       <%= more_results_link(@model_data) %>
     </p>
     <span id="per_page" class="hidden"><%= @model_data.per_page if @model_data.respond_to?(:per_page) %></span>

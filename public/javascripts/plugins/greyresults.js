@@ -55,6 +55,7 @@ $('#more_results').click(function(){
 				
 				
 				this_listing.appendTo(results_wrap).hide().slideDown(1800);
+				$('.inner:first', this_listing).effect('highlight', { color: '#c2cee9' }, 1700);
 			});
 			
 			// this updates the page count so the next time the user clicks, we pull the correct data
