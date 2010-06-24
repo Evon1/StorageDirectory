@@ -8,48 +8,8 @@
 		 
 	 <div id="rslt-list-bg">
 			
-			<% unless @model_data.blank? %>
-        <% @model_data.each do |listing| %>
-        <!-- listing item -->
-			    <div id="listing_<%= listing.id %>" class="listing">
-						 <div class="inner">
-						   <img src="" alt="" width="102" height="77"/>
-						 		<div class="rslt-contact">
-					 				<h3><%= listing.title %></h3>
-    		 					 <p><%= listing.map.address %><br />
-                   <%= listing.map.city_state_zip %></p>
-    		 					 <p class="phone"><%= listing.map.phone %></p>
-								</div>
-								
-								<ul>
-									<li class="rslt-miles"><span class="shifted-text"><%= listing_distance(listing) %></li>
-    							<li class="rslt-specials">
-    							  <h5><%= listing.specials.first.title unless listing.specials.empty? %></h5>
-                    <%= listing.specials.first.content unless listing.specials.empty? %>
-                  </li>
-                  <li class="rslt-reserve"><a href="">Reserve</a></li>
-								</ul>
-						 </div>
-						 
-						 <div class="panel hidden"></div>
-   					 <div class="clear"></div>
-
-   		 			 <ul class="tabs">
- 	  			      <li><%= link_to '+', '#', :class => 'open_tab' %></li>
-                 <li class="fac-map"><%= link_to 'Map', listing.get_partial_link(:map), :rel => 'map', :class => 'tab_link' %></li>
-                 <li class="fac-specials"><%= link_to 'Specials', listing.get_partial_link(:specials), :rel => 'specials', :class => 'tab_link' %></li>
-                 <li class="fac-sizes"><%= link_to 'Sizes', listing.get_partial_link(:sizes), :rel => 'sizes', :class => 'tab_link' %></li>
-                 <li class="fac-pictures"><%= link_to 'Pictures', listing.get_partial_link(:pictures), :rel => 'pictures', :class => 'tab_link' %></li>
- 						 </ul>
-
-     				<div class="highlight-green progress">&nbsp;</div>
-     					 
-					</div>
-					<div class="clear"></div>
-    			<!-- /.listing -->
-    			
-			  <% end %>
-		  <% else %>
+			<%= render :partial => 'listings/result', :collection => @model_data %>
+			<% if @model_data.blank? %>
         <div class="no_results framed">
           Sorry, that search didn't return any results. Try using less filter options.
         </div>
@@ -57,5 +17,7 @@
 				
 	</div>
 		 
-   <p class="rslt-foot"><%= will_paginate @model_data if @model_data.respond_to? :total_pages %></p>
+   <div class="pagination">
+     <p class="rslt-foot"><%= more_results_link(@model_data) %></p>
+    </div>
 </div>

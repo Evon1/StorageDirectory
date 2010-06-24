@@ -15,7 +15,7 @@ class SearchResults < ApplicationController
     q = params[:q]
     options = {
       :page     => params[:page], 
-      :per_page => (params[:per_page] || 7),
+      :per_page => (params[:per_page] || 10),
       :order    => (params[:order]    || 'distance'),
       :within   => (params[:within]   || 5)
     }
@@ -91,9 +91,11 @@ class SearchResults < ApplicationController
     # zip code
     return true if query.match /\d{5}/
     
-    # has a state name or abbrev
-    regex = States::NAMES.map { |s| "(#{s[0]})|\s#{s[1]}$" } * '|'
-    query.match /#{regex}/i
+    # has a state name or abbrev or city name
+    sregex = States::NAMES.map { |s| "(#{s[0]})|\s#{s[1]}$" } * '|'
+    us_cities = UsCity.all.map { |c| c.name }
+    
+    query.match(/#{sregex}/i) || us_cities.any? { |c| c =~ /#{query}/i }
   end
   
 end

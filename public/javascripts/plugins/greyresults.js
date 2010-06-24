@@ -4,6 +4,27 @@
 // bind event handlers and implement ajax functionality for search results.
 // first implemented for storage locator
 
+$('#more_results').click(function(){
+	var pagetitle = $('#params_pagetitle', this).text(),
+			query = $('#params_query', this).text(),
+			within = $('#params_within', this).text(),
+			page = $('#params_page', this).text();
+	
+	var url = '/'+ pagetitle +'?q=';
+	if (query != '') url += query;
+	if (within != '') url += '&within='+ within;
+	if (page != '') url += '&page='+ page;
+	
+	$.getJSON(url, function(response){
+		if (response) {
+			alert(response)
+		} else alert('Error');
+	});
+	
+	return false;
+});
+
+// utitity method
 $.clicked_on_different_tab = function($tab_link, $listing) {
 	var $open_panel = $('.panel:not(:hidden)', '.listing');
 	if ($open_panel.length == 0) return true;
@@ -19,27 +40,6 @@ $.clicked_on_different_tab = function($tab_link, $listing) {
 	return (clicked_tab != active_panel && active_listing == clicked_listing) || 
 				 (clicked_tab == active_panel && active_listing != clicked_listing);
 }
-
-// narrow search form sliders
-$('.slider').each(function(){
-	var $this = $(this),
-			value = $('.slider_val', $this.parent()).val();
-			
-	$this.slider({
-		max: 50,
-		min:5,
-		step: 5,
-		animate: true,
-		value: value, // reverse the direction of the slider
-		start: function(e, ui) {
-			var slider = $('.slider_val', $(e.target).parent());
-			if (slider.attr('disabled')) slider.attr('disabled', false);
-		},
-		slide: function(e, ui) {
-			$('.slider_val', $(this).parent()).val(ui.value);
-		}
-	});
-});
 
 // panel openers
 $('.inner', '.listing').click(function(){ $('.tab_link[rel=map]', $(this).parent()).click(); });
@@ -108,3 +108,24 @@ $.fn.greyresults = function() {
 }
 
 $('.listing', '#rslt-list-bg').greyresults();
+
+// narrow search form sliders
+$('.slider').each(function(){
+	var $this = $(this),
+			value = $('.slider_val', $this.parent()).val();
+			
+	$this.slider({
+		max: 50,
+		min:5,
+		step: 5,
+		animate: true,
+		value: value, // reverse the direction of the slider
+		start: function(e, ui) {
+			var slider = $('.slider_val', $(e.target).parent());
+			if (slider.attr('disabled')) slider.attr('disabled', false);
+		},
+		slide: function(e, ui) {
+			$('.slider_val', $(this).parent()).val(ui.value);
+		}
+	});
+});

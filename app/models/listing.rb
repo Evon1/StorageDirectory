@@ -20,6 +20,10 @@ class Listing < ActiveRecord::Base
     "ajax/get_partial?model=Listing&id=#{id}&partial=views/partials/greyresults/#{name.to_s}"
   end
   
+  def city_and_state
+    [self.map.city, self.map.state]
+  end
+  
   def lat() map.lat end
   def lng() map.lng end
   

@@ -12,6 +12,9 @@ ActionController::Routing::Routes.draw do |map|
   map.signup '/signup', :controller => 'users',         :action => 'new'
   map.logout '/logout', :controller => 'user_sessions', :action => 'destroy'
   
+  # clean seo friendly
+  map.facilities '/self-storage/:title/:id', :controller => 'listings', :action => :show
+  
   # grey module
   map.locate '/locate/:state/:city/:address', :controller => 'pages', 
                                    :action => 'show',

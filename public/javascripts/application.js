@@ -441,7 +441,9 @@ $.fn.tabular_content = function() {
 	return this.each(function(){
 		var $this = $(this), // the container
 				tabs = $('.tabular', $this), // ul
-				panels = $('.tab_content', $this);
+				panels = $('.tab_content', $this); // tab content divs
+		
+		panels.eq(0).show();
 				
 		$('a', tabs).click(function(){
 			$('li', tabs).removeClass('active')

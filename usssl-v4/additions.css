@@ -1,0 +1,1470 @@
+/* Additional CSS Document */
+
+/* This is the new admin bar across the top. Must replace the old one */
+
+#admin {
+height: 36px;
+line-height: 36px;
+width: 100%;
+background: url(images/admin-bg.png) repeat-x bottom left;
+background-color: #ddd;
+position:relative;
+z-index: 10;
+top: 15px;
+}
+
+#admin-in {
+width: 880px;
+height: 36px;
+margin: 0px auto;
+text-align:center;
+background: url(images/us-self-storage-locator-logo-top.png) no-repeat 6px bottom ;
+}
+
+#admin p#admin-l {
+float: left;
+}
+
+#admin p#admin-r {
+float: right;
+position:relative;
+right: 150px;
+color: #999;
+}
+
+
+#head-ctr-in {
+margin: 0px auto;
+text-align: left;
+width: 980px;
+position:relative;
+left: 35px;
+}
+
+#page-ctr {
+width: 100%;
+background: url(images/container-bg.png) repeat bottom left;
+position: relative;
+top: -15px;
+z-index: 0;
+}
+
+#page-cnt {
+margin: 0px auto;
+width: 980px;
+position: relative;
+top: -50px;
+background-color: #fff;
+border-bottom: 1px #ccc solid;
+border-top: 1px #ccc solid;
+border-radius: 20px;
+-moz-border-radius: 20px;
+-webkit-border-radius: 20px;
+box-shadow:0px 0px 8px #999;
+-webkit-box-shadow:0px 0px 8px #999;
+-moz-box-shadow:0px 0px 8px #999;
+}
+
+#logo {
+background: url(images/us-self-storage-locator-logo.png) no-repeat bottom left;
+float: left;
+height: 160px;
+width: 135px;
+position:relative;
+top: -3px;
+}
+
+#top-nav ul {
+position: relative;
+left: 50px;
+top: -78px;
+z-index: 15;
+}
+
+/* New left column styles included here to introduce that dotted line. SOme of these may be able to be ignored or removeed. Get in touch with me if you need a hand... */
+
+#type-two-l-col, 
+#type-one-l-col {
+width: 197px;
+float: left;
+position: relative;
+left: 2px;
+background: url(images/page-bg.png) no-repeat left 350px;
+border-radius-bottomleft: 20px;
+-moz-border-radius-bottomleft: 20px;
+-webkit-border-bottom-left-radius: 20px;
+}
+
+/* Change made in these two divs on the existing stylesheet in order to include that dotted line. These can possibly be ignored or changed back - get in touch if you need me to explain anything... */
+#narrow-box {
+background: url(images/narrow-search-header.png) no-repeat top left;
+width: 164px;
+border-radius: 10px;
+-moz-border-radius: 10px;
+-webkit-border-radius: 10px;
+position:relative;
+left: 18px;
+color: #555;
+text-align: center;
+margin-top:20px;
+}
+
+#add-fac-box {
+background: url(images/add-facility-box-header.png) no-repeat top left;
+width: 164px;
+position:relative;
+left: 18px;
+color: #555;
+text-align: center;
+height: 400px;
+margin-top:20px;
+}
+
+/* New left hand boxes - for welcome, admin and tips */
+#welcome-box {
+	background: url(images/welcome-header.png) no-repeat top left;
+	width: 164px;
+	position:relative;
+	left: 18px;
+	color: #555;
+	text-align: center;
+	height: 400px;
+	margin-top:20px;
+	}
+	
+#admin-box {
+	background: url(images/admin-facility-head.png) no-repeat top left;
+	width: 164px;
+	position:relative;
+	left: 20px;
+	color: #555;
+	text-align: left;
+	top: 20px;
+	margin-bottom:20px;
+	}
+
+#tips-box {
+	background: url(images/lightbulb-head.png) no-repeat top left;
+	width: 164px;
+	position:relative;
+	left: 18px;
+	color: #555;
+	text-align: center;
+	height: 400px;
+	margin-top:20px;
+	}
+
+#tips-box-bottom {
+	background: url(images/tips-bottom.png) no-repeat top left;
+	width: 164px;
+	height: 36px;
+	}
+	
+#tips-box-bottom p a {
+	width: 21px;
+	height: 20px;
+	display: block;
+	float: left;
+	position: relative;
+	left: 98px;
+	top: 8px;
+	margin-right: 5px;
+	}
+	
+#welcome-box h2 {
+width: 110px;
+font-size: 1.5em;
+color: #fff;
+text-shadow: 1px 1px 2px #000;
+height: 47px;
+line-height: 47px;
+text-align: left;
+position: relative;
+left: 60px;
+}
+
+#admin-box h2 {
+width: 110px;
+font-size: 1.5em;
+color: #fff;
+text-shadow: 1px 1px 2px #000;
+height: 47px;
+line-height: 47px;
+text-align: left;
+position: relative;
+left: 60px;
+margin-bottom:10px;
+}
+
+#tips-box h2 {
+width: 110px;
+font-size: 1.5em;
+color: #fff;
+text-shadow: 1px 1px 2px #000;
+height: 47px;
+line-height: 47px;
+text-align: left;
+position: relative;
+left: 60px;
+margin-bottom:10px;
+}
+
+#welcome-box p {
+margin: 15px 10px;
+font-size: 1em;
+text-align: left;
+line-height: 1.8em;
+}
+
+#tips-box p {
+margin: 15px 10px;
+font-size: 1em;
+text-align: left;
+line-height: 1.8em;
+}	
+/* An additional type of number-in-a-box */
+
+#sl-fac-dist p span#rslt-number {
+	border: 1px solid #aaa;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	color: #3333CB;
+	margin: 2px;
+	}
+
+/* New list item type added (this can be combined with an existing group of selectors) */
+li.rslt-offer {
+float: left;
+list-style: none;
+display: inline;
+margin-left: 20px;
+}
+
+
+/* Two new additions */
+li.rslt-offer {
+background: url(images/results-divider-white-bg.png) no-repeat top left;
+width: 120px;
+height: 100px;
+	}
+
+li.rslt-offer span {
+	position: relative;
+	top: 20px;
+	left: 10px;
+	}
+
+/* Change made to the existing city box */
+
+#city-box {
+width: 197px;
+color: #555;
+text-align: center;
+margin-bottom: 50px;
+}
+
+#city-box-in {
+width: 165px;
+background: url(images/city-list-box-bg.png) no-repeat top center;
+position: relative;
+left: 18px;
+top: 17px;
+background-color: #fff;
+border: 1px solid #ccc;
+border-radius: 10px;
+-moz-border-radius: 10px;
+-webkit-border-radius: 10px;
+}
+
+#city-box p span {
+float: right;
+position:relative;
+right: 5px;
+}
+
+#city-box ul {
+text-align: left;
+position:relative;
+left: 5px;
+}
+
+#city-box ul li a span {
+float: right;
+color: #3333CB;
+position:relative;
+right: 10px;
+}
+
+/* Changes made to the existing media box */
+
+#media-box {
+width: 167px;
+background: url(images/media-header.png) no-repeat center 1px;
+position: relative;
+left: 14px;
+top: 17px;
+background-color: #fff;
+border: 1px solid #ccc;
+border-radius: 10px;
+-moz-border-radius: 10px;
+-webkit-border-radius: 10px;
+}
+
+/* Here are a couple of changes to the footer elements inorder to shift them up the page when the new admin bar is added. */
+
+.blue-line {
+background-color: #4745CC;
+clear: both;
+margin: 5px 0px;
+color: #fff;
+height: 3em;
+line-height: 3em;
+position:relative;
+top: -15px;
+}
+
+#foot-box-bottom-bg {
+background: url(images/footer-box-bottom-bg.png) repeat-x top left;
+height: 31px;
+clear:both;
+position:relative;
+top: -15px;
+}
+
+#foot-box-ctr {
+background: url(images/footer-box-bg.png) repeat-x top left;
+background-color: #DCDCDC;
+position:relative;
+top: -15px;
+}
+
+
+
+/* And finally... here are all the brand new pages CSS starting from here */
+
+#type-three-r-col-in {
+width: 755px;
+float: right;
+position:relative;
+top: 20px;
+right: 20px;
+	}
+	
+#sl-header {
+border-radius-topleft: 15px;
+-moz-border-radius-topleft: 15px;
+-webkit-border-top-left-radius: 15px;
+border-radius-topright: 15px;
+-moz-border-radius-topright: 15px;
+-webkit-border-top-right-radius: 15px;
+background: url(images/list-page-header-bg.png) repeat-x top left;
+height: 47px;
+line-height: 47px;
+border: 1px solid #ccc;
+color: #fff;
+	}
+	
+#sl-header h2 {
+	width: 560px;
+	float:left;
+	text-shadow: 1px 1px 2px #000;
+	position: relative;
+	left: 10px;
+	margin-bottom: 15px;
+	font-size: 1.6em;
+	}
+
+#sl-header h2 span {
+	font-size: 1.4em;
+	}
+
+#sl-header p.back-btn {
+	background: url(images/back-btn.png) no-repeat top left;
+	width: 172px;
+	height: 33px;
+	line-height: 33px;
+	float:right;
+	position:relative;
+	top: 8px;
+	right: 8px;
+	text-align:center;
+	}
+	
+#sl-header p.editing-btn {
+	background: url(images/editing-btn.png) no-repeat top left;
+	width: 172px;
+	height: 33px;
+	line-height: 33px;
+	float:right;
+	position:relative;
+	top: 8px;
+	right: 8px;
+	text-align:center;
+	font-size: 14px;
+	font-weight:bold;
+	text-shadow: 1px 1px 2px #000;
+	}
+
+#sl-header p.back-btn a {
+	font-size: 14px;
+	color: #fff;
+	font-weight: bold;
+	text-decoration:none;
+	text-shadow: 1px 1px 2px #000;
+	position: relative;
+	left: 10px;
+	display:block;
+	width: 160px;
+	height:33px;
+	}
+
+#sl-fac-detail {
+	width: 365px;
+	float: left;
+	}
+
+#sl-fac-detail-in-edit {
+	border: 1px solid #ccc;
+	border-radius: 15px;
+	-moz-border-radius: 15px;
+	-webkit-border-radius: 15px;
+}
+
+#sl-fac-detail-in-edit img,
+#sl-fac-detail-in img {
+	float: left;
+	margin:10px;
+	}
+
+#sl-fac-detail-in-edit p,
+#sl-fac-detail-in p {
+	position: relative;
+	left: 10px;
+	margin-bottom: 10px;
+}
+
+#sl-fac-detail-in-edit p a,
+#sl-fac-detail-in p a {
+	font-weight:bold;
+	color: #33c;
+	text-decoration:none;
+	}
+
+#sl-fac-detail-in-edit p.address,
+#sl-fac-detail-in p.address {
+	margin: 10px 0px;
+	line-height: 1.5em;
+}
+
+#sl-fac-detail-in-edit p span,
+#sl-fac-detail-in p span {
+	font-weight:bold;
+	color: #33c;
+	margin-right: 10px;
+}
+
+#sl-fac-dist {
+	width: 364px;
+	float: left;
+	text-align:center;
+	position:relative;
+	left: 24px;
+	
+	}
+
+#sl-fac-dist-in-edit {
+	text-align:center;
+	
+	border: 1px solid #ccc;
+	border-radius: 15px;
+	-moz-border-radius: 15px;
+	-webkit-border-radius: 15px;
+}
+
+#sl-fac-dist-in-edit p,	
+#sl-fac-dist-in  p {
+	margin: 20px;
+	font-size: 16px;
+	font-weight: bold;
+	color:#666;
+	}
+
+#sl-fac-dist-in-edit p.sl-phone,
+#sl-fac-dist-in p.sl-phone {
+	font-size: 24px;
+	font-weight: bold;
+	color: #000;
+	}
+
+#sl-fac-dist-in-edit p.sl-dist,
+#sl-fac-dist-in  p.sl-dist {
+	color: #33c;
+	}
+
+p.blue-edit {
+	background: url(images/blue-edit.png) no-repeat top left;
+	width: 68px;
+	height:22px;
+	line-height:22px;
+	text-align: center;
+	font-weight:bold;
+	position:relative;
+	left: 20px;
+	}
+
+p.blue-edit a {
+	color:#fff;
+	text-decoration:none;
+	display:block;
+	width: 68px;
+	height:22px;
+	}
+
+
+#sl-footer {
+border-radius-bottomleft: 10px;
+-moz-border-radius-bottomleft: 10px;
+-webkit-border-bottom-left-radius: 10px;
+border-radius-bottomright: 10px;
+-moz-border-radius-bottomright: 10px;
+-webkit-border-bottom-right-radius: 10px;
+background-color: #ddd;
+height: 30px;
+clear:both;
+position: relative;
+	top: -10px;
+	margin-bottom: 10px;
+	}
+
+
+	
+#sl-tabs {
+background: url(images/sl-tabs-bg.png) repeat-y top left;
+width: 755px;
+margin-bottom: 30px;
+position: relative;
+
+}
+
+#sl-tabs-in {
+background: url(images/sl-tabs-bg-bottom.png) no-repeat bottom left;
+width: 755px;
+}
+
+#sl-tabs ul#sl-tabs-nav {
+background: url(images/sl-tabs-bg-top.png) no-repeat bottom left;
+font-size: 1.4em;
+font-weight: bold;
+width: 755px;
+height: 63px;
+position: relative;
+z-index: 4;
+background-color: #fff;
+}
+
+#sl-tabs ul#sl-tabs-nav li {
+background: url(images/sl-tabs-bg-inactive.png) no-repeat top left;
+display:block;
+list-style: none;
+
+width: 130px;
+float: left;
+text-align: center;
+position: relative;
+top: 5px;
+margin-right: 5px;
+}
+
+#sl-tabs ul#sl-tabs-nav li a {
+color: #fff;
+text-decoration: none;
+display: block;
+height: 58px;
+line-height: 48px;
+width: 130x;
+position: relative;
+top: 5px;
+}
+
+#sl-tabs ul#sl-tabs-nav li.active {
+background: url(images/sl-tabs-bg-active.png) no-repeat left top;
+position: relative;
+
+} 
+
+#sl-tabs ul#sl-tabs-nav li.active a {
+color: #fff;
+background: url(images/sl-tabs-add-tab.png) no-repeat 1px 8px;
+display: block;
+text-shadow: 1px 1px 2px #000;
+position: relative;
+
+}
+
+
+#sl-tabs-sizes-in {
+		margin-top: 30px;
+background: url(images/sl-table-bg.png) repeat top left;
+border-radius: 10px;
+-moz-border-radius: 10px;
+-webkit-border-radius: 10px;
+border: 1px solid #ccc;
+width: 725px;
+	position:relative;
+	left: 14px;
+	top: -15px;
+	}
+
+
+#sl-tabs-sizes-in ul {
+	clear: both;
+	font-size: 1.2em;
+	width: 719px;
+	height: 46px;
+	line-height: 46px;
+	border-radius: 10px;
+-moz-border-radius: 10px;
+-webkit-border-radius: 10px;
+border: 1px solid #ccc;
+background:none;
+text-align:left;
+position:relative;
+left: 2px;
+top: -5px;
+color: #666;
+	}
+	
+#sl-tabs-sizes-in ul li {
+	display:block;
+	float: left;
+	}
+
+#sl-tabs-sizes-in ul.sl-table-head {
+	background: url(images/sl-table-top.png) repeat-x top left;
+	border: 0;
+	line-height: 26px;
+	height: 28px;
+	font-size: 12px;
+	color: #666;
+	top: 0px;
+	left: 0px;
+	width: 725px;
+	}
+	
+#sl-tabs-sizes-in ul.sl-table-active,
+#sl-tabs-sizes-in ul.sl-table-inactive { 
+	background: url(images/sl-table-inactive.png) repeat-x top left;	
+	margin-top: 5px;
+	font-weight: bold;
+}
+
+#sl-tabs-sizes-in ul.sl-table-active {
+	background: url(images/sl-table-active.png) repeat-x top left;
+	color: #333;
+	}
+
+ 	
+#sl-tabs-sizes-in ul li.st-size {
+	margin-left: 25px;
+	width: 55px;
+	}
+
+#sl-tabs-sizes-in ul li.st-type {
+	width: 180px;
+	font-weight: normal;
+	}
+
+#sl-tabs-sizes-in ul li.st-pric {
+	width: 125px;
+	}
+
+#sl-tabs-sizes-in ul li.st-spec {
+	width: 200px;
+	font-weight: normal;
+	}
+
+#sl-tabs-sizes-in ul li.st-rese {
+	width: 100px;
+	text-align: center;
+
+	}
+	
+#sl-tabs-sizes-in ul li.st-rese a {
+	position:relative;
+	top: 8px;
+	display:block;
+	width: 84px;
+	height: 32px;
+	line-height: 32px;
+	color: #fff;
+	font-size:1.1em;
+	text-shadow: 1px 1px 2px #000;
+	text-decoration:none;
+	background:url(images/sl-table-reserve.png) no-repeat center;
+	}
+	
+#sl-tabs-sizes-in ul.sl-table-active li.st-rese a {
+	background:url(images/sl-table-reserve-active.png) no-repeat center;
+	}
+
+#sl-tabs-sizes-in ul li.st-sele {
+	width: 25px;
+	height: 46px;
+	background:url(images/sl-table-select.png) no-repeat center;
+	}
+
+#sl-tabs-sizes-in ul.sl-table-active li.st-sele {
+	background:url(images/sl-table-select-active.png) no-repeat center;
+	}
+
+#sl-tabs-sizes-in .sl-table-exp {
+	background:url(images/sl-table-exp-bg.png) repeat-x bottom left;
+	background-color: #fefeff;
+	border-radius-bottomright: 10px;
+-moz-border-radius-bottomright: 10px;
+-webkit-border-bottom-right-radius: 10px;
+	border-radius-bottomleft: 10px;
+-moz-border-radius-bottomleft: 10px;
+-webkit-border-bottom-left-radius: 10px;
+	width: 685px;
+	position:relative;
+	left: 20px;
+	top: -6px;
+	border: 1px solid #ccc;
+	}
+	
+#sl-tabs-sizes-in .sl-table-exp p {
+	margin: 10px 10px;
+	font-size:1.2em;
+	}
+	
+#sl-tabs-sizes-in .sl-table-exp p.blue-text {
+	color: #33c;
+	line-height:39px;
+	font-weight: bold;
+	position:relative;
+	left: 30px;
+	}
+
+
+#sl-tabs-sizes-in .sl-table-exp p.verisign {
+	float:left;
+	width: 83px;
+	height: 46px;
+	background:url(images/verisign.png) no-repeat top left;
+	}
+
+#sl-tabs-sizes-in .sl-table-exp p.blue-text a {
+	width: 109px;
+	height: 39px;
+	display: block;
+	float: right;
+	background:url(images/sl-questions-blue-btn.png) no-repeat center;
+	text-align:center;
+	line-height:39px;
+	color: #fff;
+	text-decoration:none;
+	position:relative;
+	right: 200px;
+	font-size: 0.9em;
+	}
+
+#sl-tabs-sizes-in .sl-table-exp input{
+			border-radius: 8px;
+-moz-border-radius: 8px;
+-webkit-border-radius: 8px;
+border: 1px solid #ccc;
+height: 24px;
+width: 170px;
+line-height: 24px;
+margin: 5px;
+	}
+	
+#sl-tabs-sizes-in .sl-table-exp input#submit-btn {
+	width: 138px;
+	height: 45px;
+	background:url(images/submit-button.png) no-repeat center;
+	border: none;
+	color: #fff;
+	font-size: 1.4em;
+	font-weight:bold;
+	text-shadow: 1px 1px 2px #000;
+	position:relative;
+left: 15px;
+cursor:pointer;
+}
+	
+#sl-tabs-sizes-in .sl-table-exp textarea {
+	float:right;
+		border-radius: 8px;
+-moz-border-radius: 8px;
+-webkit-border-radius: 8px;
+border: 1px solid #ccc;
+width: 190px;
+font-family:Arial, Helvetica, sans-serif;
+position:relative;
+left: 15px;
+	}
+	
+	
+#sl-tabs-sizes-in .sl-table-exp	p.move-in {
+	background:url(images/calendar.png) no-repeat top 190px;
+	text-align: left;
+	position:relative;
+	left: 10px;
+	}
+
+#sl-tabs-sizes-in .sl-table-exp	p.zip {
+	text-align: left;
+	position:relative;
+	left: 33px;
+	}
+	
+	
+#sl-tabs-sizes-in .sl-table-exp	p.zip input {
+	width: 90px;
+	}
+
+#sl-tabs-sizes-in .sl-table-exp	p.move-in input {
+	width: 80px;
+	}
+	
+#sl-tabs-sizes-in .sl-table-exp	p.move-in a {
+	display: block;	
+	width: 40px;
+	height: 30px;
+	float: right;
+	position:relative;
+	right: 55px;
+	}
+
+#sl-tabs-sizes-in div.sl-table-exp-form-l {
+	border: none;
+	width: 300px;
+	float:left;
+	text-align:right;
+	margin-bottom: 20px;
+	position:relative;
+	left: 40px;
+	}
+
+#sl-tabs-sizes-in div.sl-table-exp-form-r {
+	border: none;
+	width: 300px;
+	float: right;
+	position: relative;
+	right: 60px; 
+	text-align: right;
+	margin-bottom: 20px;
+	}
+
+#sl-tabs-sizes-in ul.sl-table-exp-form-l li,
+#sl-tabs-sizes-in ul.sl-table-exp-form-r li {
+
+	}
+	
+#sl-tabs-map-in {
+	height: 360px;
+	width: 700px;
+	border-radius: 8px;
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	border: 2px solid #ccc;
+	position: relative;
+	left: 25px;
+	}
+
+#sl-tabs-map ul {
+	float:right;
+	position:relative;
+	right: 40px;
+	}
+
+#sl-tabs-map ul li.sl-map-dir {
+	background:url(images/sl-map-directions-tab.png) no-repeat left top;
+	float: left;
+	width: 141px;
+	height: 22px;
+	text-transform: uppercase;
+	list-style:none;
+	margin: 0px 5px 10px 5px;
+	}
+	
+#sl-tabs-map ul li.sl-map-dir a {
+	display:block;
+	width: 141px;
+	height: 22px;
+	line-height: 22px;
+	color: #fff;
+	font-weight: bold;
+	text-decoration: none;
+	text-align:center;
+	}
+
+#sl-tabs-map ul li.sl-map-pri {
+	background:url(images/sl-map-print-tab.png) no-repeat left top;
+	float: left;
+	width: 105px;
+	height: 22px;
+	text-transform: uppercase;
+	list-style:none;
+	margin: 0px 5px 10px 5px;
+	}
+	
+#sl-tabs-map ul li.sl-map-pri a {
+	display:block;
+	width: 105px;
+	line-height: 22px;
+	height: 22px;
+	color: #fff;
+	font-weight: bold;
+	text-decoration: none;
+	text-align:center;
+	}
+
+#sl-tabs-feat-in {
+	width: 721px;
+	border-radius: 8px;
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	border: 1px solid #ccc;
+	position: relative;
+	left: 15px;
+	float:left;
+	margin-bottom: 10px;
+	}
+	
+#sl-tabs-feat-in ul{
+	float:left;
+	width: 230px;
+	margin: 15px 0px;
+	}
+
+#sl-tabs-feat-in ul li {
+	background:url(images/sl-feature-blank-icon.png) no-repeat left top;
+	height: 25px;
+	line-height: 25px;
+	margin: 5px 0px;
+	list-style:none;
+	position: relative;
+	left: 10px;
+	font-weight: bold;
+	color: #666;
+	}
+
+#sl-tabs-feat-in ul li span {
+	position: relative;
+	left: 35px;
+	}
+	
+
+#sl-tabs-pict-in {
+	width: 721px;
+	border-radius: 8px;
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	border: 1px solid #ccc;
+	position: relative;
+	left: 15px;
+	float:left;
+	margin-bottom: 10px;
+	background-color: #ddd;
+	}
+	
+#sl-tabs-pict-in ul#sl-tabs-pict-gall {
+	width: 212px;
+	float:left;
+	margin-top: 20px;
+	}
+
+#sl-tabs-pict-in ul#sl-tabs-pict-gall li {
+	width: 106px;
+	float: left;
+	list-style: none;
+	margin: 10px 0px;
+	text-align: center;
+}
+
+#sl-tabs-pict-in img.big-pic {
+	float: right;
+	border-left: 2px solid #ccc;
+	}
+
+
+
+
+#sl-questions {
+	float:left;
+	width: 300px;
+	background:url(images/sl-questions-head.png) no-repeat center top;
+	position: relative;
+	top: -10px;
+	}
+
+#sl-questions ul li {
+	list-style:none;
+	width: 270px;
+	position:relative;
+	left: 25px;
+	margin: 10px 0px;
+	height: 24px;
+line-height: 28px;
+clear:both;
+}
+
+#sl-questions ul li a.blue-search-button {
+	float: right;
+	width: 109px;
+	height: 39px;
+	display: block;
+	text-align:center;
+	line-height: 39px;
+	color: #fff;
+	font-weight: bold;
+	font-size: 14px;
+	text-decoration: none;
+	background: url(images/sl-questions-blue-btn.png) no-repeat center;
+	margin: 10px 0px;
+	}
+
+#sl-questions h3 {
+	height: 39px;
+	line-height: 36px;
+	text-align:center;
+	color: #fff;
+	text-shadow: 1px 1px 2px #000;
+	font-size: 16px;
+	}
+
+#sl-questions input {
+	float: right;
+		border-radius: 8px;
+-moz-border-radius: 8px;
+-webkit-border-radius: 8px;
+border: 1px solid #ccc;
+height: 24px;
+width: 170px;
+line-height: 24px;
+margin: 5px;
+	}
+	
+#sl-questions textarea {
+	float: right;
+		border-radius: 8px;
+-moz-border-radius: 8px;
+-webkit-border-radius: 8px;
+border: 1px solid #ccc;
+width: 170px;
+position:relative;
+left: -5px;
+font-family:Arial, Helvetica, sans-serif;
+	}
+
+#sl-logos,
+#sl-extra {
+	width: 400px;
+	float:right;
+	position:relative;
+	right: 20px;
+	}
+	
+#sl-extra h3 {
+	font-size: 2em;
+	}
+
+#sl-extra p {
+	margin: 10px 0px;
+	line-height: 1.8em;
+	}
+	
+#sl-logos {
+	border: 1px solid #ccc;
+	text-align:right;
+}
+
+/* End the facility details pages-specific CSS here */
+
+/* Starting the overview page styles here */	
+
+#ov-page-cnt {
+	position:relative;
+	left: 13px;
+	}
+	
+#ov-top ul#ov-top-list li {
+	display: block;
+	width: 200px;
+	float:left;
+	text-align:center;
+	margin-bottom: 10px;
+	font-size: 1.2em;
+	font-weight:bold;
+	}
+
+#ov-top ul#ov-top-list li span {
+	color: #33c;
+	font-size: 1.1em;
+	}
+
+#ov-top ul#ov-top-list {
+	width: 725px;
+	background:#000;
+	}
+	
+#ov-reports,
+#ov-info,
+#ov-settings {
+	border: 1px solid #ccc;
+	border-radius: 20px;
+	-moz-border-radius: 20px;
+	-webkit-border-radius: 20px;
+		margin-top: 20px;
+	margin-bottom: 10px;
+	width: 725px;
+	clear: both;
+	}
+	
+#ov-item-head {
+	background: url(images/ov-header-bg.png) repeat-x top left;
+	width: 725px;
+	height: 41px;
+	border-bottom: 1px solid #ccc;
+	border-radius-topleft: 20px;
+	-moz-border-radius-topleft: 20px;
+	-webkit-border-top-left-radius: 20px;
+	border-radius-topright: 20px;
+	-moz-border-radius-topright: 20px;
+	-webkit-border-top-right-radius: 20px;
+	line-height: 41px;
+	}
+	
+#ov-units-head {
+	border: 1px solid #ccc;
+	background: url(images/ov-header-bg.png) repeat-x top left;
+	width: 725px;
+	height: 41px;
+	border-bottom: 1px solid #ccc;
+	border-radius-topleft: 20px;
+	-moz-border-radius-topleft: 20px;
+	-webkit-border-top-left-radius: 20px;
+	border-radius-topright: 20px;
+	-moz-border-radius-topright: 20px;
+	-webkit-border-top-right-radius: 20px;
+	line-height: 41px;
+	margin-top: 20px;
+	margin-bottom: 10px;
+	}
+
+#ov-units-head h3,	
+#ov-item-head h3 {
+	position:relative;
+	left: 20px;
+	float:left;
+	width: 500px;
+	font-size:1.4em;
+}
+
+#ov-units-head p,
+#ov-item-head p {
+	float:right;
+}
+
+#ov-item-head p {
+	background: url(images/edit-btn-small.png) no-repeat top left;
+	width: 82px;
+	height: 30px;
+	position:relative;
+	right: 20px;
+	line-height: 30px;
+	font-weight:bold;
+	text-align:center;
+	top: 7px;
+	}
+	
+#ov-item-head p a{
+	display:block;
+	width: 82px;
+	height: 30px;
+	text-decoration:none;
+	color:#fff;
+	text-shadow: 1px 1px 2px #000;
+	}
+
+#ov-units-head p {
+	background: url(images/little-drop-down.png) no-repeat 150px center;
+	background-color:#fff;
+	width: 180px;
+	height: 20px;
+	line-height: 20px;
+	border: 1px solid #ccc;
+	position:relative;
+	top: 10px;
+	right: 20px;
+	}
+	
+#ov-units-head p a {
+	display:block;
+	position:relative;
+	left: 10px;
+	width: 160px;
+	text-decoration:none;
+	color: #666;
+	}
+
+#ov-info-cnt {
+	float: left;
+	position:relative;
+	text-align: right;
+	width: 300px;
+	}
+
+#ov-info-cnt p,
+#ov-info-cnt ul li {
+	list-style: none;
+	margin: 5px 0px;
+	clear:both;
+	color: #666;
+	}
+
+#ov-info-cnt p {
+	text-align: left;
+	position:relative;
+	left: 50px;
+	color: #33c;
+	font-size: 1.2em;
+	margin: 10px 0px;
+	}
+
+#ov-info-cnt ul li span {
+	width: 150px;
+	display: block;
+	float: right;
+	text-align:left;
+	position:relative;
+	left: 10px;
+	color: #000;
+}
+
+#ov-units #rslt-list-bg {
+	background: url(images/sl-table-bg.png) repeat top left;
+	width: 725px;
+	position:relative;
+	left: 0px;
+	border-right: 1px solid #ccc;
+	border-left: 1px solid #ccc;
+	}
+	
+#ov-units #rslt-list-bg .rslt-item .rslt-item-in {
+	width: 725px;
+	margin-top: 10px;
+	position:relative;
+	left: -1px;
+	}
+
+#ov-units .rslt-item .rslt-item-in .rslt-miles {
+	width: 60px;
+	}
+	
+#ov-units .rslt-item .rslt-item-in .rslt-offer {
+	width: 150px;
+	}
+
+#ov-units .rslt-item .rslt-item-in .rslt-miles span {
+
+font-size: 1.2em;
+display: block;
+position: relative;
+top: 30px;
+left: 22px;
+width: 3em;
+	}
+	
+#ov-units .rslt-item .rslt-item-in .rslt-reserve {
+	width: 108px;
+	}
+	
+#ov-reports ul li {
+	list-syle: none;
+	height: 185px;
+	width: 241px;
+	text-align:center;
+	display:block;
+	float: left;
+	font-size:1.4em;
+	font-weight:bold;
+	}
+	
+#ov-reports ul li span {
+	position:relative;
+	top: 145px;
+	}
+	
+#ov-reports ul li#clicks {
+	background: url(images/click-logo.png) no-repeat top center;
+	}
+
+#ov-reports ul li#calls {
+	background: url(images/calls-logo.png) no-repeat top center;
+	}
+	
+#ov-reports ul li#reserve {
+	background: url(images/reserve-logo.png) no-repeat top center;
+	}
+	
+
+#ov-settings p {
+	margin: 10px;
+	} 
+
+/* Ending the overview page styles here */	
+
+
+#greenspace-box {
+width: 197px;
+color: #555;
+text-align: center;
+margin-bottom: 20px;
+
+}
+
+#greenspace-box-in {
+width: 165px;
+background: url(images/recycle-logo.png) no-repeat bottom right;
+position: relative;
+left: 20px;
+top: 17px;
+background-color: #fff;
+border: 1px solid #ccc;
+border-radius: 10px;
+-moz-border-radius: 10px;
+-webkit-border-radius: 10px;
+}
+
+#greenspace-box h2{
+background: url(images/green-space-head.png) no-repeat 2px center;
+width: 163px;
+font-size: 1.5em;
+color: #fff;
+text-shadow: 1px 1px 2px #000;
+height: 47px;
+line-height:51px;
+border-radius-topleft: 10px;
+-moz-border-radius-topleft: 10px;
+-webkit-border-top-left-radius: 10px;
+text-align: center;
+
+}
+
+#greenspace-box p {
+margin: 15px;
+font-size: 1.2em;
+text-align: left;
+line-height: 2em;
+}
+
+#greenspace-box p a.blue-info {
+	background: url(images/blue-more-info.png) no-repeat top left;
+	width: 89px;
+	height: 32px;
+	display:block;
+	text-align: center;
+	line-height: 32px;
+	text-decoration:none;
+	color:#fff;
+	font-weight:bold;
+	margin-top: 70px;
+	}
+
+#greenspace-box p span {
+	color: #33c;
+	}
+
+
+#reserveonline-box {
+width: 197px;
+color: #555;
+text-align: center;
+margin-bottom: 20px;
+
+}
+
+#reserveonline-box-in {
+width: 165px;
+background: url(images/reserveonline-box-bg.png) no-repeat top center;
+position: relative;
+left: 20px;
+top: 17px;
+background-color: #fff;
+border: 1px solid #ccc;
+border-radius: 10px;
+-moz-border-radius: 10px;
+-webkit-border-radius: 10px;
+}
+
+#reserveonline-box h2{
+width: 163px;
+font-size: 1.5em;
+color: #fff;
+text-shadow: 1px 1px 2px #000;
+height: 47px;
+line-height:51px;
+border-radius-topleft: 10px;
+-moz-border-radius-topleft: 10px;
+-webkit-border-top-left-radius: 10px;
+text-align: center;
+
+}
+
+#reserveonline-box p {
+margin: 15px;
+font-size: 1.3em;
+text-align: left;
+font-weight:bold;
+line-height: 1.5em;
+}
+
+#reserveonline-box p span {
+	color: #33c;
+	}
+
+
+
+#girl-pic {
+	background: url(images/girl.png) no-repeat center 70px ;
+	height: 435px;
+	width: 169px;
+	position:relative;
+	left: 15px;
+	margin-bottom:20px;
+	}
+
+
+
+#admin-box ul li {
+	list-style: none;
+}
+
+#admin-box ul li a{
+	background: url(images/admin-facility-btn.png) no-repeat -30px left;
+	width: 163px;
+	height: 31px;
+	line-height: 31px;
+	color: #fff;
+	text-shadow: 1px 1px 2px #000;
+	text-decoration: none;
+	display:block;
+	margin:5px 0px;
+	
+	font-size: 1.2em;
+	}
+
+#admin-box ul li a span {
+	position:relative;
+	left: 10px;
+	}
+	
+#admin-box ul li a:hover{
+	background: url(images/admin-facility-btn.png) no-repeat top left;
+}
+

@@ -13,6 +13,10 @@ class PagesController < ApplicationController
   end
 
   def show
+    respond_to do |format|
+      format.html
+      format.js { render :json => @model_data }
+    end
   end
 
   def new
