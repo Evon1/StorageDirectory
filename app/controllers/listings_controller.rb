@@ -9,7 +9,7 @@ class ListingsController < ApplicationController
     @map = @listing.map
     @Gmap = GoogleMap::Map.new
 		@Gmap.center = GoogleMap::Point.new @map.lat, @map.lng
-		@Gmap.zoom = 13 # 2 miles
+		@Gmap.zoom = 16 # 2 miles
 		@Gmap.markers << GoogleMap::Marker.new(:map => @Gmap, 
                                            :lat => @map.lat, 
                                            :lng => @map.lng,

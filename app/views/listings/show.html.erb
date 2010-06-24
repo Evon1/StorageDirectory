@@ -1,4 +1,5 @@
 <% declare_content_for %>
+<% content_for :scripts, @Gmap.to_html %>
 <%= display_message flash %>
 
 <div class="staticContent">
@@ -157,7 +158,7 @@
           
           <div id="sl-tabs-map" class="tab_content">
             <div id="sl-tabs-map-in">
-              map
+              <%= @Gmap.div :width => '700px', :height => '360px' %>
             </div>
         	  
         	  <ul>

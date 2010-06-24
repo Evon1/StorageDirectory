@@ -5,10 +5,18 @@
 // first implemented for storage locator
 
 $('#more_results').click(function(){
-	var pagetitle = $('#params_pagetitle', this).text(),
-			query = $('#params_query', this).text(),
-			within = $('#params_within', this).text(),
-			page = $('#params_page', this).text();
+	var $this = $(this),
+			ajax_loader = $('.ajax_loader', $this.parent()).show();
+	
+	// params to build the url that will query the same data the visitor searched for, advanced one page
+	var pagetitle = $('#params_pagetitle', $this.parent()).text(),
+			query = $('#params_query', $this.parent()).text(),
+			within = $('#params_within', $this.parent()).text(),
+			page = $('#params_page', $this.parent()).text();
+	
+	// to build each listing object
+	var listing_clone = $('.listing:first').clone(),
+			results_wrap = $('#rslt-list-bg');
 	
 	var url = '/'+ pagetitle +'?q=';
 	if (query != '') url += query;
@@ -16,8 +24,57 @@ $('#more_results').click(function(){
 	if (page != '') url += '&page='+ page;
 	
 	$.getJSON(url, function(response){
-		if (response) {
-			alert(response)
+		ajax_loader.hide();
+		
+		if (response.success) {
+			$.each(response.data, function(i){
+				var info 				 = this.info,
+						this_listing = listing_clone.clone().attr('id', 'listing_'+ info.id),
+						map 				 = this.map,
+						specials		 = this.specials;
+				
+				// update the content
+				$('.rslt-title a', this_listing)				.text(info.title);
+				$('.rslt-title a', this_listing)				.attr('href', '/self-storage/show/' + info.id);
+				$('.rslt-address', this_listing)				.text(map.address);
+				$('.rslt-citystate', this_listing)			.text(map.city + ', ' + map.state + ' ' + map.zip);
+				$('.rslt-phone', this_listing)					.text(map.phone);
+				$('.rslt-miles span span', this_listing).text(parseFloat(map.distance).toPrecision(2));
+				$('.rslt-specials h5', this_listing)		.text(specials.title);
+				$('.rslt-specials p', this_listing)			.text(specials.cotent);
+				
+				// update tab urls
+				var map_tab = $('.fac-map a', this_listing);
+				if (map_tab) map_tab.attr('href', map_tab.attr('href').replace(/id=\d*/, 'id=' + info.id));
+				var sizes_tab = $('.fac-sizes a', this_listing);
+				if (sizes_tab) sizes_tab.attr('href', sizes_tab.attr('href').replace(/id=\d*/, 'id=' + info.id));
+				var specials_tab = $('.fac-specials a', this_listing);
+				if (specials_tab) specials_tab.attr('href', specials_tab.attr('href').replace(/id=\d*/, 'id=' + info.id));
+				var pictures_tab = $('.fac-pictures a', this_listing);
+				if (pictures_tab) pictures_tab.attr('href', pictures_tab.attr('href').replace(/id=\d*/, 'id=' + info.id));
+				
+				
+				this_listing.appendTo(results_wrap).hide().slideDown(1800);
+			});
+			
+			// this updates the page count so the next time the user clicks, we pull the correct data
+			$('#params_page', $this.parent()).text(parseInt(page) + 1);
+			
+			var range 			= $('#results_range'),
+					range_start = parseInt(range.text().split('-')[0]),
+					range_end 	= parseInt(range.text().split('-')[1]),
+					per_page		= parseInt($('#per_page').text()),
+					total 			= parseInt($('#results_total').text()),
+					remaining		= total - (range_end + per_page);		
+			
+			// update the range text and adjust the range end if we're near the end of the data set
+			range_end += parseInt($('#per_page').text());
+			if (range_end >= total) range_end = total;
+			range.text(range_start + '-' + range_end);
+			
+			if (remaining <= 0) $this.hide();
+			if (remaining < per_page) $this.text('+ Show ' + remaining + ' more');
+			
 		} else alert('Error');
 	});
 	

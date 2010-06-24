@@ -15,7 +15,16 @@ class PagesController < ApplicationController
   def show
     respond_to do |format|
       format.html
-      format.js { render :json => @model_data }
+      format.js do # implementing these ajax responses for the search results 'More Link'
+        @model_data.map! do |m|
+          mm = { :info => m.attributes, :map => m.map.attributes }
+          mm[:map].merge!(:distance => m.distance)
+          mm.merge!(:specials => m.specials)
+          mm
+        end
+        
+        render :json => { :success => !@model_data.blank?, :data => @model_data }
+      end
     end
   end
 

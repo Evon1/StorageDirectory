@@ -15,8 +15,8 @@ class SearchResults < ApplicationController
     q = params[:q]
     options = {
       :page     => params[:page], 
-      :per_page => (params[:per_page] || 10),
-      :order    => (params[:order]    || 'distance'),
+      :per_page => (params[:per_page] || 5),
+      :include  => [:map, :specials, :sizes, :pictures],
       :within   => (params[:within]   || 5)
     }
     
@@ -31,7 +31,7 @@ class SearchResults < ApplicationController
         unless session[:geo_location].blank?
           options.merge! :origin => [session[:geo_location][:lat], session[:geo_location][:lng]]
         else
-          guessed = Listing.first(conditions).map.full_address
+          guessed = Listing.first(conditions).map.full_address rescue nil
           @location = Geokit::Geocoders::MultiGeocoder.geocode(guessed)
           options.merge! :origin => @location
         end
