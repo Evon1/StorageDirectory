@@ -35,7 +35,7 @@ module ListingsHelper
     html = "<span>Showing <span id='results_range'>#{range_start}-#{range_end}</span> of <span id='results_total'>#{data.total_entries}</span> results. </span>"
     
     # only show the More link if there are more
-    if range_start < data.total_entries - per_page
+    if range_start < data.total_entries - per_page+1
       html << image_tag('/images/ui/ajax-loader-facebook.gif', :class => 'ajax_loader inline') + '&nbsp;'
       html << link_to("+ Show #{remaining < per_page ? remaining : per_page} more", '#more', :id => 'more_results')
       html << "<span class='hidden' id='params_pagetitle'>#{@page.title.parameterize}</span>"

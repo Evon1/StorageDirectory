@@ -16,6 +16,7 @@ class PagesController < ApplicationController
     respond_to do |format|
       format.html
       format.js do # implementing these ajax responses for the search results 'More Link'
+        # include listing's related data
         @model_data.map! do |m|
           mm = { :info => m.attributes, :map => m.map.attributes }
           mm[:map].merge!(:distance => m.distance)

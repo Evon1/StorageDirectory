@@ -1,7 +1,7 @@
 /* Style sheet. Created by ns-designs 2010 */
 
 /* Start by defining the main page layout */
-html, * {
+* {
 padding: 0;
 margin: 0;
 }
@@ -13,43 +13,12 @@ font-size: 0.725em;
 color:#222;
 }
 h5 { margin-bottom:10px; }
-#admin {
-height: 25px;
-line-height: 25px;
-width: 100%;
-background-color: #ddd;
-border-bottom: 1px solid #000;
-}
 
-#admin p#admin-l {
-float: left;
-margin-left: 20px;
-}
+.hidden { display: none; }
+span.big-text { font-size: 1.75em; font-weight: bold;}
 
-#admin p#admin-r {
-float: right;
-margin-right: 20px;
-}
-
-/* Now define global styles and typography */
-
-.clear {
-clear: both;
-}
-
-.hidden {
-display: none;
-}
-
-span.big-text {
-font-size: 1.75em;
-font-weight: bold;
-}
-
-/* This is the start of the main page template styles these set out the layout od the page without any content applied */
 
 /* Start complex layout styles - includes the changing background garage door etc*/
-
 #head-ctr {
 height: 231px;
 width: 100%;
@@ -276,7 +245,7 @@ background: url(/images/ui/storagelocator/locate-header.png) no-repeat top left;
 
 #locater h1 {
 clear:both;
-color:#FFFFFF;
+color:#FFF;
 font-size:20px;
 font-weight:normal;
 height:80px;
@@ -284,7 +253,7 @@ left:59px;
 letter-spacing:0.7px;
 line-height:1.2;
 position:relative;
-text-shadow:1px 1px 2px #333333;
+text-shadow:1px 1px 1px #333;
 top:12px;
 width:260px;
 }
@@ -1952,7 +1921,6 @@ position: relative;
 left: 18px;
 top: 17px;
 background-color: #fff;
-border: 1px solid #ccc;
 border-radius: 10px;
 -moz-border-radius: 10px;
 -webkit-border-radius: 10px;
