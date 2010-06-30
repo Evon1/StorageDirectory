@@ -232,7 +232,7 @@ module ApplicationHelper
       
       case model_class
       when 'block'
-        replacement = render(:partial => submodel, :locals => { :region => 'custom', :global => false })
+        replacement = render(:partial => submodel, :locals => { :region => 'custom', :global => false, :sortable_id => "Block_#{submodel.id}" })
       when 'form'
         replacement = render(:partial => 'forms/build', :locals => { :form => submodel })
       end
