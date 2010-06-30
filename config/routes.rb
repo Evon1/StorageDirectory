@@ -13,7 +13,8 @@ ActionController::Routing::Routes.draw do |map|
   map.logout '/logout', :controller => 'user_sessions', :action => 'destroy'
   
   # clean seo friendly
-  map.facilities '/self-storage/:title/:id', :controller => 'listings', :action => :show
+  map.facility '/self-storage/:title/:id', :controller => 'listings', :action => :show
+  map.quick_search '/self-storage/:q', :controller => 'pages', :action => 'show'
   
   # grey module
   map.locate '/locate/:state/:city/:address', :controller => 'pages', 
@@ -21,7 +22,7 @@ ActionController::Routing::Routes.draw do |map|
                                    :title => 'storage-locator',
                                    :requirements => { :zip => /^\d{5}$/ }
   
-  map.resources :tips, :controller => 'posts'
+  map.create_tip '/create_tip', :controller => 'posts', :action => 'create', :for => 'tip'
   
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   map.resources :products
@@ -44,6 +45,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :helptexts
   map.resources :forms
   map.resources :suggestions
+  map.resources :clients
   map.resource :site_setting
   
   # greyresults

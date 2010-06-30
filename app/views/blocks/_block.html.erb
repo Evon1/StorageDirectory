@@ -1,4 +1,4 @@
-<div id="Block_<%= block.id %>" class="block inBlock<%= block.id %> <%= controller_name %>">
+<li id="<%= sortable_id %>" class="block inBlock<%= block.id %> <%= controller_name %>" rel="position">
 	
 	<%= render :partial => 'shared/model_options', :locals => { :model => block, :edit_path => contextual_edit_block_path(block), :hide_anchor => "hide_collapseable_inBlock#{block.id}" } %>
 	
@@ -9,7 +9,7 @@
 	<div class="collapseable">
 		
 		<div class="block_content">
-			<%= block.content %>
+			<%= render_model_content(block) %>
 		</div>
 	
 		<% unless block.forms.empty? %>
@@ -27,4 +27,4 @@
 	</div>
 	
 	<%= add_widget_for(block, region) unless region.nil? || block.widget.blank? %>
-</div>
+</li>

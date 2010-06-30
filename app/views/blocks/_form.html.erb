@@ -1,28 +1,28 @@
 <div class="stack">
 	<fieldset>
 	
-		<div class="uncollapse">
+		<div class="uncollapse stack">
 			<%= f.label :title %>
 			<div class="shadow_wrap">
 				<%= f.text_field :title, :class => 'required' %>
 			</div>
 		</div>
 
-		<div>
+		<div class="stack">
 			<%= f.label :description %>
 			<div class="shadow_wrap">
 				<%= f.text_area :description, :class => 'small_textarea' %>
 			</div>
 		</div>
 
-		<div>
+		<div class="stack">
 			<%= f.label :content, 'Html' %>
 			<div class="shadow_wrap">
 				<%= f.text_area :content, :class => 'wysiwyg small_textarea' %>
 			</div>
 		</div>
 	
-		<div class="uncollapse">
+		<div class="uncollapse stack left">
 			<div class="check_box_wrap left">
 				<%= f.label :show_in_all, 'Show in ', :title => 'Show on all pages in this region' %>
 				<%= select_tag 'block[show_in_all]', @block.option_tags_for(regions(false), nil, nil, :show_in_all, '') %>
@@ -32,6 +32,24 @@
 			<div class="check_box_wrap left">
 				<%= f.check_box :show_title %>
 				<%= f.label :show_title, 'and show title' %>
+			</div>
+		</div>
+		
+		<div class="uncollapse">
+			<div class="check_box_wrap left">
+			  <%= f.label :restful, 'and ' %>
+			  <%= f.check_box :restful, :class => 'toggle_div', :title => 'Show on certain resource\'s pages' %> 
+				<%= f.label :restful, 'show in restful region ' %>
+			</div>
+		
+		  <div class="check_box_wrap left toggle_this">
+		    <div class="left">
+  				<%= select_tag 'block[restful_region]', @block.option_tags_for(regions(false), nil, nil, :restful_region, '') %>
+			  </div>
+			  <div class="left left_space">
+  				<%= f.text_field :controller, :class => 'hintable small_text_field', :title => 'resource' %>
+  				<%= f.text_field :action, :class => 'hintable small_text_field', :title => 'action' %>
+  			</div>
 			</div>
 		</div>
 	

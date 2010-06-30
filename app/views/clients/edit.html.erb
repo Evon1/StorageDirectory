@@ -1,0 +1,224 @@
+<% declare_content_for %>
+<%= display_message flash %>
+
+<h1 class="hidden">Search results listing</h1>
+<a name="top" id="top"></a>
+
+<div id="type-one-r-col">
+  <div id="type-three-r-col-in">
+    
+    <div id="sl-header">
+      <h2><span>Overview -</span> Uncle Bob's Self Storage</h2>
+    </div>
+    
+    <div id="ov-page-cnt">
+      
+      <div id="ov-top">
+        <ul id="ov-top-list">
+          <li>Account #: <span>83837850789</span>
+          </li>
+          <li>Number of listings: <span>2</span>
+          </li>
+        </ul>
+      </div>
+      <div id="ov-info">
+        <div id="ov-item-head">
+          <h3>
+            <span>Owner Info</span>
+          </h3>
+          <p>
+            <a href="">Edit</a>
+          </p>
+        </div>
+        <div id="ov-info-cnt">
+          <p>
+            Mailing Address
+          </p>
+          <ul>
+            <li>Name:<span>John Doe</span>
+            </li>
+            <li>Company:<span>Storage Group inc.</span>
+            </li>
+            <li>Address:<span>Address line 1</span>
+            </li>
+            <li>
+              <span>Address line 2</span>
+            </li>
+            <li>Phone:<span>555-9733-9748</span>
+            </li>
+            <li>Email:<span>email@address.com</span>
+            </li>
+          </ul>
+        </div>
+        <div id="ov-info-cnt">
+          <p>
+            Billing Info
+          </p>
+          <ul>
+            <li>Name:<span>John Doe</span>
+            </li>
+            <li>Address:<span>Address line 1</span>
+            </li>
+            <li>
+              <span>Address line 2</span>
+            </li>
+            <li>Card Type:<span>Visa</span>
+            </li>
+            <li>Card Number:<span>xxx-xxxx-xxxx-4000</span>
+            </li>
+          </ul>
+        </div>
+        <div class="clear"></div>
+      </div>
+      <div id="ov-units">
+        <div id="ov-units-head">
+          <h3>
+            <span>My Units</span>
+          </h3>
+          <p>
+            <a href="">Sort by address</a>
+          </p>
+        </div>
+        <div id="rslt-list-bg">
+          <!-- The following div can be copied for each item -->
+          <div class="listing">
+            <div class="inner">
+              <img src="" alt="" width="102" height="77" />
+              <div class="rslt-contact">
+                <h3>
+                  Uncle Bob's Self Storage
+                </h3>
+                <p>
+                  990 SW 18th St<br />
+                  Boca Raton, FL 33428
+                </p>
+                <p class="phone">
+                  800-456-1234
+                </p>
+              </div>
+              <ul>
+                <li class="rslt-miles">
+                  <span class="shifted-text"><strong>2</strong> miles</span>
+                </li>
+                <li class="rslt-offer">
+                  <span>FIRST MONTH FREE<br />
+                  Lowest price guaranteed!<br />
+                  Online Only Special</span>
+                </li>
+                <li class="rslt-reserve">
+                  <a href="">Edit</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          
+          <!-- The following div can be copied for each item -->
+          <div class="listing">
+            <div class="inner">
+              <img src="" alt="" width="102" height="77" />
+              <div class="rslt-contact">
+                <h3>
+                  Uncle Bob's Self Storage
+                </h3>
+                <p>
+                  990 SW 18th St<br />
+                  Boca Raton, FL 33428
+                </p>
+                <p class="phone">
+                  800-456-1234
+                </p>
+              </div>
+              <ul>
+                <li class="rslt-miles">
+                  <span class="shifted-text"><strong>2</strong> miles</span>
+                </li>
+                <li class="rslt-offer">
+                  <span>FIRST MONTH FREE<br />
+                  Lowest price guaranteed!<br />
+                  Online Only Special</span>
+                </li>
+                <li class="rslt-reserve">
+                  <a href="">Edit</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          
+          <!-- The following div can be copied for each item -->
+          <div class="listing">
+            <div class="inner">
+              <img src="" alt="" width="102" height="77" />
+              <div class="rslt-contact">
+                <h3>
+                  Uncle Bob's Self Storage
+                </h3>
+                <p>
+                  990 SW 18th St<br />
+                  Boca Raton, FL 33428
+                </p>
+                <p class="phone">
+                  800-456-1234
+                </p>
+              </div>
+              <ul>
+                <li class="rslt-miles">
+                  <span class="shifted-text"><strong>2</strong> miles</span>
+                </li>
+                <li class="rslt-offer">
+                  <span>FIRST MONTH FREE<br />
+                  Lowest price guaranteed!<br />
+                  Online Only Special</span>
+                </li>
+                <li class="rslt-reserve">
+                  <a href="">Edit</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div id="ov-reports">
+        <div id="ov-item-head">
+          <h3>
+            <span>Reports</span>
+          </h3>
+        </div>
+        <div id="ov-reports-cnt">
+          <ul>
+            <li><%= link_to '<span>Clicks</span>', '#clicks', :id => 'clicks' %></li>
+            <li><%= link_to '<span>Calls</span>', '#calls', :id => 'calls' %></li>
+            <li><%= link_to '<span>Reservations</span>', '#reservations', :id => 'reservations' %></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div id="ov-settings">
+        <div id="ov-item-head">
+          <h3>
+            <span>Settings</span>
+          </h3>
+        </div>
+        <div id="ov-settings-cnt">
+          <p>
+            Content will go here...
+          </p>
+          <p>
+            Content will go here...
+          </p>
+          <p>
+            Content will go here...
+          </p>
+          <p>
+            Content will go here...
+          </p>
+        </div>
+      </div>
+      
+      <div id="sl-footer"></div>
+      
+    </div>
+    <div class="clear"></div>
+    
+  </div>
+</div>

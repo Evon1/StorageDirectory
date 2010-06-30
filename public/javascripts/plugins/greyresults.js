@@ -26,14 +26,30 @@ $('#more_results').click(function(){
 	$.getJSON(url, function(response){
 		ajax_loader.hide();
 		
-		if (response.success) {
+		if (response.success) { // returned some listings
+			// we get an array JSON objects, each represents a listing including related models attributes
 			$.each(response.data, function(i){
-				var info 				 = this.info,
-						this_listing = listing_clone.clone().attr('id', 'listing_'+ info.id),
-						map 				 = this.map,
+				var info 				 = this.info, // listing attributes
+						this_listing = listing_clone.clone().attr('id', 'listing_'+ info.id), // a new copy of a .listing div
+						map 				 = this.map, // related model attributes
 						specials		 = this.specials;
+						
+				// update tab urls
+				var tabs = [
+					$('.fac-map a', this_listing),
+					$('.fac-sizes a', this_listing),
+					$('.fac-specials a', this_listing),
+					$('.fac-pictures a', this_listing)
+				];
+
+				for (var i = 0, len = tabs.length; i < len; i++) {
+					if (tabs[i]) {
+						var new_tab_href = tabs[i].attr('href').replace(/id=\d*/, 'id=' + info.id);
+						tabs[i].attr('href', new_tab_href);
+					}
+				}
 				
-				// update the content
+				// update the content in the copy of the listing html and add it to the dom
 				$('.rslt-title a', this_listing)				.text(info.title);
 				$('.rslt-title a', this_listing)				.attr('href', '/self-storage/show/' + info.id);
 				$('.rslt-address', this_listing)				.text(map.address);
@@ -43,18 +59,8 @@ $('#more_results').click(function(){
 				$('.rslt-specials h5', this_listing)		.text(specials.title);
 				$('.rslt-specials p', this_listing)			.text(specials.cotent);
 				
-				// update tab urls
-				var map_tab = $('.fac-map a', this_listing);
-				if (map_tab) map_tab.attr('href', map_tab.attr('href').replace(/id=\d*/, 'id=' + info.id));
-				var sizes_tab = $('.fac-sizes a', this_listing);
-				if (sizes_tab) sizes_tab.attr('href', sizes_tab.attr('href').replace(/id=\d*/, 'id=' + info.id));
-				var specials_tab = $('.fac-specials a', this_listing);
-				if (specials_tab) specials_tab.attr('href', specials_tab.attr('href').replace(/id=\d*/, 'id=' + info.id));
-				var pictures_tab = $('.fac-pictures a', this_listing);
-				if (pictures_tab) pictures_tab.attr('href', pictures_tab.attr('href').replace(/id=\d*/, 'id=' + info.id));
-				
-				
-				this_listing.appendTo(results_wrap).hide().slideDown(1800);
+				this_listing.appendTo(results_wrap).hide().slideDown('slow');
+
 				$('.inner:first', this_listing).effect('highlight', { color: '#c2cee9' }, 1700);
 			});
 			
@@ -76,7 +82,7 @@ $('#more_results').click(function(){
 			if (remaining <= 0) $this.hide();
 			if (remaining < per_page) $this.text('+ Show ' + remaining + ' more');
 			
-		} else alert('Error');
+		} else alert('Ooops, try again');
 	});
 	
 	return false;
@@ -138,16 +144,19 @@ $.fn.greyresults = function() {
 				
 				$.get(this.href, function(response) {
 					$('.tab_link, .listing, .panel').removeClass('active');
-					$('.tab_link').removeClass('borderButTop');
-
-					$this.addClass('active borderButTop');
+					$('li', '.tabs').removeClass('active');
+					$this.parent().addClass('active');
+					
+					$this.addClass('active');
 					$listing.addClass('active');
 					$panel.addClass('active');
 
 					$('.panel:not(.active)').slideUp();
 					$panel.html(response);
+					
 					$('.listing:not(.active) .open_tab').text('+');
-					$('.open_tab', $listing).text('x');
+					$('.open_tab', $listing).text('X');
+					
 					if ($panel.is(':hidden')) $panel.slideDown();
 					$('.progress', '.listing').removeClass('active');
 					

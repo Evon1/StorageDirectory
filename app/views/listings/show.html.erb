@@ -3,28 +3,26 @@
 <%= display_message flash %>
 
 <div class="staticContent">
-  <!-- BEGIN editable area -->
+  <h1 class="hidden">Self Storage Facility: <%= @listing.title.titleize %></h1>
+  <a name="top" id="top"></a>
   
-  <h1 class="hidden">
-    Self Storage Facility: <%= @listing.title.titleize %>
-  </h1><a name="top" id="top"></a>
   <div id="type-one-r-col">
     <div id="type-three-r-col-in">
+      
       <div id="sl-header">
         <h2><%= @listing.title.titleize %> in <%= @listing.city_and_state * ', ' %></h2>
-        <p class="back-btn">
-          <%= link_to 'Back to Results', :back %>
-        </p>
+        <p class="back-btn"><%= link_to 'Back to Results', :back %></p>
         <div class="clear"></div>
       </div>
+      
       <div id="sl-fac-detail">
         <div id="sl-fac-detail-in-edit">
-          <img src="/images/ui/storagelocator/bobs-logo.gif" alt="" width="164" height="120" />
+          <img src="/images/ui/storagelocator/bobs-logo.gif" alt="" width="164" height="120">
+          
           <p class="address">
-            <span>ADDRESS:</span><br />
-             <%= @listing.map.address %><br />
-             <%= @listing.map.city_state_zip %><br />
-	 					 <span class="phone"><%= @listing.map.phone %></span>
+            <span>ADDRESS:</span><br>
+            <%= @listing.map.address %><br>
+            <%= @listing.map.city_state_zip %><br>
           </p>
           <p>
             <a href="#">www.website.com</a>
@@ -49,18 +47,24 @@
           </p>
         </div>
       </div>
-      
       <div class="clear"></div>
       
       <div id="sl-tabs">
         <div id="sl-tabs-in" class="tabular_content">
           <ul id="sl-tabs-nav" class="tabular">
-            <li class="active"><a href="#" rel="sl-tabs-sizes">Unit Sizes</a></li>
-            <li><a href="#" rel="sl-tabs-map">Map</a></li>
-            <li><a href="#" rel="sl-tabs-feat">Features</a></li>
-            <li><a href="#" rel="sl-tabs-pict">Pictures</a></li>
+            <li class="active">
+              <a href="#" rel="sl-tabs-sizes">Unit Sizes</a>
+            </li>
+            <li>
+              <a href="#" rel="sl-tabs-map">Map</a>
+            </li>
+            <li>
+              <a href="#" rel="sl-tabs-feat">Features</a>
+            </li>
+            <li>
+              <a href="#" rel="sl-tabs-pict">Pictures</a>
+            </li>
           </ul>
-          
           <div id="sl-tabs-sizes" class="tab_content">
             <div id="sl-tabs-sizes-in">
               <ul class="sl-table-head">
@@ -160,29 +164,23 @@
             <div id="sl-tabs-map-in">
               <%= @Gmap.div :width => '700px', :height => '360px' %>
             </div>
-        	  
-        	  <ul>
-            	<li class="sl-map-dir"><a href="">Get directions</a></li>
+            
+            <ul>
+              <li class="sl-map-dir">
+                <%= link_to 'Get Directions', google_directions_link(@listing.map.full_address), :target => '_blank' %>
+              </li>
               <li class="sl-map-pri"><a href="">Print map</a></li>
             </ul>
-            
             <div class="clear"></div>
           </div>
           
           <div id="sl-tabs-feat" class="tab_content">
             <div id="sl-tabs-feat-in">
-              
               <% 1.upto(12) do |i| %>
               <ul>
-                <li>
-                  <span>Item <%= i %></span>
-                </li>
-                <li>
-                  <span>Item 2</span>
-                </li>
-              </ul>
-              <% end %>
-              
+                <li><span>Item <%= i %></span></li>
+                <li><span>Item 2</span></li>
+              </ul><% end %>
               <div class="clear"></div>
             </div>
           </div>
@@ -190,53 +188,36 @@
           <div id="sl-tabs-pict" class="tab_content">
             <div id="sl-tabs-pict-in">
               <ul id="sl-tabs-pict-gall">
-                <li>
-                  <img src="/images/ui/storagelocator/example-gallery-tn.png" />
-                </li>
-                <li>
-                  <img src="/images/ui/storagelocator/example-gallery-tn.png" />
-                </li>
-                <li>
-                  <img src="/images/ui/storagelocator/example-gallery-tn.png" />
-                </li>
-                <li>
-                  <img src="/images/ui/storagelocator/example-gallery-tn.png" />
-                </li>
-                <li>
-                  <img src="/images/ui/storagelocator/example-gallery-tn.png" />
-                </li>
-                <li>
-                  <img src="/images/ui/storagelocator/example-gallery-tn.png" />
-                </li>
-                <li>
-                  <img src="/images/ui/storagelocator/example-gallery-tn.png" />
-                </li>
-                <li>
-                  <img src="/images/ui/storagelocator/example-gallery-tn.png" />
-                </li>
-              </ul><img src="/images/ui/storagelocator/example-gallery.png" class="big-pic" />
+                <li><img src="/images/ui/storagelocator/example-gallery-tn.png"></li>
+                <li><img src="/images/ui/storagelocator/example-gallery-tn.png"></li>
+                <li><img src="/images/ui/storagelocator/example-gallery-tn.png"></li>
+                <li><img src="/images/ui/storagelocator/example-gallery-tn.png"></li>
+                <li><img src="/images/ui/storagelocator/example-gallery-tn.png"></li>
+                <li><img src="/images/ui/storagelocator/example-gallery-tn.png"></li>
+                <li><img src="/images/ui/storagelocator/example-gallery-tn.png"></li>
+                <li><img src="/images/ui/storagelocator/example-gallery-tn.png"></li>
+              </ul>
+              <img src="/images/ui/storagelocator/example-gallery.png" class="big-pic">
             </div>
             <div class="clear"></div>
+            
           </div>
-          
         </div>
       </div>
       
       <div id="sl-extra">
-        <h3>
-          Lorem ipsum heading here
-        </h3>
+        <h3>Lorem ipsum heading here</h3>
         <p>
           Lorem ipsum text can go here, Lorem ipsum text can go here, Lorem ipsum text can go here...
         </p>
       </div>
       
       <div id="sl-logos">
-        <img src="/images/ui/storagelocator/test-logos.png" alt="recognitions" />
+        <img src="/images/ui/storagelocator/test-logos.png" alt="recognitions">
       </div>
-      
       <div id="sl-footer"></div>
+      
     </div>
-  
-  <!-- END editable area -->
+    
+  </div>
 </div>
