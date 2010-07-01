@@ -30,11 +30,19 @@
 		</div>
 	
 		<div class="left stacked_controls">
+		  <div class="check_box_wrap stack">
+  			<%= check_box_tag 'models_views[][paginate]', 1, models_view.paginate %>
+  			<%= label_tag :paginate %>
+  		</div>
+			
 			<%= label_tag :order %>
 			<%= text_field_tag 'models_views[][order]', models_view.order, :class => 'small_text_field' %>
 		
 			<%= label_tag :limit %>
 			<%= text_field_tag 'models_views[][limit]', models_view.limit, :maxlength => 4, :class => 'tiny_text_field' %>
+			
+			<%= label_tag :conditions %>
+			<%= text_field_tag 'models_views[][conditions]', models_view.conditions, :class => 'small_text_field' %>
 		</div>
 	
 	</div>

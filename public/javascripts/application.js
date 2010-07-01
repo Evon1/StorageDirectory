@@ -508,6 +508,16 @@ $.bindPlugins = function() {
 		update: function(e, ui) { $.updateModels(e, ui); }
 	});
 	
+	/*$('.block_sortable', '.authenticated').sortable({
+		opacity: 0.3,
+		cursorAt: 'center',
+		delay:500,
+		grid: [50, 50],
+		update: function(e, ui) {
+			$.updateModels(e, ui);
+		}
+	});*/
+	
 	// front page
 	$('a', '#click-more').click(function(){
 		var $this = $(this);
@@ -516,6 +526,15 @@ $.bindPlugins = function() {
 		} else {
 			$this.text('Click here for more')
 		}
+	});
+	
+	// listings show page
+	// the google map breaks when it's loaded in a hidden div, then shown by js
+	$('a[rel=sl-tabs-map]').click(function(){
+		var map = $('#sl-tabs-map');
+		// this is a function produced by the Gmap.html() method called from the template, it's provided by the google_map plugin
+		// check the header area of the source html for the method definition
+		if (!map.is(':hidden')) center_google_map();
 	});
 	
 	// edit site settings page
@@ -796,10 +815,8 @@ function fillInFormFieldSelectLists(resource) {
 
 /**************** adapter functions ****************/
 
-// Ajaxful ratings uses Prototype's Ajax object, wrap a jQuery function in it
+// Ajaxful ratings uses Prototype's Ajax object, since we don't use Prototype, create it and wrap a jQuery function in it
 var Ajax = function(){};
 Ajax.Request = function(url, params) {
-	$.post(url, params.parameters, function(response) {
-		alert(response);
-	}, 'json')
+	$.post(url, params.parameters);
 }

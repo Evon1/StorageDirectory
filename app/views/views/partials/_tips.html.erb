@@ -11,16 +11,36 @@
 	 </div>
 	 
     <div id="add_new_tip" class="hidden">
-      <form action="/tips/create" method="post">
-        Add tips here<br>
-        Add tips here<br>
-        Add tips here
-      </form>
+      <% form_tag create_tip_path do %>
+        <fieldset>
+          <legend>Share Your Self Storage Tips</legend>
+          
+          <p>
+            <%= label_tag 'Title', nil, :class => 'hide_if_js' %>
+            <%= text_field_tag 'post[title]', nil, :id => 'tip_title', :class => 'hintable', :title => 'Title' %>
+          </p>
+          
+          <p>
+            <%= label_tag 'Content', nil, :class => 'hide_if_js' %>
+            <%= text_area_tag 'post[content]', nil, :id => 'tip_content', :class => 'hintable', :title => 'Content' %>
+          </p>
+          
+          <p>
+            <%= label_tag 'Tags', nil, :class => 'hide_if_js' %>
+            <%= text_field_tag 'post[tag_list]', nil, :class => 'hintable', :title => 'Tags' %>
+          </p>
+          
+          <div class="submit">
+            <%= submit_tag 'Submit' %>
+          </div>
+          
+        </fieldset>
+      <% end %>
     </div>
 	 
 	 <% data.each do |tip| %>
 	   <div class="blog-lock">
-  		 <h3><%=h tip.name_or_title %></h3>
+  		 <h3><%= link_to tip.name_or_title, post_path(tip) %></h3>
   		 <p>
   		  <%= tip.content_teaser %>
   		 </p>
@@ -41,6 +61,8 @@
         
   	</div>
   <% end %>
+  
+  <%= render :partial => 'views/paginate', :locals => { :data => data } %>
 		
   <div class="clear"></div>	 
 </div>

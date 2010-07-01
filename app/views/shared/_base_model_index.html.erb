@@ -4,4 +4,3 @@
 </div>
 
 <%= render :partial => "#{view_types_dir}#{@default_view_type}", :locals => { :data => data } unless data.blank? %>
-<%= will_paginate data if paginated?(data) %>

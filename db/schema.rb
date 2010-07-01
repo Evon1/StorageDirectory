@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100616045236) do
+ActiveRecord::Schema.define(:version => 20100629073232) do
 
   create_table "block_forms", :force => true do |t|
     t.integer  "block_id"
@@ -35,8 +35,13 @@ ActiveRecord::Schema.define(:version => 20100616045236) do
     t.text     "content"
     t.boolean  "show_title"
     t.string   "show_in_all"
-    t.integer  "position",    :default => 0
+    t.integer  "position",         :default => 0
     t.boolean  "process_erb"
+    t.boolean  "use_placeholders"
+    t.boolean  "restful"
+    t.string   "controller"
+    t.string   "action"
+    t.string   "restful_region"
   end
 
   create_table "blocks_models", :force => true do |t|
@@ -70,6 +75,7 @@ ActiveRecord::Schema.define(:version => 20100616045236) do
     t.datetime "updated_at"
     t.integer  "form_id"
     t.boolean  "use_own_name"
+    t.integer  "position",         :default => 0
   end
 
   create_table "forms", :force => true do |t|
@@ -192,6 +198,8 @@ ActiveRecord::Schema.define(:version => 20100616045236) do
     t.string   "view_type"
     t.text     "fields"
     t.boolean  "enabled"
+    t.string   "conditions"
+    t.boolean  "paginate"
   end
 
   create_table "pages", :force => true do |t|
@@ -204,8 +212,9 @@ ActiveRecord::Schema.define(:version => 20100616045236) do
     t.text     "content"
     t.text     "description"
     t.boolean  "show_title"
-    t.integer  "position",    :default => 0
+    t.integer  "position",         :default => 0
     t.boolean  "process_erb"
+    t.boolean  "use_placeholders"
   end
 
   create_table "permissions", :force => true do |t|

@@ -1,4 +1,4 @@
-<h5 class="white dark_text_shadow"><%= listing.title %></h5>
+<h5 class="white dark_text_shadow"><%= link_to listing.title, facility_path(listing.title.parameterize, listing.id) %></h5>
 
 <div id="map_partial" class="inner border_box">
   <div class="left small_framed">
@@ -10,7 +10,7 @@
     </p>
     
     <div class="large_round bg_grey">
-      <br /><br /><br />
+      <p class="framed"><%= link_to 'More Info', facility_path(listing.title.parameterize, listing.id) %></p>
     </div>
     
   </div>

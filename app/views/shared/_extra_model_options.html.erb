@@ -1,10 +1,20 @@
-<fieldset>
-  <legend>Extra Options</legend>
+<fieldset class="ExtraOptions">
+  <legend>
+  <%= link_to 'Extra Options', { :anchor => "#{model.is_using_extra_options? ? 'slideUp' : 'slideDown'}_collapseable_ExtraOptions" }, :class => 'toggle_action toggle_right toggle_down' %>
+  </legend>
+
+  <div class="collapseable uncollapse framed round odd<%= ' hide' unless model.is_using_extra_options? %>">
+    <% if model.respond_to? :process_erb %>
+      <div class="left check_box_wrap">
+        <%= f.check_box :process_erb, :class => 'left_space' %>&nbsp;<%= f.label :process_erb %>
+      </div>
+    <% end %>
   
-  <% if model.respond_to? :process_erb %>
-    <div class="left check_box_wrap">
-      <%= f.check_box :process_erb, :class => 'left_space right_space' %><%= f.label :process_erb %>
-    </div>
-  <% end %>
+    <% if model.respond_to? :use_placeholders %>
+      <div class="left check_box_wrap">
+        <%= f.check_box :use_placeholders, :class => 'left_space' %>&nbsp;<%= f.label :use_placeholders %>
+      </div>
+    <% end %>
+  </div>
   
 </fieldset>

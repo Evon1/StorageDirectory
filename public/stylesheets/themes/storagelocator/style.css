@@ -24,9 +24,9 @@ height: 231px;
 width: 100%;
 background: url(/images/ui/storagelocator/top-hdr-strip.png) repeat-x top;
 background-color: #fff;
-box-shadow:0px 10px 10px #133E13;
--webkit-box-shadow:0px 10px 8px #133E13;
--moz-box-shadow: 0px 10px 8px #133E13;
+box-shadow:0px 10px 10px #2b682c;
+-webkit-box-shadow:0px 10px 8px #2b682c;
+-moz-box-shadow: 0px 10px 8px #2b682c;
 }
 
 #head-ctr-in {
@@ -436,6 +436,7 @@ background: url(/images/ui/storagelocator/step3-bg.jpg) no-repeat top center;
 
 p#click-more {
 width: 226px;
+position:absolute;
 height: 35px;
 line-height: 25px;
 background: url(/images/ui/storagelocator/click-for-more.png) no-repeat bottom center;
@@ -471,6 +472,7 @@ position: relative;
 left: 2px;
 }
 .storage_locator #content_bottom.region { margin-top:20px; }
+#listings_controller #content_bottom.region { margin-top:15px; }
 
 #type-one-r-col, #content {
 width: 776px;
@@ -839,20 +841,11 @@ border: 1px solid #ccc;
 height: 100px;
 }
 
-.listing .inner.active {
+#rslt-list-bg > div.active > .inner, #rslt-list-bg > div > .inner:hover  {
 background: url(/images/ui/storagelocator/highlighted-result-inner-bg.png) repeat-x top left;
-width: 752px;
-border-radius: 12px;
--moz-border-radius: 12px;
--webkit-border-radius: 12px;
-border: 1px solid #ccc;
-height: 100px;
 }
 
-.listing ul li {
-display: inline;
-}
-
+.listing ul li { display: inline; }
 .listing ul li span.shifted-text {
 font-size: 1.2em;
 display: block;
@@ -918,26 +911,21 @@ font-size: 1.2em;
 }
 
 li.rslt-price {
-background: url(/images/ui/storagelocator/results-divider-white-bg.png) no-repeat top left;
+background: url(/images/ui/storagelocator/rslts-divider.png) no-repeat top left;
 width: 90px;
 height: 100px;
 color: #333;
 }
 
 li.rslt-miles {
-background: url(/images/ui/storagelocator/results-divider-white-bg.png) no-repeat top left;
+background: url(/images/ui/storagelocator/rslts-divider.png) no-repeat top left;
 width: 90px;
 height: 100px;
 color: #333;
 }
 
-.highlight-rslt-item-in li.rslt-price,
-.highlight-rslt-item-in li.rslt-miles {
-background: url(/images/ui/storagelocator/results-divider-color-bg.png) no-repeat top left;
-}
-
 li.rslt-reserve {
-background: url(/images/ui/storagelocator/reserve-button.png) no-repeat top center;
+background: url(/images/ui/storagelocator/reserve-btn.png) no-repeat top center;
 width:160px;
 height: 100px;
 line-height: 105px;
@@ -955,11 +943,6 @@ li.rslt-specials {
 	margin-top: 0px;
 }
 
-.highlight-rslt-item-in li.rslt-reserve {
-background: url(/images/ui/storagelocator/reserve-button-top.png) no-repeat top center;
-
-}
-
 li.rslt-reserve a {
 color: #fff;
 text-decoration: none;
@@ -968,11 +951,8 @@ margin-top:-4px;
 }
 
 ul.tabs {
-position: relative;
-left: 31px;
-margin-bottom: 5px;
+margin:0 0 5px 31px;
 float: left;
-top: -1px;
 }
 
 ul.tabs li {
@@ -980,7 +960,22 @@ height: 16px;
 line-height: 16px;
 float: left;
 margin-left: 5px;
+background:#ccc;
+padding:0 7px 1px 7px;
+border:1px solid #ccc;
+border-top:0 none;
+border-radius-bottomright: 8px;
+-moz-border-radius-bottomright: 8px;
+-webkit-border-bottom-right-radius: 8px;
+border-radius-bottomleft: 8px;
+-moz-border-radius-bottomleft: 8px;
+-webkit-border-bottom-left-radius: 8px;
 }
+ul.tabs li:hover, ul.tabs li:active, ul.tabs li.active { background:#d2d7e8;}
+ul.tabs li:hover a, ul.tabs li:active a, ul.tabs li a.active { color:#999; }
+
+ul.tabs li.open_tab_li { padding:0; }
+ul.tabs li.open_tab_li a { padding:0 2px; }
 
 ul.tabs li a {
 float: left;
@@ -992,53 +987,13 @@ font-size: 10px;
 text-decoration: none;
 text-align: right;
 text-transform:uppercase;
+padding:1px 5px 1px 25px;
 }
 
-li.fac-map {
-background: url(/images/ui/storagelocator/facility-map.png) no-repeat center left;
-width: 66px
-}
-
-li.fac-map a {
-width: 56px;
-}
-
-li.fac-map-selected {
-background: url(/images/ui/storagelocator/facility-map-selected.png) no-repeat center left;
-width: 66px;
-}
-
-ul.tabs li.fac-map-selected a {
-color: #999;
-width: 56px;
-}
-
-li.fac-specials {
-background: url(/images/ui/storagelocator/facility-specials.png) no-repeat center left;
-width: 88px
-}
-
-li.fac-specials a {
-width: 78px;
-}
-
-li.fac-sizes {
-background: url(/images/ui/storagelocator/facility-sizes.png) no-repeat center left;
-width: 72px
-}
-
-li.fac-sizes a {
-width: 62px;
-}
-
-li.fac-pictures {
-background: url(/images/ui/storagelocator/facility-pictures.png) no-repeat center left;
-width: 92px
-}
-
-li.fac-pictures a {
-width: 82px;
-}
+li.fac-map a { background:url(/images/ui/storagelocator/map-icon.png) no-repeat 0% 53%; }
+li.fac-specials a { background:url(/images/ui/storagelocator/specials-icon.png) no-repeat 0 41%; }
+li.fac-sizes a { background:url(/images/ui/storagelocator/sizes-icon.png) no-repeat 0 30%; }
+li.fac-pictures a { background:url(/images/ui/storagelocator/pictures-icon.png) no-repeat 0 34%; }
 
 p.rslt-foot {
 text-align: right;
@@ -1324,7 +1279,8 @@ top: 10px;
 #city-box p {
 margin-top: 20px;
 font-size: 1em;
-text-align: left;
+text-align: right;
+padding-right:5px;
 }
 
 #city-box p span {
@@ -1442,8 +1398,9 @@ margin: 1px 0px 10px 0px;
 }
 .blog-lock p { font-size:12px; line-height:1.2; }
 
-.blog-lock h3 {
+.blog-lock h3 a {
 color: #000;
+text-decoration:none;
 font-size: 1.6em;
 }
 
@@ -1559,7 +1516,8 @@ text-shadow: 1px 1px 2px #000;
 
 #add-fac-form-txt p.call-button span {
 position: relative;
-top: 10px;
+top: 11px;
+line-height:1.2;
 }
 
 #add-fac-form-extra {
@@ -1769,8 +1727,7 @@ position:relative;
 left: 18px;
 color: #555;
 text-align: center;
-height: 400px;
-margin-top:20px;
+height: 300px;
 }
 
 /* New left hand boxes - for welcome, admin and tips */
@@ -1927,12 +1884,6 @@ background-color: #fff;
 border-radius: 10px;
 -moz-border-radius: 10px;
 -webkit-border-radius: 10px;
-}
-
-#city-box p span {
-float: right;
-position:relative;
-right: 5px;
 }
 
 #city-box ul {
@@ -2171,7 +2122,7 @@ border-radius-bottomright: 10px;
 background-color: #ddd;
 height: 30px;
 clear:both;
-margin-bottom:5px;
+margin-bottom:15px;
 }
 
 
@@ -2919,32 +2870,37 @@ width: 3em;
 #ov-units .rslt-item .rslt-item-in .rslt-reserve {
 	width: 108px;
 	}
-	
+
 #ov-reports ul li {
-	list-syle: none;
-	height: 185px;
-	width: 241px;
+	list-style: none;
+	display:inline;
+}	
+#ov-reports ul li a {
+	width:218px;
+	height:174px; 
+	margin:0 8px;
+	cursor:pointer;
 	text-align:center;
 	display:block;
-	float: left;
+	float:left;
 	font-size:1.4em;
 	font-weight:bold;
-	}
+}
 	
 #ov-reports ul li span {
 	position:relative;
 	top: 145px;
 	}
 	
-#ov-reports ul li#clicks {
+#ov-reports ul li a#clicks {
 	background: url(/images/ui/storagelocator/click-logo.png) no-repeat top center;
 	}
 
-#ov-reports ul li#calls {
+#ov-reports ul li a#calls {
 	background: url(/images/ui/storagelocator/calls-logo.png) no-repeat top center;
 	}
 	
-#ov-reports ul li#reserve {
+#ov-reports ul li a#reservations {
 	background: url(/images/ui/storagelocator/reserve-logo.png) no-repeat top center;
 	}
 	
@@ -3124,8 +3080,8 @@ input.slider_val { width:20px; }
 .table_view { width:100%; }
 .index_action #content, .edit_action #content, .new_action #content { width:100%; float:none; margin-bottom:0; }
 
-#rslt-head h2 { font-size:24px; }
-
+#rslt-head h2 { font-size:20px; }
+#steps { padding-bottom:15px; }
 #list-name { background-position:99% 50%; }
 #list-miles { background-position:96% 50%; }
 
@@ -3146,6 +3102,7 @@ border-radius-bottomleft: 10px;
 .listing:hover .inner { border-color:#aaa; }
 .listing .rslt-contact p { margin-bottom:5px; font-size:12px; line-height:1.2; }
 .panel h5 { padding:12px 17px; margin-bottom:0; font-size:140%; background:#cc3300; }
+.panel h5 a { color:#fff; text-decoration:none; }
 .panel .inner h6 { font-size:120%; }
 .panel .inner h6, .panel .inner p { margin-bottom:14px; font-size:14px; }
 .panel .inner p { font-size:12px; line-height:1.4; }
@@ -3214,3 +3171,33 @@ img.right { margin:0 10px 10px 0; }
 #add-fac-form-extra .tab_content { padding:0 30px 1px 30px; }
 .tabular_content .tab_content { display:none; }
 .tabular_content .active { display:block; }
+
+/* add tip */
+#add_new_tip { background:#ebebeb; border-radius:10px; -moz-border-radius:10px; -webkit-border-radius:10px; }
+#add_new_tip legend { margin-bottom:10px; font-size:14px; font-weight:bold; color:#666; }
+#add_new_tip p { margin-bottom:10px; }
+#add_new_tip input { width:98%; }
+#add_new_tip textarea { width:98.6%; }
+#add_new_tip .submit input { width:auto; }
+
+/* state page */
+#state_picker h2 { font-size:20px; margin-bottom:14px; }
+#state_picker h3 { font-size:14px; margin-bottom:7px; }
+#state_picker ul li a:link { color:#999; text-decoration:none; }
+#state_picker ul li a:visited { color:#333; text-decoration:none; }
+#state_picker ul li a:hover, #state_picker ul li a:active { color:#333; text-decoration:underline; }
+
+/* create client */
+#client_form .flash {
+margin:0 0 21px 44px;
+width:52.3%;
+-moz-border-radius:8px;
+border-radius:8px;
+-webkit-border-radius:8px;
+}
+/* edit client */
+#clients_controller #type-one-cnt-in { margin:0; }
+#ov-units .listing { padding-bottom:10px; }
+#ov-units .listing > .inner { width:100%; }
+#ov-units .listing .rslt-reserve { width:145px; }
+#ov-reports-cnt { padding:15px 9px; overflow:hidden; }

@@ -13,7 +13,11 @@ module ApplicationHelper
   end
   
   def declare_content_for # renders blocks in regions based on current page
-    title = (@page ? @page.title  : controller_name.titleize).to_s
+    if controller_name == 'listings' && action_name == 'show'
+      title = @listing.title.titleize
+    else
+      title = (@page ? @page.title  : controller_name.titleize).to_s
+    end
     content_for :title, "#{title.blank? ? 'Manage - ' : title + ' - '}#{ApplicationController.app_config[:title]}"
     
     regions(false).each do |region|
@@ -21,38 +25,62 @@ module ApplicationHelper
         @html = "<div class='region_#{region} region'>"
         
           render_region_top(region)
-          render_global_blocks_for(region)
-          render_local_blocks_for(region.to_s) unless action_name == 'edit'
-
+          render_all_blocks_in(region)
+        
         @html << '</div>'
       end
-      @html = '' if @html =~ /(<div class='region_#{region} region'>\W?<\/div>)/i
     end
+    
+    @html
   end
   
   def render_region_top(region)
     case [controller_name, action_name]
-      when ['pages', 'edit'], ['blocks', 'edit'] # show region labels when editing a page or block
-        @html << label_tag(region, nil, :id => "#{region}_region_label", :class => 'region_label')
+    when ['pages', 'edit'], ['blocks', 'edit'] # show region labels when editing a page or block
+      @html << label_tag(region, nil, :id => "#{region}_region_label", :class => 'region_label')
     end
   end
   
-  def render_global_blocks_for(region)
-    @global_blocks.select { |b| b.show_in_all == region.to_s }.each do |block|
-      @html << render(:partial => block, :locals => { :region => block.show_in_all, :global => true })
+  def render_all_blocks_in(region)
+    @html << '<ul class="block_sortable">'
+    
+    combine_global_and_local_blocks_for(region).each do |block|
+      if block.show_in_all.blank? # local block
+        sortable_id = "BlocksModel_#{block.blocks_models.detect { |bm| bm.place == region.to_s }.id}"
+      else
+        sortable_id = "Block_#{block.id}"
+      end
+        
+      @html << render(:partial => block, :locals => { :region => region.to_s, :sortable_id => sortable_id, :global => true })
     end
+    
+    @html << '</ul>'
   end
   
-  # => @param region = content_for yields in application layout
-  # => @return string of html content and any widgets html and javascript needed
-  def render_local_blocks_for(region) # returns html of all the blocks for a page's regions
-    blocks_models.each do |model_name|
+  def combine_global_and_local_blocks_for(region)
+    blocks = @global_blocks.select { |b| b.show_in_all == region.to_s }
+    
+    ['page', 'post'].each do |model_name| # the types of models that can have blocks
       model_instance = eval("@#{model_name}")
-      
-      # => render the models block content, models_views, and widgets
-      model_instance.blocks_for_region(region).each do |block|
-        @html << render(:partial => block, :locals => { :region => region, :global => false })
+      model_instance.blocks_for_region(region.to_s).each do |block|
+        blocks << block
       end if model_instance
+    end unless action_name == 'edit'
+    
+    # these blocks can be shown on regular restful pages rather than a page's or post's show action (custom page)
+    # they require a controller and action attribute, comma separated to allow the block to be in multiple places
+    Block.find_all_by_restful(true).each do |block|
+      if block.restful_region == region.to_s && block.controller.split(/,\W?/).include?(controller_name) && block.action.split(/,\W?/).include?(action_name)
+        blocks << block 
+      end
+    end
+    
+    blocks.sort_by do |b|
+      if b.show_in_all.blank? # local block's position is stored in its join table
+        b.blocks_models.detect { |bm| bm.place == region.to_s }.position
+      else
+        b.position
+      end
     end
   end
   
@@ -101,9 +129,12 @@ module ApplicationHelper
       if view.model_name =~ /(tag)|(image)/ && !view.scope.blank?
         scope_model = view.owner_id.blank? ? eval("@#{view.scope}") : model_class(view.scope).find(view.owner_id)
         data = eval("scope_model.#{view.model_name.pluralize}")
+        
       elsif view.model_name == 'post' &&  view.scope == 'tag'
         tag = view.owner_id.blank? ? eval("@tag") : Tag.find(view.owner_id)
-        data = Post.tagged_with tag.name
+        data = Post.find(:all, :conditions => models_view.conditions).select { |p| p.tags.map(&:name).include? tag.name }
+        data = data.paginate(:per_page => 15, :page => params[:page]) if models_view.paginate
+        
       else
         data = view.model.all(view_find_options(view, models_view))
       end
@@ -176,8 +207,37 @@ module ApplicationHelper
   
   # processes any ERB tags in the model's content field, binding instance variables to it
   def render_model_content(model)
-    if model.respond_to?(:process_erb) && model.process_erb
+    if model.is_using_extra_options?
+      if model.use_placeholders? && (placeholders = /\[(\w*):(.*)\]/i.match(model.content)) # anything in brackets with a colon inside => [model:title_or_id]
+        model.content = set_content_in_placeholders(model, placeholders)
+      end
+      
       ERB.new(model.content).result(binding)
+    else
+      model.content
+    end
+  end
+  
+  def set_content_in_placeholders(model, placeholders)
+    placeholder, model_class, title_or_id = placeholders[0], placeholders[1], placeholders[2]
+    
+    if models(false).include? model_class
+      mClass = model_class.camelize.constantize
+      
+      if title_or_id.is_a? String
+        submodel = mClass.columns.map(&:name).include?('title') ? mClass.find_by_title(title_or_id) : mClass.find_by_name(title_or_id)
+      else
+        submodel = mClass.find(title_or_id)
+      end
+      
+      case model_class
+      when 'block'
+        replacement = render(:partial => submodel, :locals => { :region => 'custom', :global => false })
+      when 'form'
+        replacement = render(:partial => 'forms/build', :locals => { :form => submodel })
+      end
+      
+      model.content.sub placeholder, replacement
     else
       model.content
     end

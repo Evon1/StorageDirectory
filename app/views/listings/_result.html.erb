@@ -1,11 +1,12 @@
 <div id="listing_<%= result.id %>" class="listing">
 	 <div class="inner">
+	   
 	   <img src="/images/ui/storagelocator/bobs-logo.gif" alt="" width="102" height="77"/>
+	   
 	 		<div class="rslt-contact">
- 				<h3 class="rslt-title"><%= link_to result.title, facilities_path(result.title.parameterize, result.id) %></h3>
+ 				<h3 class="rslt-title"><%= link_to result.title, facility_path(result.title.parameterize, result.id) %></h3>
 				 <p><span class="rslt-address"><%= result.map.address %></span><br />
          <span class="rslt-citystate"><%= result.map.city_state_zip %></span></p>
-				 <p class="rslt-phone"><%= result.map.phone %></p>
 			</div>
 			
 			<ul>
@@ -24,11 +25,11 @@
 	 <div class="clear"></div>
 
 	 <ul class="tabs">
-      <li><%= link_to '+', '#', :class => 'open_tab' %></li>
-       <li class="fac-map"><%= link_to 'Map', result.get_partial_link(:map), :rel => 'map', :class => 'tab_link' %></li>
-       <li class="fac-sizes"><%= link_to 'Sizes', result.get_partial_link(:sizes), :rel => 'sizes', :class => 'tab_link' %></li>
-       <li class="fac-specials"><%= link_to 'Specials', result.get_partial_link(:specials), :rel => 'specials', :class => 'tab_link' %></li>
-       <li class="fac-pictures"><%= link_to 'Pictures', result.get_partial_link(:pictures), :rel => 'pictures', :class => 'tab_link' %></li>
+      <li class="open_tab_li"><%= link_to '+', '#', :class => 'open_tab' %></li>
+      <li class="fac-map"><%= link_to 'Map', result.get_partial_link(:map), :rel => 'map', :class => 'tab_link' %></li>
+      <li class="fac-sizes"><%= link_to 'Sizes', result.get_partial_link(:sizes), :rel => 'sizes', :class => 'tab_link' %></li>
+      <li class="fac-specials"><%= link_to 'Specials', result.get_partial_link(:specials), :rel => 'specials', :class => 'tab_link' %></li>
+      <li class="fac-pictures"><%= link_to 'Pictures', result.get_partial_link(:pictures), :rel => 'pictures', :class => 'tab_link' %></li>
 	 </ul>
 
 	<div class="highlight-green progress">&nbsp;</div>

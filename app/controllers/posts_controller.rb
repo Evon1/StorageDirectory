@@ -16,11 +16,23 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = current_user.posts.new(params[:post])
+    case params[:for]
+    when nil
+      @post = current_user.posts.new(params[:post])
+    when 'tip'
+      @post = Post.new(params[:post])
+      @post.tag_list << 'tip'
+    end
     
     if @post.save
       flash[:notice] = @post.title + ' has been created.'
-      redirect_to posts_path
+      
+      case params[:for]
+      when nil
+        redirect_to posts_path
+      when 'tip'
+        redirect_to :back
+      end
     else
       render :action => 'edit'
     end    

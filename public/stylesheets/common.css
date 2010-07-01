@@ -145,7 +145,7 @@ span.active { cursor:default; }
 .pagination { text-align:center; margin:20px 0 6px 0; }
 .pagination a, .pagination span { padding:1px 5px; }
 .pagination a { border:1px solid #ccc; -moz-border-radius:5px; -webkit-border-radius:5px; border-radius:5px; }
-.pagination a:link, .pagination a:visited { text-decoration:none; color:#ccc; }
+.pagination a:link, .pagination a:visited { text-decoration:none; color:#999\; }
 .pagination a:hover, .pagination a:active { background-color:#444DA0; color:#fff; }
 
 /********************* added in from old greyCMS stylesheet **********************/
@@ -297,7 +297,8 @@ div.box_view > div {
 
 input.small_text_field, input.tiny_text_field { font-size:10px; }
 input.small_text_field { width:100px; display:block; margin-bottom:3px; }
-input.tiny_text_field { width:30px; }
+input.smaller_text_field { width:70px !important; }
+input.tiny_text_field { width:30px !important; }
 
 .control_bar > div { margin-right:7px; }
 #body form fieldset.subfields { border-top:10px solid #EBEBEB; margin-bottom:15px; }

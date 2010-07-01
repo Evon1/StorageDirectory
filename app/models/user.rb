@@ -12,9 +12,6 @@ class User < ActiveRecord::Base
   has_many :images
   has_one :profile_image, :class_name => 'Image', :order => 'id'
   
-  # greyresults
-  has_many :listings
-  
   validates_presence_of :name, :email, :role_id
   
   acts_as_commentable

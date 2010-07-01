@@ -29,10 +29,17 @@
 				</div>
 			</div>
 			
-			<div class="left uncollapse option_group round box">
+			<div class="left uncollapse option_group round box right_space">
 				<div class="left check_box_wrap">
 					<%= check_box_tag 'form[fields_attributes][][use_own_name]', 1, model.use_own_name?, :disabled => disabled %>
 					<%= label_tag 'field_use_own_name', 'Use Own Name', :title => 'Useful for passing a parameter apart from the rest of the fields' %>
+				</div>
+			</div>
+			
+			<div class="left uncollapse option_group round box">
+				<div class="left check_box_wrap">
+					<%= label_tag 'field_position', 'Position', :title => 'Defines the order of the fields when they are rendered' %>
+					<%= text_field_tag 'form[fields_attributes][][position]', model.position, :disabled => disabled, :class => 'tiny_text_field', :maxlength => 3 %>
 				</div>
 			</div>
 			
