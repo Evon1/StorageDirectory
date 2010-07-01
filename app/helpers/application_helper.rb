@@ -45,7 +45,7 @@ module ApplicationHelper
     @html << '<ul class="block_sortable">'
     
     combine_global_and_local_blocks_for(region).each do |block|
-      if block.show_in_all.blank? # local block
+      if block.is_local? # local block
         sortable_id = "BlocksModel_#{block.blocks_models.detect { |bm| bm.place == region.to_s }.id}"
       else
         sortable_id = "Block_#{block.id}"
@@ -76,7 +76,7 @@ module ApplicationHelper
     end
     
     blocks.sort_by do |b|
-      if b.show_in_all.blank? # local block's position is stored in its join table
+      if b.is_local?  # local block's position is stored in its join table
         b.blocks_models.detect { |bm| bm.place == region.to_s }.position
       else
         b.position
@@ -232,7 +232,7 @@ module ApplicationHelper
       
       case model_class
       when 'block'
-        replacement = render(:partial => submodel, :locals => { :region => 'custom', :global => false })
+        replacement = render(:partial => submodel, :locals => { :region => 'custom', :global => false, :sortable_id => "Block_#{submodel.id}" })
       when 'form'
         replacement = render(:partial => 'forms/build', :locals => { :form => submodel })
       end

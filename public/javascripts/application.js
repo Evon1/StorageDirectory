@@ -508,7 +508,7 @@ $.bindPlugins = function() {
 		update: function(e, ui) { $.updateModels(e, ui); }
 	});
 	
-	/*$('.block_sortable', '.authenticated').sortable({
+	$('.block_sortable', '.authenticated').sortable({
 		opacity: 0.3,
 		cursorAt: 'center',
 		delay:500,
@@ -516,7 +516,7 @@ $.bindPlugins = function() {
 		update: function(e, ui) {
 			$.updateModels(e, ui);
 		}
-	});*/
+	});
 	
 	// front page
 	$('a', '#click-more').click(function(){

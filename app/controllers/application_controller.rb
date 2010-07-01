@@ -89,6 +89,7 @@ class ApplicationController < ActionController::Base
   # the 'frontend' of the website is a page's show action
   def authorize_user
     # simple authorization: kick out anonymous users from backend actions
+=begin
     if !current_user
       redirect_back_or_default(home_page) and return if action_name =~ /index|edit|update|destroy/
       
@@ -99,6 +100,7 @@ class ApplicationController < ActionController::Base
         redirect_back_or_default(home_page) and return
       end
     end
+=end
   end
   
   # hidden field hack_me must pass through empty, cheap reverse captcha trick

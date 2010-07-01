@@ -1,15 +1,18 @@
+<% declare_content_for %>
+<%= display_message flash %>
+
 <h1 class="hidden">Search results listing</h1>
 <a name="top" id="top"></a>
 
 <div id="type-one-r-col">
   <div id="type-three-r-col-in">
+    
     <div id="sl-header">
-      <h2>
-        <span>Overview -</span> Uncle Bob's Self Storage
-      </h2>
-      <div class="clear"></div>
+      <h2><span>Overview -</span> Uncle Bob's Self Storage</h2>
     </div>
+    
     <div id="ov-page-cnt">
+
       <div id="ov-top">
         <ul id="ov-top-list">
           <li>Account #: <span>83837850789</span>
@@ -107,9 +110,7 @@
                 </li>
               </ul>
             </div>
-            <div class="clear"></div>
           </div>
-          <div class="clear"></div><!-- End of result item div -->
           
           <!-- The following div can be copied for each item -->
           <div class="listing">
@@ -141,9 +142,7 @@
                 </li>
               </ul>
             </div>
-            <div class="clear"></div>
           </div>
-          <div class="clear"></div><!-- End of result item div -->
           
           <!-- The following div can be copied for each item -->
           <div class="listing">
@@ -175,9 +174,7 @@
                 </li>
               </ul>
             </div>
-            <div class="clear"></div>
           </div>
-          <div class="clear"></div><!-- End of result item div -->
         </div>
       </div>
       
@@ -189,7 +186,7 @@
         </div>
         <div id="ov-reports-cnt">
           <ul>
-            <li><%= link_to '<span<Clicks</span>', '#clicks', :id => 'clicks' %></li>
+            <li><%= link_to '<span>Clicks</span>', '#clicks', :id => 'clicks' %></li>
             <li><%= link_to '<span>Calls</span>', '#calls', :id => 'calls' %></li>
             <li><%= link_to '<span>Reservations</span>', '#reservations', :id => 'reservations' %></li>
           </ul>
@@ -217,6 +214,9 @@
           </p>
         </div>
       </div>
+      
+      <div id="sl-footer"></div>
+      
     </div>
     <div class="clear"></div>
     

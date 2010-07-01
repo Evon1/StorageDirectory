@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100629073232) do
+ActiveRecord::Schema.define(:version => 20100629200950) do
 
   create_table "block_forms", :force => true do |t|
     t.integer  "block_id"
@@ -339,6 +339,8 @@ ActiveRecord::Schema.define(:version => 20100629073232) do
     t.string   "last_login_ip"
     t.integer  "facebook_uid",       :limit => 8
     t.integer  "role_id"
+    t.string   "type"
+    t.string   "company"
   end
 
   create_table "views", :force => true do |t|

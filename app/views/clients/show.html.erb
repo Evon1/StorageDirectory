@@ -1,2 +1,62 @@
-<h1>Clients#show</h1>
-<p>Find me in app/views/clients/show.html.erb</p>
+<% declare_content_for %>
+<% display_message flash %>
+
+<h2><%= user_account_title %></h2>
+
+<div class="round box framed uncollapse stack">
+  <div class="right framed">
+  	<%= link_to image_tag(@client.profile_image.image.url(:thumb), :alt => @client.name), @client.profile_image unless @client.images.empty? %>
+  </div>
+  
+  <ul class="plain with_floats spaced_list_items">
+	  <li>
+  	  <b class="block left w110">Login:</b>
+  	  <%=h @client.name %>
+  	</li>
+
+  	<li>
+  	  <b class="block left w110">Email:</b>
+  	  <%=h @client.email %>
+  	</li>
+  	
+  	<li>
+  	  <b class="block left w110">Role:</b>
+  	  <%=h @client.role.title %>
+  	</li>
+
+  	<li>
+  	  <b class="block left w110">Login count:</b>
+  	  <%=h @client.login_count %>
+  	</li>
+
+  	<li>
+  	  <b class="block left w110">Last request at:</b>
+  	  <%=h @client.last_request_at %>
+  	</li>
+
+  	<li>
+  	  <b class="block left w110">Last login at:</b>
+  	  <%=h @client.last_login_at %>
+  	</li>
+
+  	<li>
+  	  <b class="block left w110">Current login at:</b>
+  	  <%=h @client.current_login_at %>
+  	</li>
+
+  	<li>
+  	  <b class="block left w110">Last login ip:</b>
+  	  <%=h @client.last_login_ip %>
+  	</li>
+
+  	<li>
+  	  <b class="block left w110">Current login ip:</b>
+  	  <%=h @client.current_login_ip %>
+  	</li>
+  </ul>
+</div>
+
+<div class="uncollapse">
+  <div class="right"><%= link_to "#{@client.name.possessive} Images", user_images_path(@client) %></div>
+  <div class="buttons"><%= button_to 'Edit', edit_user_path, { :method => 'get' } %></div>
+</div>

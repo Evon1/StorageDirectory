@@ -36,6 +36,10 @@ class Block < ActiveRecord::Base
     !show_in_all.blank?
   end
   
+  def is_local?
+    self.show_in_all.blank? && !self.restful?
+  end
+  
   def show_title_in_this(region, global)
     if defined?(global) && global
       self.show_title
