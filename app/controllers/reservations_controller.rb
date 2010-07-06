@@ -22,5 +22,6 @@ class ReservationsController < ApplicationController
   end
   
   def destroy
-
+  end
+  
 end
