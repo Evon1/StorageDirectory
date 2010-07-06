@@ -1,11 +1,4 @@
 --- 
-production: 
-    plugins: greyresults, inflector, jquery.formbouncer, jquery.hinty, jquery.iframe
-    theme: storagelocator
-    title: US Self Storage Locator
-    widgets: anim2
-    description: ""
-    keywords: ""
 development: !map:HashWithIndifferentAccess 
   plugins: greyresults, inflector, jquery.formbouncer, jquery.hinty, jquery.iframe
   theme: storagelocator
@@ -13,6 +6,13 @@ development: !map:HashWithIndifferentAccess
   widgets: anim2
   description: ""
   keywords: ""
+production: 
+    plugins: greyresults, inflector, jquery.formbouncer, jquery.hinty, jquery.iframe
+    theme: storagelocator
+    title: US Self Storage Locator
+    widgets: anim2
+    description: ""
+    keywords: ""
 test: 
   plugins: inflector, jquery.formbouncer, jquery.hinty, jquery.iframe
   title: US Self Storage Locator
