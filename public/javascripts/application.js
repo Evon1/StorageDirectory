@@ -526,6 +526,7 @@ $.bindPlugins = function() {
 	});
 	
 	$('.mini_calendar').datepicker();
+	$('.datepicker_wrap').click(function(){ $('.mini_calendar', this).focus(); });
 	
 	// front page
 	$('a', '#click-more').click(function(){

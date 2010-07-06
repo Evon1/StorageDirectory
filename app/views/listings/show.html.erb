@@ -102,52 +102,51 @@
                      <% form_for Reservation.new do |f| %>
                      	<div class="sl-table-exp-form-l">
 		 					<p>
-								<%= label_tag 'reserver[first_name]', 'First Name', :class => 'required block left w80' %>
-								<%= text_field_tag 'reserver[first_name]' %>
+								<%= label_tag 'reserver[first_name]', 'First Name', :class => 'block left w80' %>
+								<%= text_field_tag 'reserver[first_name]', nil, :class => 'required' %>
 							</p>
 	      					<p>
-								<%= label_tag 'reserver[last_name]', 'Last Name', :class => 'required block left w80' %>
-								<%= text_field_tag 'reserver[last_name]' %>
+								<%= label_tag 'reserver[last_name]', 'Last Name', :class => 'block left w80' %>
+								<%= text_field_tag 'reserver[last_name]', nil, :class => 'required' %>
 							</p>
 	                        <p>
-								<%= label_tag 'reserver[address]', 'Address', :class => 'required block left w80' %>
-								<%= text_field_tag 'reserver[address]' %>
+								<%= label_tag 'reserver[address]', 'Address', :class => 'block left w80' %>
+								<%= text_field_tag 'reserver[address]', nil, :class => 'required' %>
 							</p>
 							<p>
-								<%= label_tag 'reserver[city]', 'City', :class => 'required block left w80' %>
-								<%= text_field_tag 'reserver[city]' %>
+								<%= label_tag 'reserver[city]', 'City', :class => 'block left w80' %>
+								<%= text_field_tag 'reserver[city]', nil, :class => 'required' %>
 							</p>
 							<p>
-								<%= label_tag 'reserver[state]', 'State', :class => 'required block left w80' %>
-								<%= select_tag 'reserver[state]', option_tags(States.all) %>
+								<%= label_tag 'reserver[state]', 'State', :class => 'block left w80' %>
+								<%= select_tag 'reserver[state]', option_tags(States.all), :class => 'required' %>
 							</p>
 	                        <p class="zip">
 								<%= label_tag 'reserver[zip]', 'Zip Code', :class => 'block left w80' %>
-								<%= text_field_tag 'reserver[zip]' %>
+								<%= text_field_tag 'reserver[zip]', nil, :class => 'required numeric max_5', :maxlength => 5 %>
 							</p>
 	                      </div>
 	                      <div class="sl-table-exp-form-r">            
 							<p>
-								<%= label_tag 'reserver[phone]', 'Phone', :class => 'numeric_phone block left w80' %>
-								<%= text_field_tag 'reserver[phone]' %>
+								<%= label_tag 'reserver[phone]', 'Phone', :class => 'block left w80' %>
+								<%= text_field_tag 'reserver[phone]', nil, :class => 'numeric_phone' %>
 							</p>
 	      					<p>
-								<%= label_tag 'reserver[email]', 'Email', :class => 'email block left w80' %>
-								<%= text_field_tag 'reserver[email]' %>
+								<%= label_tag 'reserver[email]', 'Email', :class => 'block left w80' %>
+								<%= text_field_tag 'reserver[email]', nil, :class => 'email' %>
 							</p>
 	                        <p class="datepicker_wrap">
 								<span class="hidden">Calendar</span>
-								<%= label_tag 'reservation[start_date]', 'Move-In Date', :class => 'numeric_date block left w80' %>
-								<%= text_field_tag 'reservation[start_date]', nil, :id => "cal_#{i}", :class => 'mini_calendar' %>
+								<%= label_tag 'reservation[start_date]', 'Move-In Date', :class => 'block left w80' %>
+								<%= text_field_tag 'reservation[start_date]', nil, :id => "cal_#{i}", :class => 'mini_calendar numeric_date' %>
 							</p>
 							<p>
 								<%= label_tag 'reservation[comment_attributes][comment]', 'Comments', :class => 'block left w80' %>
 								<%= text_area_tag 'reservation[comment_attributes][comment]' %>
-								<a href="#"></a>
 							</p>
-	                         <div class="clear"></div>
+	                        <div class="clear"></div>
 		 					<p class="verisign"><span class="hidden">Verisign Secure</span></p>
-							<p class="right"><input id="submit-btn" type="submit" value="Submit" /></p>
+							<p class="right"><input id="submit-btn" type="submit" value="Submit" name="commit" /></p>
 						</div>
                      <% end %>
                  </div>

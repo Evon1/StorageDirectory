@@ -375,7 +375,7 @@ p.blue-edit a{color:#fff;text-decoration:none;display:block;width:68px;height:22
 #sl-tabs-sizes-in .sl-table-exp p.blue-text a{width:109px;height:39px;display:block;float:right;background:url(/images/ui/storagelocator/sl-questions-blue-btn.png) no-repeat center;text-align:center;line-height:39px;color:#fff;text-decoration:none;margin-right:101px;}
 #sl-tabs-sizes-in .sl-table-exp input{border-radius:8px;-moz-border-radius:8px;-webkit-border-radius:8px;border:1px solid #ccc;padding:0 8px;height:24px;width:170px;line-height:24px;margin:5px;}
 #sl-tabs-sizes-in .sl-table-exp input#submit-btn{width:138px;height:45px;background:url(/images/ui/storagelocator/submit-button.png) no-repeat center;border:none;color:#fff;font-size:120%;font-weight:bold;text-shadow:1px 1px 2px #000;margin:0 8px 15px 0;cursor:pointer;}
-#sl-tabs-sizes-in .sl-table-exp textarea{border-radius:8px;-moz-border-radius:8px;-webkit-border-radius:8px;border:1px solid #ccc;width:176px;font-family:Arial,Helvetica,sans-serif;padding:5px;margin-left:5px;}
+#sl-tabs-sizes-in .sl-table-exp textarea{border-radius:8px;-moz-border-radius:8px;-webkit-border-radius:8px;border:1px solid #ccc;width:176px;font-family:Arial,Helvetica,sans-serif;padding:5px;margin-left:5px;font-size:80%;height:97px;}
 #sl-tabs-sizes-in .sl-table-exp p.move-in{background:url(/images/ui/storagelocator/calendar.png) no-repeat top 190px;text-align:left;position:relative;left:10px;}
 #sl-tabs-sizes-in .sl-table-exp p.zip input{width:90px;}
 #sl-tabs-sizes-in .sl-table-exp p.move-in input{width:80px;}
@@ -559,4 +559,4 @@ img.right{margin:0 10px 10px 0;}
 /* reserve form */
 .sl-table-exp p label{line-height:2.4;font-size:80%;}
 #new_reservation select{margin-left:5px;}
-.datepicker_wrap{}
+.datepicker_wrap{background:url(/images/ui/storagelocator/cal-icon.png) no-repeat 80% 0;}
