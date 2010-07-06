@@ -36,8 +36,7 @@ module ListingsHelper
     
     # only show the More link if there are more
     if range_start < data.total_entries - per_page+1
-      html << image_tag('/images/ui/ajax-loader-facebook.gif', :class => 'ajax_loader inline') + '&nbsp;'
-      html << link_to("+ Show #{remaining < per_page ? remaining : per_page} more", '#more', :id => 'more_results')
+      html << link_to("#{image_tag('/images/ui/ajax-loader-facebook.gif', :class => 'ajax_loader inline')}<span>+</span> Show #{remaining < per_page ? remaining : per_page} more", '#more', :id => 'more_results')
       html << "<span class='hidden' id='params_pagetitle'>#{@page.title.parameterize}</span>"
       html << "<span class='hidden' id='params_query'>#{params[:q]}</span>"
       html << "<span class='hidden' id='params_page'>#{(params[:page] ? params[:page].to_i : 1) + 1}</span>"

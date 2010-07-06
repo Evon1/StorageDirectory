@@ -406,9 +406,12 @@ module ApplicationHelper
   def option_tags(array, selected = nil, prompt = nil)
     option_tags = prompt.nil? ? [] : [content_tag(:option, prompt, :value => '')]
     array.each do |a|
-      options = { :value => a }
-      options.store(:selected, 'selected') if should_be_selected(a, selected)
-      option_tags << content_tag(:option, a.to_s.titleize, options)
+      val = (a.is_a?(Array) ? a[0] : a)
+      name = (a.is_a?(Array) ? a[1] : a)
+      
+      options = { :value => val }
+      options.store(:selected, 'selected') if should_be_selected(val, selected)
+      option_tags << content_tag(:option, name.to_s.titleize, options)
     end
     option_tags
   end

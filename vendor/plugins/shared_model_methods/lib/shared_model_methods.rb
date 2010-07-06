@@ -126,12 +126,7 @@ module SharedModelMethods #:nodoc:
           options_array.each do |option|
             option_tags << _option_tag(attribute, option, (models_view && models_view.view_type == option.to_s))
           end
-
-        #when :blocks_model
-        #  options_array.each do |option|
-        #    option_tags << _option_tag(option, (object.send(attribute) == option.to_s))
-        #  end
-
+          
         else # => no assoc object, or the blocks_model_object
           options_array.each do |option|
             option_tags << _option_tag(attribute, option, _should_be_selected?(object, attribute, option, selected))

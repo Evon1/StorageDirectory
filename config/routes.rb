@@ -46,6 +46,8 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :forms
   map.resources :suggestions
   map.resources :clients
+  map.resources :reservations
+  
   map.resource :site_setting
   
   # greyresults

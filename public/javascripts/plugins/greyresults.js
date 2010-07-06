@@ -4,19 +4,33 @@
 // bind event handlers and implement ajax functionality for search results.
 // first implemented for storage locator
 
+$('.open_reserve_form').click(function(){
+	var $this = $(this),
+		rform = $('.reserve_form', $this.parent());
+	
+	$('.reserve_form').slideUp().removeClass('active');
+	$('.sl-table').removeClass('active');
+	rform.slideDown().addClass('active');
+	
+	return false;
+});
+
+/* AJAX pagination, load next page results in the same page */
 $('#more_results').click(function(){
 	var $this = $(this),
-			ajax_loader = $('.ajax_loader', $this.parent()).show();
+		ajax_loader = $('.ajax_loader', $this.parent()).show();
+	
+	$this.find('span').hide(); // the plus sign
 	
 	// params to build the url that will query the same data the visitor searched for, advanced one page
 	var pagetitle = $('#params_pagetitle', $this.parent()).text(),
-			query = $('#params_query', $this.parent()).text(),
-			within = $('#params_within', $this.parent()).text(),
-			page = $('#params_page', $this.parent()).text();
-	
+		query 	  = $('#params_query', $this.parent()).text(),
+		within 	  = $('#params_within', $this.parent()).text(),
+		page 	  = $('#params_page', $this.parent()).text();
+
 	// to build each listing object
 	var listing_clone = $('.listing:first').clone(),
-			results_wrap = $('#rslt-list-bg');
+		results_wrap = $('#rslt-list-bg');
 	
 	var url = '/'+ pagetitle +'?q=';
 	if (query != '') url += query;
@@ -25,6 +39,7 @@ $('#more_results').click(function(){
 	
 	$.getJSON(url, function(response){
 		ajax_loader.hide();
+		$this.find('span').show(); // the plus sign
 		
 		if (response.success) { // returned some listings
 			// we get an array JSON objects, each represents a listing including related models attributes
@@ -132,10 +147,10 @@ $.fn.greyresults = function() {
 	return this.each(function() {
 		// slide open the panel below a result containing a partial loaded via ajax, as per the rel in the clicked tab link
 		$('.tab_link', this).live('click', function() {
-			var $this			= $(this),
-					$listing	= $this.parent().parent().parent(),
-					$panel		= $('.panel', $listing).addClass('active'),
-					$progress = $('.progress', $listing);
+			var $this		= $(this),
+				$listing	= $this.parent().parent().parent(),
+				$panel		= $('.panel', $listing).addClass('active'),
+				$progress = $('.progress', $listing);
 					
 			// show progress and do ajax call unless we're clicking on the same tab again
 			if ($.clicked_on_different_tab($this, $listing, $panel)) {
@@ -173,7 +188,6 @@ $.fn.greyresults = function() {
 		})
 	});
 }
-
 $('.listing', '#rslt-list-bg').greyresults();
 
 // narrow search form sliders

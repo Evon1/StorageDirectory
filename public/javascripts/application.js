@@ -458,6 +458,12 @@ $.fn.tabular_content = function() {
 	});
 }
 
+$.fn.clickOnLoad = function() {
+	return this.each(function(){
+		$(this).click();
+	});
+}
+
 /******************************************* SUCCESS CALLBACKS *******************************************/
 
 $.toggleHelptext = function(clickedLink) {
@@ -501,6 +507,7 @@ $.bindPlugins = function() {
 	$('.search-btn, .search-button').submitBtn();						 // make a link act as a submit button
 	$('h4 a', '#info-accordion').accordion(); // my very own accordion widget :)
 	$('.tabular_content').tabular_content(); // a div with a list as the tab nav and hidden divs below it as the tabbed content
+	$('.clickerd').clickOnLoad();             // a click is triggered on page load for these elements
 	
 	// sortable nav bar, first implemented to update the position attr of a page (only when logged in)
 	$('.sortable', '.authenticated').sortable({
@@ -517,6 +524,8 @@ $.bindPlugins = function() {
 			$.updateModels(e, ui);
 		}
 	});
+	
+	$('.mini_calendar').datepicker();
 	
 	// front page
 	$('a', '#click-more').click(function(){

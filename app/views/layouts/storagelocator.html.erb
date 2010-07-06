@@ -22,7 +22,7 @@
 			<script type="text/javascript" src="javascripts/IE8.js"></script>
 		<![endif]-->
 	</head>
-	<body id="<%= controller_name %>_controller" class="<%= action_name %>_action <%= page_name %><%= current_user ? ' authenticated' : '' %>">
+	<body id="<%= controller_name %>_controller" class="<%= action_name %>_action <%= page_name + (@page.nil? || @page.new_record? ? ' non_page' : '') %><%= current_user ? ' authenticated' : '' %>">
   	<%#= render :partial => 'menus/menu' if current_user %>
 		
 		<!-- First set up a page container to take the header and main content -->
@@ -112,9 +112,9 @@
     
     <%= yield :footer %>
 	  
-	  <%= javascript_include_tag 'ckeditor/ckeditor.js', 'jquery.all', @plugins %>
+	<%= javascript_include_tag 'ckeditor/ckeditor.js', 'jquery.all', @plugins %>
   	<%= @widgets_js.map { |js| javascript_include_tag js } %>
-  	<%= javascript_include_tag 'application', 'plugins/greyresults' %>
+  	<%= javascript_include_tag 'application' %>
 	
 	</body>
 </html>

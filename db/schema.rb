@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100629200950) do
+ActiveRecord::Schema.define(:version => 20100705224006) do
 
   create_table "block_forms", :force => true do |t|
     t.integer  "block_id"
@@ -259,6 +259,16 @@ ActiveRecord::Schema.define(:version => 20100629200950) do
   add_index "rates", ["rateable_id", "rateable_type"], :name => "index_rates_on_rateable_id_and_rateable_type"
   add_index "rates", ["rater_id"], :name => "index_rates_on_rater_id"
 
+  create_table "reservations", :force => true do |t|
+    t.integer  "listing_id"
+    t.integer  "user_id"
+    t.string   "status"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "roles", :force => true do |t|
     t.string   "title"
     t.datetime "created_at"
@@ -344,11 +354,18 @@ ActiveRecord::Schema.define(:version => 20100629200950) do
   end
 
   create_table "views", :force => true do |t|
+    t.string   "table_catalog"
+    t.string   "table_schema"
     t.string   "model_name"
+    t.string   "table_name"
     t.string   "name"
+    t.string   "view_definition"
     t.text     "description"
     t.datetime "created_at"
+    t.string   "check_option"
     t.datetime "updated_at"
+    t.string   "is_updatable"
+    t.string   "is_insertable_into"
     t.string   "scope"
     t.integer  "owner_id"
   end
