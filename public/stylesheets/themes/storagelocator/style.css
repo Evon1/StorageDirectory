@@ -52,7 +52,7 @@ background:url(/images/ui/storagelocator/handle.png) no-repeat 50% 95%;padding-b
 /* Start the locator code */
 #locater{background:url(/images/ui/storagelocator/search-box-bg.png) repeat-x bottom left #fff;width:360px;height:386px;border:1px solid #C2C2CC;float:left;}
 #locater,#locater-in{border-radius:12px;-moz-border-radius:12px;-webkit-border-radius:12px;background:url(/images/ui/storagelocator/locate-header.png) no-repeat center top;}
-#locater-in{padding:0 40px 20px;background:url(/images/ui/storagelocator/locate-header.png) no-repeat top left;}
+#locater-in{padding:0 40px 20px;background:url(/images/ui/storagelocator/locate-header.png) no-repeat top center;}
 #locater h1{clear:both;color:#FFF;font-size:20px;height:80px;letter-spacing:0.7px;line-height:1.2;position:relative;top:12px;width:260px;font-weight:bold;left:54px;text-shadow:1px 1px 0 #666666;}
 input#postcode{border:none;margin-top:10px;width:260px;padding:6px 10px;height:1.7em;line-height:2em;color:#666;font-size:80%;font-weight:bold;-moz-border-radius:8px;-webkit-border-radius:8px;border-radius:8px;-moz-box-shadow:1px 1px 6px #999 inset;box-shadow:1px 1px 6px rgba(60,60,60,0.1) inset;-webkit-box-shadow:1px 1px 6px rgba(60,60,60,0.1) inset;}
 #locater p{margin-top:10px;color:#666;line-height:2.8;font-size:79%;}
@@ -127,7 +127,7 @@ input#narrow{border:1px solid #ccc;border-radius:8px;-moz-border-radius:8px;-web
 #rslt-head p{margin-top:23px;background:url(/images/ui/storagelocator/results-header-search.png) no-repeat top right;text-shadow:1px 1px 0 #666;width:300px;}
 #rslt-head p a{margin-left:15px;color:#fff;font-weight:bold;font-size:120%;text-decoration:none;}
 input#results{border:1px solid #ccc;font-weight:bold;padding:0 12px;border-radius:8px;-moz-border-radius:8px;-webkit-border-radius:8px;width:185px;height:28px;padding:0 12px;line-height:28px;color:#777;}
-#type-three-top-bar-head,#type-one-top-bar-head,#type-two-top-bar-head{width:774px;background:url(/images/ui/storagelocator/results-list-bg.png) no-repeat top left;height:40px;line-height:20px;position:relative;left:-3px;font-size:80%;-moz-border-radius-bottomleft:22px;-moz-border-radius-bottomright:22px;border-radius-bottomleft:22px;border-radius-bottomright:22px;-webkit-border-radius-bottom-left:22px;-webkit-border-radius-bottom-right:22px;}
+#type-three-top-bar-head,#type-one-top-bar-head,#type-two-top-bar-head{width:774px;background:url(/images/ui/storagelocator/results-list-bg.png) no-repeat top left;height:40px;line-height:20px;position:relative;left:-3px;font-size:80%;}
 #type-three-top-bar-head{background:url(/images/ui/storagelocator/add-facility-bg.png) no-repeat top left;}
 #type-one-top-bar-head li{background-image:url(/images/ui/storagelocator/options-list.png);background-repeat:no-repeat;background-color:#fff;float:left;margin-top:10px;display:inline;}
 #type-two-top-bar-head li{list-style:none;float:left;margin-top:10px;}
@@ -472,7 +472,7 @@ p.blue-edit a{color:#fff;text-decoration:none;display:block;width:68px;height:22
 .tag_link:visited{color:#338833;}
 .tag_link:hover,.tag_link:active{color:#339933;text-decoration:underline;}
 #add_new_tip{margin:15px 20px 0 20px;padding:7px 10px;border:1px solid #ccc;}
-input.slider_val{width:20px;}
+input.slider_val{width:10px;border:1px solid #ccc;border-radius:4px;-moz-border-radius:4px;-webkit-border-radius:4px;padding:3px 5px;}
 .flash{margin-top:12px;width:94%;}
 .table_view{width:100%;}
 .index_action #content,.edit_action #content,.new_action #content{width:100%;float:none;margin-bottom:0;}

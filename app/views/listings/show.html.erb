@@ -119,7 +119,7 @@
 							</p>
 							<p>
 								<%= label_tag 'reserver[state]', 'State', :class => 'block left w80' %>
-								<%= select_tag 'reserver[state]', option_tags(States.all), :class => 'required' %>
+								<%= select_tag 'reserver[state]', option_tags(States.all, nil, ''), :class => 'required' %>
 							</p>
 	                        <p class="zip">
 								<%= label_tag 'reserver[zip]', 'Zip Code', :class => 'block left w80' %>
