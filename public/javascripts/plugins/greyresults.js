@@ -8,9 +8,17 @@ $('.open_reserve_form').click(function(){
 	var $this = $(this),
 		rform = $('.reserve_form', $this.parent());
 	
-	$('.reserve_form').slideUp().removeClass('active');
-	$('.sl-table').removeClass('active');
-	rform.slideDown().addClass('active');
+	if (rform.hasClass('active')) {
+		rform.slideUp().removeClass('active');
+		$('.sl-table').removeClass('active');
+	} else {
+		$('.reserve_form').slideUp().removeClass('active');
+		$('.sl-table').removeClass('active');
+		$('.sl-table', rform.parent()).addClass('active');
+		rform.slideDown().addClass('active');
+	}
+	
+	$('input[type=text]:first', rform).focus();
 	
 	return false;
 });
@@ -109,27 +117,26 @@ $.clicked_on_different_tab = function($tab_link, $listing) {
 	if ($open_panel.length == 0) return true;
 	
 	var clicked_listing = $open_panel.parent().attr('id'),
-			active_listing 	= $listing.attr('id');
+		active_listing 	= $listing.attr('id');
 	if (active_listing != clicked_listing) return true;
 	
 	var clicked_tab  = $tab_link.attr('rel'),
-			active_panel = $open_panel.attr('rel');
+		active_panel = $open_panel.attr('rel');
 	
 	// true when clicking on a different tab in the same result, or the same tab in a different result
 	return (clicked_tab != active_panel && active_listing == clicked_listing) || 
-				 (clicked_tab == active_panel && active_listing != clicked_listing);
+		   (clicked_tab == active_panel && active_listing != clicked_listing);
 }
 
 // panel openers
-$('.inner', '.listing').click(function(){ $('.tab_link[rel=map]', $(this).parent()).click(); });
 $('.open_tab', '.tabs').click(function(){
 	var $this = $(this),
-			$panel = $('.panel', $this.parent().parent().parent());
+		$panel = $('.panel', $this.parent().parent().parent());
 	
 	$('.open_tab').text('+');
 	
 	if (!$this.data('active')) {
-		$('.tab_link[rel=map]', $this.parent()).click();
+		$('.tab_link[rel=map]', $this.parent().parent()).click();
 		$this.data('active', true);
 		$this.text('x');
 	} else {
@@ -147,6 +154,7 @@ $.fn.greyresults = function() {
 	return this.each(function() {
 		// slide open the panel below a result containing a partial loaded via ajax, as per the rel in the clicked tab link
 		$('.tab_link', this).live('click', function() {
+			$('.open_tab').data('active', false);
 			var $this		= $(this),
 				$listing	= $this.parent().parent().parent(),
 				$panel		= $('.panel', $listing).addClass('active'),
@@ -170,7 +178,7 @@ $.fn.greyresults = function() {
 					$panel.html(response);
 					
 					$('.listing:not(.active) .open_tab').text('+');
-					$('.open_tab', $listing).text('X');
+					$('.open_tab', $listing).data('active', true).text('x');
 					
 					if ($panel.is(':hidden')) $panel.slideDown();
 					$('.progress', '.listing').removeClass('active');
