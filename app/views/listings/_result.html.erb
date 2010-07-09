@@ -1,4 +1,4 @@
-<div id="listing_&lt;%= result.id %&gt;" class="listing">
+<div id="listing_<%= result.id %>" class="listing">
 	<div class="inner">
 		<img src="/images/ui/storagelocator/bobs-logo.gif" alt="" width="102" height="77">
 		<div class="rslt-contact">
@@ -23,7 +23,7 @@
 			</li>
 			
 			<li class="rslt-reserve">
-				<%= link_to 'Reserve', result.get_partial_link(:reserve) %>
+				<%= link_to 'Reserve', result.get_partial_link(:reserve), :class => 'tab_link', :rel => 'reserve' %>
 			</li>
 		</ul>
 	</div>

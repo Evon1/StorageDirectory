@@ -24,11 +24,6 @@ $('.open_reserve_form').click(function(){
 	return false;
 });
 
-//opens the reserve form in the listing results page
-$('.rslt-reserve').click(function(){
-	var $this = $(this);
-});
-
 /* AJAX pagination, load next page results in the same page */
 $('#more_results').click(function(){
 	var $this = $(this),
@@ -162,10 +157,10 @@ $.fn.greyresults = function() {
 		$('.tab_link', this).live('click', function() {
 			$('.open_tab').data('active', false);
 			var $this		= $(this),
-				$listing	= $this.parent().parent().parent(),
+				$listing	= $this.parents('.listing'),
 				$panel		= $('.panel', $listing).addClass('active'),
 				$progress = $('.progress', $listing);
-					
+				
 			// show progress and do ajax call unless we're clicking on the same tab again
 			if ($.clicked_on_different_tab($this, $listing, $panel)) {
 				$progress.addClass('active');
@@ -194,6 +189,10 @@ $.fn.greyresults = function() {
 						var $map_wrap = $('.map_wrap', $panel);
 						$map_wrap.append('<iframe />');
 						$('iframe', $map_wrap).src('/ajax/get_map_frame?model=Listing&id='+ $listing.attr('id').split('_')[1]);
+						
+					} else if ($this.attr('rel') == 'reserve') {
+						$('.mini_calendar', $panel).datepicker();
+						$('.datepicker_wrap', $panel).click(function(){ $('.mini_calendar', this).focus(); });
 					}
 				});
 			}

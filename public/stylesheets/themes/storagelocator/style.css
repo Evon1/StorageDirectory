@@ -359,22 +359,22 @@ p.blue-edit a{color:#fff;text-decoration:none;display:block;width:68px;height:22
 #sl-tabs-sizes-in ul.active li.st-rese a,#sl-tabs-sizes-in ul:hover li.st-rese a,#sl-tabs-sizes-in ul:active li.st-rese a{background:url(/images/ui/storagelocator/sl-table-reserve-active.png) no-repeat center;}
 #sl-tabs-sizes-in ul li.st-sele{width:25px;height:46px;background:url(/images/ui/storagelocator/sl-table-select.png) no-repeat center;}
 #sl-tabs-sizes-in ul.active li.st-sele,#sl-tabs-sizes-in ul:hover li.st-sele{background:url(/images/ui/storagelocator/sl-table-select-active.png) no-repeat center;}
-#sl-tabs-sizes-in .sl-table-exp{background:url(/images/ui/storagelocator/sl-table-exp-bg.png) repeat-x bottom left;background-color:#fefeff;border-radius-bottomright:10px;-moz-border-radius-bottomright:10px;-webkit-border-bottom-right-radius:10px;border-radius-bottomleft:10px;-moz-border-radius-bottomleft:10px;-webkit-border-bottom-left-radius:10px;width:685px;position:relative;left:20px;top:-6px;border:1px solid #ccc;overflow:hidden;}
-#sl-tabs-sizes-in .sl-table-exp p{margin:10px 10px;}
-#sl-tabs-sizes-in .sl-table-exp p.blue-text{color:#33c;line-height:39px;font-weight:bold;}
-#sl-tabs-sizes-in .sl-table-exp p.verisign{float:left;width:83px;height:46px;background:url(/images/ui/storagelocator/verisign.png) no-repeat top left;}
-#sl-tabs-sizes-in .sl-table-exp p.blue-text a{width:109px;height:39px;display:block;float:right;background:url(/images/ui/storagelocator/sl-questions-blue-btn.png) no-repeat center;text-align:center;line-height:39px;color:#fff;text-decoration:none;margin-right:101px;}
-#sl-tabs-sizes-in .sl-table-exp input{border-radius:8px;-moz-border-radius:8px;-webkit-border-radius:8px;border:1px solid #ccc;padding:0 8px;height:24px;width:170px;line-height:24px;margin:5px;}
-#sl-tabs-sizes-in .sl-table-exp input#submit-btn{width:138px;height:45px;background:url(/images/ui/storagelocator/submit-button.png) no-repeat center;border:none;color:#fff;font-size:120%;font-weight:bold;text-shadow:1px 1px 2px #000;margin:0 8px 15px 0;cursor:pointer;}
-#sl-tabs-sizes-in .sl-table-exp textarea{border-radius:8px;-moz-border-radius:8px;-webkit-border-radius:8px;border:1px solid #ccc;width:176px;font-family:Arial,Helvetica,sans-serif;padding:5px;margin-left:5px;font-size:80%;height:97px;}
-#sl-tabs-sizes-in .sl-table-exp p.move-in{background:url(/images/ui/storagelocator/calendar.png) no-repeat top 190px;text-align:left;position:relative;left:10px;}
-#sl-tabs-sizes-in .sl-table-exp p.zip input{width:90px;}
-#sl-tabs-sizes-in .sl-table-exp p.move-in input{width:80px;}
-#sl-tabs-sizes-in .sl-table-exp p.move-in a{display:block;width:40px;height:30px;float:right;position:relative;right:55px;}
-#sl-tabs-sizes-in div.sl-table-exp-form-l{border:none;width:49%;float:left;margin-bottom:20px;position:relative;left:20px;}
-#sl-tabs-sizes-in div.sl-table-exp-form-r{border:none;width:49%;float:right;position:relative;right:30px;margin:0 -25px 20px 0;}
-#sl-tabs-sizes-in ul.sl-table-exp-form-l li,
-#sl-tabs-sizes-in ul.sl-table-exp-form-r li{}
+#sl-tabs-sizes-in .sl-table-exp{width:685px;position:relative;top:-6px;margin-left:19px;}
+.sl-table-exp{background:url(/images/ui/storagelocator/sl-table-exp-bg.png) repeat-x bottom left;background-color:#fefeff;border-radius-bottomright:10px;-moz-border-radius-bottomright:10px;-webkit-border-bottom-right-radius:10px;border-radius-bottomleft:10px;-moz-border-radius-bottomleft:10px;-webkit-border-bottom-left-radius:10px;border:1px solid #ccc;overflow:hidden;}
+div.sl-table-exp div input{width:60%;}
+.sl-table-exp p{margin:10px 10px;}
+.sl-table-exp p.blue-text{color:#33c;line-height:39px;font-weight:bold;}
+.sl-table-exp p.verisign{float:left;width:83px;height:46px;background:url(/images/ui/storagelocator/verisign.png) no-repeat top left;}
+.sl-table-exp p.blue-text a{width:109px;height:39px;display:block;float:right;background:url(/images/ui/storagelocator/sl-questions-blue-btn.png) no-repeat center;text-align:center;line-height:39px;color:#fff;text-decoration:none;margin-right:101px;}
+.sl-table-exp input{border-radius:8px;-moz-border-radius:8px;-webkit-border-radius:8px;border:1px solid #ccc;padding:0 8px;height:24px;width:170px;line-height:24px;margin:5px;}
+.sl-table-exp input#submit-btn{width:138px;height:45px;background:url(/images/ui/storagelocator/submit-button.png) no-repeat center;border:none;color:#fff;font-size:120%;font-weight:bold;text-shadow:1px 1px 2px #000;margin:0 8px 15px 0;cursor:pointer;}
+.sl-table-exp textarea{border-radius:8px;-moz-border-radius:8px;-webkit-border-radius:8px;border:1px solid #ccc;width:176px;font-family:Arial,Helvetica,sans-serif;padding:5px;margin-left:5px;font-size:80%;height:97px;}
+.sl-table-exp p.move-in{background:url(/images/ui/storagelocator/calendar.png) no-repeat top 190px;text-align:left;position:relative;left:10px;}
+.sl-table-exp p.zip input{width:90px;}
+.sl-table-exp p.move-in input{width:80px;}
+.sl-table-exp p.move-in a{display:block;width:40px;height:30px;float:right;}
+div.sl-table-exp-form-l{border:none;width:49%;float:left;margin:0 0 20px 20px;}
+div.sl-table-exp-form-r{border:none;width:49%;float:right;position:relative;right:30px;margin:0 -25px 20px 0;}
 #sl-tabs-map-in{height:360px;width:700px;border-radius:8px;-moz-border-radius:8px;-webkit-border-radius:8px;border:2px solid #ccc;margin:21px 0 0 25px;}
 #sl-tabs-map ul{float:right;margin-right:40px;}
 #sl-tabs-map ul li.sl-map-dir{background:url(/images/ui/storagelocator/sl-map-directions-tab.png) no-repeat left top;float:left;width:141px;height:22px;text-transform:uppercase;list-style:none;margin:0px 5px 10px 5px;}
@@ -395,8 +395,7 @@ p.blue-edit a{color:#fff;text-decoration:none;display:block;width:68px;height:22
 #sl-questions h3{height:39px;line-height:36px;text-align:center;color:#fff;text-shadow:1px 1px 2px #000;font-size:16px;}
 #sl-questions input{float:right;border-radius:8px;-moz-border-radius:8px;-webkit-border-radius:8px;border:1px solid #ccc;height:24px;width:170px;line-height:24px;margin:5px;}
 #sl-questions textarea{float:right;border-radius:8px;-moz-border-radius:8px;-webkit-border-radius:8px;border:1px solid #ccc;width:170px;position:relative;left:-5px;font-family:Arial,Helvetica,sans-serif;}
-#sl-logos,
-#sl-extra{width:49%;float:left;}
+#sl-logos,#sl-extra{width:49%;float:left;}
 #sl-extra h3{font-size:2em;}
 #sl-extra p{font-size:12px;margin:10px 0px;line-height:1.8em;}
 #sl-logos{border:1px solid #ccc;float:right;background:#f9f9f9;margin-bottom:15px;}
@@ -461,7 +460,7 @@ p.blue-edit a{color:#fff;text-decoration:none;display:block;width:68px;height:22
 .ui-datepicker{width:222px;}
 .ui-datepicker .ui-datepicker-title{line-height:1.3;}
 .ui-datepicker table{font-size:80%;}
-#new_reservation input.hasDatepicker{width:75px;}
+.new_reservation input.mini_calendar{width:75px;}
 .wysiwyg,.shadow_wrap textarea,input[type="text"]{width:100%;}
 .wysiwyg{height:400px;}
 .model_options{position:absolute;z-index:9999;}
@@ -482,8 +481,14 @@ input.slider_val{width:10px;border:1px solid #ccc;border-radius:4px;-moz-border-
 #list-miles{background-position:97% 50%;}
 .listing{cursor:pointer;overflow:hidden;}
 .listing .inner{padding:0;}
-.panel{width:94%;height:250px;margin:0 auto;background:#fff;position:relative;z-index:600;padding:10px 12px;border-bottom:1px solid #ccc;border-left:1px solid #ccc;border-right:1px solid #ccc;border-radius-bottomright:10px;-moz-border-radius-bottomright:10px;-webkit-border-bottom-right-radius:10px;border-radius-bottomleft:10px;-moz-border-radius-bottomleft:10px;-webkit-border-bottom-left-radius:10px;}
-.panel .inner{height:72%;padding:13px 16px;position:relative;z-index:550;background:#fff;}
+.panel{width:94%;overflow:hidden;margin:0 auto;background:#fff;position:relative;z-index:600;padding:10px 12px;border-bottom:1px solid #ccc;border-left:1px solid #ccc;border-right:1px solid #ccc;border-radius-bottomright:10px;-moz-border-radius-bottomright:10px;-webkit-border-bottom-right-radius:10px;border-radius-bottomleft:10px;-moz-border-radius-bottomleft:10px;-webkit-border-bottom-left-radius:10px;}
+.panel .inner{height:72%;padding:13px 16px;overflow:hidden;position:relative;z-index:550;background:#fff;}
+.panel #map_partial{overflow:visible;height:183px;}
+.panel .sl-table-exp p label{font-size:90%;}
+.panel .sl-table-exp p.blue-text{margin-left:20px;font-size:80%;}
+.panel .sl-table-exp p.blue-text .blue-search-button{margin-right:143px;}
+.panel .sl-table-exp textarea{width:202px;font-size:90%;}
+.panel .sl-table-exp input#submit-btn{margin-right:23px;}
 .listing:hover .inner{border-color:#aaa;}
 .listing .rslt-contact p{margin-bottom:5px;font-size:12px;line-height:1.2;}
 .panel h5{padding:12px 17px;margin-bottom:0;font-size:140%;background:#cc3300;}
