@@ -26,7 +26,7 @@ $('.open_reserve_form').click(function(){
 
 //opens the reserve form in the listing results page
 $('.rslt-reserve').click(function(){
-	
+	var $this = $(this);
 });
 
 /* AJAX pagination, load next page results in the same page */
