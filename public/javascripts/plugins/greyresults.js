@@ -4,6 +4,7 @@
 // bind event handlers and implement ajax functionality for search results.
 // first implemented for storage locator
 
+// opens the reserve form in the unit sizes tab in the single listing page
 $('.open_reserve_form').click(function(){
 	var $this = $(this),
 		rform = $('.reserve_form', $this.parent());
@@ -21,6 +22,11 @@ $('.open_reserve_form').click(function(){
 	$('input[type=text]:first', rform).focus();
 	
 	return false;
+});
+
+//opens the reserve form in the listing results page
+$('.rslt-reserve').click(function(){
+	
 });
 
 /* AJAX pagination, load next page results in the same page */

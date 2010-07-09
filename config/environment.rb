@@ -22,7 +22,7 @@ Rails::Initializer.run do |config|
   # config.gem 'liquid'
    config.gem 'authlogic'
   # config.gem 'facebooker'
-  config.gem 'aws-s3'
+  #config.gem 'aws-s3'
   config.gem 'geokit'
   config.gem 'will_paginate'
   config.gem 'ajaxful_rating', :version => '2.2.8'

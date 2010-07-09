@@ -1,7 +1,7 @@
 class ReservationsController < ApplicationController
 
   before_filter :get_models_paginated, :only => :index
-  before_filter :get_model, :only => [:show, :edit, :destroy]
+  before_filter :get_model, :only => [:show, :edit, :update, :destroy]
 
   def index
   end

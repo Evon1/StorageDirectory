@@ -17,7 +17,7 @@ class Listing < ActiveRecord::Base
   # Instance Methods
   
   def get_partial_link(name)
-    "ajax/get_partial?model=Listing&id=#{id}&partial=views/partials/greyresults/#{name.to_s}"
+    "/ajax/get_partial?model=Listing&id=#{id}&partial=views/partials/greyresults/#{name.to_s}"
   end
   
   def city_and_state

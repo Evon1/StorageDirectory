@@ -1,37 +1,52 @@
-<div id="listing_<%= result.id %>" class="listing">
-	 <div class="inner">
-	   
-	   <img src="/images/ui/storagelocator/bobs-logo.gif" alt="" width="102" height="77"/>
-	   
-	 		<div class="rslt-contact">
- 				<h3 class="rslt-title"><%= link_to result.title, facility_path(result.title.parameterize, result.id) %></h3>
-				 <p><span class="rslt-address"><%= result.map.address %></span><br />
-         <span class="rslt-citystate"><%= result.map.city_state_zip %></span></p>
-			</div>
+<div id="listing_&lt;%= result.id %&gt;" class="listing">
+	<div class="inner">
+		<img src="/images/ui/storagelocator/bobs-logo.gif" alt="" width="102" height="77">
+		<div class="rslt-contact">
+			<h3 class="rslt-title">
+				<%= link_to result.title, facility_path(result.title.parameterize, result.id) %>
+			</h3>
+			<p>
+				<span class="rslt-address"><%= result.map.address %></span><br>
+				<span class="rslt-citystate"><%= result.map.city_state_zip %></span>
+			</p>
+		</div>
+		<ul>
+			<li class="rslt-miles">
+				<span class="shifted-text"><span class="block bold font110"><%= listing_distance(result) %></span>Miles</span>
+			</li>
 			
-			<ul>
-				<li class="rslt-miles"><span class="shifted-text"><span class="block bold font110"><%= listing_distance(result) %></span>Miles</span></li>
-				<li class="rslt-specials">
-				  <% unless result.specials.empty? %>
-  				  <h5><%= result.specials.first.title %></h5>
-            <p><%= result.specials.first.content %></p>
-          <% end %>
-        </li>
-        <li class="rslt-reserve"><a href="">Reserve</a></li>
-			</ul>
-	 </div>
-	 
-	 <div class="panel hidden"></div>
-	 <div class="clear"></div>
-
-	 <ul class="tabs">
-      <li class="open_tab_li"><%= link_to '+', '#', :class => 'open_tab' %></li>
-      <li class="fac-map"><%= link_to 'Map', result.get_partial_link(:map), :rel => 'map', :class => 'tab_link' %></li>
-      <li class="fac-sizes"><%= link_to 'Sizes', result.get_partial_link(:sizes), :rel => 'sizes', :class => 'tab_link' %></li>
-      <li class="fac-specials"><%= link_to 'Specials', result.get_partial_link(:specials), :rel => 'specials', :class => 'tab_link' %></li>
-      <li class="fac-pictures"><%= link_to 'Pictures', result.get_partial_link(:pictures), :rel => 'pictures', :class => 'tab_link' %></li>
-	 </ul>
-
-	<div class="highlight-green progress">&nbsp;</div>
-		 
+			<li class="rslt-specials">
+			  <% unless result.specials.empty? %>
+				<h5><%= result.specials.first.title %></h5>
+				<p><%= result.specials.first.content %></p>
+			  <% end %>
+			</li>
+			
+			<li class="rslt-reserve">
+				<%= link_to 'Reserve', result.get_partial_link(:reserve) %>
+			</li>
+		</ul>
+	</div>
+	<div class="panel hidden"></div>
+	<div class="clear"></div>
+	<ul class="tabs">
+		<li class="open_tab_li">
+			<%= link_to '+', '#', :class => 'open_tab' %>
+		</li>
+		<li class="fac-map">
+			<%= link_to 'Map', result.get_partial_link(:map), :rel => 'map', :class => 'tab_link' %>
+		</li>
+		<li class="fac-sizes">
+			<%= link_to 'Sizes', result.get_partial_link(:sizes), :rel => 'sizes', :class => 'tab_link' %>
+		</li>
+		<li class="fac-specials">
+			<%= link_to 'Specials', result.get_partial_link(:specials), :rel => 'specials', :class => 'tab_link' %>
+		</li>
+		<li class="fac-pictures">
+			<%= link_to 'Pictures', result.get_partial_link(:pictures), :rel => 'pictures', :class => 'tab_link' %>
+		</li>
+	</ul>
+	<div class="highlight-green progress">
+		&nbsp;
+	</div>
 </div>
