@@ -354,18 +354,11 @@ ActiveRecord::Schema.define(:version => 20100705224006) do
   end
 
   create_table "views", :force => true do |t|
-    t.string   "table_catalog"
-    t.string   "table_schema"
     t.string   "model_name"
-    t.string   "table_name"
     t.string   "name"
-    t.string   "view_definition"
     t.text     "description"
     t.datetime "created_at"
-    t.string   "check_option"
     t.datetime "updated_at"
-    t.string   "is_updatable"
-    t.string   "is_insertable_into"
     t.string   "scope"
     t.integer  "owner_id"
   end
