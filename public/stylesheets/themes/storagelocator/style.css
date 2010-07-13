@@ -126,11 +126,11 @@ input#narrow{border:1px solid #ccc;border-radius:8px;-moz-border-radius:8px;-web
 #rslt-head p{margin-top:23px;background:url(/images/ui/storagelocator/results-header-search.png) no-repeat top right;text-shadow:1px 1px 0 #666;width:300px;}
 #rslt-head p a{margin-left:15px;color:#fff;font-weight:bold;font-size:120%;text-decoration:none;}
 input#results{border:1px solid #ccc;font-weight:bold;padding:0 12px;border-radius:8px;-moz-border-radius:8px;-webkit-border-radius:8px;width:185px;height:28px;padding:0 12px;line-height:28px;color:#777;}
-#type-three-top-bar-head,#type-one-top-bar-head,#type-two-top-bar-head{width:774px;background:url(/images/ui/storagelocator/results-list-bg.png) no-repeat top left;height:40px;line-height:20px;position:relative;left:-3px;font-size:80%;}
+#type-three-top-bar-head,#type-one-top-bar-head,#type-two-top-bar-head{width:774px;background:url(/images/ui/storagelocator/results-list-bg.png) no-repeat top left;height:40px;line-height:20px;position:relative;left:-3px;}
 #type-three-top-bar-head{background:url(/images/ui/storagelocator/add-facility-bg.png) no-repeat top left;}
 #type-one-top-bar-head li{background-image:url(/images/ui/storagelocator/options-list.png);background-repeat:no-repeat;background-color:#fff;float:left;margin-top:10px;display:inline;}
 #type-two-top-bar-head li{list-style:none;float:left;margin-top:10px;}
-#type-one-top-bar-head li a{color:#000;margin-left:2px;display:block;float:left;padding-left:5px;text-decoration:none;}
+#type-one-top-bar-head li a{color:#333;margin-left:2px;display:block;float:left;padding-left:5px;text-decoration:none;}
 #type-one-top-bar-head li#list-name{border:1px solid #ccc;margin-left:40px;width:315px;}
 #type-one-top-bar-head li#list-name a{width:315px;}
 #type-one-top-bar-head li#list-miles{border:1px solid #ccc;margin-left:10px;width:100px;}
@@ -363,6 +363,7 @@ p.blue-edit a{color:#fff;text-decoration:none;display:block;width:68px;height:22
 div.sl-table-exp div input{width:60%;}
 .sl-table-exp p{margin:10px 10px;}
 .sl-table-exp p.blue-text{color:#33c;line-height:39px;font-weight:bold;}
+.sl-table-exp p.blue-text strong{text-decoration:underline;}
 .sl-table-exp p.verisign{float:left;width:83px;height:46px;background:url(/images/ui/storagelocator/verisign.png) no-repeat top left;}
 .sl-table-exp p.blue-text a{width:109px;height:39px;display:block;float:right;background:url(/images/ui/storagelocator/sl-questions-blue-btn.png) no-repeat center;text-align:center;line-height:39px;color:#fff;text-decoration:none;margin-right:101px;}
 .sl-table-exp input{border-radius:8px;-moz-border-radius:8px;-webkit-border-radius:8px;border:1px solid #ccc;padding:0 8px;height:24px;width:170px;line-height:24px;margin:5px;}
@@ -405,18 +406,18 @@ div.sl-table-exp-form-r{border:none;width:49%;float:right;position:relative;righ
 #ov-top ul#ov-top-list li span{color:#33c;font-size:1.1em;}
 #ov-top ul#ov-top-list{width:725px;background:#000;}
 #ov-reports,#ov-info,#ov-settings{border:1px solid #ccc;border-radius:20px;-moz-border-radius:20px;-webkit-border-radius:20px;margin-top:20px;margin-bottom:10px;clear:both;width:99.5%;}
-#ov-item-head{background:url(/images/ui/storagelocator/ov-header-bg.png) repeat-x top left;height:41px;border-bottom:1px solid #ccc;border-radius-topleft:20px;-moz-border-radius-topleft:20px;-webkit-border-top-left-radius:20px;border-radius-topright:20px;-moz-border-radius-topright:20px;-webkit-border-top-right-radius:20px;line-height:41px;}
+#ov-item-head{background:url(/images/ui/storagelocator/ov-header-bg.png) repeat-x top left;margin-bottom:10px;padding-right:10px;height:41px;border-bottom:1px solid #ccc;border-radius-topleft:20px;-moz-border-radius-topleft:20px;-webkit-border-top-left-radius:20px;border-radius-topright:20px;-moz-border-radius-topright:20px;-webkit-border-top-right-radius:20px;line-height:41px;position:relative;}
 #ov-units-head{border:1px solid #ccc;background:url(/images/ui/storagelocator/ov-header-bg.png) repeat-x top left;width:99.5%;height:41px;border-bottom:1px solid #ccc;border-radius-topleft:20px;-moz-border-radius-topleft:20px;-webkit-border-top-left-radius:20px;border-radius-topright:20px;-moz-border-radius-topright:20px;-webkit-border-top-right-radius:20px;line-height:41px;margin-top:20px;margin-bottom:10px;}
 #ov-units-head h3,#ov-item-head h3{position:relative;left:20px;float:left;font-size:1.4em;}
 #ov-units-head p,#ov-item-head p{float:right;}
-#ov-item-head p{background:url(/images/ui/storagelocator/edit-btn-small.png) no-repeat top left;width:82px;height:30px;position:relative;right:20px;line-height:30px;font-weight:bold;text-align:center;top:6px;}
+#ov-item-head p{background:url(/images/ui/storagelocator/edit-btn-small.png) no-repeat top left;width:82px;height:30px;line-height:30px;font-weight:bold;text-align:center;float:right;margin:6px;}
 #ov-item-head p a{display:block;width:82px;height:30px;text-decoration:none;color:#fff;text-shadow:1px 1px 2px #000;}
 #ov-units-head p{background:url(/images/ui/storagelocator/little-drop-down.png) no-repeat 150px center;background-color:#fff;width:180px;height:20px;line-height:20px;border:1px solid #ccc;position:relative;top:10px;right:20px;}
 #ov-units-head p a{display:block;position:relative;left:10px;width:160px;text-decoration:none;color:#666;}
-#ov-info-cnt{float:left;position:relative;text-align:right;width:300px;}
+#ov-info-cnt{float:left;position:relative;text-align:right;width:45%;}
 #ov-info-cnt p,#ov-info-cnt ul li{list-style:none;margin:5px 0px;clear:both;color:#666;font-size:80%;}
 #ov-info-cnt p{text-align:left;position:relative;left:50px;color:#33c;font-size:1.2em;margin:10px 0px;}
-#ov-info-cnt ul li span{width:150px;display:block;float:right;text-align:left;position:relative;left:10px;color:#000;}
+#ov-info-cnt ul li span.value{width:60%;display:block;float:right;text-align:left;position:relative;left:10px;color:#000;}
 #ov-units #rslt-list-bg{background:url(/images/ui/storagelocator/sl-table-bg.png) repeat top left;position:relative;left:0px;border-right:1px solid #ccc;border-left:1px solid #ccc;}
 #ov-units #rslt-list-bg .listing .inner{position:relative;left:-1px;}
 #ov-units .listing .inner .rslt-miles{width:60px;}
@@ -424,7 +425,7 @@ div.sl-table-exp-form-r{border:none;width:49%;float:right;position:relative;righ
 #ov-units .listing .inner .rslt-miles span{font-size:1.2em;display:block;position:relative;top:30px;left:22px;width:3em;}
 #ov-units .listing .inner .rslt-reserve{width:108px;}
 #ov-reports ul li{list-style:none;display:inline;}
-#ov-reports ul li a{width:218px;height:174px;margin:0 8px;cursor:pointer;text-align:center;display:block;float:left;font-weight:bold;font-size:100%;}
+#ov-reports ul li a{width:31.1%;height:174px;margin:0 8px 11px;cursor:pointer;text-align:center;display:block;float:left;font-weight:bold;font-size:100%;}
 #ov-reports ul li a:link,#ov-reports ul li a:visited{text-decoration:none;color:#666;}
 #ov-reports ul li a:hover,#ov-reports ul li a:active{color:#339933;}
 #ov-reports ul li span{position:relative;top:145px;}
@@ -446,7 +447,7 @@ div.sl-table-exp-form-r{border:none;width:49%;float:right;position:relative;righ
 #reserveonline-box p span{color:#33c;}
 #girl-pic{background:url(/images/ui/storagelocator/girl.png) no-repeat center 70px ;height:435px;width:169px;position:relative;left:15px;margin-bottom:20px;}
 #admin-box ul li{list-style:none;}
-#admin-box ul li a{background:url(/images/ui/storagelocator/admin-facility-btn.png) no-repeat -30px left;width:163px;height:31px;line-height:31px;color:#fff;text-shadow:1px 1px 2px #000;text-decoration:none;display:block;margin:5px 0px;font-size:1.2em;}
+#admin-box ul li a{background:url(/images/ui/storagelocator/admin-facility-btn.png) no-repeat 0 -31px;width:163px;height:31px;line-height:31px;color:#fff;text-shadow:1px 1px 2px #000;text-decoration:none;display:block;margin:5px 0px;}
 #admin-box ul li a span{position:relative;left:10px;}
 #admin-box ul li a:hover{background:url(/images/ui/storagelocator/admin-facility-btn.png) no-repeat top left;}
 /************************************************** END additions.css *********************************************************/
@@ -548,9 +549,12 @@ img.right{margin:0 10px 10px 0;}
 #ov-page-cnt > div{margin:0 0 20px 0;}
 #ov-page-cnt #sl-footer{width:99.5%;height:40px;margin:20px 0;}
 #ov-page-cnt #ov-top{margin:18px 0 10px;overflow:hidden;}
-#ov-page-cnt #ov-info{padding-bottom:15px;overflow:hidden;}
+#ov-page-cnt #ov-info{padding-bottom:18px;overflow:hidden;}
 /* reserve form */
 .sl-table-exp p label{line-height:2.4;font-size:80%;}
 #new_reservation select{margin-left:5px;}
 .datepicker_wrap{background:url(/images/ui/storagelocator/cal-icon.png) no-repeat 80% 0;cursor:pointer;}
 ul#add-fac-form a.search-button,#narrow-box a.search-btn{text-shadow:1px 1px 0 #666;}
+/* client edit form */
+#ov-info-cnt input.small_text_field{float:right;font-size:80%;padding:3px 5px;margin-left:10px;width:54%;border:1px solid#ccc;border-radius:8px;-moz-border-radius:8px;-webkit-border-radius:8px;}
+#ov-item-head .ajax_loader{position:absolute;right:205px;top:14px;}

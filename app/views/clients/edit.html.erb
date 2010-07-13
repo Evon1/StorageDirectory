@@ -22,40 +22,38 @@
         </ul>
       </div>
      
- 	  <div id="ov-info">
+ 	  <div id="ov-info" class="instant_form">
 	
         <div id="ov-item-head">
-          <h3>
-            <span>Owner Info</span>
-          </h3>
-          <p>
-            <a id="client_edit_contact" href="#">Edit</a>
-          </p>
+          <h3><span>Owner Info</span></h3>
+			
+		  <%= image_tag '/images/ui/ajax-loader-facebook.gif', :class => 'ajax_loader' %>
+          <p><a id="client_edit_contact" class="instant_submit" href="#">Edit</a></p>
         </div>
 
         <div id="ov-info-cnt">
           <p>Mailing Address</p>
           <ul>
-            <li>Name:<span>John Doe</span></li>
-            <li>Company:<span>Storage Group inc.</span></li>
-            <li>Address:<span>Address line 1</span></li>
-            <li><span>Address line 2</span></li>
-            <li>Phone:<span>555-9733-9748</span></li>
-            <li>Email:<span>email@address.com</span></li>
+            <li><span class="label">Name:</span><span class="value" rel="mailing_address"><%= @client.active_mailing_address.name if @client.has_mailing_address? %></span></li>
+            <li><span class="label">Company:</span><span class="value" rel="mailing_address"><%= @client.active_mailing_address.company if @client.has_mailing_address? %></span></li>
+            <li><span class="label">Address:</span><span class="value" rel="mailing_address"><%= @client.active_mailing_address.address if @client.has_mailing_address? %></span></li>
+            <li><span class="label">Phone:</span><span class="value" rel="mailing_address"><%= @client.active_mailing_address.phone if @client.has_mailing_address? %></span></li>
+            <li><span class="label">Email:</span><span class="value" rel="mailing_address"><%= @client.active_mailing_address.email if @client.has_mailing_address? %></span></li>
           </ul>
         </div>
 
         <div id="ov-info-cnt">
           <p>Billing Info</p>
           <ul>
-            <li>Name:<span>John Doe</span></li>
-            <li>Address:<span>Address line 1</span></li>
-            <li><span>Address line 2</span></li>
-            <li>Card Type:<span>Visa</span></li>
-            <li>Card Number:<span>xxx-xxxx-xxxx-4000</span></li>
+            <li><span class="label">Name:</span><span class="value" rel="billing_info"><%= @client.active_billing_info.name if @client.has_billing_info? %></span></li>
+            <li><span class="label">Address:</span><span class="value" rel="billing_info"><%= @client.active_billing_info.address if @client.has_billing_info? %></span></li>
+			<li><span class="label">Phone:</span><span class="value" rel="billing_info"><%= @client.active_billing_info.phone if @client.has_billing_info? %></span></li>
+            <li><span class="label">Card Type:</span><span class="value" rel="billing_info"><%= @client.active_billing_info.card_type if @client.has_billing_info? %></span></li>
+            <li><span class="label">Card Number:</span><span class="value" rel="billing_info"><%= @client.active_billing_info.card_number if @client.has_billing_info? %></span></li>
           </ul>
         </div>
-
+		<% form_for @client, :html => { :id => "client_edit_#{@client.id}", :class => 'hidden' } do |f| %><% end %>
+		
       </div>
 
       <div id="ov-units">
@@ -147,6 +145,6 @@
       
     </div>
     <div class="clear"></div>
-    
+
   </div>
 </div>

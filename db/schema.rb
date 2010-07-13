@@ -9,7 +9,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100705224006) do
+ActiveRecord::Schema.define(:version => 20100713031751) do
+
+  create_table "billing_infos", :force => true do |t|
+    t.integer  "client_id"
+    t.string   "name"
+    t.string   "address"
+    t.string   "phone"
+    t.string   "card_type"
+    t.string   "card_number"
+    t.integer  "card_expiration"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "block_forms", :force => true do |t|
     t.integer  "block_id"
@@ -161,6 +173,17 @@ ActiveRecord::Schema.define(:version => 20100705224006) do
     t.text     "description"
     t.boolean  "enabled"
     t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "mailing_addresses", :force => true do |t|
+    t.integer  "client_id"
+    t.string   "name"
+    t.string   "company"
+    t.string   "address"
+    t.string   "phone"
+    t.string   "email"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

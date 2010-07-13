@@ -464,6 +464,68 @@ $.fn.clickOnLoad = function() {
 	});
 }
 
+$.fn.instantForm = function() {
+	return this.each(function(){
+		var $this 		= $(this),
+			hidden_form = $('form:hidden', this),
+			submit_btn 	= $('.instant_submit', this),
+			client_id 	= hidden_form.attr('id').replace('client_edit_', ''),
+			ajax_loader = $('.ajax_loader', $this),
+			cancel_btn 	= $('<p class="cancel"><a href="#" id="cancel_btn">Cancel</a></p>').hide();
+		
+		submit_btn.parent().before(cancel_btn);
+		
+		submit_btn.click(function(){
+			if ($(this).text() == 'Edit') {
+				cancel_btn.fadeIn();
+				
+				$('.value', $this).each(function(){
+					var $self 		= $(this).hide(),
+						label_text 	= $self.prev('.label').text().replace(':', '').replace(' ', '_').toLowerCase(),
+						input 		= $('<input type="text" class="small_text_field" name="client['+ $self.attr('rel') +'][' + label_text +']" value="'+ $self.text() +'" />');
+
+					input.prependTo($self.parent());
+				});
+
+				$(this).text('Save');
+				
+			} else if ($(this).text() == 'Save') {
+				ajax_loader.show();
+				
+				// put copies of the inputs into the form so we can serialize it and send the data
+				$('input', $this).each(function(){ hidden_form.append($(this).clone()); });
+				
+				$.post(hidden_form.attr('action'), hidden_form.serialize(), function(response){
+					if (response.success) {
+						$('.value', $this).each(function(){
+							var this_val   = $(this),
+								this_input = $('input', this_val.parent()).hide();
+
+							this_val.text(this_input.val()).show();
+						});
+						
+						submit_btn.text('Edit');
+					} else alert(response.data);
+					
+					ajax_loader.hide();
+					cancel_btn.fadeOut();
+					
+				}, 'json');
+			}
+			
+			return false;
+		});
+		
+		cancel_btn.click(function(){
+			$('.small_text_field', $this).remove();
+			$('.value', $this).fadeIn();
+			$(this).fadeOut();
+			submit_btn.text('Edit');
+			return false;
+		});
+	});
+}
+
 /******************************************* SUCCESS CALLBACKS *******************************************/
 
 $.toggleHelptext = function(clickedLink) {
@@ -508,6 +570,7 @@ $.bindPlugins = function() {
 	$('h4 a', '#info-accordion').accordion(); // my very own accordion widget :)
 	$('.tabular_content').tabular_content(); // a div with a list as the tab nav and hidden divs below it as the tabbed content
 	$('.clickerd').clickOnLoad();             // a click is triggered on page load for these elements
+	$('.instant_form').instantForm();		// turn a tags with class name label and value into form labels and inputs
 	
 	// sortable nav bar, first implemented to update the position attr of a page (only when logged in)
 	$('.sortable', '.authenticated').sortable({
