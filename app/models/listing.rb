@@ -7,8 +7,7 @@ class Listing < ActiveRecord::Base
   
   has_many :specials
   has_many :pictures
-  has_many :listing_sizes
-  has_many :sizes, :through => :listing_sizes
+  has_many :sizes
   
   validates_presence_of :title
   

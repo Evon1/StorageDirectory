@@ -16,6 +16,7 @@ class ClientsController < ApplicationController
   end
   
   def update
+    raise params.pretty_inspect
     respond_to do |format|
       if @client.update_info(params[:client])
         format.html do
