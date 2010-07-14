@@ -78,7 +78,7 @@ p#click-more a{font-size:16px;height:36px;text-shadow:1px 1px 0 #666;display:blo
 /* Start the results page styles here */
 #type-two-l-col,#type-one-l-col,#content_bottom{width:197px;float:left;margin-top:10px;position:relative;left:2px;}
 #listings_controller #content_bottom.region{margin-top:10px;}
-#type-one-r-col, #pages_controller.show_action #content{width:776px;float:right;position:relative;left:4px;border-radius:24px;-moz-border-radius:24px;-webkit-border-radius:24px;}
+#type-one-r-col, #content{width:776px;float:right;position:relative;left:4px;border-radius:24px;-moz-border-radius:24px;-webkit-border-radius:24px;}
 #type-one-r-col{left:0;}
 /* Customizations - D.S */
 .home #content,.home #content_bottom,.pages_1_ #content,.pages_1_ #content_bottom,.pages_1 #content,.pages_1 #content_bottom{float:none;width:auto;margin:0;position:static;}
