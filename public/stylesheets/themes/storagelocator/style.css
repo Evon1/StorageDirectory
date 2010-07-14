@@ -18,7 +18,7 @@ background:url(/images/ui/storagelocator/handle.png) no-repeat 50% 95%;padding-b
 #page-cnt-in{margin:12px 5px;}
 #type-two-cnt-in{margin:2px 0px;}
 #rslt-page-cnt-in{margin:5px 0px;}
-.home #type-one-cnt-in,.pages_1_ #type-one-cnt-in,.pages_1 #type-one-cnt-in,.index_action #type-one-cnt-in,.new_action #type-one-cnt-in{margin:15px 20px 0px 20px;}
+.home #type-one-cnt-in,.pages_1_ #type-one-cnt-in,.pages_1 #type-one-cnt-in,.index_action #type-one-cnt-in,.new_action #type-one-cnt-in,#blocks_controller #type-one-cnt-in{margin:15px 20px 0px 20px;}
 #listings_controller.show_action #type-one-cnt-in{padding:0;}
 #listings_controller #narrow-box { margin-top:0;}
 #cnt-space{height:80px;}
@@ -45,10 +45,7 @@ background:url(/images/ui/storagelocator/handle.png) no-repeat 50% 95%;padding-b
 #main-nav ul li#tips,#main-nav ul li#Page_3{width:121px;background:url(/images/ui/storagelocator/tips-button.png) no-repeat top left;}
 #main-nav ul li#add,#main-nav ul li#Page_11{width:146px;background:url(/images/ui/storagelocator/add-button.png) no-repeat top left;}
 #top-nav ul li.hidden{display:none;}
-/* End header styles */
-/* This is the end of the main page template styles */
 /* Start the main homepage styles here */
-/* Start the locator code */
 #locater{background:url(/images/ui/storagelocator/search-box-bg.png) repeat-x bottom left #fff;width:360px;height:386px;border:1px solid #C2C2CC;float:left;}
 #locater,#locater-in{border-radius:12px;-moz-border-radius:12px;-webkit-border-radius:12px;background:url(/images/ui/storagelocator/locate-header.png) no-repeat center top;}
 #locater-in{padding:0 40px 20px;background:url(/images/ui/storagelocator/locate-header.png) no-repeat top center;}
@@ -63,14 +60,12 @@ input#postcode{border:none;margin-top:10px;width:260px;padding:6px 10px;height:1
 ul.city-list{margin:13px 0px;width:120px;float:left;line-height:1.3;position:relative;left:35px;}
 ul.city-list li{list-style:none;}
 ul.city-list li a{width:110px;display:block;}
-/* End the locater styles here */
 /* Start feature styles here */
 #feat{float:right;background:url(/images/ui/storagelocator/front-green-bg.png) no-repeat bottom center;width:567px;height:387px;position:relative;left:8px;}
 #feat-pic{background:url(/images/ui/storagelocator/storage-pic.png) no-repeat top right;height:317px;width:566px;-moz-border-radius:10px;-webkit-border-radius:10px;margin-bottom:10px;overflow:hidden;}
 #feat-txt{position:relative;top:150px;background-color:#000;width:290px;text-shadow:1px 1px 2px #000;font-size:210%;padding:18px;background:rgb(0,0,0);/* RGBa with 0.5 opacity */background:rgba(0,0,0,0.5);/* For IE 5.5 - 7*/filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000,endColorstr=#99000000);/* For IE 8*/-ms-filter:"progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000,endColorstr=#99000000)";border-radius-topright:20px;-moz-border-radius-topright:20px;-webkit-border-top-right-radius:20px;border-radius-bottomright:20px;-moz-border-radius-bottomright:20px;-webkit-border-bottom-right-radius:20px;}
 #feat-txt h2{color:#fff;}
 #feat p{text-align:center;color:#fff;font-size:190%;position:absolute;bottom:20px;left:55px;text-shadow:1px 1px 0 #666;}
-/* End feature styles here */
 /* Start the three boxes styles here */
 #three-box{background:url(/images/ui/storagelocator/three-boxes-bg.png) repeat-x top left;background-color:#DBDBDB;border:1px solid #C2C2CC;width:942px;margin:20px 0 0 0;padding:8px 0;border-radius:12px;-moz-border-radius:12px;-webkit-border-radius:12px;}
 .home-box{background:url(/images/ui/storagelocator/three-boxes-side-bg.png) no-repeat top right;width:313px;float:left;}
@@ -80,19 +75,13 @@ ul.city-list li a{width:110px;display:block;}
 #three-box-reserve{background:url(/images/ui/storagelocator/step3-bg.jpg) no-repeat top center;}
 p#click-more{width:226px;position:absolute;height:35px;line-height:25px;background:url(/images/ui/storagelocator/click-for-more.png) no-repeat bottom center;text-align:center;margin-left:50px;font-size:14px;font-weight:bold;}
 p#click-more a{font-size:16px;height:36px;text-shadow:1px 1px 0 #666;display:block;width:200px;text-decoration:none;color:#fff;margin-left:13px;}
-/* End the three boxes styles here */
 /* Start the results page styles here */
 #type-two-l-col,#type-one-l-col,#content_bottom{width:197px;float:left;margin-top:10px;position:relative;left:2px;}
-#listings_controller #content_bottom.region{margin-top:15px;}
-#type-one-r-col,#content{width:776px;float:right;position:relative;left:4px;border-radius:24px;-moz-border-radius:24px;-webkit-border-radius:24px;}
+#listings_controller #content_bottom.region{margin-top:10px;}
+#type-one-r-col, #pages_controller.show_action #content{width:776px;float:right;position:relative;left:4px;border-radius:24px;-moz-border-radius:24px;-webkit-border-radius:24px;}
 #type-one-r-col{left:0;}
 /* Customizations - D.S */
-.home #content,
-.home #content_bottom,
-.pages_1_ #content,
-.pages_1_ #content_bottom,
-.pages_1 #content,
-.pages_1 #content_bottom{float:none;width:auto;margin:0;position:static;}
+.home #content,.home #content_bottom,.pages_1_ #content,.pages_1_ #content_bottom,.pages_1 #content,.pages_1 #content_bottom{float:none;width:auto;margin:0;position:static;}
 #type-two-r-col{width:776px;border-radius:20px;-moz-border-radius:20px;-webkit-border-radius:20px;float:right;margin-bottom:10px;}
 #narrow-box{background:url(/images/ui/storagelocator/narrow-search-header.png) no-repeat top left;width:164px;border-radius:10px;-moz-border-radius:10px;-webkit-border-radius:10px;position:relative;left:20px;color:#555;text-align:center;}
 #add-fac-box{background:url(/images/ui/storagelocator/add-facility-box-header.png) no-repeat top left;width:164px;position:relative;left:20px;color:#555;text-align:center;height:200px;}
@@ -231,7 +220,6 @@ li.share a.twitter{background:url(/images/ui/storagelocator/twitter.png) no-repe
 li.share a.socialmediaone{background:url(/images/ui/storagelocator/socialmedia1.png) no-repeat top left;}
 li.share a.socialmediatwo{background:url(/images/ui/storagelocator/socialmedia2.png) no-repeat top left;}
 li.share a.socialmediathree{background:url(/images/ui/storagelocator/socialmedia3.png) no-repeat top left;}
-/* End the tips blog page styles here */
 /* Start the add facility page styles here */
 ul#add-fac-form{width:430px;float:left;position:relative;left:45px;margin-bottom:20px;}
 ul#add-fac-form li{list-style:none;margin-bottom:20px;clear:both;}
@@ -254,7 +242,6 @@ ul#add-fac-form li input{padding:5px;border-radius:8px;-moz-border-radius:8px;-w
 .tab_content h4, .tab_content p{color:#555;padding-right:15px;padding-left:15px;}
 .tab_content p{font-size:100%;margin:10px 0px 30px 0px;line-height:1.3;}
 .tab_content h4{color:#3333CB;font-size:120%;margin:10px 0px 10px 0px;}
-/* End the add facility page styles here */
 /* Start footer styles here */
 .blue-line{background-color:#4745CC;clear:both;margin:5px 0px;color:#fff;height:3em;line-height:3em;}
 .blue-line ul#bottom-nav li{display:inline;margin-right:20px;text-shadow:1px 1px 2px #000;}
@@ -311,7 +298,7 @@ li.rslt-offer span{position:relative;top:20px;left:10px;font-size:80%;}
 #sl-header h2{width:560px;float:left;text-shadow:1px 1px 2px #000;position:relative;left:15px;margin-bottom:15px;font-size:120%;}
 #sl-header h2 span{font-size:1.4em;}
 #sl-header p.back-btn{background:url(/images/ui/storagelocator/back-btn.png) no-repeat top left;width:172px;height:33px;line-height:33px;float:right;position:relative;top:8px;right:8px;text-align:center;}
-#sl-header p.editing-btn{background:url(/images/ui/storagelocator/editing-btn.png) no-repeat top left;width:172px;height:33px;line-height:33px;float:right;position:relative;top:8px;right:8px;text-align:center;font-size:14px;font-weight:bold;text-shadow:1px 1px 2px #000;}
+#sl-header p.editing-btn{background:url(/images/ui/storagelocator/editing-btn.png) no-repeat top left;width:172px;height:33px;line-height:2.2;float:right;position:relative;top:8px;right:8px;text-align:center;font-size:14px;font-weight:bold;text-shadow:1px 1px 2px #000;}
 #sl-header p.back-btn a{font-size:14px;color:#fff;font-weight:bold;text-decoration:none;text-shadow:1px 1px 2px #000;position:relative;left:10px;display:block;width:160px;height:33px;}
 #sl-fac-detail{width:365px;float:left;}
 #sl-fac-detail-in-edit{border:1px solid #ccc;border-radius:15px;-moz-border-radius:15px;-webkit-border-radius:15px;}
@@ -347,14 +334,15 @@ p.blue-edit a{color:#fff;text-decoration:none;display:block;width:68px;height:22
 #sl-tabs-sizes-in ul{clear:both;width:719px;height:46px;line-height:46px;border-radius:10px;-moz-border-radius:10px;-webkit-border-radius:10px;border:1px solid #ccc;background:none;text-align:left;position:relative;left:2px;top:-5px;color:#666;}
 #sl-tabs-sizes-in ul li{display:block;float:left;}
 #sl-tabs-sizes-in ul.sl-table-head{background:url(/images/ui/storagelocator/sl-table-top.png) repeat-x top left;border:0;line-height:1.7;height:28px;font-size:12px;color:#666;top:0px;left:0px;width:725px;}
-#sl-tabs-sizes-in ul.sl-table{background:url(/images/ui/storagelocator/sl-table-inactive.png) repeat-x top left;margin-top:5px;font-weight:bold;cursor:pointer;}
+#sl-tabs-sizes-in ul.sl-table{background:url(/images/ui/storagelocator/sl-table-inactive.png) repeat-x top left;margin-top:5px;font-weight:bold;cursor:pointer;font-size:90%;}
+.edit_action #sl-tabs-sizes-in ul.sl-table{cursor:default;}
 #sl-tabs-sizes-in ul.active,#sl-tabs-sizes-in .sl-table:hover,#sl-tabs-sizes-in .sl-table.active{background:url(/images/ui/storagelocator/sl-table-active.png) repeat-x top left;color:#333;}
 #sl-tabs-sizes-in ul li.st-size{margin-left:25px;width:55px;}
 #sl-tabs-sizes-in ul li.st-type{width:180px;font-weight:normal;}
 #sl-tabs-sizes-in ul li.st-pric{width:125px;}
 #sl-tabs-sizes-in ul li.st-spec{width:200px;font-weight:normal;}
 #sl-tabs-sizes-in ul li.st-rese{width:100px;text-align:center;}
-#sl-tabs-sizes-in ul li.st-rese a{position:relative;top:7px;display:block;width:84px;height:32px;line-height:32px;color:#fff;text-shadow:1px 1px 2px #000;text-decoration:none;background:url(/images/ui/storagelocator/sl-table-reserve.png) no-repeat center;font-weight:normal;}
+#sl-tabs-sizes-in ul li.st-rese a{position:relative;top:7px;right:-8px;display:block;width:84px;height:32px;line-height:32px;color:#fff;text-shadow:1px 1px 2px #000;text-decoration:none;background:url(/images/ui/storagelocator/sl-table-reserve.png) no-repeat center;font-weight:normal;}
 #sl-tabs-sizes-in ul.active li.st-rese a,#sl-tabs-sizes-in ul:hover li.st-rese a,#sl-tabs-sizes-in ul:active li.st-rese a{background:url(/images/ui/storagelocator/sl-table-reserve-active.png) no-repeat center;}
 #sl-tabs-sizes-in ul li.st-sele{width:25px;height:46px;background:url(/images/ui/storagelocator/sl-table-select.png) no-repeat center;}
 #sl-tabs-sizes-in ul.active li.st-sele,#sl-tabs-sizes-in ul:hover li.st-sele{background:url(/images/ui/storagelocator/sl-table-select-active.png) no-repeat center;}
@@ -405,9 +393,9 @@ div.sl-table-exp-form-r{border:none;width:49%;float:right;position:relative;righ
 #ov-top ul#ov-top-list li{display:block;width:200px;float:left;text-align:center;margin-bottom:10px;font-weight:bold;}
 #ov-top ul#ov-top-list li span{color:#33c;font-size:1.1em;}
 #ov-top ul#ov-top-list{width:725px;background:#000;}
-#ov-reports,#ov-info,#ov-settings{border:1px solid #ccc;border-radius:20px;-moz-border-radius:20px;-webkit-border-radius:20px;margin-top:20px;margin-bottom:10px;clear:both;width:99.5%;}
+#ov-reports,#ov-info,#ov-settings{border:1px solid #ccc;border-radius:20px;-moz-border-radius:20px;-webkit-border-radius:20px;margin-top:20px;margin-bottom:10px;clear:both;width:99.4%;}
 #ov-item-head{background:url(/images/ui/storagelocator/ov-header-bg.png) repeat-x top left;margin-bottom:10px;padding-right:10px;height:41px;border-bottom:1px solid #ccc;border-radius-topleft:20px;-moz-border-radius-topleft:20px;-webkit-border-top-left-radius:20px;border-radius-topright:20px;-moz-border-radius-topright:20px;-webkit-border-top-right-radius:20px;line-height:41px;position:relative;}
-#ov-units-head{border:1px solid #ccc;background:url(/images/ui/storagelocator/ov-header-bg.png) repeat-x top left;width:99.5%;height:41px;border-bottom:1px solid #ccc;border-radius-topleft:20px;-moz-border-radius-topleft:20px;-webkit-border-top-left-radius:20px;border-radius-topright:20px;-moz-border-radius-topright:20px;-webkit-border-top-right-radius:20px;line-height:41px;margin-top:20px;margin-bottom:10px;}
+#ov-units-head{border:1px solid #ccc;background:url(/images/ui/storagelocator/ov-header-bg.png) repeat-x top left;width:99.4%;height:41px;border-bottom:1px solid #ccc;border-radius-topleft:20px;-moz-border-radius-topleft:20px;-webkit-border-top-left-radius:20px;border-radius-topright:20px;-moz-border-radius-topright:20px;-webkit-border-top-right-radius:20px;line-height:41px;margin-top:20px;margin-bottom:10px;}
 #ov-units-head h3,#ov-item-head h3{position:relative;left:20px;float:left;font-size:1.4em;}
 #ov-units-head p,#ov-item-head p{float:right;}
 #ov-item-head p{background:url(/images/ui/storagelocator/edit-btn-small.png) no-repeat top left;width:82px;height:30px;line-height:30px;font-weight:bold;text-align:center;float:right;margin:6px;}
@@ -415,7 +403,7 @@ div.sl-table-exp-form-r{border:none;width:49%;float:right;position:relative;righ
 #ov-units-head p{background:url(/images/ui/storagelocator/little-drop-down.png) no-repeat 150px center;background-color:#fff;width:180px;height:20px;line-height:20px;border:1px solid #ccc;position:relative;top:10px;right:20px;}
 #ov-units-head p a{display:block;position:relative;left:10px;width:160px;text-decoration:none;color:#666;}
 #ov-info-cnt{float:left;position:relative;text-align:right;width:45%;}
-#ov-info-cnt p,#ov-info-cnt ul li{list-style:none;margin:5px 0px;clear:both;color:#666;font-size:80%;}
+#ov-info-cnt p,#ov-info-cnt ul li{list-style:none;margin:5px 0px;clear:both;color:#666;font-size:80%;line-height:1.5;}
 #ov-info-cnt p{text-align:left;position:relative;left:50px;color:#33c;font-size:1.2em;margin:10px 0px;}
 #ov-info-cnt ul li span.value{width:60%;display:block;float:right;text-align:left;position:relative;left:10px;color:#000;}
 #ov-units #rslt-list-bg{background:url(/images/ui/storagelocator/sl-table-bg.png) repeat top left;position:relative;left:0px;border-right:1px solid #ccc;border-left:1px solid #ccc;}
@@ -541,7 +529,7 @@ img.right{margin:0 10px 10px 0;}
 /* create client */
 #client_form .flash{margin:0 0 21px 44px;width:52.3%;-moz-border-radius:8px;border-radius:8px;-webkit-border-radius:8px;}
 /* edit client */
-#ov-units #rslt-list-bg {width:99.5%;}
+#ov-units #rslt-list-bg {width:99.4%;}
 #ov-units .listing{padding-bottom:10px;}
 #ov-units .listing > .inner{width:100%;}
 #ov-units .listing .rslt-reserve{width:145px;}
@@ -549,7 +537,8 @@ img.right{margin:0 10px 10px 0;}
 #ov-page-cnt > div{margin:0 0 20px 0;}
 #ov-page-cnt #sl-footer{width:99.5%;height:40px;margin:20px 0;}
 #ov-page-cnt #ov-top{margin:18px 0 10px;overflow:hidden;}
-#ov-page-cnt #ov-info{padding-bottom:18px;overflow:hidden;}
+#ov-page-cnt #ov-info{padding-bottom:18px;overflow:hidden;position:relative;}
+#cancel_btn{position:absolute;bottom:10px;right:20px;color:#999;}
 /* reserve form */
 .sl-table-exp p label{line-height:2.4;font-size:80%;}
 #new_reservation select{margin-left:5px;}
@@ -557,4 +546,5 @@ img.right{margin:0 10px 10px 0;}
 ul#add-fac-form a.search-button,#narrow-box a.search-btn{text-shadow:1px 1px 0 #666;}
 /* client edit form */
 #ov-info-cnt input.small_text_field{float:right;font-size:80%;padding:3px 5px;margin-left:10px;width:54%;border:1px solid#ccc;border-radius:8px;-moz-border-radius:8px;-webkit-border-radius:8px;}
-#ov-item-head .ajax_loader{position:absolute;right:205px;top:14px;}
+#ov-item-head .ajax_loader{position:absolute;right:110px;top:14px;}
+#listings_controller .flash{margin:10px 0 0 20px;}

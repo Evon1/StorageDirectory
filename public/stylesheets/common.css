@@ -237,8 +237,7 @@ input.tiny_text_field{width:30px !important;}
 .block .buttons a.iconOnly16,
 #view_type_link_wrap .iconOnly16{text-indent:-999999px;background-repeat:no-repeat;display:block;padding:1px 9px;}
 .add_link{background-image:url(/images/ui/plus_sign.png);}
-.delete_link,.inline_delete_link,
-.block_models_view .buttons a.delete_link,.plain .buttons a.delete_link{background-image:url(/images/ui/delete_icon.png);}
+.delete_link,.inline_delete_link,.block_models_view .buttons a.delete_link,.plain .buttons a.delete_link{background-image:url(/images/ui/delete_icon.png);}
 .cancel_link{background-image:url(/images/ui/cancel_icon.png);}
 .question_mark{background-image:url(/images/ui/question_mark.png);}
 .list_icon{background-image:url(/images/ui/list_icon.png);}
@@ -259,7 +258,7 @@ a.toggle_down{background-image:url(/images/ui/toggle_icon-down.png);}
 #page_buttons .toggle_right:hover{background:url(/images/ui/hide_icon.png) no-repeat 0;}
 .block .buttons .toggle_down,.block .buttons .toggle_down:hover,
 #page_buttons .toggle_down,#page_buttons .toggle_down:hover{background:url(/images/ui/show_icon.png) no-repeat 0;}
-.buttons a{font-size:75%;line-height:1.7;}
+.buttons a{font-size:75%;}
 .grey_buttons a:link,.grey_buttons a:visited,
 input[type='submit'],input[type='reset']{text-decoration:none;padding:3px 10px;background:url("/images/ui/button-bg.jpg") repeat-x top;border:1px solid #dadada;border-top:2px solid #fff;color:#555;text-shadow:0 1px #fff;-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;cursor:pointer;line-height:2.3;}
 input[type='submit']{color:#5286ed;}

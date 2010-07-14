@@ -46,7 +46,7 @@ jQuery.fn.formBouncer = function(){
 						markInvalid(input, form);
 					}
 
-					if (input.class_name('numeric') && isNaN(input.val())) {
+					if (input.hasClass('numeric') && isNaN(input.val())) {
 						error += '<p>' + input.attr('id').replace('_', ' ') + ' must be numeric.</p>';
 						markInvalid(input, form);
 					}

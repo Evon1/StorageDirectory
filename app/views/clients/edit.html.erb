@@ -63,24 +63,22 @@
             <span>My Units</span>
           </h3>
           <p>
-            <a href="">Sort by address</a>
+            <a href="#">Sort by address</a>
           </p>
         </div>
 
         <div id="rslt-list-bg">
 		
-			<% 1.upto(3) do |i| %>
+			<% @client.listings.each_with_index do |listing, i| %>
 	          <!-- The following div can be copied for each item -->
 	          <div class="listing">
 	            <div class="inner">
 	              <img src="/images/ui/storagelocator/bobs-logo.gif" alt="" width="102" height="77" />
 	              <div class="rslt-contact">
-	                <h3>
-	                  Uncle Bob's Self Storage
-	                </h3>
+	                <h3><%= listing.title %></h3>
 	                <p>
-	                  990 SW 18th St<br />
-	                  Boca Raton, FL 33428
+	                  <%= listing.map.address %><br />
+	                  <%= listing.map.city_state_zip %>
 	                </p>
                 
 	              </div>
@@ -94,7 +92,7 @@
 	                  Online Only Special</span>
 	                </li>
 	                <li class="rslt-reserve">
-	                  <a href="">Edit</a>
+	                  <%= link_to 'Edit', edit_client_listing_path(@client, listing) %>
 	                </li>
 	              </ul>
 	            </div>

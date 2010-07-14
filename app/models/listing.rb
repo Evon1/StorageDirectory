@@ -1,6 +1,6 @@
 class Listing < ActiveRecord::Base
   
-  belongs_to :user
+  belongs_to :client, :foreign_key => 'user_id'
   
   has_one  :map
   acts_as_mappable :through => :map

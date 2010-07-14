@@ -1,0 +1,170 @@
+<h1 class="hidden">Self Storage Facility: <%= @listing.title.titleize %></h1>
+<a name="top" id="top"></a>
+
+<div id="type-one-r-col">
+  <div id="type-three-r-col-in">
+    
+    <div id="sl-header">
+      <h2><%= @listing.title.titleize %> in <%= @listing.city_and_state * ', ' %></h2>
+      
+		<% if action_name == 'edit' %>
+			<p class="editing-btn">Facility edit mode</p>
+		<% else %>
+			<p class="back-btn"><%= link_to 'Back to Results', :back %></p>
+		<% end %>
+		
+      <div class="clear"></div>
+    </div>
+    
+    <div id="sl-fac-detail">
+      <div id="sl-fac-detail-in-edit">
+        <img src="/images/ui/storagelocator/bobs-logo.gif" alt="" width="164" height="120">
+        
+        <p class="address">
+          <span>ADDRESS:</span><br>
+          <%= @listing.map.address %><br>
+          <%= @listing.map.city_state_zip %><br>
+        </p>
+        <p>
+          <a href="#">www.website.com</a>
+        </p>
+        <div class="clear"></div>
+        <p>
+          <span>Category:</span> Type 1, Type 2, Type 3
+        </p>
+      </div>
+    </div>
+    
+    <div id="sl-fac-dist">
+      <div id="sl-fac-dist-in-edit">
+        <p class="sl-phone">
+          Call: 1800 1800 180
+        </p>
+        <p>
+          Get 50% off your first month of rent!
+        </p>
+        <p class="sl-dist">
+          We are just <span id="rslt-number"><span>2</span></span> miles from you!
+        </p>
+      </div>
+    </div>
+    <div class="clear"></div>
+    
+    <div id="sl-tabs">
+      <div id="sl-tabs-in" class="tabular_content">
+        <ul id="sl-tabs-nav" class="tabular">
+          <li class="active">
+            <a href="#" rel="sl-tabs-sizes">Unit Sizes</a>
+          </li>
+          <li>
+            <a href="#" rel="sl-tabs-map">Map</a>
+          </li>
+          <li>
+            <a href="#" rel="sl-tabs-feat">Features</a>
+          </li>
+          <li>
+            <a href="#" rel="sl-tabs-pict">Pictures</a>
+          </li>
+        </ul>
+        <div id="sl-tabs-sizes" class="tab_content">
+          <div id="sl-tabs-sizes-in">
+            <ul class="sl-table-head">
+              <li class="st-size">Size
+              </li>
+              <li class="st-type">Type
+              </li>
+              <li class="st-pric">Price
+              </li>
+              <li class="st-spec">Special
+              </li>
+            </ul>
+
+			<% @listing.sizes.each do |size| %>
+				<div class="sl-table-wrap">
+					<ul class="sl-table<%= ' open_reserve_form' if action_name == 'show' %>">
+						<li class="st-size"><span class="value"><%= size.x %></span> x <span><%= size.y %></span></li>
+						<li class="st-type">Climate controlled</li>
+						<li class="st-pric">$36.00</li>
+						<li class="st-spec">First Month Free</li>
+						<li class="st-rese">
+							<% if action_name == 'edit' %>
+								<%= link_to 'Edit', listing_size_path(@listing, size), :class => 'edit-btn' %>
+							<% else %>
+								<a href="#" class="rsr-btn">Reserve</a>
+							<% end %>
+						</li>
+						<li class="st-sele"><span class="hidden">Select</span></li>
+					</ul>
+
+					<% if action_name == 'show' %>
+						<div class="reserve_form hidden">
+							<%= render :partial => 'views/partials/greyresults/reserve', :locals => { :listing => @listing } %>
+						</div>
+					<% end %>
+					
+				</div>
+           <% end %>
+
+          </div>
+        </div>
+        
+        <div id="sl-tabs-map" class="tab_content">
+          <div id="sl-tabs-map-in">
+            <%= @Gmap.div :width => '700px', :height => '360px' %>
+          </div>
+          
+          <ul>
+            <li class="sl-map-dir">
+              <%= link_to 'Get Directions', google_directions_link(@listing.map.full_address), :target => '_blank' %>
+            </li>
+            <li class="sl-map-pri"><a href="">Print map</a></li>
+          </ul>
+          <div class="clear"></div>
+        </div>
+        
+        <div id="sl-tabs-feat" class="tab_content">
+          <div id="sl-tabs-feat-in">
+            <% 1.upto(12) do |i| %>
+            <ul>
+              <li><span>Item <%= i %></span></li>
+              <li><span>Item 2</span></li>
+            </ul><% end %>
+            <div class="clear"></div>
+          </div>
+        </div>
+        
+        <div id="sl-tabs-pict" class="tab_content">
+          <div id="sl-tabs-pict-in">
+            <ul id="sl-tabs-pict-gall">
+              <li><img src="/images/ui/storagelocator/example-gallery-tn.png"></li>
+              <li><img src="/images/ui/storagelocator/example-gallery-tn.png"></li>
+              <li><img src="/images/ui/storagelocator/example-gallery-tn.png"></li>
+              <li><img src="/images/ui/storagelocator/example-gallery-tn.png"></li>
+              <li><img src="/images/ui/storagelocator/example-gallery-tn.png"></li>
+              <li><img src="/images/ui/storagelocator/example-gallery-tn.png"></li>
+              <li><img src="/images/ui/storagelocator/example-gallery-tn.png"></li>
+              <li><img src="/images/ui/storagelocator/example-gallery-tn.png"></li>
+            </ul>
+            <img src="/images/ui/storagelocator/example-gallery.png" class="big-pic">
+          </div>
+          <div class="clear"></div>
+          
+        </div>
+      </div>
+    </div>
+    
+    <div id="sl-extra">
+      <h3>Lorem ipsum heading here</h3>
+      <p>
+        Lorem ipsum text can go here, Lorem ipsum text can go here, Lorem ipsum text can go here...
+      </p>
+    </div>
+    
+    <div id="sl-logos">
+      <img src="/images/ui/storagelocator/test-logos.png" alt="recognitions">
+    </div>
+    <div id="sl-footer"></div>
+    
+  </div>
+  
+</div>

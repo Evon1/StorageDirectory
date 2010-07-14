@@ -24,6 +24,30 @@ $('.open_reserve_form').click(function(){
 	return false;
 });
 
+// edit functionality for the sizes in the facility edit page
+$('.edit-btn', '.authenticated .sl-table').click(function(){
+	var $this 		= $(this),
+		container 	= $this.parent().parent(),
+		sizes_li 	= $('.st-size', container),
+		type_li 	= $('.st-type', container),
+		price_li 	= $('.st-pric', container),
+		specials_li = $('.st-spec', container),
+		reset_li 	= $('.st-rese', container),
+		load_li 	= $('.st-sele', container);
+	
+	
+	
+	if ($(this).text() == 'Edit') {
+		
+		$this.text('Save');
+		
+	} else if ($(this).text() == 'Save') {
+		
+	}
+	
+	return false;
+});
+
 /* AJAX pagination, load next page results in the same page */
 $('#more_results').click(function(){
 	var $this = $(this),
