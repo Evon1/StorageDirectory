@@ -29,7 +29,7 @@ $('.edit-btn', '.authenticated .sl-table').click(function(){
 	var $this 			= $(this),
 		container 		= $this.parent().parent(),
 		hidden_form		= $('.hidden_form', container.parent()),
-		cancel_btn		= $('.cancel_btn', container.parent()),
+		cancel_btn		= $('.cancel_link', container.parent()),
 		size_id			= $('input[name=size_id]', container).val(),
 		sizes_li 		= $('.st-size', container),
 		type_li 		= $('.st-type', container),
@@ -46,7 +46,7 @@ $('.edit-btn', '.authenticated .sl-table').click(function(){
 		
 		// we needed to adjust the size of the sizes li to stop the inputs within from breaking to a new line, we save the original css here to revert later
 		sizes_li_adjustment = { 'margin-left': '13px', 'width': '67px' },
-		sizes_li_revertment = { 'margin-left': sizes_li.css('margin-left'), 'width': sizes_li.css('width') };
+		sizes_li_revertment = { 'margin-left': '25px', 'width': '55px' };
 	
 	if ($(this).text() == 'Edit') {
 		// build the input fields with the original values preset
@@ -54,9 +54,9 @@ $('.edit-btn', '.authenticated .sl-table').click(function(){
 			y = sizes_orig.split(/\W?x\W?/)[1],
 			xi = '<input type="text" size="3" maxlength="3" class="small_num i" name="size[x]" value="'+ x +'" />',
 			yi = '<input type="text" size="3" maxlength="3" class="small_num i" name="size[y]" value="'+ y +'" />',
-			ti = '<input type="text" class="small_text_field i" name="size[unit_type]" value="'+ type_orig +'" />',
+			ti = '<input type="text" class="small_text_field i" name="size[unit_type]" value="'+ (type_orig == 'NONE' ? '' : type_orig) +'" />',
 			pi = '<input type="text" size="8" maxlength="8" class="small_text_field i" name="size[price]" value="'+ price_orig.replace('$', '') +'" />',
-			si = '<input type="text" class="small_text_field i" name="size[special]" value="'+ specials_orig +'" />';
+			si = '<input type="text" class="small_text_field i" name="size[special]" value="'+ (specials_orig == 'NONE' ? '' : specials_orig) +'" />';
 		
 		// replace the content in the unit size row
 		sizes_li.css(sizes_li_adjustment).html(xi +' x '+ yi);
@@ -74,7 +74,7 @@ $('.edit-btn', '.authenticated .sl-table').click(function(){
 		
 		// clone the inputs and put into the hidden form in order to serialize the data
 		$('input.i', container).each(function(){ hidden_form.append($(this).clone()); });
-		console.log(hidden_form)
+		
 		$.post(hidden_form.attr('action'), hidden_form.serialize(), function(response){
 			if (response.success) {
 				// update the row with the new values

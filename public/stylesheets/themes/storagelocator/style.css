@@ -18,9 +18,6 @@ background:url(/images/ui/storagelocator/handle.png) no-repeat 50% 95%;padding-b
 #page-cnt-in{margin:12px 5px;}
 #type-two-cnt-in{margin:2px 0px;}
 #rslt-page-cnt-in{margin:5px 0px;}
-.home #type-one-cnt-in,.pages_1_ #type-one-cnt-in,.pages_1 #type-one-cnt-in,.index_action #type-one-cnt-in,.new_action #type-one-cnt-in,#blocks_controller #type-one-cnt-in{margin:15px 20px 0px 20px;}
-#listings_controller.show_action #type-one-cnt-in{padding:0;}
-#listings_controller #narrow-box {margin-top:5px;}
 #cnt-space{height:80px;}
 /* Start header styles */
 #logo{float:left;height:187px;width:139px;margin-left:35px;position:relative;z-index:9999;}
@@ -404,9 +401,9 @@ div.sl-table-exp-form-r{border:none;width:49%;float:right;position:relative;righ
 #ov-units-head p{background:url(/images/ui/storagelocator/little-drop-down.png) no-repeat 150px center;background-color:#fff;width:180px;height:20px;line-height:20px;border:1px solid #ccc;position:relative;top:10px;right:20px;}
 #ov-units-head p a{display:block;position:relative;left:10px;width:160px;text-decoration:none;color:#666;}
 #ov-info-cnt{float:left;position:relative;text-align:right;width:45%;}
-#ov-info-cnt p,#ov-info-cnt ul li{list-style:none;margin:5px 0px;clear:both;color:#666;font-size:80%;line-height:1.5;}
+#ov-info-cnt p,#ov-info-cnt ul li{list-style:none;margin:5px 0px;clear:both;color:#333;font-size:80%;line-height:1.5;}
 #ov-info-cnt p{text-align:left;position:relative;left:50px;color:#33c;font-size:1.2em;margin:10px 0px;}
-#ov-info-cnt ul li span.value{width:60%;display:block;float:right;text-align:left;position:relative;left:10px;color:#000;}
+#ov-info-cnt ul li span.value{width:60%;display:block;float:right;text-align:left;position:relative;left:10px;color:#666;}
 #ov-units #rslt-list-bg{background:url(/images/ui/storagelocator/sl-table-bg.png) repeat top left;position:relative;left:0px;border-right:1px solid #ccc;border-left:1px solid #ccc;}
 #ov-units #rslt-list-bg .listing .inner{position:relative;left:-1px;}
 #ov-units .listing .inner .rslt-miles{width:60px;}
@@ -461,7 +458,13 @@ div.sl-table-exp-form-r{border:none;width:49%;float:right;position:relative;righ
 input.slider_val{width:10px;border:1px solid #ccc;border-radius:4px;-moz-border-radius:4px;-webkit-border-radius:4px;padding:3px 5px;}
 .flash{margin-top:12px;width:94%;}
 .table_view{width:100%;}
-.index_action #content,.edit_action #content,.new_action #content{margin-bottom:0;}
+/* the container styles */
+.home #type-one-cnt-in,.pages_1_ #type-one-cnt-in,.pages_1 #type-one-cnt-in,.index_action #type-one-cnt-in,.new_action #type-one-cnt-in,.edit_action #type-one-cnt-in,#pages_controller #type-one-cnt-in{margin:15px 20px 0px 20px;}
+#clients_controller #type-one-cnt-in,#listings_controller #type-one-cnt-in{margin:0;}
+#pages_controller #type-one-cnt-in #content{width:auto;float:none;position:static;}
+#listings_controller.show_action #type-one-cnt-in{padding:0;}
+#listings_controller #narrow-box {margin-top:5px;}
+.index_action #content,.edit_action #content,.new_action #content{margin-bottom:0;float:none;width:auto;position:static;}
 #rslt-head h2{font-size:20px;}
 #steps{padding-bottom:15px;}
 #list-name{background-position:99% 50%;}
@@ -548,9 +551,10 @@ ul#add-fac-form a.search-button,#narrow-box a.search-btn{text-shadow:1px 1px 0 #
 /* client edit form */
 #sl-tabs-sizes-in .sl-table-wrap{overflow:hidden;}
 #clients_controller input.small_text_field,#listings_controller input.small_text_field,.sl-table .small_num{font-size:80%;padding:3px 5px;border:1px solid#ccc;border-radius:8px;-moz-border-radius:8px;-webkit-border-radius:8px;}
-#ov-info-cnt input.small_text_field{float:right;margin-left:10px;width:54%;}
+#ov-info-cnt input.small_text_field{float:right;margin-left:10px;width:54%;color:#666;}
 #ov-item-head .ajax_loader{position:absolute;right:110px;top:14px;}
 .sl-table input.small_num{width:15px;padding:3px;}
 .sl-table .small_text_field{width:80%;float:left;margin-top:12px;}
+#listings_controller .sl-table a.hidden{margin:14px 2px 0 0;display:none;}
 /* fixes */
 #listings_controller .flash{margin:10px 0 0 20px;}

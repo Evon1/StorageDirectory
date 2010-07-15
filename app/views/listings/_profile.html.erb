@@ -82,10 +82,10 @@
 			<% @listing.sizes.each do |size| %>
 				<div class="sl-table-wrap">
 					<ul class="sl-table<%= ' open_reserve_form' if action_name == 'show' %>">
-						<li class="st-size"><%= size.x %> x <%= size.y %></li>
-						<li class="st-type">Climate controlled</li>
-						<li class="st-pric">$36.00</li>
-						<li class="st-spec">First Month Free</li>
+						<li class="st-size"><%= size.display_dimensions %></li>
+						<li class="st-type"><%= size.unit_type || 'NONE' %></li>
+						<li class="st-pric"><%= size.display_price %></li>
+						<li class="st-spec"><%= size.special || 'NONE' %></li>
 						<li class="st-rese">
 							<% if action_name == 'edit' %>
 								<%= link_to 'Edit', listing_size_path(@listing, size), :class => 'edit-btn' %>
@@ -95,7 +95,7 @@
 							<% end %>
 						</li>
 						<li class="st-sele">
-							<%= link_to 'X', '#', :class => 'hidden cancel_btn right' %>
+							<%= link_to 'Cancel', '#', :class => 'hidden cancel_link iconOnly16 right', :title => 'Cancel' %>
 						</li>
 					</ul>
 

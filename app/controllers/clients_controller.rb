@@ -16,7 +16,6 @@ class ClientsController < ApplicationController
   end
   
   def update
-    raise params.pretty_inspect
     respond_to do |format|
       if @client.update_info(params[:client])
         format.html do
@@ -29,7 +28,14 @@ class ClientsController < ApplicationController
         end
         
       else
-      
+        format.html do
+          flash[:error] = model_errors(@client)
+          redirect_to :action => 'edit'
+        end
+        
+        format.js do
+          render :json => { :success => false, :data => model_errors(@client) }
+        end
       end
     end
   end
