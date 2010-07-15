@@ -1,5 +1,8 @@
 /* Style sheet. Created by ns-designs 2010 */
-
+html {
+overflow-y: scroll;
+overflow-x: hidden;
+}
 /* Start by defining the main page layout */
 * {
 padding: 0;
