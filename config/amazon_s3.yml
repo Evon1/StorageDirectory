@@ -1,0 +1,14 @@
+development:
+  bucket: storagelocator
+  access_key_id: AKIAIOIDZ35L6N6SRDVQ
+  secret_access_key: 78Infl5e5TQTUaj+s2PLaWcn6Nq1kYThZm4+wNz5
+
+test:
+  bucket: myapptest
+  access_key_id: <your key>
+  secret_access_key: <your key>
+
+production:
+  bucket: storagelocator
+  access_key_id: AKIAIOIDZ35L6N6SRDVQ
+  secret_access_key: 78Infl5e5TQTUaj+s2PLaWcn6Nq1kYThZm4+wNz5

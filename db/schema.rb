@@ -9,7 +9,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100629200950) do
+ActiveRecord::Schema.define(:version => 20100714215015) do
+
+  create_table "billing_infos", :force => true do |t|
+    t.integer  "client_id"
+    t.string   "name"
+    t.string   "address"
+    t.string   "phone"
+    t.string   "card_type"
+    t.string   "card_number"
+    t.integer  "card_expiration"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "block_forms", :force => true do |t|
     t.integer  "block_id"
@@ -148,19 +160,22 @@ ActiveRecord::Schema.define(:version => 20100629200950) do
     t.integer  "target_id"
   end
 
-  create_table "listing_sizes", :force => true do |t|
-    t.integer  "listing_id"
-    t.integer  "size_id"
-    t.integer  "position",   :default => 0
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "listings", :force => true do |t|
     t.string   "title"
     t.text     "description"
     t.boolean  "enabled"
     t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "mailing_addresses", :force => true do |t|
+    t.integer  "client_id"
+    t.string   "name"
+    t.string   "company"
+    t.string   "address"
+    t.string   "phone"
+    t.string   "email"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -259,6 +274,16 @@ ActiveRecord::Schema.define(:version => 20100629200950) do
   add_index "rates", ["rateable_id", "rateable_type"], :name => "index_rates_on_rateable_id_and_rateable_type"
   add_index "rates", ["rater_id"], :name => "index_rates_on_rater_id"
 
+  create_table "reservations", :force => true do |t|
+    t.integer  "listing_id"
+    t.integer  "user_id"
+    t.string   "status"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "roles", :force => true do |t|
     t.string   "title"
     t.datetime "created_at"
@@ -272,6 +297,9 @@ ActiveRecord::Schema.define(:version => 20100629200950) do
     t.string   "unit"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "unit_type"
+    t.integer  "price"
+    t.integer  "listing_id"
   end
 
   create_table "specials", :force => true do |t|
@@ -344,11 +372,18 @@ ActiveRecord::Schema.define(:version => 20100629200950) do
   end
 
   create_table "views", :force => true do |t|
+    t.string   "table_catalog"
+    t.string   "table_schema"
     t.string   "model_name"
+    t.string   "table_name"
     t.string   "name"
+    t.string   "view_definition"
     t.text     "description"
     t.datetime "created_at"
+    t.string   "check_option"
     t.datetime "updated_at"
+    t.string   "is_updatable"
+    t.string   "is_insertable_into"
     t.string   "scope"
     t.integer  "owner_id"
   end

@@ -45,11 +45,13 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :helptexts
   map.resources :forms
   map.resources :suggestions
-  map.resources :clients
+  map.resources :clients, :has_many => :listings
+  map.resources :reservations
+  
   map.resource :site_setting
   
   # greyresults
-  map.resources :listings, :collection => { :import => :post }
+  map.resources :listings, :collection => { :import => :post }, :has_many => :sizes
   
   map.paperclip_attachment '/images/:id', :controller => 'images', :action => 'show'
   
@@ -70,7 +72,6 @@ ActionController::Routing::Routes.draw do |map|
     user.resources :comments
     user.resources :tags
     user.resources :permissions
-    user.resources :listings
   end
   
   map.resources :pages do |page|

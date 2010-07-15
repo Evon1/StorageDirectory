@@ -1,2 +1,7 @@
-<h1>Listings#edit</h1>
-<p>Find me in app/views/listings/edit.html.erb</p>
+<% declare_content_for %>
+<% content_for :scripts, @Gmap.to_html %>
+<%= display_message flash %>
+
+<div class="staticContent">
+	<%= render :partial => 'profile' %>
+</div>

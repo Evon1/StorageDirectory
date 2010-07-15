@@ -458,6 +458,77 @@ $.fn.tabular_content = function() {
 	});
 }
 
+$.fn.clickOnLoad = function() {
+	return this.each(function(){
+		$(this).click();
+	});
+}
+
+// first implemented for the client edit form. turns spans into inputs and submits the data via ajax
+$.fn.instantForm = function() {
+	return this.each(function(){
+		var $this 		= $(this),
+			hidden_form = $('form:hidden', this), // a hidden form we use for the authenticity token and to submit via ajax
+			submit_btn 	= $('.instant_submit', this),
+			client_id 	= hidden_form.attr('id').replace('client_edit_', ''),
+			ajax_loader = $('.ajax_loader', $this),
+			cancel_btn 	= $('<a href="#" id="cancel_btn">Cancel</a>').hide().appendTo($this);
+		
+		// serves as the edit mode button and submit button
+		submit_btn.click(function(){
+			if ($(this).text() == 'Edit') {
+				cancel_btn.fadeIn();
+				
+				// turn elements with a class of value into an input. use it's rel attr and text for the field name, the rel attr is the relation name, e.g. mailing_address, billing_info. the text is the attr name
+				$('.value', $this).each(function(){
+					var $self 		= $(this).hide(),
+						label_text 	= $self.prev('.label').text().replace(':', '').replace(' ', '_').toLowerCase(),
+						field_name	= 'client'+ ($self.attr('rel') ? '['+ $self.attr('rel') +']' : '') +'[' + label_text +']', 
+						input 		= $('<input type="text" class="small_text_field '+ label_text +'" name="'+ field_name +'" value="'+ $self.text() +'" />');
+
+					input.prependTo($self.parent());
+				});
+
+				$(this).text('Save');
+				$.bindPlugins(); // so that hinty and formbouncer will work.
+				
+			} else if ($(this).text() == 'Save') {
+				ajax_loader.show();
+				
+				// put copies of the inputs into the form so we can serialize it and send the data
+				$('input', $this).each(function(){ hidden_form.append($(this).clone()); });
+				
+				$.post(hidden_form.attr('action'), hidden_form.serialize(), function(response){
+					if (response.success) {
+						$('.value', $this).each(function(){
+							var this_val   = $(this),
+								this_input = $('input', this_val.parent()).hide();
+
+							this_val.text(this_input.val()).fadeIn(1000);
+						});
+						
+						submit_btn.text('Edit');
+					} else alert(response.data);
+					
+					ajax_loader.hide();
+					cancel_btn.fadeOut();
+					
+				}, 'json');
+			}
+			
+			return false;
+		});
+		
+		cancel_btn.click(function(){
+			$('.small_text_field', $this).remove();
+			$('.value', $this).show();
+			$(this).fadeOut();
+			submit_btn.text('Edit');
+			return false;
+		});
+	});
+}
+
 /******************************************* SUCCESS CALLBACKS *******************************************/
 
 $.toggleHelptext = function(clickedLink) {
@@ -471,6 +542,7 @@ $.toggleHelptext = function(clickedLink) {
 // used to rebind the plugin to elements loaded into the DOM dynamically or through AJAX
 $.bindPlugins = function() {
 	$('.hintable').hinty(); // all matched inputs will display their title attribute
+	$('form').formBouncer(); // form validation, fields with supported validation classes will be processed
 }
 
 // removed jQuery ready call since the scripts are at the bottom of the layout
@@ -485,7 +557,6 @@ $.bindPlugins = function() {
 	
 	try { // to load external plugins, ignore failure (if plugins weren't selected in site settings)
 		$.bindPlugins(); // calls a few common plugins, also used after a new element that uses a plugin is created in the dom
-		$('form').formBouncer(); // form validation, fields with supported validation classes will be processed
 	} catch (e){};
 	
 	$('.disabler', '.disabled').disabler();  // checkbox that disables all inputs in its form
@@ -501,6 +572,8 @@ $.bindPlugins = function() {
 	$('.search-btn, .search-button').submitBtn();						 // make a link act as a submit button
 	$('h4 a', '#info-accordion').accordion(); // my very own accordion widget :)
 	$('.tabular_content').tabular_content(); // a div with a list as the tab nav and hidden divs below it as the tabbed content
+	$('.clickerd').clickOnLoad();             // a click is triggered on page load for these elements
+	$('.instant_form').instantForm();		// turn a tags with class name label and value into form labels and inputs
 	
 	// sortable nav bar, first implemented to update the position attr of a page (only when logged in)
 	$('.sortable', '.authenticated').sortable({
@@ -517,6 +590,9 @@ $.bindPlugins = function() {
 			$.updateModels(e, ui);
 		}
 	});
+	
+	$('.mini_calendar').datepicker();
+	$('.datepicker_wrap').click(function(){ $('.mini_calendar', this).focus(); });
 	
 	// front page
 	$('a', '#click-more').click(function(){

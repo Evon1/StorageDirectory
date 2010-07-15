@@ -18,6 +18,11 @@ jQuery.fn.formBouncer = function(){
 
 		jQuery('.invalid', 'form.silent').blur(function(){ jQuery(this).removeClass('invalid'); });
 	}
+	
+	function is_numeric(input) {
+		alert(input.attr('class'))
+		return input.attr('class')
+	}
 
 	return this.each(function(){
 		var form = jQuery(this);
@@ -30,6 +35,7 @@ jQuery.fn.formBouncer = function(){
 				input.removeClass('invalid');
 				
 				if (!input.attr('disabled')) {
+					
 					if (input.hasClass('required') && (input.val() == '' || input.val() == input.attr('title')) ) {
 						error += '<p>' + input.attr('id').replace('_', ' ') + ' is required.</p>';
 						markInvalid(input, form);

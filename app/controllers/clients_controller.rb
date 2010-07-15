@@ -14,5 +14,30 @@ class ClientsController < ApplicationController
 
   def edit
   end
+  
+  def update
+    respond_to do |format|
+      if @client.update_info(params[:client])
+        format.html do
+          flash[:notice] = 'Info updated successfully'
+          redirect_to :action => 'edit'
+        end
+        
+        format.js do
+          render :json => { :success => true }
+        end
+        
+      else
+        format.html do
+          flash[:error] = model_errors(@client)
+          redirect_to :action => 'edit'
+        end
+        
+        format.js do
+          render :json => { :success => false, :data => model_errors(@client) }
+        end
+      end
+    end
+  end
 
 end

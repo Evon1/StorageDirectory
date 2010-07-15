@@ -1,15 +1,15 @@
 <div id="type-one-top-bar">
 	<div id="type-one-top-bar-head">
 	   <ul>
-		 		 <li id="list-name"><a href=""><span class="hidden">List by </span>Facility name</a></li>
-				 <li id="list-miles"><a href=""><span class="hidden">List by </span>Miles</a></li>
-		 </ul>
+		 <li id="list-name"><a href=""><span class="hidden">List by </span>Facility name</a></li>
+		 <li id="list-miles"><a href=""><span class="hidden">List by </span>Miles</a></li>
+	   </ul>
 	</div>
 		 
-	 <div id="rslt-list-bg">
+	<div id="rslt-list-bg">
 			
-			<%= render :partial => 'listings/result', :collection => @model_data %>
-			<% if @model_data.blank? %>
+	  <%= render :partial => 'listings/result', :collection => @model_data %>
+	  <% if @model_data.blank? %>
         <div class="no_results framed">
           Sorry, that search didn't return any results. Try using less filter options.
         </div>

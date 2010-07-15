@@ -1,14 +1,13 @@
 class Listing < ActiveRecord::Base
   
-  belongs_to :user
+  belongs_to :client, :foreign_key => 'user_id'
   
   has_one  :map
   acts_as_mappable :through => :map
   
   has_many :specials
   has_many :pictures
-  has_many :listing_sizes
-  has_many :sizes, :through => :listing_sizes
+  has_many :sizes
   
   validates_presence_of :title
   
@@ -17,7 +16,7 @@ class Listing < ActiveRecord::Base
   # Instance Methods
   
   def get_partial_link(name)
-    "ajax/get_partial?model=Listing&id=#{id}&partial=views/partials/greyresults/#{name.to_s}"
+    "/ajax/get_partial?model=Listing&id=#{id}&partial=views/partials/greyresults/#{name.to_s}"
   end
   
   def city_and_state

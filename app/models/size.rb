@@ -1,6 +1,15 @@
 class Size < ActiveRecord::Base
   
-  has_many :listing_sizes, :dependent => :destroy
-  has_many :listings, :through => :listing_sizes
+  belongs_to :listing
+  
+  attr_accessor :special
+  
+  def display_price
+    "$#{self.price.to_f}"
+  end
+  
+  def display_dimensions
+    "#{x} x #{y}"
+  end
   
 end
